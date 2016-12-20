@@ -1,0 +1,9 @@
+import "Timestamp.proto";
+import "ResolutionTarget.proto";
+import "Docflow/Attachment.proto";
+
+package AgentSIB.Diadoc.Api.Proto.Docflow;
+
+message ResolutionDocflow
+{
+}
