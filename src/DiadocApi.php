@@ -6,6 +6,27 @@
 namespace AgentSIB\Diadoc;
 
 
+use AgentSIB\Diadoc\Api\Proto\AcquireCounteragentRequest;
+use AgentSIB\Diadoc\Api\Proto\AcquireCounteragentResult;
+use AgentSIB\Diadoc\Api\Proto\AsyncMethodResult;
+use AgentSIB\Diadoc\Api\Proto\Box;
+use AgentSIB\Diadoc\Api\Proto\Counteragent;
+use AgentSIB\Diadoc\Api\Proto\CounteragentCertificateList;
+use AgentSIB\Diadoc\Api\Proto\CounteragentList;
+use AgentSIB\Diadoc\Api\Proto\CounteragentStatus;
+use AgentSIB\Diadoc\Api\Proto\Department;
+use AgentSIB\Diadoc\Api\Proto\Events\SignedContent;
+use AgentSIB\Diadoc\Api\Proto\GetOrganizationsByInnListRequest;
+use AgentSIB\Diadoc\Api\Proto\GetOrganizationsByInnListResponse;
+use AgentSIB\Diadoc\Api\Proto\InvitationDocument;
+use AgentSIB\Diadoc\Api\Proto\Organization;
+use AgentSIB\Diadoc\Api\Proto\OrganizationList;
+use AgentSIB\Diadoc\Api\Proto\OrganizationUserPermissions;
+use AgentSIB\Diadoc\Api\Proto\OrganizationUsersList;
+use AgentSIB\Diadoc\Api\Proto\RussianAddress;
+use AgentSIB\Diadoc\Api\Proto\User;
+use AgentSIB\Diadoc\Model\CryptoProviderInterface;
+
 class DiadocApi
 {
     const METHOD_GET = 'GET';
@@ -25,8 +46,8 @@ class DiadocApi
     const RESOURCE_GET_MY_PERMISSIONS = '/GetMyPermissions';
     const RESOURCE_GET_MY_USER = '/GetMyUser';
     const RESOURCE_GET_ORGANIZATION = '/GetOrganization';
-    const RESOURCE_GET_ORGANIZATION_BY_INN_KPP = '/GetOrganizationsByInnKpp';
-    const RESOURCE_GET_ORGANIZATION_BY_INN_LIST = '/GetOrganizationsByInnList';
+    const RESOURCE_GET_ORGANIZATIONS_BY_INN_KPP = '/GetOrganizationsByInnKpp';
+    const RESOURCE_GET_ORGANIZATIONS_BY_INN_LIST = '/GetOrganizationsByInnList';
     const RESOURCE_GET_ORGANIZATION_USERS = '/GetOrganizationUsers';
     const RESOURCE_PARSE_RUSSIAN_ADDRESS = '/ParseRussianAddress';
 
@@ -110,9 +131,13 @@ class DiadocApi
     private $ddauthApiClientId;
     private $token;
 
-    public function __construct($ddauthApiClientId)
+    /** @var  CryptoProviderInterface */
+    private $cryptoProvider;
+
+    public function __construct($ddauthApiClientId, CryptoProviderInterface $cryptoProvider)
     {
         $this->ddauthApiClientId = $ddauthApiClientId;
+        $this->cryptoProvider = $cryptoProvider;
     }
 
 
@@ -120,7 +145,11 @@ class DiadocApi
     {
         $response = $this->doRequest(self::RESOURCE_AUTHENTICATE, [], self::METHOD_POST, file_get_contents($certificateFile));
 
-        return $response;
+        $token = base64_encode($this->cryptoProvider->decrypt($response));
+
+        $this->setToken($token);
+
+        return $token;
     }
 
     protected function buildRequestHeaders()
@@ -162,7 +191,9 @@ class DiadocApi
 
 //        curl_setopt_array($ch, $this->config['curl_options']);
 
-        if (!$response = curl_exec($ch)) {
+        $response = curl_exec($ch);
+
+        if (curl_errno($ch)) {
             throw new \Exception(sprintf('Curl error: (%s) %s', curl_errno($ch), curl_error($ch)), curl_errno($ch));
         }
         if (!($httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE)) || ($httpCode !== 200 && $httpCode !== 204)) {
@@ -171,6 +202,443 @@ class DiadocApi
         curl_close($ch);
 
         return $response;
+    }
+
+
+    /**
+     * @param string $boxId
+     *
+     * @return Box|\Protobuf\Message
+     */
+    public function getBox($boxId)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_BOX,
+            [
+                'boxId' => $boxId
+            ]
+        );
+
+        return Box::fromStream($response);
+    }
+
+    /**
+     * @param string $orgId
+     * @param string $departmentId
+     *
+     * @return Department|\Protobuf\Message
+     */
+    public function getDepartment($orgId, $departmentId)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_DEPARTMENT,
+            [
+                'orgId' => $orgId,
+                'departmentId' => $departmentId
+            ]
+        );
+
+        return Department::fromStream($response);
+    }
+
+    /**
+     * @return OrganizationList|\Protobuf\Message
+     */
+    public function getMyOrganizations()
+    {
+        $response = $this->doRequest(self::RESOURCE_GET_MY_ORGANIZATION);
+
+        return OrganizationList::fromStream($response);
+    }
+
+    /**
+     * @param $orgId
+     *
+     * @return OrganizationUserPermissions|\Protobuf\Message
+     */
+    public function getMyPermissions($orgId)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_MY_PERMISSIONS,
+            [
+                'orgId' => $orgId
+            ]
+        );
+
+        return OrganizationUserPermissions::fromStream($response);
+    }
+
+    /**
+     * @return User|\Protobuf\Message
+     */
+    public function getMyUser()
+    {
+        $response = $this->doRequest(self::RESOURCE_GET_MY_USER);
+
+        return User::fromStream($response);
+    }
+
+    /**
+     * @param string $orgId
+     *
+     * @return Organization|\Protobuf\Message
+     */
+    public function getOrganizationById($orgId)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_ORGANIZATION,
+            [
+                'orgId' => $orgId
+            ]
+        );
+
+        return Organization::fromStream($response);
+    }
+
+    /**
+     * @param string $fnsParticipantId
+     *
+     * @return Organization|\Protobuf\Message
+     */
+    public function getOrganizationByFnsParticipantId($fnsParticipantId)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_ORGANIZATION,
+            [
+                'fnsParticipantId' => $fnsParticipantId
+            ]
+        );
+
+        return Organization::fromStream($response);
+    }
+
+
+    /**
+     * @param string $inn
+     *
+     * @return Organization|\Protobuf\Message
+     */
+    public function getOrganizationByInn($inn)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_ORGANIZATION,
+            [
+                'inn' => $inn
+            ]
+        );
+
+        return Organization::fromStream($response);
+    }
+
+    /**
+     * @param string $inn
+     * @param string $kpp
+     * @param bool $includeRelations
+     *
+     * @return OrganizationList|\Protobuf\Message
+     */
+    public function getOrganizationsByInnKpp($inn, $kpp = null, $includeRelations = false)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_ORGANIZATIONS_BY_INN_KPP,
+            [
+                'inn' => $inn,
+                'kpp' => $kpp,
+//                'includeRelations' => (int) $includeRelations
+            ]
+        );
+
+        return OrganizationList::fromStream($response);
+    }
+
+    /**
+     * @param $myOrgId
+     * @param array $innList
+     *
+     * @return GetOrganizationsByInnListResponse|\Protobuf\Message
+     */
+    public function getOrganizationsByInnList($myOrgId, $innList = [])
+    {
+        $request = new GetOrganizationsByInnListRequest();
+        array_map([$request, 'addInnList'], $innList);
+
+        $response = $this->doRequest(
+            self::RESOURCE_GET_ORGANIZATIONS_BY_INN_LIST,
+            [
+                'myOrgId'   =>  $myOrgId
+            ],
+            self::METHOD_POST,
+            $request->toStream()->getContents()
+        );
+
+        return GetOrganizationsByInnListResponse::fromStream($response);
+    }
+
+    /**
+     * @param $orgId
+     *
+     * @return OrganizationUsersList|\Protobuf\Message
+     */
+    public function getOrganizationUsers($orgId)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_ORGANIZATION_USERS,
+            [
+                'orgId' => $orgId
+            ]
+        );
+
+        return OrganizationUsersList::fromStream($response);
+    }
+
+    /**
+     * @param $address
+     *
+     * @return RussianAddress|\Protobuf\Message
+     */
+    public function parseRussianAddress($address)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_PARSE_RUSSIAN_ADDRESS,
+            [
+                'address' => $address
+            ]
+        );
+
+        return RussianAddress::fromStream($response);
+    }
+
+    public function acquireCounteragent($myOrgId, $counteragentOrgId, $myDepartmentId, $comment = null)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_ACQUIRE_COUNTERAGENTS,
+            [
+                'myOrgId' => $myOrgId,
+                'counteragentOrgId' => $counteragentOrgId,
+                'myDepartmentId'    =>  $myDepartmentId,
+                'comment'   =>  $comment
+            ],
+            self::METHOD_POST
+        );
+
+        return $response;
+    }
+
+    /**
+     * @param $myOrgId
+     * @param $counteragentOrgId
+     * @param $myDepartmentId
+     * @param $invitationDocument|null $invationDocument
+     * @param null $messageToContragent
+     *
+     * @return AsyncMethodResult|\Protobuf\Message
+     */
+    public function acquireCounteragentWithDocument($myOrgId, $counteragentOrgId, $myDepartmentId, InvitationDocument $invitationDocument = null, $messageToContragent = null)
+    {
+        $request = new AcquireCounteragentRequest();
+        $request->setOrgId($counteragentOrgId);
+        $request->setMessageToCounteragent($messageToContragent);
+        $request->setInvitationDocument($invitationDocument);
+
+        $response = $this->doRequest(
+            self::RESOURCE_ACQUIRE_COUNTERAGENTS_V2,
+            [
+                'myOrgId' => $myOrgId,
+                'myDepartmentId'    =>  $myDepartmentId,
+            ],
+            self::METHOD_POST,
+            $request->toStream()->getContents()
+        );
+        return AsyncMethodResult::fromStream($response);
+    }
+
+    /**
+     * @param $myOrgId
+     * @param $counteragentInn
+     * @param $myDepartmentId
+     * @param $invitationDocument|null $invationDocument
+     * @param null $messageToContragent
+     *
+     * @return AsyncMethodResult|\Protobuf\Message
+     */
+    public function acquireCounteragentByInnWithDocument($myOrgId, $counteragentInn, $myDepartmentId, InvitationDocument $invitationDocument = null, $messageToContragent = null)
+    {
+        $request = new AcquireCounteragentRequest();
+        $request->setInn($counteragentInn);
+        $request->setMessageToCounteragent($messageToContragent);
+        $request->setInvitationDocument($invitationDocument);
+
+        $response = $this->doRequest(
+            self::RESOURCE_ACQUIRE_COUNTERAGENTS_V2,
+            [
+                'myOrgId' => $myOrgId,
+                'myDepartmentId'    =>  $myDepartmentId,
+            ],
+            self::METHOD_POST,
+            $request->toStream()->getContents()
+        );
+        return AsyncMethodResult::fromStream($response);
+    }
+
+    /**
+     * @param $taskId
+     *
+     * @return AcquireCounteragentResult|\Protobuf\Message
+     */
+    public function acquireCounteragentResult($taskId)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_ACQUIRE_COUNTERAGENT_RESULT,
+            [
+                'taskId' => $taskId
+            ],
+            self::METHOD_GET
+        );
+
+        return AcquireCounteragentResult::fromStream($response);
+    }
+
+    /**
+     * @param $myOrgId
+     * @param $counteragentOrgId
+     * @param null $comment
+     * @return bool
+     */
+    public function breakWithCounteragent($myOrgId, $counteragentOrgId, $comment = null)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_BREAK_WITH_COUNTERAGENT,
+            [
+                'myOrgId' => $myOrgId,
+                'counteragentOrgId' => $counteragentOrgId,
+                'comment' => $comment
+            ],
+            self::METHOD_POST
+        );
+
+        return true;
+    }
+
+    /**
+     * @param $myOrgId
+     * @param $counteragentOrgId
+     *
+     * @return Counteragent|\Protobuf\Message
+     */
+    public function getContragent($myOrgId, $counteragentOrgId)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_COUNTERAGENT,
+            [
+                'myOrgId' => $myOrgId,
+                'counteragentOrgId' => $counteragentOrgId
+            ]
+        );
+
+        return Counteragent::fromStream($response);
+    }
+
+
+    /**
+     * @param $myOrgId
+     * @param $counteragentOrgId
+     *
+     * @return Counteragent|\Protobuf\Message
+     */
+    public function getContragentV2($myOrgId, $counteragentOrgId)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_COUNTERAGENT_V2,
+            [
+                'myOrgId' => $myOrgId,
+                'counteragentOrgId' => $counteragentOrgId
+            ]
+        );
+
+        return Counteragent::fromStream($response);
+    }
+
+
+    /**
+     * @param $myOrgId
+     * @param CounteragentStatus $counteragentStatus
+     * @param null $afterIndexKey
+     *
+     * @return CounteragentList|\Protobuf\Message
+     */
+    public function getContragents($myOrgId, CounteragentStatus $counteragentStatus = null, $afterIndexKey = null)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_COUNTERAGENTS,
+            [
+                'myOrgId'   =>  $myOrgId,
+                'counteragentStatus' => $counteragentStatus?$counteragentStatus->value():null,
+                'afterIndexKey'  =>  $afterIndexKey
+            ]
+        );
+
+        return CounteragentList::fromStream($response);
+    }
+
+    /**
+     * @param $myOrgId
+     * @param CounteragentStatus $counteragentStatus
+     * @param null $afterIndexKey
+     *
+     * @return CounteragentList|\Protobuf\Message
+     */
+    public function getContragentsV2($myOrgId, CounteragentStatus $counteragentStatus = null, $afterIndexKey = null)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_COUNTERAGENTS_V2,
+            [
+                'myOrgId'   =>  $myOrgId,
+                'counteragentStatus' => $counteragentStatus?$counteragentStatus->value():null,
+                'afterIndexKey'  =>  $afterIndexKey
+            ]
+        );
+
+        return CounteragentList::fromStream($response);
+    }
+
+    public function getCounteragentCertificates($myOrgId, $counteragentOrgId)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_COUNTERAGENT_CERTIFICATES,
+            [
+                'myOrgId' => $myOrgId,
+                'counteragentOrgId' => $counteragentOrgId
+            ]
+        );
+
+        return CounteragentCertificateList::fromStream($response);
+    }
+
+    public function generateInvitationDocument($fileName, $title = null, $signatureRequested = false)
+    {
+        $splFile = new \SplFileInfo($fileName);
+        $invitationDocument = new InvitationDocument();
+        $invitationDocument->setFileName(!empty($title)?$title:$splFile->getFilename());
+        $invitationDocument->setSignedContent($this->generateSignedContentFromFile($fileName));
+        $invitationDocument->setSignatureRequested($signatureRequested);
+
+        return $invitationDocument;
+//        $invitationDocument->setType();
+    }
+
+
+    public function generateSignedContentFromFile($fileName)
+    {
+        if (!file_exists($fileName)) {
+            throw new \Exception('File not found');
+        }
+
+        $content = file_get_contents($fileName);
+        $signedContent = new SignedContent();
+        $signedContent->setContent($content);
+        $signedContent->setSignature($this->cryptoProvider->sign($content));
+
+        return $signedContent;
     }
 
     /**
@@ -186,7 +654,7 @@ class DiadocApi
      *
      * @return $this
      */
-    protected function setToken($token)
+    public function setToken($token)
     {
         $this->token = $token;
     }
