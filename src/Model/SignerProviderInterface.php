@@ -6,7 +6,7 @@
 namespace AgentSIB\Diadoc\Model;
 
 
-interface CryptoProviderInterface
+interface SignerProviderInterface
 {
     public function encrypt($encriptedData);
 

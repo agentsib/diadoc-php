@@ -8,23 +8,31 @@ namespace AgentSIB\Diadoc\Model;
 
 use Symfony\Component\Process\ProcessBuilder;
 
-class OpenSslCryptoProvider implements CryptoProviderInterface
+class OpensslSignerProvider implements SignerProviderInterface
 {
     private $caFile;
     private $certFile;
     private $privateKey;
+    private $opensslBin;
 
-    public function __construct($caFile, $certFile, $privateKey)
+    public function __construct($caFile, $certFile, $privateKey, $opensslBin = '/usr/bin/openssl')
     {
         $this->caFile = $caFile;
         $this->certFile = $certFile;
         $this->privateKey = $privateKey;
+        $this->opensslBin = $opensslBin;
+    }
+
+    private function getOpensslProcess(array $args = [], $input = null)
+    {
+        return ProcessBuilder::create($args)
+            ->setPrefix($this->opensslBin)
+            ->setInput($input)->getProcess();
     }
 
     public function encrypt($plainData)
     {
-        $process = ProcessBuilder::create([
-            'openssl',
+        $process = $this->getOpensslProcess([
             'smime',
             '-encrypt',
             '-binary',
@@ -32,31 +40,28 @@ class OpenSslCryptoProvider implements CryptoProviderInterface
             '-outform', 'DER',
             '-gost89',
             $this->certFile
-        ])->setInput($plainData)->getProcess();
+        ], $plainData);
 
         return $process->mustRun()->getOutput();
     }
 
     public function decrypt($encriptedData)
     {
-        $process = ProcessBuilder::create([
-            'openssl',
+        $process = $this->getOpensslProcess([
             'smime',
             '-decrypt',
             '-binary',
             '-noattr',
             '-inform', 'der',
             '-inkey', $this->privateKey
-
-        ])->setInput($encriptedData)->getProcess();
+        ], $encriptedData);
 
         return $process->mustRun()->getOutput();
     }
 
     public function sign($data)
     {
-        $process = ProcessBuilder::create([
-            'openssl',
+        $process = $this->getOpensslProcess([
             'smime',
             '-sign',
             '-binary',
@@ -65,7 +70,7 @@ class OpenSslCryptoProvider implements CryptoProviderInterface
             '-signer', $this->certFile,
             '-inkey', $this->privateKey,
             '-outform', 'der'
-        ])->setInput($data)->getProcess();
+        ], $data);
 
         return $process->mustRun()->getOutput();
     }
@@ -76,8 +81,8 @@ class OpenSslCryptoProvider implements CryptoProviderInterface
         $metaDatas = stream_get_meta_data($file);
         $tmpFilename = $metaDatas['uri'];
         fwrite($file, $data);
-        $process = ProcessBuilder::create([
-            'openssl',
+
+        $process = $this->getOpensslProcess([
             'smime',
             '-verify',
             '-binary',
@@ -86,8 +91,7 @@ class OpenSslCryptoProvider implements CryptoProviderInterface
             '-inform', 'der',
             '-CAfile', $this->caFile,
             '-content', $tmpFilename
-
-        ])->setInput($sign)->getProcess();
+        ], $sign);
 
         $result = $process->run();
         fclose($file);

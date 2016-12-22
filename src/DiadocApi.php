@@ -42,7 +42,7 @@ use AgentSIB\Diadoc\Api\Proto\SortDirection;
 use AgentSIB\Diadoc\Api\Proto\TimeBasedFilter;
 use AgentSIB\Diadoc\Api\Proto\Timestamp;
 use AgentSIB\Diadoc\Api\Proto\User;
-use AgentSIB\Diadoc\Model\CryptoProviderInterface;
+use AgentSIB\Diadoc\Model\SignerProviderInterface;
 
 class DiadocApi
 {
@@ -148,13 +148,13 @@ class DiadocApi
     private $ddauthApiClientId;
     private $token;
 
-    /** @var  CryptoProviderInterface */
-    private $cryptoProvider;
+    /** @var  SignerProviderInterface */
+    private $signerProvider;
 
-    public function __construct($ddauthApiClientId, CryptoProviderInterface $cryptoProvider)
+    public function __construct($ddauthApiClientId, SignerProviderInterface $signerProvider)
     {
         $this->ddauthApiClientId = $ddauthApiClientId;
-        $this->cryptoProvider = $cryptoProvider;
+        $this->signerProvider = $signerProvider;
     }
 
 
@@ -162,7 +162,7 @@ class DiadocApi
     {
         $response = $this->doRequest(self::RESOURCE_AUTHENTICATE, [], self::METHOD_POST, file_get_contents($certificateFile));
 
-        $token = base64_encode($this->cryptoProvider->decrypt($response));
+        $token = base64_encode($this->signerProvider->decrypt($response));
 
         $this->setToken($token);
 
@@ -891,7 +891,7 @@ class DiadocApi
         $content = file_get_contents($fileName);
         $signedContent = new SignedContent();
         $signedContent->setContent($content);
-        $signedContent->setSignature($this->cryptoProvider->sign($content));
+        $signedContent->setSignature($this->signerProvider->sign($content));
 
         return $signedContent;
     }
