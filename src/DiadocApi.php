@@ -15,6 +15,20 @@ use AgentSIB\Diadoc\Api\Proto\CounteragentCertificateList;
 use AgentSIB\Diadoc\Api\Proto\CounteragentList;
 use AgentSIB\Diadoc\Api\Proto\CounteragentStatus;
 use AgentSIB\Diadoc\Api\Proto\Department;
+use AgentSIB\Diadoc\Api\Proto\Docflow\GetDocflowBatchRequest;
+use AgentSIB\Diadoc\Api\Proto\Docflow\GetDocflowBatchResponse;
+use AgentSIB\Diadoc\Api\Proto\Docflow\GetDocflowEventsRequest;
+use AgentSIB\Diadoc\Api\Proto\Docflow\GetDocflowEventsResponse;
+use AgentSIB\Diadoc\Api\Proto\Docflow\GetDocflowsByPacketIdRequest;
+use AgentSIB\Diadoc\Api\Proto\Docflow\GetDocflowsByPacketIdResponse;
+use AgentSIB\Diadoc\Api\Proto\Docflow\SearchDocflowsRequest;
+use AgentSIB\Diadoc\Api\Proto\Docflow\SearchDocflowsResponse;
+use AgentSIB\Diadoc\Api\Proto\Docflow\SearchScope;
+use AgentSIB\Diadoc\Api\Proto\Documents\Document;
+use AgentSIB\Diadoc\Api\Proto\Events\Message;
+use AgentSIB\Diadoc\Api\Proto\Events\MessagePatch;
+use AgentSIB\Diadoc\Api\Proto\Events\MessagePatchToPost;
+use AgentSIB\Diadoc\Api\Proto\Events\MessageToPost;
 use AgentSIB\Diadoc\Api\Proto\Events\SignedContent;
 use AgentSIB\Diadoc\Api\Proto\GetOrganizationsByInnListRequest;
 use AgentSIB\Diadoc\Api\Proto\GetOrganizationsByInnListResponse;
@@ -24,6 +38,9 @@ use AgentSIB\Diadoc\Api\Proto\OrganizationList;
 use AgentSIB\Diadoc\Api\Proto\OrganizationUserPermissions;
 use AgentSIB\Diadoc\Api\Proto\OrganizationUsersList;
 use AgentSIB\Diadoc\Api\Proto\RussianAddress;
+use AgentSIB\Diadoc\Api\Proto\SortDirection;
+use AgentSIB\Diadoc\Api\Proto\TimeBasedFilter;
+use AgentSIB\Diadoc\Api\Proto\Timestamp;
 use AgentSIB\Diadoc\Api\Proto\User;
 use AgentSIB\Diadoc\Model\CryptoProviderInterface;
 
@@ -614,6 +631,244 @@ class DiadocApi
         return CounteragentCertificateList::fromStream($response);
     }
 
+    /**
+     * @param $boxId
+     * @param $messageId
+     * @param $entityId
+     *
+     * @return mixed
+     */
+    public function getEntityContent($boxId, $messageId, $entityId)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_ENTITY_CONTENT,
+            [
+                'boxId' =>  $boxId,
+                'messageId' =>  $messageId,
+                'entityId'  =>  $entityId
+            ]
+        );
+
+        return $response;
+    }
+
+    /**
+     * @param $boxId
+     * @param $messageId
+     * @param null $entityId
+     * @param null|bool $originalSignature
+     *
+     * @return Message|\Protobuf\Message
+     */
+    public function getMessage($boxId, $messageId, $entityId = null, $originalSignature = null)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_MESSAGE,
+            [
+                'boxId' =>  $boxId,
+                'messageId' =>  $messageId,
+                'entityId'  =>  $entityId,
+                'originalSignature' => $originalSignature
+            ]
+        );
+
+        return Message::fromStream($response);
+    }
+
+    /**
+     * @param MessageToPost $messageToPost
+     * @param null $operationId
+     *
+     * @return Message|\Protobuf\Message
+     */
+    public function postMessage(MessageToPost $messageToPost, $operationId = null)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_POST_MESSAGE,
+            [
+                'operationId' => $operationId
+            ],
+            self::METHOD_POST,
+            $messageToPost->toStream()->getContents()
+        );
+
+        return Message::fromStream($response);
+    }
+
+    /**
+     * @param MessagePatchToPost $messagePatchToPost
+     * @param null $operationId
+     *
+     * @return MessagePatch|\Protobuf\Message
+     */
+    public function postMessagePatch(MessagePatchToPost $messagePatchToPost, $operationId = null)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_POST_MESSAGE_PATCH,
+            [
+                'operationId' => $operationId
+            ],
+            self::METHOD_POST,
+            $messagePatchToPost->toStream()->getContents()
+        );
+
+        return MessagePatch::fromStream($response);
+    }
+
+    /**
+     * @param $boxId
+     * @param $messageId
+     * @param $entityId
+     * @return Document|\Protobuf\Message
+     */
+    public function getDocument($boxId, $messageId, $entityId)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_DOCUMENT,
+            [
+                'boxId' => $boxId,
+                'messageId' =>  $messageId,
+                'entityId'  =>  $entityId
+            ]
+        );
+
+        return Document::fromStream($response);
+    }
+
+
+    /**
+     * @param $boxId
+     * @param GetDocflowBatchRequest $batchRequest
+     *
+     * @return GetDocflowBatchResponse
+     */
+    public function getDocflows($boxId, GetDocflowBatchRequest $batchRequest)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_DOCFLOWS,
+            [
+                'boxId' =>  $boxId
+            ],
+            self::METHOD_POST,
+            $batchRequest->toStream()->getContents()
+        );
+
+        return GetDocflowBatchResponse::fromStream($response);
+    }
+
+    /**
+     * @param $boxId
+     * @param $packetId
+     * @param bool $injectEntityContent
+     * @param null $afterIndexKey
+     * @param int $count
+     *
+     * @return GetDocflowsByPacketIdResponse|\Protobuf\Message
+     */
+    public function getDocflowsByPacketId($boxId, $packetId, $injectEntityContent = false, $afterIndexKey = null, $count = 100)
+    {
+        $getDocflowsByPacketIdRequest = new GetDocflowsByPacketIdRequest();
+        $getDocflowsByPacketIdRequest->setPacketId($packetId);
+        $getDocflowsByPacketIdRequest->setInjectEntityContent($injectEntityContent);
+        $getDocflowsByPacketIdRequest->setAfterIndexKey($afterIndexKey);
+        $getDocflowsByPacketIdRequest->setCount($count);
+
+        $response = $this->doRequest(
+            self::RESOURCE_GET_DOCFLOWS_BY_PACKET_ID,
+            [
+                'boxId' =>  $boxId
+            ],
+            self::METHOD_POST,
+            $getDocflowsByPacketIdRequest->toStream()->getContents()
+        );
+
+        return GetDocflowsByPacketIdResponse::fromStream($response);
+    }
+
+    /**
+     * @param $boxId
+     * @param $queryString
+     * @param SearchScope|null $searchScope
+     * @param null|int $firstIndex
+     * @param int $count
+     *
+     * @return SearchDocflowsResponse|\Protobuf\Message
+     */
+    public function searchDocflows($boxId, $queryString, SearchScope $searchScope = null, $firstIndex = null, $count = 100)
+    {
+        $searchDocflowRequest = new SearchDocflowsRequest();
+        $searchDocflowRequest->setQueryString($queryString);
+        if ($searchScope) {
+            $searchDocflowRequest->setScope($searchScope);
+        }
+        if ($firstIndex) {
+            $searchDocflowRequest->setFirstIndex($firstIndex);
+        }
+        $searchDocflowRequest->setCount($count);
+
+        $response = $this->doRequest(
+            self::RESOURCE_SEARCH_DOCFLOWS,
+            [
+                'boxId' =>  $boxId
+            ],
+            self::METHOD_POST,
+            $searchDocflowRequest->toStream()->getContents()
+        );
+
+        return SearchDocflowsResponse::fromStream($response);
+    }
+
+    public function getDocflowEvents
+    (
+        $boxId,
+        \DateTime $from = null,
+        \DateTime $to = null,
+        SortDirection $sortDirection = null,
+        $populateDocuments = false,
+        $populatePreviousDocumentStates = false,
+        $injectEntityContent = false,
+        $afterIndexKey = null
+    )
+    {
+
+
+        $timeBasedFilter = new TimeBasedFilter();
+        $fromTimestamp = null;
+        $toTimestamp = null;
+
+        if ($from) {
+            $fromTimestamp = new Timestamp();
+            $fromTimestamp->setTicks($this->convertDateTimeToTicks($from));
+        }
+        if ($to) {
+            $toTimestamp = new Timestamp();
+            $toTimestamp->setTicks($this->convertDateTimeToTicks($to));
+        }
+
+        $timeBasedFilter->setFromTimestamp($fromTimestamp);
+        $timeBasedFilter->setToTimestamp($toTimestamp);
+        $timeBasedFilter->setSortDirection($sortDirection);
+
+        $getDocflowEventsRequest = new GetDocflowEventsRequest();
+        $getDocflowEventsRequest->setFilter($timeBasedFilter);
+        $getDocflowEventsRequest->setPopulateDocuments($populateDocuments);
+        $getDocflowEventsRequest->setPopulatePreviousDocumentStates($populatePreviousDocumentStates);
+        $getDocflowEventsRequest->setInjectEntityContent($injectEntityContent);
+        $getDocflowEventsRequest->setAfterIndexKey($afterIndexKey);
+
+
+        $response = $this->doRequest(
+            self::RESOURCE_GET_DOCFLOWS_EVENTS,
+            [
+                'boxId' =>  $boxId
+            ],
+            self::METHOD_POST,
+            $getDocflowEventsRequest->toStream()->getContents()
+        );
+
+        return GetDocflowEventsResponse::fromStream($response);
+    }
+
     public function generateInvitationDocument($fileName, $title = null, $signatureRequested = false)
     {
         $splFile = new \SplFileInfo($fileName);
@@ -621,9 +876,9 @@ class DiadocApi
         $invitationDocument->setFileName(!empty($title)?$title:$splFile->getFilename());
         $invitationDocument->setSignedContent($this->generateSignedContentFromFile($fileName));
         $invitationDocument->setSignatureRequested($signatureRequested);
+//        $invitationDocument->setType();
 
         return $invitationDocument;
-//        $invitationDocument->setType();
     }
 
 
@@ -639,6 +894,18 @@ class DiadocApi
         $signedContent->setSignature($this->cryptoProvider->sign($content));
 
         return $signedContent;
+    }
+
+    public function convertDateTimeToTicks(\DateTime $dateTime)
+    {
+        return $dateTime->getTimestamp() * 10000000 + 621355968000000000;
+    }
+
+    public function convertTicksToDateTime($ticks)
+    {
+        $timestamp = floor(($ticks - 621355968000000000)/10000000);
+
+        return new \DateTime('@' . $timestamp);
     }
 
     /**
