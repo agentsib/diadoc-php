@@ -2,6 +2,7 @@
     "name": "agentsib/diadoc-php",
     "description": "Diadoc API implementation",
     "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Ilya Kovalenko",
@@ -9,7 +10,8 @@
         }
     ],
     "require": {
-        "protobuf-php/protobuf": "^0.1.3"
+        "protobuf-php/protobuf": "^0.1.3",
+        "agentsib/diadoc-php-signers": "dev-master"
     },
     "require-dev": {
         "protobuf-php/protobuf-plugin": "^0.1.2",
