@@ -25,6 +25,7 @@ use AgentSIB\Diadoc\Api\Proto\Docflow\SearchDocflowsRequest;
 use AgentSIB\Diadoc\Api\Proto\Docflow\SearchDocflowsResponse;
 use AgentSIB\Diadoc\Api\Proto\Docflow\SearchScope;
 use AgentSIB\Diadoc\Api\Proto\Documents\Document;
+use AgentSIB\Diadoc\Api\Proto\Documents\DocumentList;
 use AgentSIB\Diadoc\Api\Proto\Events\Message;
 use AgentSIB\Diadoc\Api\Proto\Events\MessagePatch;
 use AgentSIB\Diadoc\Api\Proto\Events\MessagePatchToPost;
@@ -42,6 +43,8 @@ use AgentSIB\Diadoc\Api\Proto\SortDirection;
 use AgentSIB\Diadoc\Api\Proto\TimeBasedFilter;
 use AgentSIB\Diadoc\Api\Proto\Timestamp;
 use AgentSIB\Diadoc\Api\Proto\User;
+use AgentSIB\Diadoc\Filter\DocumentsFilter;
+use AgentSIB\Diadoc\Helper\DateHelper;
 use AgentSIB\Diadoc\Model\SignerProviderInterface;
 
 class DiadocApi
@@ -751,6 +754,30 @@ class DiadocApi
         return Document::fromStream($response);
     }
 
+    public function getDocuments($boxId, DocumentsFilter $documentsFilter = null, SortDirection $sortDirection = null, $afterIndexKey = null)
+    {
+        if (is_null($sortDirection)) {
+            $sortDirection = SortDirection::Ascending();
+        }
+        $params = [
+            'boxId' => $boxId,
+            'sortDirection' =>  $sortDirection->name(),
+            'afterIndexKey' =>  $afterIndexKey
+        ];
+        if (is_null($documentsFilter)) {
+            $documentsFilter = DocumentsFilter::create();
+        }
+
+        $params = array_replace($params, $documentsFilter->toFilter());
+
+        $response = $this->doRequest(
+            self::RESOURCE_GET_DOCUMENTS,
+            $params
+        );
+
+        return DocumentList::fromStream($response);
+    }
+
 
     /**
      * @param $boxId
@@ -854,11 +881,11 @@ class DiadocApi
 
         if ($from) {
             $fromTimestamp = new Timestamp();
-            $fromTimestamp->setTicks($this->convertDateTimeToTicks($from));
+            $fromTimestamp->setTicks(DateHelper::convertDateTimeToTicks($from));
         }
         if ($to) {
             $toTimestamp = new Timestamp();
-            $toTimestamp->setTicks($this->convertDateTimeToTicks($to));
+            $toTimestamp->setTicks(DateHelper::convertDateTimeToTicks($to));
         }
 
         $timeBasedFilter->setFromTimestamp($fromTimestamp);
@@ -910,18 +937,6 @@ class DiadocApi
         $signedContent->setSignature($this->signerProvider->sign($content));
 
         return $signedContent;
-    }
-
-    public function convertDateTimeToTicks(\DateTime $dateTime)
-    {
-        return $dateTime->getTimestamp() * 10000000 + 621355968000000000;
-    }
-
-    public function convertTicksToDateTime($ticks)
-    {
-        $timestamp = floor(($ticks - 621355968000000000)/10000000);
-
-        return new \DateTime('@' . $timestamp);
     }
 
     /**
