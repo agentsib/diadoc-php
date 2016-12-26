@@ -169,6 +169,22 @@ class DiadocApi
         return $token;
     }
 
+    public function authenticateLogin($login, $password)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_AUTHENTICATE,
+            [
+                'login' => $login,
+                'password'  =>  $password
+            ],
+            self::METHOD_POST
+        );
+
+        $this->setToken($response);
+
+        return $response;
+    }
+
     protected function buildRequestHeaders()
     {
         $header = sprintf('DiadocAuth ddauth_api_client_id=%s', $this->ddauthApiClientId);
