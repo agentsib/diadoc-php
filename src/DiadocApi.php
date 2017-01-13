@@ -26,11 +26,15 @@ use AgentSIB\Diadoc\Api\Proto\Docflow\SearchDocflowsResponse;
 use AgentSIB\Diadoc\Api\Proto\Docflow\SearchScope;
 use AgentSIB\Diadoc\Api\Proto\Documents\Document;
 use AgentSIB\Diadoc\Api\Proto\Documents\DocumentList;
+use AgentSIB\Diadoc\Api\Proto\Events\BoxEvent;
+use AgentSIB\Diadoc\Api\Proto\Events\BoxEventList;
 use AgentSIB\Diadoc\Api\Proto\Events\Message;
 use AgentSIB\Diadoc\Api\Proto\Events\MessagePatch;
 use AgentSIB\Diadoc\Api\Proto\Events\MessagePatchToPost;
 use AgentSIB\Diadoc\Api\Proto\Events\MessageToPost;
 use AgentSIB\Diadoc\Api\Proto\Events\SignedContent;
+use AgentSIB\Diadoc\Api\Proto\Forwarding\ForwardDocumentRequest;
+use AgentSIB\Diadoc\Api\Proto\Forwarding\ForwardDocumentResponse;
 use AgentSIB\Diadoc\Api\Proto\GetOrganizationsByInnListRequest;
 use AgentSIB\Diadoc\Api\Proto\GetOrganizationsByInnListResponse;
 use AgentSIB\Diadoc\Api\Proto\InvitationDocument;
@@ -444,6 +448,14 @@ class DiadocApi
         return RussianAddress::fromStream($response);
     }
 
+    /**
+     * @param $myOrgId
+     * @param $counteragentOrgId
+     * @param $myDepartmentId
+     * @param null $comment
+     *
+     * @return mixed
+     */
     public function acquireCounteragent($myOrgId, $counteragentOrgId, $myDepartmentId, $comment = null)
     {
         $response = $this->doRequest(
@@ -497,7 +509,7 @@ class DiadocApi
      *
      * @return AsyncMethodResult|\Protobuf\Message
      */
-    public function acquireCounteragentByInnWithDocument($myOrgId, $counteragentInn, $myDepartmentId, InvitationDocument $invitationDocument = null, $messageToContragent = null)
+    public function acquireCounteragentByInnWithDocument($myOrgId, $counteragentInn, $myDepartmentId = null, InvitationDocument $invitationDocument = null, $messageToContragent = null)
     {
         $request = new AcquireCounteragentRequest();
         $request->setInn($counteragentInn);
@@ -561,7 +573,7 @@ class DiadocApi
      *
      * @return Counteragent|\Protobuf\Message
      */
-    public function getContragent($myOrgId, $counteragentOrgId)
+    public function getCountragent($myOrgId, $counteragentOrgId)
     {
         $response = $this->doRequest(
             self::RESOURCE_GET_COUNTERAGENT,
@@ -581,7 +593,7 @@ class DiadocApi
      *
      * @return Counteragent|\Protobuf\Message
      */
-    public function getContragentV2($myOrgId, $counteragentOrgId)
+    public function getCountragentV2($myOrgId, $counteragentOrgId)
     {
         $response = $this->doRequest(
             self::RESOURCE_GET_COUNTERAGENT_V2,
@@ -602,13 +614,13 @@ class DiadocApi
      *
      * @return CounteragentList|\Protobuf\Message
      */
-    public function getContragents($myOrgId, CounteragentStatus $counteragentStatus = null, $afterIndexKey = null)
+    public function getCountragents($myOrgId, CounteragentStatus $counteragentStatus = null, $afterIndexKey = null)
     {
         $response = $this->doRequest(
             self::RESOURCE_GET_COUNTERAGENTS,
             [
                 'myOrgId'   =>  $myOrgId,
-                'counteragentStatus' => $counteragentStatus?$counteragentStatus->value():null,
+                'counteragentStatus' => $counteragentStatus?$counteragentStatus->name():null,
                 'afterIndexKey'  =>  $afterIndexKey
             ]
         );
@@ -623,13 +635,13 @@ class DiadocApi
      *
      * @return CounteragentList|\Protobuf\Message
      */
-    public function getContragentsV2($myOrgId, CounteragentStatus $counteragentStatus = null, $afterIndexKey = null)
+    public function getCountragentsV2($myOrgId, CounteragentStatus $counteragentStatus = null, $afterIndexKey = null)
     {
         $response = $this->doRequest(
             self::RESOURCE_GET_COUNTERAGENTS_V2,
             [
                 'myOrgId'   =>  $myOrgId,
-                'counteragentStatus' => $counteragentStatus?$counteragentStatus->value():null,
+                'counteragentStatus' => $counteragentStatus?$counteragentStatus->name():null,
                 'afterIndexKey'  =>  $afterIndexKey
             ]
         );
@@ -737,6 +749,53 @@ class DiadocApi
     /**
      * @param $boxId
      * @param $messageId
+     * @param null $documentId
+     *
+     * @return bool
+     */
+    public function delete($boxId, $messageId, $documentId = null)
+    {
+        $this->doRequest(
+            self::RESOURCE_DELETE,
+            [
+                'boxId' =>  $boxId,
+                'messageId' => $messageId,
+                'documentId' => $documentId
+            ],
+            self::METHOD_POST
+        );
+
+        return true;
+    }
+
+    /**
+     * @param $boxId
+     * @param $toBoxId
+     * @param $documentId
+     *
+     * @return ForwardDocumentResponse
+     */
+    public function forwardDocument($boxId, $toBoxId, $documentId)
+    {
+        $forwardDocumentRequest = new ForwardDocumentRequest();
+        $forwardDocumentRequest->setToBoxId($toBoxId);
+        $forwardDocumentRequest->setDocumentId($documentId);
+
+        $response = $this->doRequest(
+            self::RESOURCE_FORWARD_DOCUMENT,
+            [
+                'boxId' =>  $boxId
+            ],
+            self::METHOD_POST,
+            $forwardDocumentRequest->toStream()->getContents()
+        );
+
+        return $response;
+    }
+
+    /**
+     * @param $boxId
+     * @param $messageId
      * @param $entityId
      * @return Document|\Protobuf\Message
      */
@@ -753,6 +812,8 @@ class DiadocApi
 
         return Document::fromStream($response);
     }
+
+
 
     public function getDocuments($boxId, DocumentsFilter $documentsFilter = null, SortDirection $sortDirection = null, $afterIndexKey = null)
     {
@@ -861,6 +922,18 @@ class DiadocApi
         return SearchDocflowsResponse::fromStream($response);
     }
 
+    /**
+     * @param $boxId
+     * @param \DateTime|null $from
+     * @param \DateTime|null $to
+     * @param SortDirection|null $sortDirection
+     * @param bool $populateDocuments
+     * @param bool $populatePreviousDocumentStates
+     * @param bool $injectEntityContent
+     * @param null $afterIndexKey
+     *
+     * @return GetDocflowEventsResponse
+     */
     public function getDocflowEvents
     (
         $boxId,
@@ -910,6 +983,39 @@ class DiadocApi
         );
 
         return GetDocflowEventsResponse::fromStream($response);
+    }
+
+
+    /**
+     * @param $boxId
+     * @param $eventId
+     *
+     * @return BoxEvent
+     */
+    public function getEvent($boxId, $eventId)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_EVENT,
+            [
+                'boxId' =>  $boxId,
+                'eventId' =>    $eventId
+            ]
+        );
+
+        return BoxEvent::fromStream($response);
+    }
+
+    public function getNewEvents($boxId, $afterEventId = null)
+    {
+        $response = $this->doRequest(
+            self::RESOURCE_GET_NEW_EVENTS,
+            [
+                'boxId' =>  $boxId,
+                'afterEventId' =>    $afterEventId
+            ]
+        );
+
+        return BoxEventList::fromStream($response);
     }
 
     public function generateInvitationDocument($fileName, $title = null, $signatureRequested = false)
