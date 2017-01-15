@@ -43,6 +43,14 @@ class BoxApi
     }
 
     /**
+     * @return DiadocApi
+     */
+    public function getDiadocApi()
+    {
+        return $this->diadocApi;
+    }
+
+    /**
      * @return Box
      */
     public function getBox()

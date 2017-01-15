@@ -37,6 +37,15 @@ class OrganizationApi
         $this->orgId = $orgId;
     }
 
+
+    /**
+     * @return DiadocApi
+     */
+    public function getDiadocApi()
+    {
+        return $this->diadocApi;
+    }
+
     /**
      * @return Organization
      */
