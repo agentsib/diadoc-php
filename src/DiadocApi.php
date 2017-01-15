@@ -47,6 +47,7 @@ use AgentSIB\Diadoc\Api\Proto\SortDirection;
 use AgentSIB\Diadoc\Api\Proto\TimeBasedFilter;
 use AgentSIB\Diadoc\Api\Proto\Timestamp;
 use AgentSIB\Diadoc\Api\Proto\User;
+use AgentSIB\Diadoc\Exception\DiadocApiException;
 use AgentSIB\Diadoc\Filter\DocumentsFilter;
 use AgentSIB\Diadoc\Helper\DateHelper;
 use AgentSIB\Diadoc\Model\SignerProviderInterface;
@@ -234,10 +235,10 @@ class DiadocApi
         $response = curl_exec($ch);
 
         if (curl_errno($ch)) {
-            throw new \Exception(sprintf('Curl error: (%s) %s', curl_errno($ch), curl_error($ch)), curl_errno($ch));
+            throw new DiadocApiException(sprintf('Curl error: (%s) %s', curl_errno($ch), curl_error($ch)), curl_errno($ch));
         }
         if (!($httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE)) || ($httpCode !== 200 && $httpCode !== 204)) {
-            throw new \Exception(sprintf('Curl error http code: (%s) %s', $httpCode, $response), $httpCode);
+            throw new DiadocApiException(sprintf('Curl error http code: (%s) %s', $httpCode, $response), $httpCode);
         }
         curl_close($ch);
 
@@ -384,7 +385,7 @@ class DiadocApi
             [
                 'inn' => $inn,
                 'kpp' => $kpp,
-//                'includeRelations' => (int) $includeRelations
+                'includeRelations' => $includeRelations?'true':'false'
             ]
         );
 
