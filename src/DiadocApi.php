@@ -1019,14 +1019,19 @@ class DiadocApi
         return BoxEventList::fromStream($response);
     }
 
-    public function generateInvitationDocument($fileName, $title = null, $signatureRequested = false)
+    public function generateInvitationDocumentFromFile($fileName, $title = null, $signatureRequested = false)
     {
         $splFile = new \SplFileInfo($fileName);
+
+        return $this->generateInvitationDocument(file_get_contents($fileName), !empty($title)?$title:$splFile->getFilename(), $signatureRequested);
+    }
+
+    public function generateInvitationDocument($content, $title, $signatureRequested = false)
+    {
         $invitationDocument = new InvitationDocument();
-        $invitationDocument->setFileName(!empty($title)?$title:$splFile->getFilename());
-        $invitationDocument->setSignedContent($this->generateSignedContentFromFile($fileName));
+        $invitationDocument->setFileName($title);
+        $invitationDocument->setSignedContent($this->generateSignedContent($content));
         $invitationDocument->setSignatureRequested($signatureRequested);
-//        $invitationDocument->setType();
 
         return $invitationDocument;
     }
@@ -1039,6 +1044,12 @@ class DiadocApi
         }
 
         $content = file_get_contents($fileName);
+
+        return $this->generateSignedContent($content);
+    }
+
+    public function generateSignedContent($content)
+    {
         $signedContent = new SignedContent();
         $signedContent->setContent($content);
         $signedContent->setSignature($this->signerProvider->sign($content));
