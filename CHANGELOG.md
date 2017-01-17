@@ -3,6 +3,7 @@
 ## 0.0.3
 
 - Generate signed content not only from file
+- Fix default timezone in `DateHelper`
 
 ## 0.0.2
 

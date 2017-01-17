@@ -23,6 +23,8 @@ class DateHelper
         }
         $timestamp = floor(($ticks - 621355968000000000)/10000000);
 
-        return new \DateTime('@' . $timestamp);
+        $dateTime = new \DateTime();
+        $dateTime->setTimestamp($timestamp);
+        return $dateTime;
     }
 }
