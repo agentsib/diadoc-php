@@ -403,6 +403,146 @@ class Document extends \Protobuf\AbstractMessage
     protected $UniversalTransferDocumentMetadata = null;
 
     /**
+     * UniversalTransferDocumentRevisionMetadata optional message = 57
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentRevisionMetadata
+     */
+    protected $UniversalTransferDocumentRevisionMetadata = null;
+
+    /**
+     * UniversalCorrectionDocumentMetadata optional message = 58
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalCorrectionDocumentMetadata
+     */
+    protected $UniversalCorrectionDocumentMetadata = null;
+
+    /**
+     * UniversalCorrectionDocumentRevisionMetadata optional message = 59
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalCorrectionDocumentRevisionMetadata
+     */
+    protected $UniversalCorrectionDocumentRevisionMetadata = null;
+
+    /**
+     * ResolutionRouteId optional string = 60
+     *
+     * @var string
+     */
+    protected $ResolutionRouteId = null;
+
+    /**
+     * AttachmentVersion optional string = 61
+     *
+     * @var string
+     */
+    protected $AttachmentVersion = null;
+
+    /**
+     * ProxySignatureStatus optional enum = 62
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\ProxySignatureStatus
+     */
+    protected $ProxySignatureStatus = null;
+
+    /**
+     * TypeNamedId required string = 63
+     *
+     * @var string
+     */
+    protected $TypeNamedId = null;
+
+    /**
+     * Function required string = 64
+     *
+     * @var string
+     */
+    protected $Function = null;
+
+    /**
+     * WorkflowId required int32 = 65
+     *
+     * @var int
+     */
+    protected $WorkflowId = null;
+
+    /**
+     * Title required string = 66
+     *
+     * @var string
+     */
+    protected $Title = null;
+
+    /**
+     * Metadata repeated message = 67
+     *
+     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\MetadataItem>
+     */
+    protected $Metadata = null;
+
+    /**
+     * RecipientReceiptMetadata required message = 68
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\RecipientReceiptMetadata
+     */
+    protected $RecipientReceiptMetadata = null;
+
+    /**
+     * ConfirmationMetadata required message = 69
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\ConfirmationMetadata
+     */
+    protected $ConfirmationMetadata = null;
+
+    /**
+     * RecipientResponseStatus required enum = 70
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\RecipientResponseStatus
+     */
+    protected $RecipientResponseStatus = null;
+
+    /**
+     * AmendmentRequestMetadata required message = 71
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\AmendmentRequestMetadata
+     */
+    protected $AmendmentRequestMetadata = null;
+
+    /**
+     * Origin optional message = 72
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\Origin
+     */
+    protected $Origin = null;
+
+    /**
+     * EditingSettingId optional string = 73
+     *
+     * @var string
+     */
+    protected $EditingSettingId = null;
+
+    /**
+     * LockMode required enum = 74
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\LockMode
+     */
+    protected $LockMode = null;
+
+    /**
+     * SenderReceiptMetadata required message = 75
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\SenderReceiptMetadata
+     */
+    protected $SenderReceiptMetadata = null;
+
+    /**
+     * Version required string = 76
+     *
+     * @var string
+     */
+    protected $Version = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
@@ -417,6 +557,11 @@ class Document extends \Protobuf\AbstractMessage
         $this->SenderSignatureStatus = \AgentSIB\Diadoc\Api\Proto\Documents\SenderSignatureStatus::UnknownSenderSignatureStatus();
         $this->IsRead = false;
         $this->PacketIsLocked = false;
+        $this->ResolutionRouteId = '';
+        $this->ProxySignatureStatus = \AgentSIB\Diadoc\Api\Proto\Documents\ProxySignatureStatus::UnknownProxySignatureStatus();
+        $this->RecipientResponseStatus = \AgentSIB\Diadoc\Api\Proto\Documents\RecipientResponseStatus::RecipientResponseStatusUnknown();
+        $this->EditingSettingId = '';
+        $this->LockMode = \AgentSIB\Diadoc\Api\Proto\LockMode::None();
 
         parent::__construct($stream, $configuration);
     }
@@ -2098,6 +2243,620 @@ class Document extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'UniversalTransferDocumentRevisionMetadata' has a value
+     *
+     * @return bool
+     */
+    public function hasUniversalTransferDocumentRevisionMetadata()
+    {
+        return $this->UniversalTransferDocumentRevisionMetadata !== null;
+    }
+
+    /**
+     * Get 'UniversalTransferDocumentRevisionMetadata' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentRevisionMetadata
+     */
+    public function getUniversalTransferDocumentRevisionMetadata()
+    {
+        return $this->UniversalTransferDocumentRevisionMetadata;
+    }
+
+    /**
+     * Set 'UniversalTransferDocumentRevisionMetadata' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentRevisionMetadata $value
+     */
+    public function setUniversalTransferDocumentRevisionMetadata(\AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentRevisionMetadata $value = null)
+    {
+        $this->UniversalTransferDocumentRevisionMetadata = $value;
+    }
+
+    /**
+     * Check if 'UniversalCorrectionDocumentMetadata' has a value
+     *
+     * @return bool
+     */
+    public function hasUniversalCorrectionDocumentMetadata()
+    {
+        return $this->UniversalCorrectionDocumentMetadata !== null;
+    }
+
+    /**
+     * Get 'UniversalCorrectionDocumentMetadata' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalCorrectionDocumentMetadata
+     */
+    public function getUniversalCorrectionDocumentMetadata()
+    {
+        return $this->UniversalCorrectionDocumentMetadata;
+    }
+
+    /**
+     * Set 'UniversalCorrectionDocumentMetadata' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalCorrectionDocumentMetadata $value
+     */
+    public function setUniversalCorrectionDocumentMetadata(\AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalCorrectionDocumentMetadata $value = null)
+    {
+        $this->UniversalCorrectionDocumentMetadata = $value;
+    }
+
+    /**
+     * Check if 'UniversalCorrectionDocumentRevisionMetadata' has a value
+     *
+     * @return bool
+     */
+    public function hasUniversalCorrectionDocumentRevisionMetadata()
+    {
+        return $this->UniversalCorrectionDocumentRevisionMetadata !== null;
+    }
+
+    /**
+     * Get 'UniversalCorrectionDocumentRevisionMetadata' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalCorrectionDocumentRevisionMetadata
+     */
+    public function getUniversalCorrectionDocumentRevisionMetadata()
+    {
+        return $this->UniversalCorrectionDocumentRevisionMetadata;
+    }
+
+    /**
+     * Set 'UniversalCorrectionDocumentRevisionMetadata' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalCorrectionDocumentRevisionMetadata $value
+     */
+    public function setUniversalCorrectionDocumentRevisionMetadata(\AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalCorrectionDocumentRevisionMetadata $value = null)
+    {
+        $this->UniversalCorrectionDocumentRevisionMetadata = $value;
+    }
+
+    /**
+     * Check if 'ResolutionRouteId' has a value
+     *
+     * @return bool
+     */
+    public function hasResolutionRouteId()
+    {
+        return $this->ResolutionRouteId !== null;
+    }
+
+    /**
+     * Get 'ResolutionRouteId' value
+     *
+     * @return string
+     */
+    public function getResolutionRouteId()
+    {
+        return $this->ResolutionRouteId;
+    }
+
+    /**
+     * Set 'ResolutionRouteId' value
+     *
+     * @param string $value
+     */
+    public function setResolutionRouteId($value = null)
+    {
+        $this->ResolutionRouteId = $value;
+    }
+
+    /**
+     * Check if 'AttachmentVersion' has a value
+     *
+     * @return bool
+     */
+    public function hasAttachmentVersion()
+    {
+        return $this->AttachmentVersion !== null;
+    }
+
+    /**
+     * Get 'AttachmentVersion' value
+     *
+     * @return string
+     */
+    public function getAttachmentVersion()
+    {
+        return $this->AttachmentVersion;
+    }
+
+    /**
+     * Set 'AttachmentVersion' value
+     *
+     * @param string $value
+     */
+    public function setAttachmentVersion($value = null)
+    {
+        $this->AttachmentVersion = $value;
+    }
+
+    /**
+     * Check if 'ProxySignatureStatus' has a value
+     *
+     * @return bool
+     */
+    public function hasProxySignatureStatus()
+    {
+        return $this->ProxySignatureStatus !== null;
+    }
+
+    /**
+     * Get 'ProxySignatureStatus' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\ProxySignatureStatus
+     */
+    public function getProxySignatureStatus()
+    {
+        return $this->ProxySignatureStatus;
+    }
+
+    /**
+     * Set 'ProxySignatureStatus' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Documents\ProxySignatureStatus $value
+     */
+    public function setProxySignatureStatus(\AgentSIB\Diadoc\Api\Proto\Documents\ProxySignatureStatus $value = null)
+    {
+        $this->ProxySignatureStatus = $value;
+    }
+
+    /**
+     * Check if 'TypeNamedId' has a value
+     *
+     * @return bool
+     */
+    public function hasTypeNamedId()
+    {
+        return $this->TypeNamedId !== null;
+    }
+
+    /**
+     * Get 'TypeNamedId' value
+     *
+     * @return string
+     */
+    public function getTypeNamedId()
+    {
+        return $this->TypeNamedId;
+    }
+
+    /**
+     * Set 'TypeNamedId' value
+     *
+     * @param string $value
+     */
+    public function setTypeNamedId($value)
+    {
+        $this->TypeNamedId = $value;
+    }
+
+    /**
+     * Check if 'Function' has a value
+     *
+     * @return bool
+     */
+    public function hasFunction()
+    {
+        return $this->Function !== null;
+    }
+
+    /**
+     * Get 'Function' value
+     *
+     * @return string
+     */
+    public function getFunction()
+    {
+        return $this->Function;
+    }
+
+    /**
+     * Set 'Function' value
+     *
+     * @param string $value
+     */
+    public function setFunction($value)
+    {
+        $this->Function = $value;
+    }
+
+    /**
+     * Check if 'WorkflowId' has a value
+     *
+     * @return bool
+     */
+    public function hasWorkflowId()
+    {
+        return $this->WorkflowId !== null;
+    }
+
+    /**
+     * Get 'WorkflowId' value
+     *
+     * @return int
+     */
+    public function getWorkflowId()
+    {
+        return $this->WorkflowId;
+    }
+
+    /**
+     * Set 'WorkflowId' value
+     *
+     * @param int $value
+     */
+    public function setWorkflowId($value)
+    {
+        $this->WorkflowId = $value;
+    }
+
+    /**
+     * Check if 'Title' has a value
+     *
+     * @return bool
+     */
+    public function hasTitle()
+    {
+        return $this->Title !== null;
+    }
+
+    /**
+     * Get 'Title' value
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->Title;
+    }
+
+    /**
+     * Set 'Title' value
+     *
+     * @param string $value
+     */
+    public function setTitle($value)
+    {
+        $this->Title = $value;
+    }
+
+    /**
+     * Check if 'Metadata' has a value
+     *
+     * @return bool
+     */
+    public function hasMetadataList()
+    {
+        return $this->Metadata !== null;
+    }
+
+    /**
+     * Get 'Metadata' value
+     *
+     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\MetadataItem>
+     */
+    public function getMetadataList()
+    {
+        return $this->Metadata;
+    }
+
+    /**
+     * Set 'Metadata' value
+     *
+     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\MetadataItem> $value
+     */
+    public function setMetadataList(\Protobuf\Collection $value = null)
+    {
+        $this->Metadata = $value;
+    }
+
+    /**
+     * Add a new element to 'Metadata'
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Events\MetadataItem $value
+     */
+    public function addMetadata(\AgentSIB\Diadoc\Api\Proto\Events\MetadataItem $value)
+    {
+        if ($this->Metadata === null) {
+            $this->Metadata = new \Protobuf\MessageCollection();
+        }
+
+        $this->Metadata->add($value);
+    }
+
+    /**
+     * Check if 'RecipientReceiptMetadata' has a value
+     *
+     * @return bool
+     */
+    public function hasRecipientReceiptMetadata()
+    {
+        return $this->RecipientReceiptMetadata !== null;
+    }
+
+    /**
+     * Get 'RecipientReceiptMetadata' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\RecipientReceiptMetadata
+     */
+    public function getRecipientReceiptMetadata()
+    {
+        return $this->RecipientReceiptMetadata;
+    }
+
+    /**
+     * Set 'RecipientReceiptMetadata' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Documents\RecipientReceiptMetadata $value
+     */
+    public function setRecipientReceiptMetadata(\AgentSIB\Diadoc\Api\Proto\Documents\RecipientReceiptMetadata $value)
+    {
+        $this->RecipientReceiptMetadata = $value;
+    }
+
+    /**
+     * Check if 'ConfirmationMetadata' has a value
+     *
+     * @return bool
+     */
+    public function hasConfirmationMetadata()
+    {
+        return $this->ConfirmationMetadata !== null;
+    }
+
+    /**
+     * Get 'ConfirmationMetadata' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\ConfirmationMetadata
+     */
+    public function getConfirmationMetadata()
+    {
+        return $this->ConfirmationMetadata;
+    }
+
+    /**
+     * Set 'ConfirmationMetadata' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Documents\ConfirmationMetadata $value
+     */
+    public function setConfirmationMetadata(\AgentSIB\Diadoc\Api\Proto\Documents\ConfirmationMetadata $value)
+    {
+        $this->ConfirmationMetadata = $value;
+    }
+
+    /**
+     * Check if 'RecipientResponseStatus' has a value
+     *
+     * @return bool
+     */
+    public function hasRecipientResponseStatus()
+    {
+        return $this->RecipientResponseStatus !== null;
+    }
+
+    /**
+     * Get 'RecipientResponseStatus' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\RecipientResponseStatus
+     */
+    public function getRecipientResponseStatus()
+    {
+        return $this->RecipientResponseStatus;
+    }
+
+    /**
+     * Set 'RecipientResponseStatus' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Documents\RecipientResponseStatus $value
+     */
+    public function setRecipientResponseStatus(\AgentSIB\Diadoc\Api\Proto\Documents\RecipientResponseStatus $value)
+    {
+        $this->RecipientResponseStatus = $value;
+    }
+
+    /**
+     * Check if 'AmendmentRequestMetadata' has a value
+     *
+     * @return bool
+     */
+    public function hasAmendmentRequestMetadata()
+    {
+        return $this->AmendmentRequestMetadata !== null;
+    }
+
+    /**
+     * Get 'AmendmentRequestMetadata' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\AmendmentRequestMetadata
+     */
+    public function getAmendmentRequestMetadata()
+    {
+        return $this->AmendmentRequestMetadata;
+    }
+
+    /**
+     * Set 'AmendmentRequestMetadata' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Documents\AmendmentRequestMetadata $value
+     */
+    public function setAmendmentRequestMetadata(\AgentSIB\Diadoc\Api\Proto\Documents\AmendmentRequestMetadata $value)
+    {
+        $this->AmendmentRequestMetadata = $value;
+    }
+
+    /**
+     * Check if 'Origin' has a value
+     *
+     * @return bool
+     */
+    public function hasOrigin()
+    {
+        return $this->Origin !== null;
+    }
+
+    /**
+     * Get 'Origin' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\Origin
+     */
+    public function getOrigin()
+    {
+        return $this->Origin;
+    }
+
+    /**
+     * Set 'Origin' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Documents\Origin $value
+     */
+    public function setOrigin(\AgentSIB\Diadoc\Api\Proto\Documents\Origin $value = null)
+    {
+        $this->Origin = $value;
+    }
+
+    /**
+     * Check if 'EditingSettingId' has a value
+     *
+     * @return bool
+     */
+    public function hasEditingSettingId()
+    {
+        return $this->EditingSettingId !== null;
+    }
+
+    /**
+     * Get 'EditingSettingId' value
+     *
+     * @return string
+     */
+    public function getEditingSettingId()
+    {
+        return $this->EditingSettingId;
+    }
+
+    /**
+     * Set 'EditingSettingId' value
+     *
+     * @param string $value
+     */
+    public function setEditingSettingId($value = null)
+    {
+        $this->EditingSettingId = $value;
+    }
+
+    /**
+     * Check if 'LockMode' has a value
+     *
+     * @return bool
+     */
+    public function hasLockMode()
+    {
+        return $this->LockMode !== null;
+    }
+
+    /**
+     * Get 'LockMode' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\LockMode
+     */
+    public function getLockMode()
+    {
+        return $this->LockMode;
+    }
+
+    /**
+     * Set 'LockMode' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\LockMode $value
+     */
+    public function setLockMode(\AgentSIB\Diadoc\Api\Proto\LockMode $value)
+    {
+        $this->LockMode = $value;
+    }
+
+    /**
+     * Check if 'SenderReceiptMetadata' has a value
+     *
+     * @return bool
+     */
+    public function hasSenderReceiptMetadata()
+    {
+        return $this->SenderReceiptMetadata !== null;
+    }
+
+    /**
+     * Get 'SenderReceiptMetadata' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\SenderReceiptMetadata
+     */
+    public function getSenderReceiptMetadata()
+    {
+        return $this->SenderReceiptMetadata;
+    }
+
+    /**
+     * Set 'SenderReceiptMetadata' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Documents\SenderReceiptMetadata $value
+     */
+    public function setSenderReceiptMetadata(\AgentSIB\Diadoc\Api\Proto\Documents\SenderReceiptMetadata $value)
+    {
+        $this->SenderReceiptMetadata = $value;
+    }
+
+    /**
+     * Check if 'Version' has a value
+     *
+     * @return bool
+     */
+    public function hasVersion()
+    {
+        return $this->Version !== null;
+    }
+
+    /**
+     * Get 'Version' value
+     *
+     * @return string
+     */
+    public function getVersion()
+    {
+        return $this->Version;
+    }
+
+    /**
+     * Set 'Version' value
+     *
+     * @param string $value
+     */
+    public function setVersion($value)
+    {
+        $this->Version = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -2140,6 +2899,42 @@ class Document extends \Protobuf\AbstractMessage
 
         if ( ! isset($values['CreationTimestampTicks'])) {
             throw new \InvalidArgumentException('Field "CreationTimestampTicks" (tag 4) is required but has no value.');
+        }
+
+        if ( ! isset($values['TypeNamedId'])) {
+            throw new \InvalidArgumentException('Field "TypeNamedId" (tag 63) is required but has no value.');
+        }
+
+        if ( ! isset($values['Function'])) {
+            throw new \InvalidArgumentException('Field "Function" (tag 64) is required but has no value.');
+        }
+
+        if ( ! isset($values['WorkflowId'])) {
+            throw new \InvalidArgumentException('Field "WorkflowId" (tag 65) is required but has no value.');
+        }
+
+        if ( ! isset($values['Title'])) {
+            throw new \InvalidArgumentException('Field "Title" (tag 66) is required but has no value.');
+        }
+
+        if ( ! isset($values['RecipientReceiptMetadata'])) {
+            throw new \InvalidArgumentException('Field "RecipientReceiptMetadata" (tag 68) is required but has no value.');
+        }
+
+        if ( ! isset($values['ConfirmationMetadata'])) {
+            throw new \InvalidArgumentException('Field "ConfirmationMetadata" (tag 69) is required but has no value.');
+        }
+
+        if ( ! isset($values['AmendmentRequestMetadata'])) {
+            throw new \InvalidArgumentException('Field "AmendmentRequestMetadata" (tag 71) is required but has no value.');
+        }
+
+        if ( ! isset($values['SenderReceiptMetadata'])) {
+            throw new \InvalidArgumentException('Field "SenderReceiptMetadata" (tag 75) is required but has no value.');
+        }
+
+        if ( ! isset($values['Version'])) {
+            throw new \InvalidArgumentException('Field "Version" (tag 76) is required but has no value.');
         }
 
         $message = new self();
@@ -2194,7 +2989,16 @@ class Document extends \Protobuf\AbstractMessage
             'PacketIsLocked' => false,
             'PriceListAgreementMetadata' => null,
             'CertificateRegistryMetadata' => null,
-            'UniversalTransferDocumentMetadata' => null
+            'UniversalTransferDocumentMetadata' => null,
+            'UniversalTransferDocumentRevisionMetadata' => null,
+            'UniversalCorrectionDocumentMetadata' => null,
+            'UniversalCorrectionDocumentRevisionMetadata' => null,
+            'ResolutionRouteId' => '',
+            'AttachmentVersion' => null,
+            'ProxySignatureStatus' => \AgentSIB\Diadoc\Api\Proto\Documents\ProxySignatureStatus::UnknownProxySignatureStatus(),
+            'Metadata' => [],
+            'Origin' => null,
+            'EditingSettingId' => '',
         ], $values);
 
         $message->setIndexKey($values['IndexKey']);
@@ -2247,6 +3051,25 @@ class Document extends \Protobuf\AbstractMessage
         $message->setPriceListAgreementMetadata($values['PriceListAgreementMetadata']);
         $message->setCertificateRegistryMetadata($values['CertificateRegistryMetadata']);
         $message->setUniversalTransferDocumentMetadata($values['UniversalTransferDocumentMetadata']);
+        $message->setUniversalTransferDocumentRevisionMetadata($values['UniversalTransferDocumentRevisionMetadata']);
+        $message->setUniversalCorrectionDocumentMetadata($values['UniversalCorrectionDocumentMetadata']);
+        $message->setUniversalCorrectionDocumentRevisionMetadata($values['UniversalCorrectionDocumentRevisionMetadata']);
+        $message->setResolutionRouteId($values['ResolutionRouteId']);
+        $message->setAttachmentVersion($values['AttachmentVersion']);
+        $message->setProxySignatureStatus($values['ProxySignatureStatus']);
+        $message->setTypeNamedId($values['TypeNamedId']);
+        $message->setFunction($values['Function']);
+        $message->setWorkflowId($values['WorkflowId']);
+        $message->setTitle($values['Title']);
+        $message->setRecipientReceiptMetadata($values['RecipientReceiptMetadata']);
+        $message->setConfirmationMetadata($values['ConfirmationMetadata']);
+        $message->setRecipientResponseStatus($values['RecipientResponseStatus']);
+        $message->setAmendmentRequestMetadata($values['AmendmentRequestMetadata']);
+        $message->setOrigin($values['Origin']);
+        $message->setEditingSettingId($values['EditingSettingId']);
+        $message->setLockMode($values['LockMode']);
+        $message->setSenderReceiptMetadata($values['SenderReceiptMetadata']);
+        $message->setVersion($values['Version']);
 
         foreach ($values['InitialDocumentIds'] as $item) {
             $message->addInitialDocumentIds($item);
@@ -2262,6 +3085,10 @@ class Document extends \Protobuf\AbstractMessage
 
         foreach ($values['CustomData'] as $item) {
             $message->addCustomData($item);
+        }
+
+        foreach ($values['Metadata'] as $item) {
+            $message->addMetadata($item);
         }
 
         return $message;
@@ -2640,6 +3467,143 @@ class Document extends \Protobuf\AbstractMessage
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.UniversalTransferDocument.UniversalTransferDocumentMetadata'
                 ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 57,
+                    'name' => 'UniversalTransferDocumentRevisionMetadata',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.UniversalTransferDocument.UniversalTransferDocumentRevisionMetadata'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 58,
+                    'name' => 'UniversalCorrectionDocumentMetadata',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.UniversalTransferDocument.UniversalCorrectionDocumentMetadata'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 59,
+                    'name' => 'UniversalCorrectionDocumentRevisionMetadata',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.UniversalTransferDocument.UniversalCorrectionDocumentRevisionMetadata'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 60,
+                    'name' => 'ResolutionRouteId',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'default_value' => ''
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 61,
+                    'name' => 'AttachmentVersion',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 62,
+                    'name' => 'ProxySignatureStatus',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.ProxySignatureStatus',
+                    'default_value' => \AgentSIB\Diadoc\Api\Proto\Documents\ProxySignatureStatus::UnknownProxySignatureStatus()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 63,
+                    'name' => 'TypeNamedId',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 64,
+                    'name' => 'Function',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 65,
+                    'name' => 'WorkflowId',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_INT32(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 66,
+                    'name' => 'Title',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 67,
+                    'name' => 'Metadata',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.MetadataItem'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 68,
+                    'name' => 'RecipientReceiptMetadata',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.RecipientReceiptMetadata'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 69,
+                    'name' => 'ConfirmationMetadata',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.ConfirmationMetadata'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 70,
+                    'name' => 'RecipientResponseStatus',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.RecipientResponseStatus',
+                    'default_value' => \AgentSIB\Diadoc\Api\Proto\Documents\RecipientResponseStatus::RecipientResponseStatusUnknown()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 71,
+                    'name' => 'AmendmentRequestMetadata',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.AmendmentRequestMetadata'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 72,
+                    'name' => 'Origin',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.Origin'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 73,
+                    'name' => 'EditingSettingId',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'default_value' => ''
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 74,
+                    'name' => 'LockMode',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.LockMode',
+                    'default_value' => \AgentSIB\Diadoc\Api\Proto\LockMode::None()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 75,
+                    'name' => 'SenderReceiptMetadata',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.SenderReceiptMetadata'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 76,
+                    'name' => 'Version',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
+                ]),
             ],
         ]);
     }
@@ -2678,6 +3642,50 @@ class Document extends \Protobuf\AbstractMessage
 
         if ($this->CreationTimestampTicks === null) {
             throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Documents\\Document#CreationTimestampTicks" (tag 4) is required but has no value.');
+        }
+
+        if ($this->TypeNamedId === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Documents\\Document#TypeNamedId" (tag 63) is required but has no value.');
+        }
+
+        if ($this->Function === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Documents\\Document#Function" (tag 64) is required but has no value.');
+        }
+
+        if ($this->WorkflowId === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Documents\\Document#WorkflowId" (tag 65) is required but has no value.');
+        }
+
+        if ($this->Title === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Documents\\Document#Title" (tag 66) is required but has no value.');
+        }
+
+        if ($this->RecipientReceiptMetadata === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Documents\\Document#RecipientReceiptMetadata" (tag 68) is required but has no value.');
+        }
+
+        if ($this->ConfirmationMetadata === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Documents\\Document#ConfirmationMetadata" (tag 69) is required but has no value.');
+        }
+
+        if ($this->RecipientResponseStatus === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Documents\\Document#RecipientResponseStatus" (tag 70) is required but has no value.');
+        }
+
+        if ($this->AmendmentRequestMetadata === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Documents\\Document#AmendmentRequestMetadata" (tag 71) is required but has no value.');
+        }
+
+        if ($this->LockMode === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Documents\\Document#LockMode" (tag 74) is required but has no value.');
+        }
+
+        if ($this->SenderReceiptMetadata === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Documents\\Document#SenderReceiptMetadata" (tag 75) is required but has no value.');
+        }
+
+        if ($this->Version === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Documents\\Document#Version" (tag 76) is required but has no value.');
         }
 
         if ($this->IndexKey !== null) {
@@ -2982,6 +3990,117 @@ class Document extends \Protobuf\AbstractMessage
             $writer->writeVarint($stream, 450);
             $writer->writeVarint($stream, $this->UniversalTransferDocumentMetadata->serializedSize($sizeContext));
             $this->UniversalTransferDocumentMetadata->writeTo($context);
+        }
+
+        if ($this->UniversalTransferDocumentRevisionMetadata !== null) {
+            $writer->writeVarint($stream, 458);
+            $writer->writeVarint($stream, $this->UniversalTransferDocumentRevisionMetadata->serializedSize($sizeContext));
+            $this->UniversalTransferDocumentRevisionMetadata->writeTo($context);
+        }
+
+        if ($this->UniversalCorrectionDocumentMetadata !== null) {
+            $writer->writeVarint($stream, 466);
+            $writer->writeVarint($stream, $this->UniversalCorrectionDocumentMetadata->serializedSize($sizeContext));
+            $this->UniversalCorrectionDocumentMetadata->writeTo($context);
+        }
+
+        if ($this->UniversalCorrectionDocumentRevisionMetadata !== null) {
+            $writer->writeVarint($stream, 474);
+            $writer->writeVarint($stream, $this->UniversalCorrectionDocumentRevisionMetadata->serializedSize($sizeContext));
+            $this->UniversalCorrectionDocumentRevisionMetadata->writeTo($context);
+        }
+
+        if ($this->ResolutionRouteId !== null) {
+            $writer->writeVarint($stream, 482);
+            $writer->writeString($stream, $this->ResolutionRouteId);
+        }
+
+        if ($this->AttachmentVersion !== null) {
+            $writer->writeVarint($stream, 490);
+            $writer->writeString($stream, $this->AttachmentVersion);
+        }
+
+        if ($this->ProxySignatureStatus !== null) {
+            $writer->writeVarint($stream, 496);
+            $writer->writeVarint($stream, $this->ProxySignatureStatus->value());
+        }
+
+        if ($this->TypeNamedId !== null) {
+            $writer->writeVarint($stream, 506);
+            $writer->writeString($stream, $this->TypeNamedId);
+        }
+
+        if ($this->Function !== null) {
+            $writer->writeVarint($stream, 514);
+            $writer->writeString($stream, $this->Function);
+        }
+
+        if ($this->WorkflowId !== null) {
+            $writer->writeVarint($stream, 520);
+            $writer->writeVarint($stream, $this->WorkflowId);
+        }
+
+        if ($this->Title !== null) {
+            $writer->writeVarint($stream, 530);
+            $writer->writeString($stream, $this->Title);
+        }
+
+        if ($this->Metadata !== null) {
+            foreach ($this->Metadata as $val) {
+                $writer->writeVarint($stream, 538);
+                $writer->writeVarint($stream, $val->serializedSize($sizeContext));
+                $val->writeTo($context);
+            }
+        }
+
+        if ($this->RecipientReceiptMetadata !== null) {
+            $writer->writeVarint($stream, 546);
+            $writer->writeVarint($stream, $this->RecipientReceiptMetadata->serializedSize($sizeContext));
+            $this->RecipientReceiptMetadata->writeTo($context);
+        }
+
+        if ($this->ConfirmationMetadata !== null) {
+            $writer->writeVarint($stream, 554);
+            $writer->writeVarint($stream, $this->ConfirmationMetadata->serializedSize($sizeContext));
+            $this->ConfirmationMetadata->writeTo($context);
+        }
+
+        if ($this->RecipientResponseStatus !== null) {
+            $writer->writeVarint($stream, 560);
+            $writer->writeVarint($stream, $this->RecipientResponseStatus->value());
+        }
+
+        if ($this->AmendmentRequestMetadata !== null) {
+            $writer->writeVarint($stream, 570);
+            $writer->writeVarint($stream, $this->AmendmentRequestMetadata->serializedSize($sizeContext));
+            $this->AmendmentRequestMetadata->writeTo($context);
+        }
+
+        if ($this->Origin !== null) {
+            $writer->writeVarint($stream, 578);
+            $writer->writeVarint($stream, $this->Origin->serializedSize($sizeContext));
+            $this->Origin->writeTo($context);
+        }
+
+        if ($this->EditingSettingId !== null) {
+            $writer->writeVarint($stream, 586);
+            $writer->writeString($stream, $this->EditingSettingId);
+        }
+
+        if ($this->LockMode !== null) {
+            $writer->writeVarint($stream, 592);
+            $writer->writeVarint($stream, $this->LockMode->value());
+        }
+
+        if ($this->SenderReceiptMetadata !== null) {
+            $writer->writeVarint($stream, 602);
+            $writer->writeVarint($stream, $this->SenderReceiptMetadata->serializedSize($sizeContext));
+            $this->SenderReceiptMetadata->writeTo($context);
+        }
+
+        if ($this->Version !== null) {
+            $writer->writeVarint($stream, 610);
+            $writer->writeString($stream, $this->Version);
         }
 
         if ($this->extensions !== null) {
@@ -3648,6 +4767,233 @@ class Document extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 57) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentRevisionMetadata();
+
+                $this->UniversalTransferDocumentRevisionMetadata = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 58) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalCorrectionDocumentMetadata();
+
+                $this->UniversalCorrectionDocumentMetadata = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 59) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalCorrectionDocumentRevisionMetadata();
+
+                $this->UniversalCorrectionDocumentRevisionMetadata = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 60) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->ResolutionRouteId = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 61) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->AttachmentVersion = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 62) {
+                \Protobuf\WireFormat::assertWireType($wire, 14);
+
+                $this->ProxySignatureStatus = \AgentSIB\Diadoc\Api\Proto\Documents\ProxySignatureStatus::valueOf($reader->readVarint($stream));
+
+                continue;
+            }
+
+            if ($tag === 63) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->TypeNamedId = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 64) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->Function = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 65) {
+                \Protobuf\WireFormat::assertWireType($wire, 5);
+
+                $this->WorkflowId = $reader->readVarint($stream);
+
+                continue;
+            }
+
+            if ($tag === 66) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->Title = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 67) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\MetadataItem();
+
+                if ($this->Metadata === null) {
+                    $this->Metadata = new \Protobuf\MessageCollection();
+                }
+
+                $this->Metadata->add($innerMessage);
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 68) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Documents\RecipientReceiptMetadata();
+
+                $this->RecipientReceiptMetadata = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 69) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Documents\ConfirmationMetadata();
+
+                $this->ConfirmationMetadata = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 70) {
+                \Protobuf\WireFormat::assertWireType($wire, 14);
+
+                $this->RecipientResponseStatus = \AgentSIB\Diadoc\Api\Proto\Documents\RecipientResponseStatus::valueOf($reader->readVarint($stream));
+
+                continue;
+            }
+
+            if ($tag === 71) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Documents\AmendmentRequestMetadata();
+
+                $this->AmendmentRequestMetadata = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 72) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Documents\Origin();
+
+                $this->Origin = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 73) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->EditingSettingId = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 74) {
+                \Protobuf\WireFormat::assertWireType($wire, 14);
+
+                $this->LockMode = \AgentSIB\Diadoc\Api\Proto\LockMode::valueOf($reader->readVarint($stream));
+
+                continue;
+            }
+
+            if ($tag === 75) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Documents\SenderReceiptMetadata();
+
+                $this->SenderReceiptMetadata = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 76) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->Version = $reader->readString($stream);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -4033,6 +5379,135 @@ class Document extends \Protobuf\AbstractMessage
             $size += $calculator->computeVarintSize($innerSize);
         }
 
+        if ($this->UniversalTransferDocumentRevisionMetadata !== null) {
+            $innerSize = $this->UniversalTransferDocumentRevisionMetadata->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->UniversalCorrectionDocumentMetadata !== null) {
+            $innerSize = $this->UniversalCorrectionDocumentMetadata->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->UniversalCorrectionDocumentRevisionMetadata !== null) {
+            $innerSize = $this->UniversalCorrectionDocumentRevisionMetadata->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->ResolutionRouteId !== null) {
+            $size += 2;
+            $size += $calculator->computeStringSize($this->ResolutionRouteId);
+        }
+
+        if ($this->AttachmentVersion !== null) {
+            $size += 2;
+            $size += $calculator->computeStringSize($this->AttachmentVersion);
+        }
+
+        if ($this->ProxySignatureStatus !== null) {
+            $size += 2;
+            $size += $calculator->computeVarintSize($this->ProxySignatureStatus->value());
+        }
+
+        if ($this->TypeNamedId !== null) {
+            $size += 2;
+            $size += $calculator->computeStringSize($this->TypeNamedId);
+        }
+
+        if ($this->Function !== null) {
+            $size += 2;
+            $size += $calculator->computeStringSize($this->Function);
+        }
+
+        if ($this->WorkflowId !== null) {
+            $size += 2;
+            $size += $calculator->computeVarintSize($this->WorkflowId);
+        }
+
+        if ($this->Title !== null) {
+            $size += 2;
+            $size += $calculator->computeStringSize($this->Title);
+        }
+
+        if ($this->Metadata !== null) {
+            foreach ($this->Metadata as $val) {
+                $innerSize = $val->serializedSize($context);
+
+                $size += 2;
+                $size += $innerSize;
+                $size += $calculator->computeVarintSize($innerSize);
+            }
+        }
+
+        if ($this->RecipientReceiptMetadata !== null) {
+            $innerSize = $this->RecipientReceiptMetadata->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->ConfirmationMetadata !== null) {
+            $innerSize = $this->ConfirmationMetadata->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->RecipientResponseStatus !== null) {
+            $size += 2;
+            $size += $calculator->computeVarintSize($this->RecipientResponseStatus->value());
+        }
+
+        if ($this->AmendmentRequestMetadata !== null) {
+            $innerSize = $this->AmendmentRequestMetadata->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->Origin !== null) {
+            $innerSize = $this->Origin->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->EditingSettingId !== null) {
+            $size += 2;
+            $size += $calculator->computeStringSize($this->EditingSettingId);
+        }
+
+        if ($this->LockMode !== null) {
+            $size += 2;
+            $size += $calculator->computeVarintSize($this->LockMode->value());
+        }
+
+        if ($this->SenderReceiptMetadata !== null) {
+            $innerSize = $this->SenderReceiptMetadata->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->Version !== null) {
+            $size += 2;
+            $size += $calculator->computeStringSize($this->Version);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -4099,6 +5574,26 @@ class Document extends \Protobuf\AbstractMessage
         $this->PriceListAgreementMetadata = null;
         $this->CertificateRegistryMetadata = null;
         $this->UniversalTransferDocumentMetadata = null;
+        $this->UniversalTransferDocumentRevisionMetadata = null;
+        $this->UniversalCorrectionDocumentMetadata = null;
+        $this->UniversalCorrectionDocumentRevisionMetadata = null;
+        $this->ResolutionRouteId = '';
+        $this->AttachmentVersion = null;
+        $this->ProxySignatureStatus = \AgentSIB\Diadoc\Api\Proto\Documents\ProxySignatureStatus::UnknownProxySignatureStatus();
+        $this->TypeNamedId = null;
+        $this->Function = null;
+        $this->WorkflowId = null;
+        $this->Title = null;
+        $this->Metadata = null;
+        $this->RecipientReceiptMetadata = null;
+        $this->ConfirmationMetadata = null;
+        $this->RecipientResponseStatus = \AgentSIB\Diadoc\Api\Proto\Documents\RecipientResponseStatus::RecipientResponseStatusUnknown();
+        $this->AmendmentRequestMetadata = null;
+        $this->Origin = null;
+        $this->EditingSettingId = '';
+        $this->LockMode = \AgentSIB\Diadoc\Api\Proto\LockMode::None();
+        $this->SenderReceiptMetadata = null;
+        $this->Version = null;
     }
 
     /**
@@ -4164,6 +5659,26 @@ class Document extends \Protobuf\AbstractMessage
         $this->PriceListAgreementMetadata = ($message->PriceListAgreementMetadata !== null) ? $message->PriceListAgreementMetadata : $this->PriceListAgreementMetadata;
         $this->CertificateRegistryMetadata = ($message->CertificateRegistryMetadata !== null) ? $message->CertificateRegistryMetadata : $this->CertificateRegistryMetadata;
         $this->UniversalTransferDocumentMetadata = ($message->UniversalTransferDocumentMetadata !== null) ? $message->UniversalTransferDocumentMetadata : $this->UniversalTransferDocumentMetadata;
+        $this->UniversalTransferDocumentRevisionMetadata = ($message->UniversalTransferDocumentRevisionMetadata !== null) ? $message->UniversalTransferDocumentRevisionMetadata : $this->UniversalTransferDocumentRevisionMetadata;
+        $this->UniversalCorrectionDocumentMetadata = ($message->UniversalCorrectionDocumentMetadata !== null) ? $message->UniversalCorrectionDocumentMetadata : $this->UniversalCorrectionDocumentMetadata;
+        $this->UniversalCorrectionDocumentRevisionMetadata = ($message->UniversalCorrectionDocumentRevisionMetadata !== null) ? $message->UniversalCorrectionDocumentRevisionMetadata : $this->UniversalCorrectionDocumentRevisionMetadata;
+        $this->ResolutionRouteId = ($message->ResolutionRouteId !== null) ? $message->ResolutionRouteId : $this->ResolutionRouteId;
+        $this->AttachmentVersion = ($message->AttachmentVersion !== null) ? $message->AttachmentVersion : $this->AttachmentVersion;
+        $this->ProxySignatureStatus = ($message->ProxySignatureStatus !== null) ? $message->ProxySignatureStatus : $this->ProxySignatureStatus;
+        $this->TypeNamedId = ($message->TypeNamedId !== null) ? $message->TypeNamedId : $this->TypeNamedId;
+        $this->Function = ($message->Function !== null) ? $message->Function : $this->Function;
+        $this->WorkflowId = ($message->WorkflowId !== null) ? $message->WorkflowId : $this->WorkflowId;
+        $this->Title = ($message->Title !== null) ? $message->Title : $this->Title;
+        $this->Metadata = ($message->Metadata !== null) ? $message->Metadata : $this->Metadata;
+        $this->RecipientReceiptMetadata = ($message->RecipientReceiptMetadata !== null) ? $message->RecipientReceiptMetadata : $this->RecipientReceiptMetadata;
+        $this->ConfirmationMetadata = ($message->ConfirmationMetadata !== null) ? $message->ConfirmationMetadata : $this->ConfirmationMetadata;
+        $this->RecipientResponseStatus = ($message->RecipientResponseStatus !== null) ? $message->RecipientResponseStatus : $this->RecipientResponseStatus;
+        $this->AmendmentRequestMetadata = ($message->AmendmentRequestMetadata !== null) ? $message->AmendmentRequestMetadata : $this->AmendmentRequestMetadata;
+        $this->Origin = ($message->Origin !== null) ? $message->Origin : $this->Origin;
+        $this->EditingSettingId = ($message->EditingSettingId !== null) ? $message->EditingSettingId : $this->EditingSettingId;
+        $this->LockMode = ($message->LockMode !== null) ? $message->LockMode : $this->LockMode;
+        $this->SenderReceiptMetadata = ($message->SenderReceiptMetadata !== null) ? $message->SenderReceiptMetadata : $this->SenderReceiptMetadata;
+        $this->Version = ($message->Version !== null) ? $message->Version : $this->Version;
     }
 
 

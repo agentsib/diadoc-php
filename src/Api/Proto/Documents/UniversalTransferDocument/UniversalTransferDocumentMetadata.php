@@ -68,11 +68,18 @@ class UniversalTransferDocumentMetadata extends \Protobuf\AbstractMessage
     protected $Currency = null;
 
     /**
-     * ReceiptStatus optional enum = 7
+     * ConfirmationDateTimeTicks optional sfixed64 = 8
      *
-     * @var \AgentSIB\Diadoc\Api\Proto\Documents\ReceiptStatus
+     * @var int
      */
-    protected $ReceiptStatus = null;
+    protected $ConfirmationDateTimeTicks = null;
+
+    /**
+     * InvoiceAmendmentFlags optional int32 = 9
+     *
+     * @var int
+     */
+    protected $InvoiceAmendmentFlags = null;
 
     /**
      * {@inheritdoc}
@@ -80,7 +87,6 @@ class UniversalTransferDocumentMetadata extends \Protobuf\AbstractMessage
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
     {
         $this->DocumentStatus = \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus::UnknownDocumentStatus();
-        $this->ReceiptStatus = \AgentSIB\Diadoc\Api\Proto\Documents\ReceiptStatus::UnknownReceiptStatus();
 
         parent::__construct($stream, $configuration);
     }
@@ -266,33 +272,63 @@ class UniversalTransferDocumentMetadata extends \Protobuf\AbstractMessage
     }
 
     /**
-     * Check if 'ReceiptStatus' has a value
+     * Check if 'ConfirmationDateTimeTicks' has a value
      *
      * @return bool
      */
-    public function hasReceiptStatus()
+    public function hasConfirmationDateTimeTicks()
     {
-        return $this->ReceiptStatus !== null;
+        return $this->ConfirmationDateTimeTicks !== null;
     }
 
     /**
-     * Get 'ReceiptStatus' value
+     * Get 'ConfirmationDateTimeTicks' value
      *
-     * @return \AgentSIB\Diadoc\Api\Proto\Documents\ReceiptStatus
+     * @return int
      */
-    public function getReceiptStatus()
+    public function getConfirmationDateTimeTicks()
     {
-        return $this->ReceiptStatus;
+        return $this->ConfirmationDateTimeTicks;
     }
 
     /**
-     * Set 'ReceiptStatus' value
+     * Set 'ConfirmationDateTimeTicks' value
      *
-     * @param \AgentSIB\Diadoc\Api\Proto\Documents\ReceiptStatus $value
+     * @param int $value
      */
-    public function setReceiptStatus(\AgentSIB\Diadoc\Api\Proto\Documents\ReceiptStatus $value = null)
+    public function setConfirmationDateTimeTicks($value = null)
     {
-        $this->ReceiptStatus = $value;
+        $this->ConfirmationDateTimeTicks = $value;
+    }
+
+    /**
+     * Check if 'InvoiceAmendmentFlags' has a value
+     *
+     * @return bool
+     */
+    public function hasInvoiceAmendmentFlags()
+    {
+        return $this->InvoiceAmendmentFlags !== null;
+    }
+
+    /**
+     * Get 'InvoiceAmendmentFlags' value
+     *
+     * @return int
+     */
+    public function getInvoiceAmendmentFlags()
+    {
+        return $this->InvoiceAmendmentFlags;
+    }
+
+    /**
+     * Set 'InvoiceAmendmentFlags' value
+     *
+     * @param int $value
+     */
+    public function setInvoiceAmendmentFlags($value = null)
+    {
+        $this->InvoiceAmendmentFlags = $value;
     }
 
     /**
@@ -345,7 +381,8 @@ class UniversalTransferDocumentMetadata extends \Protobuf\AbstractMessage
             'DocumentStatus' => \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus::UnknownDocumentStatus(),
             'Vat' => null,
             'Grounds' => null,
-            'ReceiptStatus' => \AgentSIB\Diadoc\Api\Proto\Documents\ReceiptStatus::UnknownReceiptStatus()
+            'ConfirmationDateTimeTicks' => null,
+            'InvoiceAmendmentFlags' => null
         ], $values);
 
         $message->setDocumentStatus($values['DocumentStatus']);
@@ -354,7 +391,8 @@ class UniversalTransferDocumentMetadata extends \Protobuf\AbstractMessage
         $message->setGrounds($values['Grounds']);
         $message->setDocumentFunction($values['DocumentFunction']);
         $message->setCurrency($values['Currency']);
-        $message->setReceiptStatus($values['ReceiptStatus']);
+        $message->setConfirmationDateTimeTicks($values['ConfirmationDateTimeTicks']);
+        $message->setInvoiceAmendmentFlags($values['InvoiceAmendmentFlags']);
 
         return $message;
     }
@@ -406,12 +444,16 @@ class UniversalTransferDocumentMetadata extends \Protobuf\AbstractMessage
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
                 ]),
                 \google\protobuf\FieldDescriptorProto::fromArray([
-                    'number' => 7,
-                    'name' => 'ReceiptStatus',
-                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
-                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
-                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.ReceiptStatus',
-                    'default_value' => \AgentSIB\Diadoc\Api\Proto\Documents\ReceiptStatus::UnknownReceiptStatus()
+                    'number' => 8,
+                    'name' => 'ConfirmationDateTimeTicks',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_SFIXED64(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 9,
+                    'name' => 'InvoiceAmendmentFlags',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_INT32(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
                 ]),
             ],
         ]);
@@ -483,9 +525,14 @@ class UniversalTransferDocumentMetadata extends \Protobuf\AbstractMessage
             $writer->writeVarint($stream, $this->Currency);
         }
 
-        if ($this->ReceiptStatus !== null) {
-            $writer->writeVarint($stream, 56);
-            $writer->writeVarint($stream, $this->ReceiptStatus->value());
+        if ($this->ConfirmationDateTimeTicks !== null) {
+            $writer->writeVarint($stream, 65);
+            $writer->writeSFixed64($stream, $this->ConfirmationDateTimeTicks);
+        }
+
+        if ($this->InvoiceAmendmentFlags !== null) {
+            $writer->writeVarint($stream, 72);
+            $writer->writeVarint($stream, $this->InvoiceAmendmentFlags);
         }
 
         if ($this->extensions !== null) {
@@ -570,10 +617,18 @@ class UniversalTransferDocumentMetadata extends \Protobuf\AbstractMessage
                 continue;
             }
 
-            if ($tag === 7) {
-                \Protobuf\WireFormat::assertWireType($wire, 14);
+            if ($tag === 8) {
+                \Protobuf\WireFormat::assertWireType($wire, 16);
 
-                $this->ReceiptStatus = \AgentSIB\Diadoc\Api\Proto\Documents\ReceiptStatus::valueOf($reader->readVarint($stream));
+                $this->ConfirmationDateTimeTicks = $reader->readSFixed64($stream);
+
+                continue;
+            }
+
+            if ($tag === 9) {
+                \Protobuf\WireFormat::assertWireType($wire, 5);
+
+                $this->InvoiceAmendmentFlags = $reader->readVarint($stream);
 
                 continue;
             }
@@ -637,9 +692,14 @@ class UniversalTransferDocumentMetadata extends \Protobuf\AbstractMessage
             $size += $calculator->computeVarintSize($this->Currency);
         }
 
-        if ($this->ReceiptStatus !== null) {
+        if ($this->ConfirmationDateTimeTicks !== null) {
             $size += 1;
-            $size += $calculator->computeVarintSize($this->ReceiptStatus->value());
+            $size += 8;
+        }
+
+        if ($this->InvoiceAmendmentFlags !== null) {
+            $size += 1;
+            $size += $calculator->computeVarintSize($this->InvoiceAmendmentFlags);
         }
 
         if ($this->extensions !== null) {
@@ -660,7 +720,8 @@ class UniversalTransferDocumentMetadata extends \Protobuf\AbstractMessage
         $this->Grounds = null;
         $this->DocumentFunction = null;
         $this->Currency = null;
-        $this->ReceiptStatus = \AgentSIB\Diadoc\Api\Proto\Documents\ReceiptStatus::UnknownReceiptStatus();
+        $this->ConfirmationDateTimeTicks = null;
+        $this->InvoiceAmendmentFlags = null;
     }
 
     /**
@@ -678,7 +739,8 @@ class UniversalTransferDocumentMetadata extends \Protobuf\AbstractMessage
         $this->Grounds = ($message->Grounds !== null) ? $message->Grounds : $this->Grounds;
         $this->DocumentFunction = ($message->DocumentFunction !== null) ? $message->DocumentFunction : $this->DocumentFunction;
         $this->Currency = ($message->Currency !== null) ? $message->Currency : $this->Currency;
-        $this->ReceiptStatus = ($message->ReceiptStatus !== null) ? $message->ReceiptStatus : $this->ReceiptStatus;
+        $this->ConfirmationDateTimeTicks = ($message->ConfirmationDateTimeTicks !== null) ? $message->ConfirmationDateTimeTicks : $this->ConfirmationDateTimeTicks;
+        $this->InvoiceAmendmentFlags = ($message->InvoiceAmendmentFlags !== null) ? $message->InvoiceAmendmentFlags : $this->InvoiceAmendmentFlags;
     }
 
 

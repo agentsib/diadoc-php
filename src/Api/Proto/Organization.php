@@ -172,6 +172,34 @@ class Organization extends \Protobuf\AbstractMessage
     protected $Sociability = null;
 
     /**
+     * LiquidationDate optional string = 23
+     *
+     * @var string
+     */
+    protected $LiquidationDate = null;
+
+    /**
+     * CertificateOfRegistryInfo optional string = 24
+     *
+     * @var string
+     */
+    protected $CertificateOfRegistryInfo = null;
+
+    /**
+     * IsForeign optional bool = 25
+     *
+     * @var bool
+     */
+    protected $IsForeign = null;
+
+    /**
+     * HasCertificateToSign optional bool = 26
+     *
+     * @var bool
+     */
+    protected $HasCertificateToSign = null;
+
+    /**
      * Check if 'OrgId' has a value
      *
      * @return bool
@@ -830,6 +858,126 @@ class Organization extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'LiquidationDate' has a value
+     *
+     * @return bool
+     */
+    public function hasLiquidationDate()
+    {
+        return $this->LiquidationDate !== null;
+    }
+
+    /**
+     * Get 'LiquidationDate' value
+     *
+     * @return string
+     */
+    public function getLiquidationDate()
+    {
+        return $this->LiquidationDate;
+    }
+
+    /**
+     * Set 'LiquidationDate' value
+     *
+     * @param string $value
+     */
+    public function setLiquidationDate($value = null)
+    {
+        $this->LiquidationDate = $value;
+    }
+
+    /**
+     * Check if 'CertificateOfRegistryInfo' has a value
+     *
+     * @return bool
+     */
+    public function hasCertificateOfRegistryInfo()
+    {
+        return $this->CertificateOfRegistryInfo !== null;
+    }
+
+    /**
+     * Get 'CertificateOfRegistryInfo' value
+     *
+     * @return string
+     */
+    public function getCertificateOfRegistryInfo()
+    {
+        return $this->CertificateOfRegistryInfo;
+    }
+
+    /**
+     * Set 'CertificateOfRegistryInfo' value
+     *
+     * @param string $value
+     */
+    public function setCertificateOfRegistryInfo($value = null)
+    {
+        $this->CertificateOfRegistryInfo = $value;
+    }
+
+    /**
+     * Check if 'IsForeign' has a value
+     *
+     * @return bool
+     */
+    public function hasIsForeign()
+    {
+        return $this->IsForeign !== null;
+    }
+
+    /**
+     * Get 'IsForeign' value
+     *
+     * @return bool
+     */
+    public function getIsForeign()
+    {
+        return $this->IsForeign;
+    }
+
+    /**
+     * Set 'IsForeign' value
+     *
+     * @param bool $value
+     */
+    public function setIsForeign($value = null)
+    {
+        $this->IsForeign = $value;
+    }
+
+    /**
+     * Check if 'HasCertificateToSign' has a value
+     *
+     * @return bool
+     */
+    public function hasHasCertificateToSign()
+    {
+        return $this->HasCertificateToSign !== null;
+    }
+
+    /**
+     * Get 'HasCertificateToSign' value
+     *
+     * @return bool
+     */
+    public function getHasCertificateToSign()
+    {
+        return $this->HasCertificateToSign;
+    }
+
+    /**
+     * Set 'HasCertificateToSign' value
+     *
+     * @param bool $value
+     */
+    public function setHasCertificateToSign($value = null)
+    {
+        $this->HasCertificateToSign = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -897,6 +1045,10 @@ class Organization extends \Protobuf\AbstractMessage
             'IsEmployee' => null,
             'InvitationCount' => null,
             'SearchCount' => null,
+            'LiquidationDate' => null,
+            'CertificateOfRegistryInfo' => null,
+            'IsForeign' => null,
+            'HasCertificateToSign' => null
         ], $values);
 
         $message->setOrgId($values['OrgId']);
@@ -918,6 +1070,10 @@ class Organization extends \Protobuf\AbstractMessage
         $message->setInvitationCount($values['InvitationCount']);
         $message->setSearchCount($values['SearchCount']);
         $message->setSociability($values['Sociability']);
+        $message->setLiquidationDate($values['LiquidationDate']);
+        $message->setCertificateOfRegistryInfo($values['CertificateOfRegistryInfo']);
+        $message->setIsForeign($values['IsForeign']);
+        $message->setHasCertificateToSign($values['HasCertificateToSign']);
 
         foreach ($values['Boxes'] as $item) {
             $message->addBoxes($item);
@@ -1067,6 +1223,30 @@ class Organization extends \Protobuf\AbstractMessage
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.Sociability'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 23,
+                    'name' => 'LiquidationDate',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 24,
+                    'name' => 'CertificateOfRegistryInfo',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 25,
+                    'name' => 'IsForeign',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_BOOL(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 26,
+                    'name' => 'HasCertificateToSign',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_BOOL(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
                 ]),
             ],
         ]);
@@ -1222,6 +1402,26 @@ class Organization extends \Protobuf\AbstractMessage
         if ($this->Sociability !== null) {
             $writer->writeVarint($stream, 176);
             $writer->writeVarint($stream, $this->Sociability->value());
+        }
+
+        if ($this->LiquidationDate !== null) {
+            $writer->writeVarint($stream, 186);
+            $writer->writeString($stream, $this->LiquidationDate);
+        }
+
+        if ($this->CertificateOfRegistryInfo !== null) {
+            $writer->writeVarint($stream, 194);
+            $writer->writeString($stream, $this->CertificateOfRegistryInfo);
+        }
+
+        if ($this->IsForeign !== null) {
+            $writer->writeVarint($stream, 200);
+            $writer->writeBool($stream, $this->IsForeign);
+        }
+
+        if ($this->HasCertificateToSign !== null) {
+            $writer->writeVarint($stream, 208);
+            $writer->writeBool($stream, $this->HasCertificateToSign);
         }
 
         if ($this->extensions !== null) {
@@ -1455,6 +1655,38 @@ class Organization extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 23) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->LiquidationDate = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 24) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->CertificateOfRegistryInfo = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 25) {
+                \Protobuf\WireFormat::assertWireType($wire, 8);
+
+                $this->IsForeign = $reader->readBool($stream);
+
+                continue;
+            }
+
+            if ($tag === 26) {
+                \Protobuf\WireFormat::assertWireType($wire, 8);
+
+                $this->HasCertificateToSign = $reader->readBool($stream);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -1602,6 +1834,26 @@ class Organization extends \Protobuf\AbstractMessage
             $size += $calculator->computeVarintSize($this->Sociability->value());
         }
 
+        if ($this->LiquidationDate !== null) {
+            $size += 2;
+            $size += $calculator->computeStringSize($this->LiquidationDate);
+        }
+
+        if ($this->CertificateOfRegistryInfo !== null) {
+            $size += 2;
+            $size += $calculator->computeStringSize($this->CertificateOfRegistryInfo);
+        }
+
+        if ($this->IsForeign !== null) {
+            $size += 2;
+            $size += 1;
+        }
+
+        if ($this->HasCertificateToSign !== null) {
+            $size += 2;
+            $size += 1;
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -1635,6 +1887,10 @@ class Organization extends \Protobuf\AbstractMessage
         $this->InvitationCount = null;
         $this->SearchCount = null;
         $this->Sociability = null;
+        $this->LiquidationDate = null;
+        $this->CertificateOfRegistryInfo = null;
+        $this->IsForeign = null;
+        $this->HasCertificateToSign = null;
     }
 
     /**
@@ -1667,6 +1923,10 @@ class Organization extends \Protobuf\AbstractMessage
         $this->InvitationCount = ($message->InvitationCount !== null) ? $message->InvitationCount : $this->InvitationCount;
         $this->SearchCount = ($message->SearchCount !== null) ? $message->SearchCount : $this->SearchCount;
         $this->Sociability = ($message->Sociability !== null) ? $message->Sociability : $this->Sociability;
+        $this->LiquidationDate = ($message->LiquidationDate !== null) ? $message->LiquidationDate : $this->LiquidationDate;
+        $this->CertificateOfRegistryInfo = ($message->CertificateOfRegistryInfo !== null) ? $message->CertificateOfRegistryInfo : $this->CertificateOfRegistryInfo;
+        $this->IsForeign = ($message->IsForeign !== null) ? $message->IsForeign : $this->IsForeign;
+        $this->HasCertificateToSign = ($message->HasCertificateToSign !== null) ? $message->HasCertificateToSign : $this->HasCertificateToSign;
     }
 
 

@@ -40,6 +40,13 @@ class XmlSignatureRejectionAttachment extends \Protobuf\AbstractMessage
     protected $SignedContent = null;
 
     /**
+     * Labels repeated string = 3
+     *
+     * @var \Protobuf\Collection
+     */
+    protected $Labels = null;
+
+    /**
      * Check if 'ParentEntityId' has a value
      *
      * @return bool
@@ -100,6 +107,50 @@ class XmlSignatureRejectionAttachment extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'Labels' has a value
+     *
+     * @return bool
+     */
+    public function hasLabelsList()
+    {
+        return $this->Labels !== null;
+    }
+
+    /**
+     * Get 'Labels' value
+     *
+     * @return \Protobuf\Collection
+     */
+    public function getLabelsList()
+    {
+        return $this->Labels;
+    }
+
+    /**
+     * Set 'Labels' value
+     *
+     * @param \Protobuf\Collection $value
+     */
+    public function setLabelsList(\Protobuf\Collection $value = null)
+    {
+        $this->Labels = $value;
+    }
+
+    /**
+     * Add a new element to 'Labels'
+     *
+     * @param string $value
+     */
+    public function addLabels($value)
+    {
+        if ($this->Labels === null) {
+            $this->Labels = new \Protobuf\ScalarCollection();
+        }
+
+        $this->Labels->add($value);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -142,10 +193,15 @@ class XmlSignatureRejectionAttachment extends \Protobuf\AbstractMessage
 
         $message = new self();
         $values  = array_merge([
+            'Labels' => []
         ], $values);
 
         $message->setParentEntityId($values['ParentEntityId']);
         $message->setSignedContent($values['SignedContent']);
+
+        foreach ($values['Labels'] as $item) {
+            $message->addLabels($item);
+        }
 
         return $message;
     }
@@ -170,6 +226,12 @@ class XmlSignatureRejectionAttachment extends \Protobuf\AbstractMessage
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.SignedContent'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 3,
+                    'name' => 'Labels',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED()
                 ]),
             ],
         ]);
@@ -216,6 +278,13 @@ class XmlSignatureRejectionAttachment extends \Protobuf\AbstractMessage
             $writer->writeVarint($stream, 18);
             $writer->writeVarint($stream, $this->SignedContent->serializedSize($sizeContext));
             $this->SignedContent->writeTo($context);
+        }
+
+        if ($this->Labels !== null) {
+            foreach ($this->Labels as $val) {
+                $writer->writeVarint($stream, 26);
+                $writer->writeString($stream, $val);
+            }
         }
 
         if ($this->extensions !== null) {
@@ -275,6 +344,18 @@ class XmlSignatureRejectionAttachment extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 3) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                if ($this->Labels === null) {
+                    $this->Labels = new \Protobuf\ScalarCollection();
+                }
+
+                $this->Labels->add($reader->readString($stream));
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -317,6 +398,13 @@ class XmlSignatureRejectionAttachment extends \Protobuf\AbstractMessage
             $size += $calculator->computeVarintSize($innerSize);
         }
 
+        if ($this->Labels !== null) {
+            foreach ($this->Labels as $val) {
+                $size += 1;
+                $size += $calculator->computeStringSize($val);
+            }
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -331,6 +419,7 @@ class XmlSignatureRejectionAttachment extends \Protobuf\AbstractMessage
     {
         $this->ParentEntityId = null;
         $this->SignedContent = null;
+        $this->Labels = null;
     }
 
     /**
@@ -344,6 +433,7 @@ class XmlSignatureRejectionAttachment extends \Protobuf\AbstractMessage
 
         $this->ParentEntityId = ($message->ParentEntityId !== null) ? $message->ParentEntityId : $this->ParentEntityId;
         $this->SignedContent = ($message->SignedContent !== null) ? $message->SignedContent : $this->SignedContent;
+        $this->Labels = ($message->Labels !== null) ? $message->Labels : $this->Labels;
     }
 
 

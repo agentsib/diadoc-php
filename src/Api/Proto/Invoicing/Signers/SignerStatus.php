@@ -35,6 +35,16 @@ class SignerStatus extends \Protobuf\Enum
     const AuthorizedPerson_VALUE = 4;
 
     /**
+     * BuyerEmployee = 5
+     */
+    const BuyerEmployee_VALUE = 5;
+
+    /**
+     * InformationCreatorBuyerEmployee = 6
+     */
+    const InformationCreatorBuyerEmployee_VALUE = 6;
+
+    /**
      * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerStatus
      */
     protected static $SellerEmployee = null;
@@ -53,6 +63,16 @@ class SignerStatus extends \Protobuf\Enum
      * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerStatus
      */
     protected static $AuthorizedPerson = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerStatus
+     */
+    protected static $BuyerEmployee = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerStatus
+     */
+    protected static $InformationCreatorBuyerEmployee = null;
 
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerStatus
@@ -103,6 +123,30 @@ class SignerStatus extends \Protobuf\Enum
     }
 
     /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerStatus
+     */
+    public static function BuyerEmployee()
+    {
+        if (self::$BuyerEmployee !== null) {
+            return self::$BuyerEmployee;
+        }
+
+        return self::$BuyerEmployee = new self('BuyerEmployee', self::BuyerEmployee_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerStatus
+     */
+    public static function InformationCreatorBuyerEmployee()
+    {
+        if (self::$InformationCreatorBuyerEmployee !== null) {
+            return self::$InformationCreatorBuyerEmployee;
+        }
+
+        return self::$InformationCreatorBuyerEmployee = new self('InformationCreatorBuyerEmployee', self::InformationCreatorBuyerEmployee_VALUE);
+    }
+
+    /**
      * @param int $value
      * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerStatus
      */
@@ -113,6 +157,8 @@ class SignerStatus extends \Protobuf\Enum
             case 2: return self::InformationCreatorEmployee();
             case 3: return self::OtherOrganizationEmployee();
             case 4: return self::AuthorizedPerson();
+            case 5: return self::BuyerEmployee();
+            case 6: return self::InformationCreatorBuyerEmployee();
             default: return null;
         }
     }

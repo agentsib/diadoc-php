@@ -53,6 +53,13 @@ class BasicDocumentInfo extends \Protobuf\AbstractMessage
     protected $Grounds = null;
 
     /**
+     * RevisionDateAndNumber optional message = 5
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Docflow\DocumentDateAndNumber
+     */
+    protected $RevisionDateAndNumber = null;
+
+    /**
      * Check if 'Total' has a value
      *
      * @return bool
@@ -173,6 +180,36 @@ class BasicDocumentInfo extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'RevisionDateAndNumber' has a value
+     *
+     * @return bool
+     */
+    public function hasRevisionDateAndNumber()
+    {
+        return $this->RevisionDateAndNumber !== null;
+    }
+
+    /**
+     * Get 'RevisionDateAndNumber' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Docflow\DocumentDateAndNumber
+     */
+    public function getRevisionDateAndNumber()
+    {
+        return $this->RevisionDateAndNumber;
+    }
+
+    /**
+     * Set 'RevisionDateAndNumber' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Docflow\DocumentDateAndNumber $value
+     */
+    public function setRevisionDateAndNumber(\AgentSIB\Diadoc\Api\Proto\Docflow\DocumentDateAndNumber $value = null)
+    {
+        $this->RevisionDateAndNumber = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -210,13 +247,15 @@ class BasicDocumentInfo extends \Protobuf\AbstractMessage
             'Total' => null,
             'NoVat' => null,
             'Vat' => null,
-            'Grounds' => null
+            'Grounds' => null,
+            'RevisionDateAndNumber' => null
         ], $values);
 
         $message->setTotal($values['Total']);
         $message->setNoVat($values['NoVat']);
         $message->setVat($values['Vat']);
         $message->setGrounds($values['Grounds']);
+        $message->setRevisionDateAndNumber($values['RevisionDateAndNumber']);
 
         return $message;
     }
@@ -252,6 +291,13 @@ class BasicDocumentInfo extends \Protobuf\AbstractMessage
                     'name' => 'Grounds',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 5,
+                    'name' => 'RevisionDateAndNumber',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Docflow.DocumentDateAndNumber'
                 ]),
             ],
         ]);
@@ -299,6 +345,12 @@ class BasicDocumentInfo extends \Protobuf\AbstractMessage
         if ($this->Grounds !== null) {
             $writer->writeVarint($stream, 34);
             $writer->writeString($stream, $this->Grounds);
+        }
+
+        if ($this->RevisionDateAndNumber !== null) {
+            $writer->writeVarint($stream, 42);
+            $writer->writeVarint($stream, $this->RevisionDateAndNumber->serializedSize($sizeContext));
+            $this->RevisionDateAndNumber->writeTo($context);
         }
 
         if ($this->extensions !== null) {
@@ -367,6 +419,21 @@ class BasicDocumentInfo extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 5) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Docflow\DocumentDateAndNumber();
+
+                $this->RevisionDateAndNumber = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -416,6 +483,14 @@ class BasicDocumentInfo extends \Protobuf\AbstractMessage
             $size += $calculator->computeStringSize($this->Grounds);
         }
 
+        if ($this->RevisionDateAndNumber !== null) {
+            $innerSize = $this->RevisionDateAndNumber->serializedSize($context);
+
+            $size += 1;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -432,6 +507,7 @@ class BasicDocumentInfo extends \Protobuf\AbstractMessage
         $this->NoVat = null;
         $this->Vat = null;
         $this->Grounds = null;
+        $this->RevisionDateAndNumber = null;
     }
 
     /**
@@ -447,6 +523,7 @@ class BasicDocumentInfo extends \Protobuf\AbstractMessage
         $this->NoVat = ($message->NoVat !== null) ? $message->NoVat : $this->NoVat;
         $this->Vat = ($message->Vat !== null) ? $message->Vat : $this->Vat;
         $this->Grounds = ($message->Grounds !== null) ? $message->Grounds : $this->Grounds;
+        $this->RevisionDateAndNumber = ($message->RevisionDateAndNumber !== null) ? $message->RevisionDateAndNumber : $this->RevisionDateAndNumber;
     }
 
 

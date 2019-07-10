@@ -165,6 +165,27 @@ class Message extends \Protobuf\AbstractMessage
     protected $PacketIsLocked = null;
 
     /**
+     * LockMode required enum = 21
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\LockMode
+     */
+    protected $LockMode = null;
+
+    /**
+     * MessageType required enum = 22
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\MessageType
+     */
+    protected $MessageType = null;
+
+    /**
+     * TemplateToLetterTransformationInfo optional message = 23
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\TemplateToLetterTransformationInfo
+     */
+    protected $TemplateToLetterTransformationInfo = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
@@ -177,6 +198,7 @@ class Message extends \Protobuf\AbstractMessage
         $this->IsInternal = false;
         $this->IsProxified = false;
         $this->PacketIsLocked = false;
+        $this->LockMode = \AgentSIB\Diadoc\Api\Proto\LockMode::None();
 
         parent::__construct($stream, $configuration);
     }
@@ -810,6 +832,96 @@ class Message extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'LockMode' has a value
+     *
+     * @return bool
+     */
+    public function hasLockMode()
+    {
+        return $this->LockMode !== null;
+    }
+
+    /**
+     * Get 'LockMode' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\LockMode
+     */
+    public function getLockMode()
+    {
+        return $this->LockMode;
+    }
+
+    /**
+     * Set 'LockMode' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\LockMode $value
+     */
+    public function setLockMode(\AgentSIB\Diadoc\Api\Proto\LockMode $value)
+    {
+        $this->LockMode = $value;
+    }
+
+    /**
+     * Check if 'MessageType' has a value
+     *
+     * @return bool
+     */
+    public function hasMessageType()
+    {
+        return $this->MessageType !== null;
+    }
+
+    /**
+     * Get 'MessageType' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\MessageType
+     */
+    public function getMessageType()
+    {
+        return $this->MessageType;
+    }
+
+    /**
+     * Set 'MessageType' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Documents\MessageType $value
+     */
+    public function setMessageType(\AgentSIB\Diadoc\Api\Proto\Documents\MessageType $value)
+    {
+        $this->MessageType = $value;
+    }
+
+    /**
+     * Check if 'TemplateToLetterTransformationInfo' has a value
+     *
+     * @return bool
+     */
+    public function hasTemplateToLetterTransformationInfo()
+    {
+        return $this->TemplateToLetterTransformationInfo !== null;
+    }
+
+    /**
+     * Get 'TemplateToLetterTransformationInfo' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\TemplateToLetterTransformationInfo
+     */
+    public function getTemplateToLetterTransformationInfo()
+    {
+        return $this->TemplateToLetterTransformationInfo;
+    }
+
+    /**
+     * Set 'TemplateToLetterTransformationInfo' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Events\TemplateToLetterTransformationInfo $value
+     */
+    public function setTemplateToLetterTransformationInfo(\AgentSIB\Diadoc\Api\Proto\Events\TemplateToLetterTransformationInfo $value = null)
+    {
+        $this->TemplateToLetterTransformationInfo = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -862,6 +974,10 @@ class Message extends \Protobuf\AbstractMessage
             throw new \InvalidArgumentException('Field "FromTitle" (tag 5) is required but has no value.');
         }
 
+        if ( ! isset($values['MessageType'])) {
+            throw new \InvalidArgumentException('Field "MessageType" (tag 22) is required but has no value.');
+        }
+
         $message = new self();
         $values  = array_merge([
             'ToBoxId' => null,
@@ -878,7 +994,8 @@ class Message extends \Protobuf\AbstractMessage
             'IsProxified' => false,
             'ProxyBoxId' => null,
             'ProxyTitle' => null,
-            'PacketIsLocked' => false
+            'PacketIsLocked' => false,
+            'TemplateToLetterTransformationInfo' => null
         ], $values);
 
         $message->setMessageId($values['MessageId']);
@@ -899,6 +1016,9 @@ class Message extends \Protobuf\AbstractMessage
         $message->setProxyBoxId($values['ProxyBoxId']);
         $message->setProxyTitle($values['ProxyTitle']);
         $message->setPacketIsLocked($values['PacketIsLocked']);
+        $message->setLockMode($values['LockMode']);
+        $message->setMessageType($values['MessageType']);
+        $message->setTemplateToLetterTransformationInfo($values['TemplateToLetterTransformationInfo']);
 
         foreach ($values['Entities'] as $item) {
             $message->addEntities($item);
@@ -1048,6 +1168,28 @@ class Message extends \Protobuf\AbstractMessage
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
                     'default_value' => false
                 ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 21,
+                    'name' => 'LockMode',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.LockMode',
+                    'default_value' => \AgentSIB\Diadoc\Api\Proto\LockMode::None()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 22,
+                    'name' => 'MessageType',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.MessageType'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 23,
+                    'name' => 'TemplateToLetterTransformationInfo',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.TemplateToLetterTransformationInfo'
+                ]),
             ],
         ]);
     }
@@ -1094,6 +1236,14 @@ class Message extends \Protobuf\AbstractMessage
 
         if ($this->FromTitle === null) {
             throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Events\\Message#FromTitle" (tag 5) is required but has no value.');
+        }
+
+        if ($this->LockMode === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Events\\Message#LockMode" (tag 21) is required but has no value.');
+        }
+
+        if ($this->MessageType === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Events\\Message#MessageType" (tag 22) is required but has no value.');
         }
 
         if ($this->MessageId !== null) {
@@ -1199,6 +1349,22 @@ class Message extends \Protobuf\AbstractMessage
         if ($this->PacketIsLocked !== null) {
             $writer->writeVarint($stream, 160);
             $writer->writeBool($stream, $this->PacketIsLocked);
+        }
+
+        if ($this->LockMode !== null) {
+            $writer->writeVarint($stream, 168);
+            $writer->writeVarint($stream, $this->LockMode->value());
+        }
+
+        if ($this->MessageType !== null) {
+            $writer->writeVarint($stream, 176);
+            $writer->writeVarint($stream, $this->MessageType->value());
+        }
+
+        if ($this->TemplateToLetterTransformationInfo !== null) {
+            $writer->writeVarint($stream, 186);
+            $writer->writeVarint($stream, $this->TemplateToLetterTransformationInfo->serializedSize($sizeContext));
+            $this->TemplateToLetterTransformationInfo->writeTo($context);
         }
 
         if ($this->extensions !== null) {
@@ -1410,6 +1576,37 @@ class Message extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 21) {
+                \Protobuf\WireFormat::assertWireType($wire, 14);
+
+                $this->LockMode = \AgentSIB\Diadoc\Api\Proto\LockMode::valueOf($reader->readVarint($stream));
+
+                continue;
+            }
+
+            if ($tag === 22) {
+                \Protobuf\WireFormat::assertWireType($wire, 14);
+
+                $this->MessageType = \AgentSIB\Diadoc\Api\Proto\Documents\MessageType::valueOf($reader->readVarint($stream));
+
+                continue;
+            }
+
+            if ($tag === 23) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\TemplateToLetterTransformationInfo();
+
+                $this->TemplateToLetterTransformationInfo = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -1546,6 +1743,24 @@ class Message extends \Protobuf\AbstractMessage
             $size += 1;
         }
 
+        if ($this->LockMode !== null) {
+            $size += 2;
+            $size += $calculator->computeVarintSize($this->LockMode->value());
+        }
+
+        if ($this->MessageType !== null) {
+            $size += 2;
+            $size += $calculator->computeVarintSize($this->MessageType->value());
+        }
+
+        if ($this->TemplateToLetterTransformationInfo !== null) {
+            $innerSize = $this->TemplateToLetterTransformationInfo->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -1578,6 +1793,9 @@ class Message extends \Protobuf\AbstractMessage
         $this->ProxyBoxId = null;
         $this->ProxyTitle = null;
         $this->PacketIsLocked = false;
+        $this->LockMode = \AgentSIB\Diadoc\Api\Proto\LockMode::None();
+        $this->MessageType = null;
+        $this->TemplateToLetterTransformationInfo = null;
     }
 
     /**
@@ -1609,6 +1827,9 @@ class Message extends \Protobuf\AbstractMessage
         $this->ProxyBoxId = ($message->ProxyBoxId !== null) ? $message->ProxyBoxId : $this->ProxyBoxId;
         $this->ProxyTitle = ($message->ProxyTitle !== null) ? $message->ProxyTitle : $this->ProxyTitle;
         $this->PacketIsLocked = ($message->PacketIsLocked !== null) ? $message->PacketIsLocked : $this->PacketIsLocked;
+        $this->LockMode = ($message->LockMode !== null) ? $message->LockMode : $this->LockMode;
+        $this->MessageType = ($message->MessageType !== null) ? $message->MessageType : $this->MessageType;
+        $this->TemplateToLetterTransformationInfo = ($message->TemplateToLetterTransformationInfo !== null) ? $message->TemplateToLetterTransformationInfo : $this->TemplateToLetterTransformationInfo;
     }
 
 

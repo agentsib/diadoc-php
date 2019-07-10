@@ -69,14 +69,14 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
     /**
      * XmlTorg12BuyerTitles repeated message = 7
      *
-     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment>
+     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment>
      */
     protected $XmlTorg12BuyerTitles = null;
 
     /**
      * XmlAcceptanceCertificateBuyerTitles repeated message = 8
      *
-     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment>
+     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment>
      */
     protected $XmlAcceptanceCertificateBuyerTitles = null;
 
@@ -137,11 +137,11 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
     protected $CustomDataPatches = null;
 
     /**
-     * ResolutionChainAssignments repeated message = 17
+     * ResolutionRouteAssignments repeated message = 17
      *
-     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ResolutionChainAssignment>
+     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteAssignment>
      */
-    protected $ResolutionChainAssignments = null;
+    protected $ResolutionRouteAssignments = null;
 
     /**
      * SignatureVerifications repeated message = 18
@@ -160,9 +160,30 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
     /**
      * UniversalTransferDocumentBuyerTitles repeated message = 20
      *
-     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment>
+     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment>
      */
     protected $UniversalTransferDocumentBuyerTitles = null;
+
+    /**
+     * ResolutionRouteRemovals repeated message = 21
+     *
+     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteRemoval>
+     */
+    protected $ResolutionRouteRemovals = null;
+
+    /**
+     * RecipientTitles repeated message = 22
+     *
+     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment>
+     */
+    protected $RecipientTitles = null;
+
+    /**
+     * EditingPatches repeated message = 24
+     *
+     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\EditingPatch>
+     */
+    protected $EditingPatches = null;
 
     /**
      * Check if 'BoxId' has a value
@@ -413,7 +434,7 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
     /**
      * Get 'XmlTorg12BuyerTitles' value
      *
-     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment>
+     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment>
      */
     public function getXmlTorg12BuyerTitlesList()
     {
@@ -423,7 +444,7 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
     /**
      * Set 'XmlTorg12BuyerTitles' value
      *
-     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment> $value
+     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment> $value
      */
     public function setXmlTorg12BuyerTitlesList(\Protobuf\Collection $value = null)
     {
@@ -433,9 +454,9 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
     /**
      * Add a new element to 'XmlTorg12BuyerTitles'
      *
-     * @param \AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment $value
+     * @param \AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment $value
      */
-    public function addXmlTorg12BuyerTitles(\AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment $value)
+    public function addXmlTorg12BuyerTitles(\AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment $value)
     {
         if ($this->XmlTorg12BuyerTitles === null) {
             $this->XmlTorg12BuyerTitles = new \Protobuf\MessageCollection();
@@ -457,7 +478,7 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
     /**
      * Get 'XmlAcceptanceCertificateBuyerTitles' value
      *
-     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment>
+     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment>
      */
     public function getXmlAcceptanceCertificateBuyerTitlesList()
     {
@@ -467,7 +488,7 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
     /**
      * Set 'XmlAcceptanceCertificateBuyerTitles' value
      *
-     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment> $value
+     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment> $value
      */
     public function setXmlAcceptanceCertificateBuyerTitlesList(\Protobuf\Collection $value = null)
     {
@@ -477,9 +498,9 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
     /**
      * Add a new element to 'XmlAcceptanceCertificateBuyerTitles'
      *
-     * @param \AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment $value
+     * @param \AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment $value
      */
-    public function addXmlAcceptanceCertificateBuyerTitles(\AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment $value)
+    public function addXmlAcceptanceCertificateBuyerTitles(\AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment $value)
     {
         if ($this->XmlAcceptanceCertificateBuyerTitles === null) {
             $this->XmlAcceptanceCertificateBuyerTitles = new \Protobuf\MessageCollection();
@@ -845,47 +866,47 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
     }
 
     /**
-     * Check if 'ResolutionChainAssignments' has a value
+     * Check if 'ResolutionRouteAssignments' has a value
      *
      * @return bool
      */
-    public function hasResolutionChainAssignmentsList()
+    public function hasResolutionRouteAssignmentsList()
     {
-        return $this->ResolutionChainAssignments !== null;
+        return $this->ResolutionRouteAssignments !== null;
     }
 
     /**
-     * Get 'ResolutionChainAssignments' value
+     * Get 'ResolutionRouteAssignments' value
      *
-     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ResolutionChainAssignment>
+     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteAssignment>
      */
-    public function getResolutionChainAssignmentsList()
+    public function getResolutionRouteAssignmentsList()
     {
-        return $this->ResolutionChainAssignments;
+        return $this->ResolutionRouteAssignments;
     }
 
     /**
-     * Set 'ResolutionChainAssignments' value
+     * Set 'ResolutionRouteAssignments' value
      *
-     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ResolutionChainAssignment> $value
+     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteAssignment> $value
      */
-    public function setResolutionChainAssignmentsList(\Protobuf\Collection $value = null)
+    public function setResolutionRouteAssignmentsList(\Protobuf\Collection $value = null)
     {
-        $this->ResolutionChainAssignments = $value;
+        $this->ResolutionRouteAssignments = $value;
     }
 
     /**
-     * Add a new element to 'ResolutionChainAssignments'
+     * Add a new element to 'ResolutionRouteAssignments'
      *
-     * @param \AgentSIB\Diadoc\Api\Proto\Events\ResolutionChainAssignment $value
+     * @param \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteAssignment $value
      */
-    public function addResolutionChainAssignments(\AgentSIB\Diadoc\Api\Proto\Events\ResolutionChainAssignment $value)
+    public function addResolutionRouteAssignments(\AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteAssignment $value)
     {
-        if ($this->ResolutionChainAssignments === null) {
-            $this->ResolutionChainAssignments = new \Protobuf\MessageCollection();
+        if ($this->ResolutionRouteAssignments === null) {
+            $this->ResolutionRouteAssignments = new \Protobuf\MessageCollection();
         }
 
-        $this->ResolutionChainAssignments->add($value);
+        $this->ResolutionRouteAssignments->add($value);
     }
 
     /**
@@ -989,7 +1010,7 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
     /**
      * Get 'UniversalTransferDocumentBuyerTitles' value
      *
-     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment>
+     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment>
      */
     public function getUniversalTransferDocumentBuyerTitlesList()
     {
@@ -999,7 +1020,7 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
     /**
      * Set 'UniversalTransferDocumentBuyerTitles' value
      *
-     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment> $value
+     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment> $value
      */
     public function setUniversalTransferDocumentBuyerTitlesList(\Protobuf\Collection $value = null)
     {
@@ -1009,15 +1030,147 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
     /**
      * Add a new element to 'UniversalTransferDocumentBuyerTitles'
      *
-     * @param \AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment $value
+     * @param \AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment $value
      */
-    public function addUniversalTransferDocumentBuyerTitles(\AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment $value)
+    public function addUniversalTransferDocumentBuyerTitles(\AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment $value)
     {
         if ($this->UniversalTransferDocumentBuyerTitles === null) {
             $this->UniversalTransferDocumentBuyerTitles = new \Protobuf\MessageCollection();
         }
 
         $this->UniversalTransferDocumentBuyerTitles->add($value);
+    }
+
+    /**
+     * Check if 'ResolutionRouteRemovals' has a value
+     *
+     * @return bool
+     */
+    public function hasResolutionRouteRemovalsList()
+    {
+        return $this->ResolutionRouteRemovals !== null;
+    }
+
+    /**
+     * Get 'ResolutionRouteRemovals' value
+     *
+     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteRemoval>
+     */
+    public function getResolutionRouteRemovalsList()
+    {
+        return $this->ResolutionRouteRemovals;
+    }
+
+    /**
+     * Set 'ResolutionRouteRemovals' value
+     *
+     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteRemoval> $value
+     */
+    public function setResolutionRouteRemovalsList(\Protobuf\Collection $value = null)
+    {
+        $this->ResolutionRouteRemovals = $value;
+    }
+
+    /**
+     * Add a new element to 'ResolutionRouteRemovals'
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteRemoval $value
+     */
+    public function addResolutionRouteRemovals(\AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteRemoval $value)
+    {
+        if ($this->ResolutionRouteRemovals === null) {
+            $this->ResolutionRouteRemovals = new \Protobuf\MessageCollection();
+        }
+
+        $this->ResolutionRouteRemovals->add($value);
+    }
+
+    /**
+     * Check if 'RecipientTitles' has a value
+     *
+     * @return bool
+     */
+    public function hasRecipientTitlesList()
+    {
+        return $this->RecipientTitles !== null;
+    }
+
+    /**
+     * Get 'RecipientTitles' value
+     *
+     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment>
+     */
+    public function getRecipientTitlesList()
+    {
+        return $this->RecipientTitles;
+    }
+
+    /**
+     * Set 'RecipientTitles' value
+     *
+     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment> $value
+     */
+    public function setRecipientTitlesList(\Protobuf\Collection $value = null)
+    {
+        $this->RecipientTitles = $value;
+    }
+
+    /**
+     * Add a new element to 'RecipientTitles'
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment $value
+     */
+    public function addRecipientTitles(\AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment $value)
+    {
+        if ($this->RecipientTitles === null) {
+            $this->RecipientTitles = new \Protobuf\MessageCollection();
+        }
+
+        $this->RecipientTitles->add($value);
+    }
+
+    /**
+     * Check if 'EditingPatches' has a value
+     *
+     * @return bool
+     */
+    public function hasEditingPatchesList()
+    {
+        return $this->EditingPatches !== null;
+    }
+
+    /**
+     * Get 'EditingPatches' value
+     *
+     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\EditingPatch>
+     */
+    public function getEditingPatchesList()
+    {
+        return $this->EditingPatches;
+    }
+
+    /**
+     * Set 'EditingPatches' value
+     *
+     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\EditingPatch> $value
+     */
+    public function setEditingPatchesList(\Protobuf\Collection $value = null)
+    {
+        $this->EditingPatches = $value;
+    }
+
+    /**
+     * Add a new element to 'EditingPatches'
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Events\EditingPatch $value
+     */
+    public function addEditingPatches(\AgentSIB\Diadoc\Api\Proto\Events\EditingPatch $value)
+    {
+        if ($this->EditingPatches === null) {
+            $this->EditingPatches = new \Protobuf\MessageCollection();
+        }
+
+        $this->EditingPatches->add($value);
     }
 
     /**
@@ -1077,10 +1230,13 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
             'RevocationRequests' => [],
             'XmlSignatureRejections' => [],
             'CustomDataPatches' => [],
-            'ResolutionChainAssignments' => [],
+            'ResolutionRouteAssignments' => [],
             'SignatureVerifications' => [],
             'EditDocumentPacketCommands' => [],
-            'UniversalTransferDocumentBuyerTitles' => []
+            'UniversalTransferDocumentBuyerTitles' => [],
+            'ResolutionRouteRemovals' => [],
+            'RecipientTitles' => [],
+            'EditingPatches' => []
         ], $values);
 
         $message->setBoxId($values['BoxId']);
@@ -1142,8 +1298,8 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
             $message->addCustomDataPatches($item);
         }
 
-        foreach ($values['ResolutionChainAssignments'] as $item) {
-            $message->addResolutionChainAssignments($item);
+        foreach ($values['ResolutionRouteAssignments'] as $item) {
+            $message->addResolutionRouteAssignments($item);
         }
 
         foreach ($values['SignatureVerifications'] as $item) {
@@ -1156,6 +1312,18 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
 
         foreach ($values['UniversalTransferDocumentBuyerTitles'] as $item) {
             $message->addUniversalTransferDocumentBuyerTitles($item);
+        }
+
+        foreach ($values['ResolutionRouteRemovals'] as $item) {
+            $message->addResolutionRouteRemovals($item);
+        }
+
+        foreach ($values['RecipientTitles'] as $item) {
+            $message->addRecipientTitles($item);
+        }
+
+        foreach ($values['EditingPatches'] as $item) {
+            $message->addEditingPatches($item);
         }
 
         return $message;
@@ -1214,14 +1382,14 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
                     'name' => 'XmlTorg12BuyerTitles',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
-                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.ReceiptAttachment'
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.RecipientTitleAttachment'
                 ]),
                 \google\protobuf\FieldDescriptorProto::fromArray([
                     'number' => 8,
                     'name' => 'XmlAcceptanceCertificateBuyerTitles',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
-                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.ReceiptAttachment'
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.RecipientTitleAttachment'
                 ]),
                 \google\protobuf\FieldDescriptorProto::fromArray([
                     'number' => 9,
@@ -1281,10 +1449,10 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
                 ]),
                 \google\protobuf\FieldDescriptorProto::fromArray([
                     'number' => 17,
-                    'name' => 'ResolutionChainAssignments',
+                    'name' => 'ResolutionRouteAssignments',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
-                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.ResolutionChainAssignment'
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.ResolutionRouteAssignment'
                 ]),
                 \google\protobuf\FieldDescriptorProto::fromArray([
                     'number' => 18,
@@ -1305,7 +1473,28 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
                     'name' => 'UniversalTransferDocumentBuyerTitles',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
-                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.ReceiptAttachment'
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.RecipientTitleAttachment'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 21,
+                    'name' => 'ResolutionRouteRemovals',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.ResolutionRouteRemoval'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 22,
+                    'name' => 'RecipientTitles',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.RecipientTitleAttachment'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 24,
+                    'name' => 'EditingPatches',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.EditingPatch'
                 ]),
             ],
         ]);
@@ -1465,8 +1654,8 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
             }
         }
 
-        if ($this->ResolutionChainAssignments !== null) {
-            foreach ($this->ResolutionChainAssignments as $val) {
+        if ($this->ResolutionRouteAssignments !== null) {
+            foreach ($this->ResolutionRouteAssignments as $val) {
                 $writer->writeVarint($stream, 138);
                 $writer->writeVarint($stream, $val->serializedSize($sizeContext));
                 $val->writeTo($context);
@@ -1492,6 +1681,30 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
         if ($this->UniversalTransferDocumentBuyerTitles !== null) {
             foreach ($this->UniversalTransferDocumentBuyerTitles as $val) {
                 $writer->writeVarint($stream, 162);
+                $writer->writeVarint($stream, $val->serializedSize($sizeContext));
+                $val->writeTo($context);
+            }
+        }
+
+        if ($this->ResolutionRouteRemovals !== null) {
+            foreach ($this->ResolutionRouteRemovals as $val) {
+                $writer->writeVarint($stream, 170);
+                $writer->writeVarint($stream, $val->serializedSize($sizeContext));
+                $val->writeTo($context);
+            }
+        }
+
+        if ($this->RecipientTitles !== null) {
+            foreach ($this->RecipientTitles as $val) {
+                $writer->writeVarint($stream, 178);
+                $writer->writeVarint($stream, $val->serializedSize($sizeContext));
+                $val->writeTo($context);
+            }
+        }
+
+        if ($this->EditingPatches !== null) {
+            foreach ($this->EditingPatches as $val) {
+                $writer->writeVarint($stream, 194);
                 $writer->writeVarint($stream, $val->serializedSize($sizeContext));
                 $val->writeTo($context);
             }
@@ -1627,7 +1840,7 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
                 \Protobuf\WireFormat::assertWireType($wire, 11);
 
                 $innerSize    = $reader->readVarint($stream);
-                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment();
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment();
 
                 if ($this->XmlTorg12BuyerTitles === null) {
                     $this->XmlTorg12BuyerTitles = new \Protobuf\MessageCollection();
@@ -1646,7 +1859,7 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
                 \Protobuf\WireFormat::assertWireType($wire, 11);
 
                 $innerSize    = $reader->readVarint($stream);
-                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment();
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment();
 
                 if ($this->XmlAcceptanceCertificateBuyerTitles === null) {
                     $this->XmlAcceptanceCertificateBuyerTitles = new \Protobuf\MessageCollection();
@@ -1817,13 +2030,13 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
                 \Protobuf\WireFormat::assertWireType($wire, 11);
 
                 $innerSize    = $reader->readVarint($stream);
-                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\ResolutionChainAssignment();
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteAssignment();
 
-                if ($this->ResolutionChainAssignments === null) {
-                    $this->ResolutionChainAssignments = new \Protobuf\MessageCollection();
+                if ($this->ResolutionRouteAssignments === null) {
+                    $this->ResolutionRouteAssignments = new \Protobuf\MessageCollection();
                 }
 
-                $this->ResolutionChainAssignments->add($innerMessage);
+                $this->ResolutionRouteAssignments->add($innerMessage);
 
                 $context->setLength($innerSize);
                 $innerMessage->readFrom($context);
@@ -1874,13 +2087,70 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
                 \Protobuf\WireFormat::assertWireType($wire, 11);
 
                 $innerSize    = $reader->readVarint($stream);
-                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\ReceiptAttachment();
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment();
 
                 if ($this->UniversalTransferDocumentBuyerTitles === null) {
                     $this->UniversalTransferDocumentBuyerTitles = new \Protobuf\MessageCollection();
                 }
 
                 $this->UniversalTransferDocumentBuyerTitles->add($innerMessage);
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 21) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteRemoval();
+
+                if ($this->ResolutionRouteRemovals === null) {
+                    $this->ResolutionRouteRemovals = new \Protobuf\MessageCollection();
+                }
+
+                $this->ResolutionRouteRemovals->add($innerMessage);
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 22) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\RecipientTitleAttachment();
+
+                if ($this->RecipientTitles === null) {
+                    $this->RecipientTitles = new \Protobuf\MessageCollection();
+                }
+
+                $this->RecipientTitles->add($innerMessage);
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 24) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\EditingPatch();
+
+                if ($this->EditingPatches === null) {
+                    $this->EditingPatches = new \Protobuf\MessageCollection();
+                }
+
+                $this->EditingPatches->add($innerMessage);
 
                 $context->setLength($innerSize);
                 $innerMessage->readFrom($context);
@@ -2068,8 +2338,8 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
             }
         }
 
-        if ($this->ResolutionChainAssignments !== null) {
-            foreach ($this->ResolutionChainAssignments as $val) {
+        if ($this->ResolutionRouteAssignments !== null) {
+            foreach ($this->ResolutionRouteAssignments as $val) {
                 $innerSize = $val->serializedSize($context);
 
                 $size += 2;
@@ -2108,6 +2378,36 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
             }
         }
 
+        if ($this->ResolutionRouteRemovals !== null) {
+            foreach ($this->ResolutionRouteRemovals as $val) {
+                $innerSize = $val->serializedSize($context);
+
+                $size += 2;
+                $size += $innerSize;
+                $size += $calculator->computeVarintSize($innerSize);
+            }
+        }
+
+        if ($this->RecipientTitles !== null) {
+            foreach ($this->RecipientTitles as $val) {
+                $innerSize = $val->serializedSize($context);
+
+                $size += 2;
+                $size += $innerSize;
+                $size += $calculator->computeVarintSize($innerSize);
+            }
+        }
+
+        if ($this->EditingPatches !== null) {
+            foreach ($this->EditingPatches as $val) {
+                $innerSize = $val->serializedSize($context);
+
+                $size += 2;
+                $size += $innerSize;
+                $size += $calculator->computeVarintSize($innerSize);
+            }
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -2136,10 +2436,13 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
         $this->RevocationRequests = null;
         $this->XmlSignatureRejections = null;
         $this->CustomDataPatches = null;
-        $this->ResolutionChainAssignments = null;
+        $this->ResolutionRouteAssignments = null;
         $this->SignatureVerifications = null;
         $this->EditDocumentPacketCommands = null;
         $this->UniversalTransferDocumentBuyerTitles = null;
+        $this->ResolutionRouteRemovals = null;
+        $this->RecipientTitles = null;
+        $this->EditingPatches = null;
     }
 
     /**
@@ -2167,10 +2470,13 @@ class MessagePatchToPost extends \Protobuf\AbstractMessage
         $this->RevocationRequests = ($message->RevocationRequests !== null) ? $message->RevocationRequests : $this->RevocationRequests;
         $this->XmlSignatureRejections = ($message->XmlSignatureRejections !== null) ? $message->XmlSignatureRejections : $this->XmlSignatureRejections;
         $this->CustomDataPatches = ($message->CustomDataPatches !== null) ? $message->CustomDataPatches : $this->CustomDataPatches;
-        $this->ResolutionChainAssignments = ($message->ResolutionChainAssignments !== null) ? $message->ResolutionChainAssignments : $this->ResolutionChainAssignments;
+        $this->ResolutionRouteAssignments = ($message->ResolutionRouteAssignments !== null) ? $message->ResolutionRouteAssignments : $this->ResolutionRouteAssignments;
         $this->SignatureVerifications = ($message->SignatureVerifications !== null) ? $message->SignatureVerifications : $this->SignatureVerifications;
         $this->EditDocumentPacketCommands = ($message->EditDocumentPacketCommands !== null) ? $message->EditDocumentPacketCommands : $this->EditDocumentPacketCommands;
         $this->UniversalTransferDocumentBuyerTitles = ($message->UniversalTransferDocumentBuyerTitles !== null) ? $message->UniversalTransferDocumentBuyerTitles : $this->UniversalTransferDocumentBuyerTitles;
+        $this->ResolutionRouteRemovals = ($message->ResolutionRouteRemovals !== null) ? $message->ResolutionRouteRemovals : $this->ResolutionRouteRemovals;
+        $this->RecipientTitles = ($message->RecipientTitles !== null) ? $message->RecipientTitles : $this->RecipientTitles;
+        $this->EditingPatches = ($message->EditingPatches !== null) ? $message->EditingPatches : $this->EditingPatches;
     }
 
 

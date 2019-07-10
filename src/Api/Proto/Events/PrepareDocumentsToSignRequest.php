@@ -47,6 +47,13 @@ class PrepareDocumentsToSignRequest extends \Protobuf\AbstractMessage
     protected $Documents = null;
 
     /**
+     * Contents repeated message = 4
+     *
+     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ContentToPatch>
+     */
+    protected $Contents = null;
+
+    /**
      * Check if 'BoxId' has a value
      *
      * @return bool
@@ -165,6 +172,50 @@ class PrepareDocumentsToSignRequest extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'Contents' has a value
+     *
+     * @return bool
+     */
+    public function hasContentsList()
+    {
+        return $this->Contents !== null;
+    }
+
+    /**
+     * Get 'Contents' value
+     *
+     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ContentToPatch>
+     */
+    public function getContentsList()
+    {
+        return $this->Contents;
+    }
+
+    /**
+     * Set 'Contents' value
+     *
+     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\ContentToPatch> $value
+     */
+    public function setContentsList(\Protobuf\Collection $value = null)
+    {
+        $this->Contents = $value;
+    }
+
+    /**
+     * Add a new element to 'Contents'
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Events\ContentToPatch $value
+     */
+    public function addContents(\AgentSIB\Diadoc\Api\Proto\Events\ContentToPatch $value)
+    {
+        if ($this->Contents === null) {
+            $this->Contents = new \Protobuf\MessageCollection();
+        }
+
+        $this->Contents->add($value);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -204,7 +255,8 @@ class PrepareDocumentsToSignRequest extends \Protobuf\AbstractMessage
         $message = new self();
         $values  = array_merge([
             'DraftDocuments' => [],
-            'Documents' => []
+            'Documents' => [],
+            'Contents' => []
         ], $values);
 
         $message->setBoxId($values['BoxId']);
@@ -215,6 +267,10 @@ class PrepareDocumentsToSignRequest extends \Protobuf\AbstractMessage
 
         foreach ($values['Documents'] as $item) {
             $message->addDocuments($item);
+        }
+
+        foreach ($values['Contents'] as $item) {
+            $message->addContents($item);
         }
 
         return $message;
@@ -247,6 +303,13 @@ class PrepareDocumentsToSignRequest extends \Protobuf\AbstractMessage
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.DocumentToPatch'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 4,
+                    'name' => 'Contents',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.ContentToPatch'
                 ]),
             ],
         ]);
@@ -296,6 +359,14 @@ class PrepareDocumentsToSignRequest extends \Protobuf\AbstractMessage
         if ($this->Documents !== null) {
             foreach ($this->Documents as $val) {
                 $writer->writeVarint($stream, 26);
+                $writer->writeVarint($stream, $val->serializedSize($sizeContext));
+                $val->writeTo($context);
+            }
+        }
+
+        if ($this->Contents !== null) {
+            foreach ($this->Contents as $val) {
+                $writer->writeVarint($stream, 34);
                 $writer->writeVarint($stream, $val->serializedSize($sizeContext));
                 $val->writeTo($context);
             }
@@ -381,6 +452,25 @@ class PrepareDocumentsToSignRequest extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 4) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\ContentToPatch();
+
+                if ($this->Contents === null) {
+                    $this->Contents = new \Protobuf\MessageCollection();
+                }
+
+                $this->Contents->add($innerMessage);
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -435,6 +525,16 @@ class PrepareDocumentsToSignRequest extends \Protobuf\AbstractMessage
             }
         }
 
+        if ($this->Contents !== null) {
+            foreach ($this->Contents as $val) {
+                $innerSize = $val->serializedSize($context);
+
+                $size += 1;
+                $size += $innerSize;
+                $size += $calculator->computeVarintSize($innerSize);
+            }
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -450,6 +550,7 @@ class PrepareDocumentsToSignRequest extends \Protobuf\AbstractMessage
         $this->BoxId = null;
         $this->DraftDocuments = null;
         $this->Documents = null;
+        $this->Contents = null;
     }
 
     /**
@@ -464,6 +565,7 @@ class PrepareDocumentsToSignRequest extends \Protobuf\AbstractMessage
         $this->BoxId = ($message->BoxId !== null) ? $message->BoxId : $this->BoxId;
         $this->DraftDocuments = ($message->DraftDocuments !== null) ? $message->DraftDocuments : $this->DraftDocuments;
         $this->Documents = ($message->Documents !== null) ? $message->Documents : $this->Documents;
+        $this->Contents = ($message->Contents !== null) ? $message->Contents : $this->Contents;
     }
 
 

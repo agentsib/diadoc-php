@@ -67,7 +67,7 @@ class ReconciliationActAttachment extends \Protobuf\AbstractMessage
     protected $DocumentDate = null;
 
     /**
-     * DocumentNumber required string = 8
+     * DocumentNumber optional string = 8
      *
      * @var string
      */
@@ -99,6 +99,7 @@ class ReconciliationActAttachment extends \Protobuf\AbstractMessage
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
     {
+        $this->DocumentNumber = '';
         $this->NeedReceipt = false;
 
         parent::__construct($stream, $configuration);
@@ -337,7 +338,7 @@ class ReconciliationActAttachment extends \Protobuf\AbstractMessage
      *
      * @param string $value
      */
-    public function setDocumentNumber($value)
+    public function setDocumentNumber($value = null)
     {
         $this->DocumentNumber = $value;
     }
@@ -491,15 +492,12 @@ class ReconciliationActAttachment extends \Protobuf\AbstractMessage
             throw new \InvalidArgumentException('Field "DocumentDate" (tag 7) is required but has no value.');
         }
 
-        if ( ! isset($values['DocumentNumber'])) {
-            throw new \InvalidArgumentException('Field "DocumentNumber" (tag 8) is required but has no value.');
-        }
-
         $message = new self();
         $values  = array_merge([
             'Comment' => null,
             'InitialDocumentIds' => [],
             'SubordinateDocumentIds' => [],
+            'DocumentNumber' => '',
             'CustomDocumentId' => null,
             'NeedReceipt' => false,
             'CustomData' => []
@@ -579,7 +577,8 @@ class ReconciliationActAttachment extends \Protobuf\AbstractMessage
                     'number' => 8,
                     'name' => 'DocumentNumber',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
-                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'default_value' => ''
                 ]),
                 \google\protobuf\FieldDescriptorProto::fromArray([
                     'number' => 9,
@@ -639,10 +638,6 @@ class ReconciliationActAttachment extends \Protobuf\AbstractMessage
 
         if ($this->DocumentDate === null) {
             throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Events\\ReconciliationActAttachment#DocumentDate" (tag 7) is required but has no value.');
-        }
-
-        if ($this->DocumentNumber === null) {
-            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Events\\ReconciliationActAttachment#DocumentNumber" (tag 8) is required but has no value.');
         }
 
         if ($this->SignedContent !== null) {
@@ -974,7 +969,7 @@ class ReconciliationActAttachment extends \Protobuf\AbstractMessage
         $this->InitialDocumentIds = null;
         $this->SubordinateDocumentIds = null;
         $this->DocumentDate = null;
-        $this->DocumentNumber = null;
+        $this->DocumentNumber = '';
         $this->CustomDocumentId = null;
         $this->NeedReceipt = false;
         $this->CustomData = null;

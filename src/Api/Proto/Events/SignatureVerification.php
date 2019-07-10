@@ -46,6 +46,13 @@ class SignatureVerification extends \Protobuf\AbstractMessage
     protected $ErrorMessage = null;
 
     /**
+     * Labels repeated string = 4
+     *
+     * @var \Protobuf\Collection
+     */
+    protected $Labels = null;
+
+    /**
      * Check if 'InitialDocumentId' has a value
      *
      * @return bool
@@ -136,6 +143,50 @@ class SignatureVerification extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'Labels' has a value
+     *
+     * @return bool
+     */
+    public function hasLabelsList()
+    {
+        return $this->Labels !== null;
+    }
+
+    /**
+     * Get 'Labels' value
+     *
+     * @return \Protobuf\Collection
+     */
+    public function getLabelsList()
+    {
+        return $this->Labels;
+    }
+
+    /**
+     * Set 'Labels' value
+     *
+     * @param \Protobuf\Collection $value
+     */
+    public function setLabelsList(\Protobuf\Collection $value = null)
+    {
+        $this->Labels = $value;
+    }
+
+    /**
+     * Add a new element to 'Labels'
+     *
+     * @param string $value
+     */
+    public function addLabels($value)
+    {
+        if ($this->Labels === null) {
+            $this->Labels = new \Protobuf\ScalarCollection();
+        }
+
+        $this->Labels->add($value);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -178,12 +229,17 @@ class SignatureVerification extends \Protobuf\AbstractMessage
 
         $message = new self();
         $values  = array_merge([
-            'ErrorMessage' => null
+            'ErrorMessage' => null,
+            'Labels' => []
         ], $values);
 
         $message->setInitialDocumentId($values['InitialDocumentId']);
         $message->setIsValid($values['IsValid']);
         $message->setErrorMessage($values['ErrorMessage']);
+
+        foreach ($values['Labels'] as $item) {
+            $message->addLabels($item);
+        }
 
         return $message;
     }
@@ -213,6 +269,12 @@ class SignatureVerification extends \Protobuf\AbstractMessage
                     'name' => 'ErrorMessage',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 4,
+                    'name' => 'Labels',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED()
                 ]),
             ],
         ]);
@@ -263,6 +325,13 @@ class SignatureVerification extends \Protobuf\AbstractMessage
         if ($this->ErrorMessage !== null) {
             $writer->writeVarint($stream, 26);
             $writer->writeString($stream, $this->ErrorMessage);
+        }
+
+        if ($this->Labels !== null) {
+            foreach ($this->Labels as $val) {
+                $writer->writeVarint($stream, 34);
+                $writer->writeString($stream, $val);
+            }
         }
 
         if ($this->extensions !== null) {
@@ -323,6 +392,18 @@ class SignatureVerification extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 4) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                if ($this->Labels === null) {
+                    $this->Labels = new \Protobuf\ScalarCollection();
+                }
+
+                $this->Labels->add($reader->readString($stream));
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -367,6 +448,13 @@ class SignatureVerification extends \Protobuf\AbstractMessage
             $size += $calculator->computeStringSize($this->ErrorMessage);
         }
 
+        if ($this->Labels !== null) {
+            foreach ($this->Labels as $val) {
+                $size += 1;
+                $size += $calculator->computeStringSize($val);
+            }
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -382,6 +470,7 @@ class SignatureVerification extends \Protobuf\AbstractMessage
         $this->InitialDocumentId = null;
         $this->IsValid = null;
         $this->ErrorMessage = null;
+        $this->Labels = null;
     }
 
     /**
@@ -396,6 +485,7 @@ class SignatureVerification extends \Protobuf\AbstractMessage
         $this->InitialDocumentId = ($message->InitialDocumentId !== null) ? $message->InitialDocumentId : $this->InitialDocumentId;
         $this->IsValid = ($message->IsValid !== null) ? $message->IsValid : $this->IsValid;
         $this->ErrorMessage = ($message->ErrorMessage !== null) ? $message->ErrorMessage : $this->ErrorMessage;
+        $this->Labels = ($message->Labels !== null) ? $message->Labels : $this->Labels;
     }
 
 

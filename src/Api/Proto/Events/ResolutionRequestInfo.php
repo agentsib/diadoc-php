@@ -27,7 +27,7 @@ class ResolutionRequestInfo extends \Protobuf\AbstractMessage
     /**
      * RequestType optional enum = 1
      *
-     * @var \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRequestType
+     * @var \AgentSIB\Diadoc\Api\Proto\ResolutionRequestType
      */
     protected $RequestType = null;
 
@@ -53,11 +53,18 @@ class ResolutionRequestInfo extends \Protobuf\AbstractMessage
     protected $ResolvedWith = null;
 
     /**
+     * Actions repeated enum = 5
+     *
+     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\ResolutionAction>
+     */
+    protected $Actions = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
     {
-        $this->RequestType = \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRequestType::UnknownResolutionRequestType();
+        $this->RequestType = \AgentSIB\Diadoc\Api\Proto\ResolutionRequestType::UnknownResolutionRequestType();
 
         parent::__construct($stream, $configuration);
     }
@@ -75,7 +82,7 @@ class ResolutionRequestInfo extends \Protobuf\AbstractMessage
     /**
      * Get 'RequestType' value
      *
-     * @return \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRequestType
+     * @return \AgentSIB\Diadoc\Api\Proto\ResolutionRequestType
      */
     public function getRequestType()
     {
@@ -85,9 +92,9 @@ class ResolutionRequestInfo extends \Protobuf\AbstractMessage
     /**
      * Set 'RequestType' value
      *
-     * @param \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRequestType $value
+     * @param \AgentSIB\Diadoc\Api\Proto\ResolutionRequestType $value
      */
-    public function setRequestType(\AgentSIB\Diadoc\Api\Proto\Events\ResolutionRequestType $value = null)
+    public function setRequestType(\AgentSIB\Diadoc\Api\Proto\ResolutionRequestType $value = null)
     {
         $this->RequestType = $value;
     }
@@ -183,6 +190,50 @@ class ResolutionRequestInfo extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'Actions' has a value
+     *
+     * @return bool
+     */
+    public function hasActionsList()
+    {
+        return $this->Actions !== null;
+    }
+
+    /**
+     * Get 'Actions' value
+     *
+     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\ResolutionAction>
+     */
+    public function getActionsList()
+    {
+        return $this->Actions;
+    }
+
+    /**
+     * Set 'Actions' value
+     *
+     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\ResolutionAction> $value
+     */
+    public function setActionsList(\Protobuf\Collection $value = null)
+    {
+        $this->Actions = $value;
+    }
+
+    /**
+     * Add a new element to 'Actions'
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\ResolutionAction $value
+     */
+    public function addActions(\AgentSIB\Diadoc\Api\Proto\ResolutionAction $value)
+    {
+        if ($this->Actions === null) {
+            $this->Actions = new \Protobuf\EnumCollection();
+        }
+
+        $this->Actions->add($value);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -221,15 +272,20 @@ class ResolutionRequestInfo extends \Protobuf\AbstractMessage
 
         $message = new self();
         $values  = array_merge([
-            'RequestType' => \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRequestType::UnknownResolutionRequestType(),
+            'RequestType' => \AgentSIB\Diadoc\Api\Proto\ResolutionRequestType::UnknownResolutionRequestType(),
             'Target' => null,
-            'ResolvedWith' => null
+            'ResolvedWith' => null,
+            'Actions' => []
         ], $values);
 
         $message->setRequestType($values['RequestType']);
         $message->setAuthor($values['Author']);
         $message->setTarget($values['Target']);
         $message->setResolvedWith($values['ResolvedWith']);
+
+        foreach ($values['Actions'] as $item) {
+            $message->addActions($item);
+        }
 
         return $message;
     }
@@ -247,8 +303,8 @@ class ResolutionRequestInfo extends \Protobuf\AbstractMessage
                     'name' => 'RequestType',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
-                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.ResolutionRequestType',
-                    'default_value' => \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRequestType::UnknownResolutionRequestType()
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.ResolutionRequestType',
+                    'default_value' => \AgentSIB\Diadoc\Api\Proto\ResolutionRequestType::UnknownResolutionRequestType()
                 ]),
                 \google\protobuf\FieldDescriptorProto::fromArray([
                     'number' => 2,
@@ -268,6 +324,13 @@ class ResolutionRequestInfo extends \Protobuf\AbstractMessage
                     'name' => 'ResolvedWith',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 5,
+                    'name' => 'Actions',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.ResolutionAction'
                 ]),
             ],
         ]);
@@ -322,6 +385,13 @@ class ResolutionRequestInfo extends \Protobuf\AbstractMessage
             $writer->writeString($stream, $this->ResolvedWith);
         }
 
+        if ($this->Actions !== null) {
+            foreach ($this->Actions as $val) {
+                $writer->writeVarint($stream, 40);
+                $writer->writeVarint($stream, $val->value());
+            }
+        }
+
         if ($this->extensions !== null) {
             $this->extensions->writeTo($context);
         }
@@ -359,7 +429,7 @@ class ResolutionRequestInfo extends \Protobuf\AbstractMessage
             if ($tag === 1) {
                 \Protobuf\WireFormat::assertWireType($wire, 14);
 
-                $this->RequestType = \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRequestType::valueOf($reader->readVarint($stream));
+                $this->RequestType = \AgentSIB\Diadoc\Api\Proto\ResolutionRequestType::valueOf($reader->readVarint($stream));
 
                 continue;
             }
@@ -391,6 +461,18 @@ class ResolutionRequestInfo extends \Protobuf\AbstractMessage
                 \Protobuf\WireFormat::assertWireType($wire, 9);
 
                 $this->ResolvedWith = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 5) {
+                \Protobuf\WireFormat::assertWireType($wire, 14);
+
+                if ($this->Actions === null) {
+                    $this->Actions = new \Protobuf\EnumCollection();
+                }
+
+                $this->Actions->add(\AgentSIB\Diadoc\Api\Proto\ResolutionAction::valueOf($reader->readVarint($stream)));
 
                 continue;
             }
@@ -447,6 +529,13 @@ class ResolutionRequestInfo extends \Protobuf\AbstractMessage
             $size += $calculator->computeStringSize($this->ResolvedWith);
         }
 
+        if ($this->Actions !== null) {
+            foreach ($this->Actions as $val) {
+                $size += 1;
+                $size += $calculator->computeVarintSize($val->value());
+            }
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -459,10 +548,11 @@ class ResolutionRequestInfo extends \Protobuf\AbstractMessage
      */
     public function clear()
     {
-        $this->RequestType = \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRequestType::UnknownResolutionRequestType();
+        $this->RequestType = \AgentSIB\Diadoc\Api\Proto\ResolutionRequestType::UnknownResolutionRequestType();
         $this->Author = null;
         $this->Target = null;
         $this->ResolvedWith = null;
+        $this->Actions = null;
     }
 
     /**
@@ -478,6 +568,7 @@ class ResolutionRequestInfo extends \Protobuf\AbstractMessage
         $this->Author = ($message->Author !== null) ? $message->Author : $this->Author;
         $this->Target = ($message->Target !== null) ? $message->Target : $this->Target;
         $this->ResolvedWith = ($message->ResolvedWith !== null) ? $message->ResolvedWith : $this->ResolvedWith;
+        $this->Actions = ($message->Actions !== null) ? $message->Actions : $this->Actions;
     }
 
 

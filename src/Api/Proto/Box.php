@@ -53,6 +53,13 @@ class Box extends \Protobuf\AbstractMessage
     protected $InvoiceFormatVersion = null;
 
     /**
+     * EncryptedDocumentsAllowed optional bool = 5
+     *
+     * @var bool
+     */
+    protected $EncryptedDocumentsAllowed = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
@@ -183,6 +190,36 @@ class Box extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'EncryptedDocumentsAllowed' has a value
+     *
+     * @return bool
+     */
+    public function hasEncryptedDocumentsAllowed()
+    {
+        return $this->EncryptedDocumentsAllowed !== null;
+    }
+
+    /**
+     * Get 'EncryptedDocumentsAllowed' value
+     *
+     * @return bool
+     */
+    public function getEncryptedDocumentsAllowed()
+    {
+        return $this->EncryptedDocumentsAllowed;
+    }
+
+    /**
+     * Set 'EncryptedDocumentsAllowed' value
+     *
+     * @param bool $value
+     */
+    public function setEncryptedDocumentsAllowed($value = null)
+    {
+        $this->EncryptedDocumentsAllowed = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -226,13 +263,15 @@ class Box extends \Protobuf\AbstractMessage
         $message = new self();
         $values  = array_merge([
             'Organization' => null,
-            'InvoiceFormatVersion' => \AgentSIB\Diadoc\Api\Proto\OrganizationInvoiceFormatVersion::v5_02()
+            'InvoiceFormatVersion' => \AgentSIB\Diadoc\Api\Proto\OrganizationInvoiceFormatVersion::v5_02(),
+            'EncryptedDocumentsAllowed' => null
         ], $values);
 
         $message->setBoxId($values['BoxId']);
         $message->setTitle($values['Title']);
         $message->setOrganization($values['Organization']);
         $message->setInvoiceFormatVersion($values['InvoiceFormatVersion']);
+        $message->setEncryptedDocumentsAllowed($values['EncryptedDocumentsAllowed']);
 
         return $message;
     }
@@ -271,6 +310,12 @@ class Box extends \Protobuf\AbstractMessage
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.OrganizationInvoiceFormatVersion',
                     'default_value' => \AgentSIB\Diadoc\Api\Proto\OrganizationInvoiceFormatVersion::v5_02()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 5,
+                    'name' => 'EncryptedDocumentsAllowed',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_BOOL(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
                 ]),
             ],
         ]);
@@ -327,6 +372,11 @@ class Box extends \Protobuf\AbstractMessage
         if ($this->InvoiceFormatVersion !== null) {
             $writer->writeVarint($stream, 32);
             $writer->writeVarint($stream, $this->InvoiceFormatVersion->value());
+        }
+
+        if ($this->EncryptedDocumentsAllowed !== null) {
+            $writer->writeVarint($stream, 40);
+            $writer->writeBool($stream, $this->EncryptedDocumentsAllowed);
         }
 
         if ($this->extensions !== null) {
@@ -402,6 +452,14 @@ class Box extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 5) {
+                \Protobuf\WireFormat::assertWireType($wire, 8);
+
+                $this->EncryptedDocumentsAllowed = $reader->readBool($stream);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -454,6 +512,11 @@ class Box extends \Protobuf\AbstractMessage
             $size += $calculator->computeVarintSize($this->InvoiceFormatVersion->value());
         }
 
+        if ($this->EncryptedDocumentsAllowed !== null) {
+            $size += 1;
+            $size += 1;
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -470,6 +533,7 @@ class Box extends \Protobuf\AbstractMessage
         $this->Title = null;
         $this->Organization = null;
         $this->InvoiceFormatVersion = \AgentSIB\Diadoc\Api\Proto\OrganizationInvoiceFormatVersion::v5_02();
+        $this->EncryptedDocumentsAllowed = null;
     }
 
     /**
@@ -485,6 +549,7 @@ class Box extends \Protobuf\AbstractMessage
         $this->Title = ($message->Title !== null) ? $message->Title : $this->Title;
         $this->Organization = ($message->Organization !== null) ? $message->Organization : $this->Organization;
         $this->InvoiceFormatVersion = ($message->InvoiceFormatVersion !== null) ? $message->InvoiceFormatVersion : $this->InvoiceFormatVersion;
+        $this->EncryptedDocumentsAllowed = ($message->EncryptedDocumentsAllowed !== null) ? $message->EncryptedDocumentsAllowed : $this->EncryptedDocumentsAllowed;
     }
 
 

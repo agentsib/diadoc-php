@@ -50,6 +50,16 @@ class TaxRate extends \Protobuf\Enum
     const Fraction_18_118_VALUE = 6;
 
     /**
+     * TaxedByAgent = 7
+     */
+    const TaxedByAgent_VALUE = 7;
+
+    /**
+     * Fraction_20_120 = 8
+     */
+    const Fraction_20_120_VALUE = 8;
+
+    /**
      * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\TaxRate
      */
     protected static $NoVat = null;
@@ -83,6 +93,16 @@ class TaxRate extends \Protobuf\Enum
      * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\TaxRate
      */
     protected static $Fraction_18_118 = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\TaxRate
+     */
+    protected static $TaxedByAgent = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\TaxRate
+     */
+    protected static $Fraction_20_120 = null;
 
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\TaxRate
@@ -169,6 +189,30 @@ class TaxRate extends \Protobuf\Enum
     }
 
     /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\TaxRate
+     */
+    public static function TaxedByAgent()
+    {
+        if (self::$TaxedByAgent !== null) {
+            return self::$TaxedByAgent;
+        }
+
+        return self::$TaxedByAgent = new self('TaxedByAgent', self::TaxedByAgent_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\TaxRate
+     */
+    public static function Fraction_20_120()
+    {
+        if (self::$Fraction_20_120 !== null) {
+            return self::$Fraction_20_120;
+        }
+
+        return self::$Fraction_20_120 = new self('Fraction_20_120', self::Fraction_20_120_VALUE);
+    }
+
+    /**
      * @param int $value
      * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\TaxRate
      */
@@ -182,6 +226,8 @@ class TaxRate extends \Protobuf\Enum
             case 4: return self::Percent_20();
             case 5: return self::Fraction_10_110();
             case 6: return self::Fraction_18_118();
+            case 7: return self::TaxedByAgent();
+            case 8: return self::Fraction_20_120();
             default: return null;
         }
     }

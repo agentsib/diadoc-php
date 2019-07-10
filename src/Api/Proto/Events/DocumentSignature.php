@@ -67,6 +67,13 @@ class DocumentSignature extends \Protobuf\AbstractMessage
     protected $PatchedContentId = null;
 
     /**
+     * Labels repeated string = 8
+     *
+     * @var \Protobuf\Collection
+     */
+    protected $Labels = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
@@ -262,6 +269,50 @@ class DocumentSignature extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'Labels' has a value
+     *
+     * @return bool
+     */
+    public function hasLabelsList()
+    {
+        return $this->Labels !== null;
+    }
+
+    /**
+     * Get 'Labels' value
+     *
+     * @return \Protobuf\Collection
+     */
+    public function getLabelsList()
+    {
+        return $this->Labels;
+    }
+
+    /**
+     * Set 'Labels' value
+     *
+     * @param \Protobuf\Collection $value
+     */
+    public function setLabelsList(\Protobuf\Collection $value = null)
+    {
+        $this->Labels = $value;
+    }
+
+    /**
+     * Add a new element to 'Labels'
+     *
+     * @param string $value
+     */
+    public function addLabels($value)
+    {
+        if ($this->Labels === null) {
+            $this->Labels = new \Protobuf\ScalarCollection();
+        }
+
+        $this->Labels->add($value);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -304,7 +355,8 @@ class DocumentSignature extends \Protobuf\AbstractMessage
             'SignWithTestSignature' => false,
             'IsApprovementSignature' => false,
             'SignatureNameOnShelf' => null,
-            'PatchedContentId' => null
+            'PatchedContentId' => null,
+            'Labels' => []
         ], $values);
 
         $message->setParentEntityId($values['ParentEntityId']);
@@ -313,6 +365,10 @@ class DocumentSignature extends \Protobuf\AbstractMessage
         $message->setIsApprovementSignature($values['IsApprovementSignature']);
         $message->setSignatureNameOnShelf($values['SignatureNameOnShelf']);
         $message->setPatchedContentId($values['PatchedContentId']);
+
+        foreach ($values['Labels'] as $item) {
+            $message->addLabels($item);
+        }
 
         return $message;
     }
@@ -362,6 +418,12 @@ class DocumentSignature extends \Protobuf\AbstractMessage
                     'name' => 'PatchedContentId',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 8,
+                    'name' => 'Labels',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED()
                 ]),
             ],
         ]);
@@ -423,6 +485,13 @@ class DocumentSignature extends \Protobuf\AbstractMessage
         if ($this->PatchedContentId !== null) {
             $writer->writeVarint($stream, 58);
             $writer->writeString($stream, $this->PatchedContentId);
+        }
+
+        if ($this->Labels !== null) {
+            foreach ($this->Labels as $val) {
+                $writer->writeVarint($stream, 66);
+                $writer->writeString($stream, $val);
+            }
         }
 
         if ($this->extensions !== null) {
@@ -507,6 +576,18 @@ class DocumentSignature extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 8) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                if ($this->Labels === null) {
+                    $this->Labels = new \Protobuf\ScalarCollection();
+                }
+
+                $this->Labels->add($reader->readString($stream));
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -566,6 +647,13 @@ class DocumentSignature extends \Protobuf\AbstractMessage
             $size += $calculator->computeStringSize($this->PatchedContentId);
         }
 
+        if ($this->Labels !== null) {
+            foreach ($this->Labels as $val) {
+                $size += 1;
+                $size += $calculator->computeStringSize($val);
+            }
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -584,6 +672,7 @@ class DocumentSignature extends \Protobuf\AbstractMessage
         $this->IsApprovementSignature = false;
         $this->SignatureNameOnShelf = null;
         $this->PatchedContentId = null;
+        $this->Labels = null;
     }
 
     /**
@@ -601,6 +690,7 @@ class DocumentSignature extends \Protobuf\AbstractMessage
         $this->IsApprovementSignature = ($message->IsApprovementSignature !== null) ? $message->IsApprovementSignature : $this->IsApprovementSignature;
         $this->SignatureNameOnShelf = ($message->SignatureNameOnShelf !== null) ? $message->SignatureNameOnShelf : $this->SignatureNameOnShelf;
         $this->PatchedContentId = ($message->PatchedContentId !== null) ? $message->PatchedContentId : $this->PatchedContentId;
+        $this->Labels = ($message->Labels !== null) ? $message->Labels : $this->Labels;
     }
 
 

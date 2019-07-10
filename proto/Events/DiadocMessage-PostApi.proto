@@ -4,7 +4,10 @@
 //	PostMessagePatch(MessagePatchToPost messagePatch) : MessagePatch
 
 import "DocumentId.proto";
+import "LockMode.proto";
 import "CustomDataItem.proto";
+import "ResolutionRequestType.proto";
+import "ResolutionType.proto";
 import "Invoicing/Signer.proto";
 import "Invoicing/ExtendedSigner.proto";
 import "Events/ResolutionInfo.proto";
@@ -47,7 +50,8 @@ message MessageToPost {
 	repeated SupplementaryAgreementAttachment SupplementaryAgreements = 31;
 	optional bool LockPacket = 32 [default = false];
 	repeated XmlDocumentAttachment UniversalTransferDocumentSellerTitles = 33;
-	repeated CustomDocumentAttachment CustomDocumentAttachments = 34;
+	repeated DocumentAttachment DocumentAttachments = 34;
+	optional LockMode LockMode = 35 [default = None];
 }
 
 message EncryptedXmlDocumentAttachment {
@@ -83,6 +87,7 @@ message EncryptedDocumentMetadata {
 message EncryptedXmlBasicDocumentMetadata {
 	required string FormationDate = 1;
 	required string FormationTime = 2;
+	optional string DocumentName = 3;
 }
 
 message EncryptedInvoiceMetadata {
@@ -158,7 +163,7 @@ message AcceptanceCertificateAttachment {
 	repeated DocumentId InitialDocumentIds = 4;
 	repeated DocumentId SubordinateDocumentIds = 5;
 	required string DocumentDate = 6;
-	required string DocumentNumber = 7;
+	optional string DocumentNumber = 7 [default=""];
 	required string Total = 8;
 	optional string CustomDocumentId = 9;
 	optional string Vat = 10;
@@ -206,7 +211,7 @@ message ReconciliationActAttachment {
 	repeated DocumentId InitialDocumentIds = 5;
 	repeated DocumentId SubordinateDocumentIds = 6;
 	required string DocumentDate = 7;
-	required string DocumentNumber = 8;
+	optional string DocumentNumber = 8 [default = ""];
 	optional string CustomDocumentId = 9;
 	optional bool NeedReceipt = 10 [default = false];
 	repeated CustomDataItem CustomData = 11;
@@ -258,19 +263,29 @@ message ServiceDetailsAttachment {
 	repeated CustomDataItem CustomData = 11;
 }
 
-message CustomDocumentAttachment {
+message DocumentAttachment {
 	required SignedContent SignedContent = 1;
-	required string FileName = 2;
+	// reserved 2 for FileName
 	optional string Comment = 3;
-	// reserved 4 for NeedRecipientSignature
+	optional bool NeedRecipientSignature = 4 [default = false];
 	repeated DocumentId InitialDocumentIds = 5;
 	repeated DocumentId SubordinateDocumentIds = 6;
 	// reserved 7 for DocumentDate
 	// reserved 8 for DocumentNumber
 	optional string CustomDocumentId = 9;
-	//reserved 10 for NeedReceipt
+	optional bool NeedReceipt = 10 [default = false];
 	repeated CustomDataItem CustomData = 11;
-	required string Type = 12;
+	required string TypeNamedId = 12;
+	optional string Function = 13;
+	optional string Version = 14;
+	repeated MetadataItem Metadata = 15;
+	optional int32 WorkflowId = 16;
+	optional bool IsEncrypted = 17 [default = false];
+}
+
+message MetadataItem {
+	required string Key = 1;
+	required string Value = 2;
 }
 
 message MessagePatchToPost {
@@ -280,8 +295,8 @@ message MessagePatchToPost {
 	repeated CorrectionRequestAttachment CorrectionRequests = 4;
 	repeated DocumentSignature Signatures = 5;
 	repeated RequestedSignatureRejection RequestedSignatureRejections = 6;
-	repeated ReceiptAttachment XmlTorg12BuyerTitles = 7;
-	repeated ReceiptAttachment XmlAcceptanceCertificateBuyerTitles = 8;
+	repeated RecipientTitleAttachment XmlTorg12BuyerTitles = 7;
+	repeated RecipientTitleAttachment XmlAcceptanceCertificateBuyerTitles = 8;
 	repeated ResolutionAttachment Resolutions = 9;
 	repeated ResolutionRequestAttachment ResolutionRequests = 10;
 	repeated ResolutionRequestCancellationAttachment ResolutionRequestCancellations = 11;
@@ -290,16 +305,26 @@ message MessagePatchToPost {
 	repeated RevocationRequestAttachment RevocationRequests = 14;
 	repeated XmlSignatureRejectionAttachment XmlSignatureRejections = 15;
 	repeated CustomDataPatch CustomDataPatches = 16;
-	repeated ResolutionChainAssignment ResolutionChainAssignments = 17;
+	repeated ResolutionRouteAssignment ResolutionRouteAssignments = 17;
 	repeated SignatureVerification SignatureVerifications = 18;
 	repeated EditDocumentPacketCommand EditDocumentPacketCommands = 19;
-	repeated ReceiptAttachment UniversalTransferDocumentBuyerTitles = 20;
+	repeated RecipientTitleAttachment UniversalTransferDocumentBuyerTitles = 20;
+	repeated ResolutionRouteRemoval ResolutionRouteRemovals = 21;
+	repeated RecipientTitleAttachment RecipientTitles = 22;
+	repeated EditingPatch EditingPatches = 24;
+}
+
+message EditingPatch {
+	required string ParentEntityId = 1;
+	required UnsignedContent Content = 2;
+	repeated string Labels = 3;
 }
 
 message SignatureVerification {
 	required string InitialDocumentId = 1;
 	required bool IsValid = 2;
 	optional string ErrorMessage = 3;
+	repeated string Labels = 4;
 }
 
 message ResolutionRequestAttachment {
@@ -308,17 +333,21 @@ message ResolutionRequestAttachment {
 	optional string TargetUserId = 3;
 	optional string TargetDepartmentId = 4;
 	optional string Comment = 5;
+	repeated string Labels = 6;
 }
 
-message ResolutionChainAssignment
+message ResolutionRouteAssignment
 {
 	required string InitialDocumentId = 1;
-	required string ChainId = 2;
+	required string RouteId = 2;
 	optional string Comment = 3;
+	repeated string Labels = 4;
 }
 
 message ResolutionRequestCancellationAttachment {
 	required string InitialResolutionRequestId = 1;
+	optional string Comment = 2;
+	repeated string Labels = 3;
 }
 
 message ResolutionRequestDenialCancellationAttachment {
@@ -328,24 +357,35 @@ message ResolutionRequestDenialCancellationAttachment {
 message ResolutionRequestDenialAttachment {
 	required string InitialResolutionRequestId = 1;
 	optional string Comment = 2;
+	repeated string Labels = 3;
 }
 
 message ResolutionAttachment {
 	required string InitialDocumentId = 1;
 	required ResolutionType ResolutionType = 2;
 	optional string Comment = 3;
+	repeated string Labels = 4;
 }
 
 message ReceiptAttachment {
 	required string ParentEntityId = 1;
 	required SignedContent SignedContent = 2;
 	// do not use field #3
+	repeated string Labels = 4;
+}
+
+message RecipientTitleAttachment {
+	required string ParentEntityId = 1;
+	required SignedContent SignedContent = 2;
+	repeated string Labels = 4;
+	required bool NeedReceipt = 5 [default = false];
 }
 
 message CorrectionRequestAttachment {
 	required string ParentEntityId = 1;
 	required SignedContent SignedContent = 2;
 	// do not use field #3
+	repeated string Labels = 4;
 }
 
 message DocumentSignature {
@@ -355,6 +395,7 @@ message DocumentSignature {
 	optional bool IsApprovementSignature = 5 [default = false];
 	optional string SignatureNameOnShelf = 6;
 	optional string PatchedContentId = 7;
+	repeated string Labels = 8;
 }
 
 message DocumentSenderSignature {
@@ -367,6 +408,7 @@ message DocumentSenderSignature {
 message RequestedSignatureRejection {
 	required string ParentEntityId = 1;
 	required SignedContent SignedContent = 2;
+	repeated string Labels = 3;
 }
 
 message SignedContent {
@@ -391,6 +433,7 @@ message PrepareDocumentsToSignRequest {
 	required string BoxId = 1;
 	repeated DraftDocumentToPatch DraftDocuments = 2;
 	repeated DocumentToPatch Documents = 3;
+	repeated ContentToPatch Contents = 4;
 }
 
 message DraftDocumentToPatch {
@@ -398,6 +441,16 @@ message DraftDocumentToPatch {
 	optional string ToBoxId = 2;
 	optional Invoicing.Signer Signer = 3;
 	repeated Invoicing.Signers.ExtendedSigner ExtendedSigner = 4;
+}
+
+message ContentToPatch {
+	required string TypeNamedId = 1;
+	required string Function = 2;
+	required string Version = 3;
+	required UnsignedContent Content = 4;
+	optional string ToBoxId = 5;
+	optional Invoicing.Signer Signer = 6;
+	repeated Invoicing.Signers.ExtendedSigner ExtendedSigner = 7;
 }
 
 message DocumentToPatch {
@@ -425,11 +478,13 @@ message MessageToSend {
 message RevocationRequestAttachment {
 	required string ParentEntityId = 1;
 	required SignedContent SignedContent = 2;
+	repeated string Labels = 3;
 }
 
 message XmlSignatureRejectionAttachment {
 	required string ParentEntityId = 1;
 	required SignedContent SignedContent = 2;
+	repeated string Labels = 3;
 }
 
 message RoamingNotificationToPost {
@@ -437,6 +492,8 @@ message RoamingNotificationToPost {
 	required string EventId = 2;
 	required bool Success = 3;
 	optional string Description = 4;
+	optional string MessageId = 5;
+	repeated string NotifiableEntityIds = 6;
 }
 
 enum CustomDataPatchOperation {
@@ -455,4 +512,57 @@ message EditDocumentPacketCommand {
 	required string DocumentId = 1;
 	repeated DocumentId AddDocumentsToPacket = 2;
 	repeated DocumentId RemoveDocumentsFromPacket = 3;
+}
+
+message ResolutionRouteRemoval {
+	required string ParentEntityId = 1; // EntityId документа, который нужно снять с маршрута согласования
+	required string RouteId = 2; // Идентификатор маршрута, с которого нужно снять документ
+	optional string Comment = 3 [default = ""]; // Текстовый комментарий, ограничение - 256 символов
+	repeated string Labels = 4;
+}
+
+message TemplateToPost {
+	required string FromBoxId = 1;
+	required string ToBoxId = 2;
+	required string MessageFromBoxId = 3;
+	required string MessageToBoxId = 4;
+	optional string MessageToDepartmentId = 5;
+	repeated TemplateDocumentAttachment DocumentAttachments = 6;
+	optional LockMode LockMode = 7 [default = None];
+	optional string FromDepartmentId = 8;
+	optional string ToDepartmentId = 9;
+}
+
+message TemplateDocumentAttachment {
+	required UnsignedContent UnsignedContent = 1;
+	optional string Comment = 2;
+	required string TypeNamedId = 3;
+	optional string Function = 4;
+	optional string Version = 5;
+	repeated MetadataItem Metadata = 6;
+	optional int32 WorkflowId = 7;
+	optional string CustomDocumentId = 8;
+	optional string EditingSettingId = 9;
+	optional bool NeedRecipientSignature = 10 [default = false];
+	optional PredefinedRecipientTitle PredefinedRecipientTitle = 11;
+}
+
+message PredefinedRecipientTitle {
+	required UnsignedContent UnsignedContent = 1;
+}
+
+message UnsignedContent {
+	optional bytes Content = 1;
+	optional string NameOnShelf = 2;
+}
+
+message TemplateTransformationToPost {
+	required string BoxId = 1;
+	required string TemplateId = 2;
+	repeated DocumentTransformation DocumentTransformations = 3;
+}
+
+message DocumentTransformation {
+	required string DocumentId = 1;
+	optional string CustomDocumentId = 2;
 }

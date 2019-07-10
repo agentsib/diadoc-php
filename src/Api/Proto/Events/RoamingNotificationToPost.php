@@ -53,6 +53,20 @@ class RoamingNotificationToPost extends \Protobuf\AbstractMessage
     protected $Description = null;
 
     /**
+     * MessageId optional string = 5
+     *
+     * @var string
+     */
+    protected $MessageId = null;
+
+    /**
+     * NotifiableEntityIds repeated string = 6
+     *
+     * @var \Protobuf\Collection
+     */
+    protected $NotifiableEntityIds = null;
+
+    /**
      * Check if 'BoxId' has a value
      *
      * @return bool
@@ -173,6 +187,80 @@ class RoamingNotificationToPost extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'MessageId' has a value
+     *
+     * @return bool
+     */
+    public function hasMessageId()
+    {
+        return $this->MessageId !== null;
+    }
+
+    /**
+     * Get 'MessageId' value
+     *
+     * @return string
+     */
+    public function getMessageId()
+    {
+        return $this->MessageId;
+    }
+
+    /**
+     * Set 'MessageId' value
+     *
+     * @param string $value
+     */
+    public function setMessageId($value = null)
+    {
+        $this->MessageId = $value;
+    }
+
+    /**
+     * Check if 'NotifiableEntityIds' has a value
+     *
+     * @return bool
+     */
+    public function hasNotifiableEntityIdsList()
+    {
+        return $this->NotifiableEntityIds !== null;
+    }
+
+    /**
+     * Get 'NotifiableEntityIds' value
+     *
+     * @return \Protobuf\Collection
+     */
+    public function getNotifiableEntityIdsList()
+    {
+        return $this->NotifiableEntityIds;
+    }
+
+    /**
+     * Set 'NotifiableEntityIds' value
+     *
+     * @param \Protobuf\Collection $value
+     */
+    public function setNotifiableEntityIdsList(\Protobuf\Collection $value = null)
+    {
+        $this->NotifiableEntityIds = $value;
+    }
+
+    /**
+     * Add a new element to 'NotifiableEntityIds'
+     *
+     * @param string $value
+     */
+    public function addNotifiableEntityIds($value)
+    {
+        if ($this->NotifiableEntityIds === null) {
+            $this->NotifiableEntityIds = new \Protobuf\ScalarCollection();
+        }
+
+        $this->NotifiableEntityIds->add($value);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -219,13 +307,20 @@ class RoamingNotificationToPost extends \Protobuf\AbstractMessage
 
         $message = new self();
         $values  = array_merge([
-            'Description' => null
+            'Description' => null,
+            'MessageId' => null,
+            'NotifiableEntityIds' => []
         ], $values);
 
         $message->setBoxId($values['BoxId']);
         $message->setEventId($values['EventId']);
         $message->setSuccess($values['Success']);
         $message->setDescription($values['Description']);
+        $message->setMessageId($values['MessageId']);
+
+        foreach ($values['NotifiableEntityIds'] as $item) {
+            $message->addNotifiableEntityIds($item);
+        }
 
         return $message;
     }
@@ -261,6 +356,18 @@ class RoamingNotificationToPost extends \Protobuf\AbstractMessage
                     'name' => 'Description',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 5,
+                    'name' => 'MessageId',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 6,
+                    'name' => 'NotifiableEntityIds',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED()
                 ]),
             ],
         ]);
@@ -320,6 +427,18 @@ class RoamingNotificationToPost extends \Protobuf\AbstractMessage
         if ($this->Description !== null) {
             $writer->writeVarint($stream, 34);
             $writer->writeString($stream, $this->Description);
+        }
+
+        if ($this->MessageId !== null) {
+            $writer->writeVarint($stream, 42);
+            $writer->writeString($stream, $this->MessageId);
+        }
+
+        if ($this->NotifiableEntityIds !== null) {
+            foreach ($this->NotifiableEntityIds as $val) {
+                $writer->writeVarint($stream, 50);
+                $writer->writeString($stream, $val);
+            }
         }
 
         if ($this->extensions !== null) {
@@ -388,6 +507,26 @@ class RoamingNotificationToPost extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 5) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->MessageId = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 6) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                if ($this->NotifiableEntityIds === null) {
+                    $this->NotifiableEntityIds = new \Protobuf\ScalarCollection();
+                }
+
+                $this->NotifiableEntityIds->add($reader->readString($stream));
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -437,6 +576,18 @@ class RoamingNotificationToPost extends \Protobuf\AbstractMessage
             $size += $calculator->computeStringSize($this->Description);
         }
 
+        if ($this->MessageId !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->MessageId);
+        }
+
+        if ($this->NotifiableEntityIds !== null) {
+            foreach ($this->NotifiableEntityIds as $val) {
+                $size += 1;
+                $size += $calculator->computeStringSize($val);
+            }
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -453,6 +604,8 @@ class RoamingNotificationToPost extends \Protobuf\AbstractMessage
         $this->EventId = null;
         $this->Success = null;
         $this->Description = null;
+        $this->MessageId = null;
+        $this->NotifiableEntityIds = null;
     }
 
     /**
@@ -468,6 +621,8 @@ class RoamingNotificationToPost extends \Protobuf\AbstractMessage
         $this->EventId = ($message->EventId !== null) ? $message->EventId : $this->EventId;
         $this->Success = ($message->Success !== null) ? $message->Success : $this->Success;
         $this->Description = ($message->Description !== null) ? $message->Description : $this->Description;
+        $this->MessageId = ($message->MessageId !== null) ? $message->MessageId : $this->MessageId;
+        $this->NotifiableEntityIds = ($message->NotifiableEntityIds !== null) ? $message->NotifiableEntityIds : $this->NotifiableEntityIds;
     }
 
 

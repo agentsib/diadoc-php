@@ -53,6 +53,13 @@ class OrganizationUserPermissions extends \Protobuf\AbstractMessage
     protected $CanSignDocuments = null;
 
     /**
+     * CanManageCounteragents required bool = 6
+     *
+     * @var bool
+     */
+    protected $CanManageCounteragents = null;
+
+    /**
      * CanAddResolutions required bool = 7
      *
      * @var bool
@@ -79,6 +86,27 @@ class OrganizationUserPermissions extends \Protobuf\AbstractMessage
      * @var string
      */
     protected $JobTitle = null;
+
+    /**
+     * CanCreateDocuments required bool = 11
+     *
+     * @var bool
+     */
+    protected $CanCreateDocuments = null;
+
+    /**
+     * AuthorizationPermission required message = 12
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\AuthorizationPermission
+     */
+    protected $AuthorizationPermission = null;
+
+    /**
+     * CanDeleteRestoreDocuments required bool = 13
+     *
+     * @var bool
+     */
+    protected $CanDeleteRestoreDocuments = null;
 
     /**
      * {@inheritdoc}
@@ -208,6 +236,36 @@ class OrganizationUserPermissions extends \Protobuf\AbstractMessage
     public function setCanSignDocuments($value)
     {
         $this->CanSignDocuments = $value;
+    }
+
+    /**
+     * Check if 'CanManageCounteragents' has a value
+     *
+     * @return bool
+     */
+    public function hasCanManageCounteragents()
+    {
+        return $this->CanManageCounteragents !== null;
+    }
+
+    /**
+     * Get 'CanManageCounteragents' value
+     *
+     * @return bool
+     */
+    public function getCanManageCounteragents()
+    {
+        return $this->CanManageCounteragents;
+    }
+
+    /**
+     * Set 'CanManageCounteragents' value
+     *
+     * @param bool $value
+     */
+    public function setCanManageCounteragents($value)
+    {
+        $this->CanManageCounteragents = $value;
     }
 
     /**
@@ -345,6 +403,96 @@ class OrganizationUserPermissions extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'CanCreateDocuments' has a value
+     *
+     * @return bool
+     */
+    public function hasCanCreateDocuments()
+    {
+        return $this->CanCreateDocuments !== null;
+    }
+
+    /**
+     * Get 'CanCreateDocuments' value
+     *
+     * @return bool
+     */
+    public function getCanCreateDocuments()
+    {
+        return $this->CanCreateDocuments;
+    }
+
+    /**
+     * Set 'CanCreateDocuments' value
+     *
+     * @param bool $value
+     */
+    public function setCanCreateDocuments($value)
+    {
+        $this->CanCreateDocuments = $value;
+    }
+
+    /**
+     * Check if 'AuthorizationPermission' has a value
+     *
+     * @return bool
+     */
+    public function hasAuthorizationPermission()
+    {
+        return $this->AuthorizationPermission !== null;
+    }
+
+    /**
+     * Get 'AuthorizationPermission' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\AuthorizationPermission
+     */
+    public function getAuthorizationPermission()
+    {
+        return $this->AuthorizationPermission;
+    }
+
+    /**
+     * Set 'AuthorizationPermission' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\AuthorizationPermission $value
+     */
+    public function setAuthorizationPermission(\AgentSIB\Diadoc\Api\Proto\AuthorizationPermission $value)
+    {
+        $this->AuthorizationPermission = $value;
+    }
+
+    /**
+     * Check if 'CanDeleteRestoreDocuments' has a value
+     *
+     * @return bool
+     */
+    public function hasCanDeleteRestoreDocuments()
+    {
+        return $this->CanDeleteRestoreDocuments !== null;
+    }
+
+    /**
+     * Get 'CanDeleteRestoreDocuments' value
+     *
+     * @return bool
+     */
+    public function getCanDeleteRestoreDocuments()
+    {
+        return $this->CanDeleteRestoreDocuments;
+    }
+
+    /**
+     * Set 'CanDeleteRestoreDocuments' value
+     *
+     * @param bool $value
+     */
+    public function setCanDeleteRestoreDocuments($value)
+    {
+        $this->CanDeleteRestoreDocuments = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -389,6 +537,10 @@ class OrganizationUserPermissions extends \Protobuf\AbstractMessage
             throw new \InvalidArgumentException('Field "CanSignDocuments" (tag 4) is required but has no value.');
         }
 
+        if ( ! isset($values['CanManageCounteragents'])) {
+            throw new \InvalidArgumentException('Field "CanManageCounteragents" (tag 6) is required but has no value.');
+        }
+
         if ( ! isset($values['CanAddResolutions'])) {
             throw new \InvalidArgumentException('Field "CanAddResolutions" (tag 7) is required but has no value.');
         }
@@ -397,20 +549,36 @@ class OrganizationUserPermissions extends \Protobuf\AbstractMessage
             throw new \InvalidArgumentException('Field "CanRequestResolutions" (tag 8) is required but has no value.');
         }
 
+        if ( ! isset($values['CanCreateDocuments'])) {
+            throw new \InvalidArgumentException('Field "CanCreateDocuments" (tag 11) is required but has no value.');
+        }
+
+        if ( ! isset($values['AuthorizationPermission'])) {
+            throw new \InvalidArgumentException('Field "AuthorizationPermission" (tag 12) is required but has no value.');
+        }
+
+        if ( ! isset($values['CanDeleteRestoreDocuments'])) {
+            throw new \InvalidArgumentException('Field "CanDeleteRestoreDocuments" (tag 13) is required but has no value.');
+        }
+
         $message = new self();
         $values  = array_merge([
             'DocumentAccessLevel' => \AgentSIB\Diadoc\Api\Proto\DocumentAccessLevel::UnknownDocumentAccessLevel(),
             'SelectedDepartmentIds' => [],
-            'JobTitle' => null
+            'JobTitle' => null,
         ], $values);
 
         $message->setUserDepartmentId($values['UserDepartmentId']);
         $message->setIsAdministrator($values['IsAdministrator']);
         $message->setDocumentAccessLevel($values['DocumentAccessLevel']);
         $message->setCanSignDocuments($values['CanSignDocuments']);
+        $message->setCanManageCounteragents($values['CanManageCounteragents']);
         $message->setCanAddResolutions($values['CanAddResolutions']);
         $message->setCanRequestResolutions($values['CanRequestResolutions']);
         $message->setJobTitle($values['JobTitle']);
+        $message->setCanCreateDocuments($values['CanCreateDocuments']);
+        $message->setAuthorizationPermission($values['AuthorizationPermission']);
+        $message->setCanDeleteRestoreDocuments($values['CanDeleteRestoreDocuments']);
 
         foreach ($values['SelectedDepartmentIds'] as $item) {
             $message->addSelectedDepartmentIds($item);
@@ -454,6 +622,12 @@ class OrganizationUserPermissions extends \Protobuf\AbstractMessage
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
                 ]),
                 \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 6,
+                    'name' => 'CanManageCounteragents',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_BOOL(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
                     'number' => 7,
                     'name' => 'CanAddResolutions',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_BOOL(),
@@ -476,6 +650,25 @@ class OrganizationUserPermissions extends \Protobuf\AbstractMessage
                     'name' => 'JobTitle',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 11,
+                    'name' => 'CanCreateDocuments',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_BOOL(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 12,
+                    'name' => 'AuthorizationPermission',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.AuthorizationPermission'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 13,
+                    'name' => 'CanDeleteRestoreDocuments',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_BOOL(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
                 ]),
             ],
         ]);
@@ -517,12 +710,28 @@ class OrganizationUserPermissions extends \Protobuf\AbstractMessage
             throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\OrganizationUserPermissions#CanSignDocuments" (tag 4) is required but has no value.');
         }
 
+        if ($this->CanManageCounteragents === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\OrganizationUserPermissions#CanManageCounteragents" (tag 6) is required but has no value.');
+        }
+
         if ($this->CanAddResolutions === null) {
             throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\OrganizationUserPermissions#CanAddResolutions" (tag 7) is required but has no value.');
         }
 
         if ($this->CanRequestResolutions === null) {
             throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\OrganizationUserPermissions#CanRequestResolutions" (tag 8) is required but has no value.');
+        }
+
+        if ($this->CanCreateDocuments === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\OrganizationUserPermissions#CanCreateDocuments" (tag 11) is required but has no value.');
+        }
+
+        if ($this->AuthorizationPermission === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\OrganizationUserPermissions#AuthorizationPermission" (tag 12) is required but has no value.');
+        }
+
+        if ($this->CanDeleteRestoreDocuments === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\OrganizationUserPermissions#CanDeleteRestoreDocuments" (tag 13) is required but has no value.');
         }
 
         if ($this->UserDepartmentId !== null) {
@@ -545,6 +754,11 @@ class OrganizationUserPermissions extends \Protobuf\AbstractMessage
             $writer->writeBool($stream, $this->CanSignDocuments);
         }
 
+        if ($this->CanManageCounteragents !== null) {
+            $writer->writeVarint($stream, 48);
+            $writer->writeBool($stream, $this->CanManageCounteragents);
+        }
+
         if ($this->CanAddResolutions !== null) {
             $writer->writeVarint($stream, 56);
             $writer->writeBool($stream, $this->CanAddResolutions);
@@ -565,6 +779,22 @@ class OrganizationUserPermissions extends \Protobuf\AbstractMessage
         if ($this->JobTitle !== null) {
             $writer->writeVarint($stream, 82);
             $writer->writeString($stream, $this->JobTitle);
+        }
+
+        if ($this->CanCreateDocuments !== null) {
+            $writer->writeVarint($stream, 88);
+            $writer->writeBool($stream, $this->CanCreateDocuments);
+        }
+
+        if ($this->AuthorizationPermission !== null) {
+            $writer->writeVarint($stream, 98);
+            $writer->writeVarint($stream, $this->AuthorizationPermission->serializedSize($sizeContext));
+            $this->AuthorizationPermission->writeTo($context);
+        }
+
+        if ($this->CanDeleteRestoreDocuments !== null) {
+            $writer->writeVarint($stream, 104);
+            $writer->writeBool($stream, $this->CanDeleteRestoreDocuments);
         }
 
         if ($this->extensions !== null) {
@@ -633,6 +863,14 @@ class OrganizationUserPermissions extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 6) {
+                \Protobuf\WireFormat::assertWireType($wire, 8);
+
+                $this->CanManageCounteragents = $reader->readBool($stream);
+
+                continue;
+            }
+
             if ($tag === 7) {
                 \Protobuf\WireFormat::assertWireType($wire, 8);
 
@@ -665,6 +903,37 @@ class OrganizationUserPermissions extends \Protobuf\AbstractMessage
                 \Protobuf\WireFormat::assertWireType($wire, 9);
 
                 $this->JobTitle = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 11) {
+                \Protobuf\WireFormat::assertWireType($wire, 8);
+
+                $this->CanCreateDocuments = $reader->readBool($stream);
+
+                continue;
+            }
+
+            if ($tag === 12) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\AuthorizationPermission();
+
+                $this->AuthorizationPermission = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 13) {
+                \Protobuf\WireFormat::assertWireType($wire, 8);
+
+                $this->CanDeleteRestoreDocuments = $reader->readBool($stream);
 
                 continue;
             }
@@ -718,6 +987,11 @@ class OrganizationUserPermissions extends \Protobuf\AbstractMessage
             $size += 1;
         }
 
+        if ($this->CanManageCounteragents !== null) {
+            $size += 1;
+            $size += 1;
+        }
+
         if ($this->CanAddResolutions !== null) {
             $size += 1;
             $size += 1;
@@ -740,6 +1014,24 @@ class OrganizationUserPermissions extends \Protobuf\AbstractMessage
             $size += $calculator->computeStringSize($this->JobTitle);
         }
 
+        if ($this->CanCreateDocuments !== null) {
+            $size += 1;
+            $size += 1;
+        }
+
+        if ($this->AuthorizationPermission !== null) {
+            $innerSize = $this->AuthorizationPermission->serializedSize($context);
+
+            $size += 1;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->CanDeleteRestoreDocuments !== null) {
+            $size += 1;
+            $size += 1;
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -756,10 +1048,14 @@ class OrganizationUserPermissions extends \Protobuf\AbstractMessage
         $this->IsAdministrator = null;
         $this->DocumentAccessLevel = \AgentSIB\Diadoc\Api\Proto\DocumentAccessLevel::UnknownDocumentAccessLevel();
         $this->CanSignDocuments = null;
+        $this->CanManageCounteragents = null;
         $this->CanAddResolutions = null;
         $this->CanRequestResolutions = null;
         $this->SelectedDepartmentIds = null;
         $this->JobTitle = null;
+        $this->CanCreateDocuments = null;
+        $this->AuthorizationPermission = null;
+        $this->CanDeleteRestoreDocuments = null;
     }
 
     /**
@@ -775,10 +1071,14 @@ class OrganizationUserPermissions extends \Protobuf\AbstractMessage
         $this->IsAdministrator = ($message->IsAdministrator !== null) ? $message->IsAdministrator : $this->IsAdministrator;
         $this->DocumentAccessLevel = ($message->DocumentAccessLevel !== null) ? $message->DocumentAccessLevel : $this->DocumentAccessLevel;
         $this->CanSignDocuments = ($message->CanSignDocuments !== null) ? $message->CanSignDocuments : $this->CanSignDocuments;
+        $this->CanManageCounteragents = ($message->CanManageCounteragents !== null) ? $message->CanManageCounteragents : $this->CanManageCounteragents;
         $this->CanAddResolutions = ($message->CanAddResolutions !== null) ? $message->CanAddResolutions : $this->CanAddResolutions;
         $this->CanRequestResolutions = ($message->CanRequestResolutions !== null) ? $message->CanRequestResolutions : $this->CanRequestResolutions;
         $this->SelectedDepartmentIds = ($message->SelectedDepartmentIds !== null) ? $message->SelectedDepartmentIds : $this->SelectedDepartmentIds;
         $this->JobTitle = ($message->JobTitle !== null) ? $message->JobTitle : $this->JobTitle;
+        $this->CanCreateDocuments = ($message->CanCreateDocuments !== null) ? $message->CanCreateDocuments : $this->CanCreateDocuments;
+        $this->AuthorizationPermission = ($message->AuthorizationPermission !== null) ? $message->AuthorizationPermission : $this->AuthorizationPermission;
+        $this->CanDeleteRestoreDocuments = ($message->CanDeleteRestoreDocuments !== null) ? $message->CanDeleteRestoreDocuments : $this->CanDeleteRestoreDocuments;
     }
 
 

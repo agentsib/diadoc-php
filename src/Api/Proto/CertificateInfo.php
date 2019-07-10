@@ -46,6 +46,20 @@ class CertificateInfo extends \Protobuf\AbstractMessage
     protected $ValidTo = null;
 
     /**
+     * OrganizationName optional string = 4
+     *
+     * @var string
+     */
+    protected $OrganizationName = null;
+
+    /**
+     * Inn optional string = 5
+     *
+     * @var string
+     */
+    protected $Inn = null;
+
+    /**
      * Check if 'Thumbprint' has a value
      *
      * @return bool
@@ -136,6 +150,66 @@ class CertificateInfo extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'OrganizationName' has a value
+     *
+     * @return bool
+     */
+    public function hasOrganizationName()
+    {
+        return $this->OrganizationName !== null;
+    }
+
+    /**
+     * Get 'OrganizationName' value
+     *
+     * @return string
+     */
+    public function getOrganizationName()
+    {
+        return $this->OrganizationName;
+    }
+
+    /**
+     * Set 'OrganizationName' value
+     *
+     * @param string $value
+     */
+    public function setOrganizationName($value = null)
+    {
+        $this->OrganizationName = $value;
+    }
+
+    /**
+     * Check if 'Inn' has a value
+     *
+     * @return bool
+     */
+    public function hasInn()
+    {
+        return $this->Inn !== null;
+    }
+
+    /**
+     * Get 'Inn' value
+     *
+     * @return string
+     */
+    public function getInn()
+    {
+        return $this->Inn;
+    }
+
+    /**
+     * Set 'Inn' value
+     *
+     * @param string $value
+     */
+    public function setInn($value = null)
+    {
+        $this->Inn = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -172,12 +246,16 @@ class CertificateInfo extends \Protobuf\AbstractMessage
         $values  = array_merge([
             'Thumbprint' => null,
             'ValidFrom' => null,
-            'ValidTo' => null
+            'ValidTo' => null,
+            'OrganizationName' => null,
+            'Inn' => null
         ], $values);
 
         $message->setThumbprint($values['Thumbprint']);
         $message->setValidFrom($values['ValidFrom']);
         $message->setValidTo($values['ValidTo']);
+        $message->setOrganizationName($values['OrganizationName']);
+        $message->setInn($values['Inn']);
 
         return $message;
     }
@@ -206,6 +284,18 @@ class CertificateInfo extends \Protobuf\AbstractMessage
                     'number' => 3,
                     'name' => 'ValidTo',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_SFIXED64(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 4,
+                    'name' => 'OrganizationName',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 5,
+                    'name' => 'Inn',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
                 ]),
             ],
@@ -249,6 +339,16 @@ class CertificateInfo extends \Protobuf\AbstractMessage
         if ($this->ValidTo !== null) {
             $writer->writeVarint($stream, 25);
             $writer->writeSFixed64($stream, $this->ValidTo);
+        }
+
+        if ($this->OrganizationName !== null) {
+            $writer->writeVarint($stream, 34);
+            $writer->writeString($stream, $this->OrganizationName);
+        }
+
+        if ($this->Inn !== null) {
+            $writer->writeVarint($stream, 42);
+            $writer->writeString($stream, $this->Inn);
         }
 
         if ($this->extensions !== null) {
@@ -309,6 +409,22 @@ class CertificateInfo extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 4) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->OrganizationName = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 5) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->Inn = $reader->readString($stream);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -353,6 +469,16 @@ class CertificateInfo extends \Protobuf\AbstractMessage
             $size += 8;
         }
 
+        if ($this->OrganizationName !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->OrganizationName);
+        }
+
+        if ($this->Inn !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->Inn);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -368,6 +494,8 @@ class CertificateInfo extends \Protobuf\AbstractMessage
         $this->Thumbprint = null;
         $this->ValidFrom = null;
         $this->ValidTo = null;
+        $this->OrganizationName = null;
+        $this->Inn = null;
     }
 
     /**
@@ -382,6 +510,8 @@ class CertificateInfo extends \Protobuf\AbstractMessage
         $this->Thumbprint = ($message->Thumbprint !== null) ? $message->Thumbprint : $this->Thumbprint;
         $this->ValidFrom = ($message->ValidFrom !== null) ? $message->ValidFrom : $this->ValidFrom;
         $this->ValidTo = ($message->ValidTo !== null) ? $message->ValidTo : $this->ValidTo;
+        $this->OrganizationName = ($message->OrganizationName !== null) ? $message->OrganizationName : $this->OrganizationName;
+        $this->Inn = ($message->Inn !== null) ? $message->Inn : $this->Inn;
     }
 
 

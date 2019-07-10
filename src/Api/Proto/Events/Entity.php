@@ -158,6 +158,55 @@ class Entity extends \Protobuf\AbstractMessage
     protected $IsEncryptedContent = null;
 
     /**
+     * AttachmentVersion optional string = 21
+     *
+     * @var string
+     */
+    protected $AttachmentVersion = null;
+
+    /**
+     * ResolutionRouteAssignmentInfo optional message = 22
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteAssignmentInfo
+     */
+    protected $ResolutionRouteAssignmentInfo = null;
+
+    /**
+     * ResolutionRouteRemovalInfo optional message = 23
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteRemovalInfo
+     */
+    protected $ResolutionRouteRemovalInfo = null;
+
+    /**
+     * CancellationInfo optional message = 24
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\CancellationInfo
+     */
+    protected $CancellationInfo = null;
+
+    /**
+     * Labels repeated string = 25
+     *
+     * @var \Protobuf\Collection
+     */
+    protected $Labels = null;
+
+    /**
+     * Version optional string = 26
+     *
+     * @var string
+     */
+    protected $Version = null;
+
+    /**
+     * TemplateTransformationInfo optional message = 27
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\TemplateTransformationInfo
+     */
+    protected $TemplateTransformationInfo = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
@@ -744,6 +793,230 @@ class Entity extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'AttachmentVersion' has a value
+     *
+     * @return bool
+     */
+    public function hasAttachmentVersion()
+    {
+        return $this->AttachmentVersion !== null;
+    }
+
+    /**
+     * Get 'AttachmentVersion' value
+     *
+     * @return string
+     */
+    public function getAttachmentVersion()
+    {
+        return $this->AttachmentVersion;
+    }
+
+    /**
+     * Set 'AttachmentVersion' value
+     *
+     * @param string $value
+     */
+    public function setAttachmentVersion($value = null)
+    {
+        $this->AttachmentVersion = $value;
+    }
+
+    /**
+     * Check if 'ResolutionRouteAssignmentInfo' has a value
+     *
+     * @return bool
+     */
+    public function hasResolutionRouteAssignmentInfo()
+    {
+        return $this->ResolutionRouteAssignmentInfo !== null;
+    }
+
+    /**
+     * Get 'ResolutionRouteAssignmentInfo' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteAssignmentInfo
+     */
+    public function getResolutionRouteAssignmentInfo()
+    {
+        return $this->ResolutionRouteAssignmentInfo;
+    }
+
+    /**
+     * Set 'ResolutionRouteAssignmentInfo' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteAssignmentInfo $value
+     */
+    public function setResolutionRouteAssignmentInfo(\AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteAssignmentInfo $value = null)
+    {
+        $this->ResolutionRouteAssignmentInfo = $value;
+    }
+
+    /**
+     * Check if 'ResolutionRouteRemovalInfo' has a value
+     *
+     * @return bool
+     */
+    public function hasResolutionRouteRemovalInfo()
+    {
+        return $this->ResolutionRouteRemovalInfo !== null;
+    }
+
+    /**
+     * Get 'ResolutionRouteRemovalInfo' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteRemovalInfo
+     */
+    public function getResolutionRouteRemovalInfo()
+    {
+        return $this->ResolutionRouteRemovalInfo;
+    }
+
+    /**
+     * Set 'ResolutionRouteRemovalInfo' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteRemovalInfo $value
+     */
+    public function setResolutionRouteRemovalInfo(\AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteRemovalInfo $value = null)
+    {
+        $this->ResolutionRouteRemovalInfo = $value;
+    }
+
+    /**
+     * Check if 'CancellationInfo' has a value
+     *
+     * @return bool
+     */
+    public function hasCancellationInfo()
+    {
+        return $this->CancellationInfo !== null;
+    }
+
+    /**
+     * Get 'CancellationInfo' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\CancellationInfo
+     */
+    public function getCancellationInfo()
+    {
+        return $this->CancellationInfo;
+    }
+
+    /**
+     * Set 'CancellationInfo' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Events\CancellationInfo $value
+     */
+    public function setCancellationInfo(\AgentSIB\Diadoc\Api\Proto\Events\CancellationInfo $value = null)
+    {
+        $this->CancellationInfo = $value;
+    }
+
+    /**
+     * Check if 'Labels' has a value
+     *
+     * @return bool
+     */
+    public function hasLabelsList()
+    {
+        return $this->Labels !== null;
+    }
+
+    /**
+     * Get 'Labels' value
+     *
+     * @return \Protobuf\Collection
+     */
+    public function getLabelsList()
+    {
+        return $this->Labels;
+    }
+
+    /**
+     * Set 'Labels' value
+     *
+     * @param \Protobuf\Collection $value
+     */
+    public function setLabelsList(\Protobuf\Collection $value = null)
+    {
+        $this->Labels = $value;
+    }
+
+    /**
+     * Add a new element to 'Labels'
+     *
+     * @param string $value
+     */
+    public function addLabels($value)
+    {
+        if ($this->Labels === null) {
+            $this->Labels = new \Protobuf\ScalarCollection();
+        }
+
+        $this->Labels->add($value);
+    }
+
+    /**
+     * Check if 'Version' has a value
+     *
+     * @return bool
+     */
+    public function hasVersion()
+    {
+        return $this->Version !== null;
+    }
+
+    /**
+     * Get 'Version' value
+     *
+     * @return string
+     */
+    public function getVersion()
+    {
+        return $this->Version;
+    }
+
+    /**
+     * Set 'Version' value
+     *
+     * @param string $value
+     */
+    public function setVersion($value = null)
+    {
+        $this->Version = $value;
+    }
+
+    /**
+     * Check if 'TemplateTransformationInfo' has a value
+     *
+     * @return bool
+     */
+    public function hasTemplateTransformationInfo()
+    {
+        return $this->TemplateTransformationInfo !== null;
+    }
+
+    /**
+     * Get 'TemplateTransformationInfo' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\TemplateTransformationInfo
+     */
+    public function getTemplateTransformationInfo()
+    {
+        return $this->TemplateTransformationInfo;
+    }
+
+    /**
+     * Set 'TemplateTransformationInfo' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Events\TemplateTransformationInfo $value
+     */
+    public function setTemplateTransformationInfo(\AgentSIB\Diadoc\Api\Proto\Events\TemplateTransformationInfo $value = null)
+    {
+        $this->TemplateTransformationInfo = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -799,7 +1072,14 @@ class Entity extends \Protobuf\AbstractMessage
             'NeedReceipt' => false,
             'PacketId' => null,
             'IsApprovementSignature' => false,
-            'IsEncryptedContent' => false
+            'IsEncryptedContent' => false,
+            'AttachmentVersion' => null,
+            'ResolutionRouteAssignmentInfo' => null,
+            'ResolutionRouteRemovalInfo' => null,
+            'CancellationInfo' => null,
+            'Labels' => [],
+            'Version' => null,
+            'TemplateTransformationInfo' => null
         ], $values);
 
         $message->setEntityType($values['EntityType']);
@@ -821,6 +1101,16 @@ class Entity extends \Protobuf\AbstractMessage
         $message->setPacketId($values['PacketId']);
         $message->setIsApprovementSignature($values['IsApprovementSignature']);
         $message->setIsEncryptedContent($values['IsEncryptedContent']);
+        $message->setAttachmentVersion($values['AttachmentVersion']);
+        $message->setResolutionRouteAssignmentInfo($values['ResolutionRouteAssignmentInfo']);
+        $message->setResolutionRouteRemovalInfo($values['ResolutionRouteRemovalInfo']);
+        $message->setCancellationInfo($values['CancellationInfo']);
+        $message->setVersion($values['Version']);
+        $message->setTemplateTransformationInfo($values['TemplateTransformationInfo']);
+
+        foreach ($values['Labels'] as $item) {
+            $message->addLabels($item);
+        }
 
         return $message;
     }
@@ -961,6 +1251,52 @@ class Entity extends \Protobuf\AbstractMessage
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
                     'default_value' => false
                 ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 21,
+                    'name' => 'AttachmentVersion',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 22,
+                    'name' => 'ResolutionRouteAssignmentInfo',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.ResolutionRouteAssignmentInfo'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 23,
+                    'name' => 'ResolutionRouteRemovalInfo',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.ResolutionRouteRemovalInfo'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 24,
+                    'name' => 'CancellationInfo',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.CancellationInfo'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 25,
+                    'name' => 'Labels',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 26,
+                    'name' => 'Version',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 27,
+                    'name' => 'TemplateTransformationInfo',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.TemplateTransformationInfo'
+                ]),
             ],
         ]);
     }
@@ -1091,6 +1427,47 @@ class Entity extends \Protobuf\AbstractMessage
         if ($this->IsEncryptedContent !== null) {
             $writer->writeVarint($stream, 160);
             $writer->writeBool($stream, $this->IsEncryptedContent);
+        }
+
+        if ($this->AttachmentVersion !== null) {
+            $writer->writeVarint($stream, 170);
+            $writer->writeString($stream, $this->AttachmentVersion);
+        }
+
+        if ($this->ResolutionRouteAssignmentInfo !== null) {
+            $writer->writeVarint($stream, 178);
+            $writer->writeVarint($stream, $this->ResolutionRouteAssignmentInfo->serializedSize($sizeContext));
+            $this->ResolutionRouteAssignmentInfo->writeTo($context);
+        }
+
+        if ($this->ResolutionRouteRemovalInfo !== null) {
+            $writer->writeVarint($stream, 186);
+            $writer->writeVarint($stream, $this->ResolutionRouteRemovalInfo->serializedSize($sizeContext));
+            $this->ResolutionRouteRemovalInfo->writeTo($context);
+        }
+
+        if ($this->CancellationInfo !== null) {
+            $writer->writeVarint($stream, 194);
+            $writer->writeVarint($stream, $this->CancellationInfo->serializedSize($sizeContext));
+            $this->CancellationInfo->writeTo($context);
+        }
+
+        if ($this->Labels !== null) {
+            foreach ($this->Labels as $val) {
+                $writer->writeVarint($stream, 202);
+                $writer->writeString($stream, $val);
+            }
+        }
+
+        if ($this->Version !== null) {
+            $writer->writeVarint($stream, 210);
+            $writer->writeString($stream, $this->Version);
+        }
+
+        if ($this->TemplateTransformationInfo !== null) {
+            $writer->writeVarint($stream, 218);
+            $writer->writeVarint($stream, $this->TemplateTransformationInfo->serializedSize($sizeContext));
+            $this->TemplateTransformationInfo->writeTo($context);
         }
 
         if ($this->extensions !== null) {
@@ -1314,6 +1691,94 @@ class Entity extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 21) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->AttachmentVersion = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 22) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteAssignmentInfo();
+
+                $this->ResolutionRouteAssignmentInfo = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 23) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRouteRemovalInfo();
+
+                $this->ResolutionRouteRemovalInfo = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 24) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\CancellationInfo();
+
+                $this->CancellationInfo = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 25) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                if ($this->Labels === null) {
+                    $this->Labels = new \Protobuf\ScalarCollection();
+                }
+
+                $this->Labels->add($reader->readString($stream));
+
+                continue;
+            }
+
+            if ($tag === 26) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->Version = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 27) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\TemplateTransformationInfo();
+
+                $this->TemplateTransformationInfo = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -1453,6 +1918,55 @@ class Entity extends \Protobuf\AbstractMessage
             $size += 1;
         }
 
+        if ($this->AttachmentVersion !== null) {
+            $size += 2;
+            $size += $calculator->computeStringSize($this->AttachmentVersion);
+        }
+
+        if ($this->ResolutionRouteAssignmentInfo !== null) {
+            $innerSize = $this->ResolutionRouteAssignmentInfo->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->ResolutionRouteRemovalInfo !== null) {
+            $innerSize = $this->ResolutionRouteRemovalInfo->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->CancellationInfo !== null) {
+            $innerSize = $this->CancellationInfo->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->Labels !== null) {
+            foreach ($this->Labels as $val) {
+                $size += 2;
+                $size += $calculator->computeStringSize($val);
+            }
+        }
+
+        if ($this->Version !== null) {
+            $size += 2;
+            $size += $calculator->computeStringSize($this->Version);
+        }
+
+        if ($this->TemplateTransformationInfo !== null) {
+            $innerSize = $this->TemplateTransformationInfo->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -1484,6 +1998,13 @@ class Entity extends \Protobuf\AbstractMessage
         $this->PacketId = null;
         $this->IsApprovementSignature = false;
         $this->IsEncryptedContent = false;
+        $this->AttachmentVersion = null;
+        $this->ResolutionRouteAssignmentInfo = null;
+        $this->ResolutionRouteRemovalInfo = null;
+        $this->CancellationInfo = null;
+        $this->Labels = null;
+        $this->Version = null;
+        $this->TemplateTransformationInfo = null;
     }
 
     /**
@@ -1514,6 +2035,13 @@ class Entity extends \Protobuf\AbstractMessage
         $this->PacketId = ($message->PacketId !== null) ? $message->PacketId : $this->PacketId;
         $this->IsApprovementSignature = ($message->IsApprovementSignature !== null) ? $message->IsApprovementSignature : $this->IsApprovementSignature;
         $this->IsEncryptedContent = ($message->IsEncryptedContent !== null) ? $message->IsEncryptedContent : $this->IsEncryptedContent;
+        $this->AttachmentVersion = ($message->AttachmentVersion !== null) ? $message->AttachmentVersion : $this->AttachmentVersion;
+        $this->ResolutionRouteAssignmentInfo = ($message->ResolutionRouteAssignmentInfo !== null) ? $message->ResolutionRouteAssignmentInfo : $this->ResolutionRouteAssignmentInfo;
+        $this->ResolutionRouteRemovalInfo = ($message->ResolutionRouteRemovalInfo !== null) ? $message->ResolutionRouteRemovalInfo : $this->ResolutionRouteRemovalInfo;
+        $this->CancellationInfo = ($message->CancellationInfo !== null) ? $message->CancellationInfo : $this->CancellationInfo;
+        $this->Labels = ($message->Labels !== null) ? $message->Labels : $this->Labels;
+        $this->Version = ($message->Version !== null) ? $message->Version : $this->Version;
+        $this->TemplateTransformationInfo = ($message->TemplateTransformationInfo !== null) ? $message->TemplateTransformationInfo : $this->TemplateTransformationInfo;
     }
 
 

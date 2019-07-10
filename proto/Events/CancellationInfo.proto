@@ -1,0 +1,5 @@
+package AgentSIB.Diadoc.Api.Proto.Events;
+
+message CancellationInfo {
+	required string Author = 1;
+}

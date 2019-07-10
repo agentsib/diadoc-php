@@ -7,6 +7,8 @@ import "Docflow/BilateralDocflow.proto";
 import "Docflow/XmlBilateralDocflow.proto";
 import "Docflow/RevocationDocflow.proto";
 import "Docflow/ResolutionDocflow.proto";
+import "Docflow/UniversalTransferDocumentDocflow.proto";
+import "Docflow/RoamingNotification.proto";
 
 package AgentSIB.Diadoc.Api.Proto.Docflow;
 
@@ -34,6 +36,11 @@ message Docflow
 	optional string PacketId = 16;
 
 	repeated CustomDataItem CustomData = 17;
+
+	optional InboundUniversalTransferDocumentDocflow InboundUniversalTransferDocumentDocflow = 18; // for UniversalTransferDocument, UniversalTransferDocumentRevision, UniversalCorrectionDocument
+	optional OutboundUniversalTransferDocumentDocflow OutboundUniversalTransferDocumentDocflow = 19; // for UniversalTransferDocument, UniversalTransferDocumentRevision, UniversalCorrectionDocument
+    
+	optional RoamingNotification RoamingNotification = 20;
 }
 
 message DocflowStatus

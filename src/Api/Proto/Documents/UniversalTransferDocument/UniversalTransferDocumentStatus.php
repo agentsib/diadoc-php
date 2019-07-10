@@ -41,34 +41,59 @@ class UniversalTransferDocumentStatus extends \Protobuf\Enum
     const OutboundWaitingForRecipientSignature_VALUE = 4;
 
     /**
-     * OutboundInvalidSenderSignature = 5
+     * OutboundWithRecipientSignature = 5
      */
-    const OutboundInvalidSenderSignature_VALUE = 5;
+    const OutboundWithRecipientSignature_VALUE = 5;
 
     /**
-     * InboundWaitingForInvoiceReceiptAndRecipientSignature = 6
+     * OutboundRecipientSignatureRequestRejected = 6
      */
-    const InboundWaitingForInvoiceReceiptAndRecipientSignature_VALUE = 6;
+    const OutboundRecipientSignatureRequestRejected_VALUE = 6;
 
     /**
-     * InboundWaitingForRecipientSignature = 7
+     * OutboundInvalidSenderSignature = 7
      */
-    const InboundWaitingForRecipientSignature_VALUE = 7;
+    const OutboundInvalidSenderSignature_VALUE = 7;
 
     /**
-     * InboundWaitingForInvoiceReceipt = 8
+     * OutboundNotFinished = 8
      */
-    const InboundWaitingForInvoiceReceipt_VALUE = 8;
+    const OutboundNotFinished_VALUE = 8;
 
     /**
-     * InboundWithRecipientSignature = 9
+     * OutboundFinished = 9
      */
-    const InboundWithRecipientSignature_VALUE = 9;
+    const OutboundFinished_VALUE = 9;
 
     /**
-     * InboundInvalidRecipientSignature = 10
+     * InboundWaitingForRecipientSignature = 16
      */
-    const InboundInvalidRecipientSignature_VALUE = 10;
+    const InboundWaitingForRecipientSignature_VALUE = 16;
+
+    /**
+     * InboundWithRecipientSignature = 17
+     */
+    const InboundWithRecipientSignature_VALUE = 17;
+
+    /**
+     * InboundRecipientSignatureRequestRejected = 18
+     */
+    const InboundRecipientSignatureRequestRejected_VALUE = 18;
+
+    /**
+     * InboundInvalidRecipientSignature = 19
+     */
+    const InboundInvalidRecipientSignature_VALUE = 19;
+
+    /**
+     * InboundNotFinished = 20
+     */
+    const InboundNotFinished_VALUE = 20;
+
+    /**
+     * InboundFinished = 21
+     */
+    const InboundFinished_VALUE = 21;
 
     /**
      * @var \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
@@ -98,12 +123,27 @@ class UniversalTransferDocumentStatus extends \Protobuf\Enum
     /**
      * @var \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
      */
+    protected static $OutboundWithRecipientSignature = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
+     */
+    protected static $OutboundRecipientSignatureRequestRejected = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
+     */
     protected static $OutboundInvalidSenderSignature = null;
 
     /**
      * @var \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
      */
-    protected static $InboundWaitingForInvoiceReceiptAndRecipientSignature = null;
+    protected static $OutboundNotFinished = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
+     */
+    protected static $OutboundFinished = null;
 
     /**
      * @var \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
@@ -113,17 +153,27 @@ class UniversalTransferDocumentStatus extends \Protobuf\Enum
     /**
      * @var \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
      */
-    protected static $InboundWaitingForInvoiceReceipt = null;
-
-    /**
-     * @var \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
-     */
     protected static $InboundWithRecipientSignature = null;
 
     /**
      * @var \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
      */
+    protected static $InboundRecipientSignatureRequestRejected = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
+     */
     protected static $InboundInvalidRecipientSignature = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
+     */
+    protected static $InboundNotFinished = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
+     */
+    protected static $InboundFinished = null;
 
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
@@ -188,6 +238,30 @@ class UniversalTransferDocumentStatus extends \Protobuf\Enum
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
      */
+    public static function OutboundWithRecipientSignature()
+    {
+        if (self::$OutboundWithRecipientSignature !== null) {
+            return self::$OutboundWithRecipientSignature;
+        }
+
+        return self::$OutboundWithRecipientSignature = new self('OutboundWithRecipientSignature', self::OutboundWithRecipientSignature_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
+     */
+    public static function OutboundRecipientSignatureRequestRejected()
+    {
+        if (self::$OutboundRecipientSignatureRequestRejected !== null) {
+            return self::$OutboundRecipientSignatureRequestRejected;
+        }
+
+        return self::$OutboundRecipientSignatureRequestRejected = new self('OutboundRecipientSignatureRequestRejected', self::OutboundRecipientSignatureRequestRejected_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
+     */
     public static function OutboundInvalidSenderSignature()
     {
         if (self::$OutboundInvalidSenderSignature !== null) {
@@ -200,13 +274,25 @@ class UniversalTransferDocumentStatus extends \Protobuf\Enum
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
      */
-    public static function InboundWaitingForInvoiceReceiptAndRecipientSignature()
+    public static function OutboundNotFinished()
     {
-        if (self::$InboundWaitingForInvoiceReceiptAndRecipientSignature !== null) {
-            return self::$InboundWaitingForInvoiceReceiptAndRecipientSignature;
+        if (self::$OutboundNotFinished !== null) {
+            return self::$OutboundNotFinished;
         }
 
-        return self::$InboundWaitingForInvoiceReceiptAndRecipientSignature = new self('InboundWaitingForInvoiceReceiptAndRecipientSignature', self::InboundWaitingForInvoiceReceiptAndRecipientSignature_VALUE);
+        return self::$OutboundNotFinished = new self('OutboundNotFinished', self::OutboundNotFinished_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
+     */
+    public static function OutboundFinished()
+    {
+        if (self::$OutboundFinished !== null) {
+            return self::$OutboundFinished;
+        }
+
+        return self::$OutboundFinished = new self('OutboundFinished', self::OutboundFinished_VALUE);
     }
 
     /**
@@ -224,18 +310,6 @@ class UniversalTransferDocumentStatus extends \Protobuf\Enum
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
      */
-    public static function InboundWaitingForInvoiceReceipt()
-    {
-        if (self::$InboundWaitingForInvoiceReceipt !== null) {
-            return self::$InboundWaitingForInvoiceReceipt;
-        }
-
-        return self::$InboundWaitingForInvoiceReceipt = new self('InboundWaitingForInvoiceReceipt', self::InboundWaitingForInvoiceReceipt_VALUE);
-    }
-
-    /**
-     * @return \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
-     */
     public static function InboundWithRecipientSignature()
     {
         if (self::$InboundWithRecipientSignature !== null) {
@@ -243,6 +317,18 @@ class UniversalTransferDocumentStatus extends \Protobuf\Enum
         }
 
         return self::$InboundWithRecipientSignature = new self('InboundWithRecipientSignature', self::InboundWithRecipientSignature_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
+     */
+    public static function InboundRecipientSignatureRequestRejected()
+    {
+        if (self::$InboundRecipientSignatureRequestRejected !== null) {
+            return self::$InboundRecipientSignatureRequestRejected;
+        }
+
+        return self::$InboundRecipientSignatureRequestRejected = new self('InboundRecipientSignatureRequestRejected', self::InboundRecipientSignatureRequestRejected_VALUE);
     }
 
     /**
@@ -258,6 +344,30 @@ class UniversalTransferDocumentStatus extends \Protobuf\Enum
     }
 
     /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
+     */
+    public static function InboundNotFinished()
+    {
+        if (self::$InboundNotFinished !== null) {
+            return self::$InboundNotFinished;
+        }
+
+        return self::$InboundNotFinished = new self('InboundNotFinished', self::InboundNotFinished_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
+     */
+    public static function InboundFinished()
+    {
+        if (self::$InboundFinished !== null) {
+            return self::$InboundFinished;
+        }
+
+        return self::$InboundFinished = new self('InboundFinished', self::InboundFinished_VALUE);
+    }
+
+    /**
      * @param int $value
      * @return \AgentSIB\Diadoc\Api\Proto\Documents\UniversalTransferDocument\UniversalTransferDocumentStatus
      */
@@ -269,12 +379,17 @@ class UniversalTransferDocumentStatus extends \Protobuf\Enum
             case 2: return self::OutboundWaitingForInvoiceReceiptAndRecipientSignature();
             case 3: return self::OutboundWaitingForInvoiceReceipt();
             case 4: return self::OutboundWaitingForRecipientSignature();
-            case 5: return self::OutboundInvalidSenderSignature();
-            case 6: return self::InboundWaitingForInvoiceReceiptAndRecipientSignature();
-            case 7: return self::InboundWaitingForRecipientSignature();
-            case 8: return self::InboundWaitingForInvoiceReceipt();
-            case 9: return self::InboundWithRecipientSignature();
-            case 10: return self::InboundInvalidRecipientSignature();
+            case 5: return self::OutboundWithRecipientSignature();
+            case 6: return self::OutboundRecipientSignatureRequestRejected();
+            case 7: return self::OutboundInvalidSenderSignature();
+            case 8: return self::OutboundNotFinished();
+            case 9: return self::OutboundFinished();
+            case 16: return self::InboundWaitingForRecipientSignature();
+            case 17: return self::InboundWithRecipientSignature();
+            case 18: return self::InboundRecipientSignatureRequestRejected();
+            case 19: return self::InboundInvalidRecipientSignature();
+            case 20: return self::InboundNotFinished();
+            case 21: return self::InboundFinished();
             default: return null;
         }
     }

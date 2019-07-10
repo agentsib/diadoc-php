@@ -28,6 +28,10 @@ message Organization {
 	optional int32 InvitationCount = 20;
 	optional int32 SearchCount = 21;
 	required Sociability Sociability = 22;
+	optional string LiquidationDate = 23;
+	optional string CertificateOfRegistryInfo = 24;
+	optional bool IsForeign = 25;
+	optional bool HasCertificateToSign = 26;
 }
 
 message Department {
@@ -50,6 +54,7 @@ message Box {
 	required string Title = 2;
 	optional Organization Organization = 3;
 	optional OrganizationInvoiceFormatVersion InvoiceFormatVersion = 4 [default = v5_02];
+	optional bool EncryptedDocumentsAllowed = 5;
 }
 
 enum Sociability {

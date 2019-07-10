@@ -40,6 +40,13 @@ class EncryptedXmlBasicDocumentMetadata extends \Protobuf\AbstractMessage
     protected $FormationTime = null;
 
     /**
+     * DocumentName optional string = 3
+     *
+     * @var string
+     */
+    protected $DocumentName = null;
+
+    /**
      * Check if 'FormationDate' has a value
      *
      * @return bool
@@ -100,6 +107,36 @@ class EncryptedXmlBasicDocumentMetadata extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'DocumentName' has a value
+     *
+     * @return bool
+     */
+    public function hasDocumentName()
+    {
+        return $this->DocumentName !== null;
+    }
+
+    /**
+     * Get 'DocumentName' value
+     *
+     * @return string
+     */
+    public function getDocumentName()
+    {
+        return $this->DocumentName;
+    }
+
+    /**
+     * Set 'DocumentName' value
+     *
+     * @param string $value
+     */
+    public function setDocumentName($value = null)
+    {
+        $this->DocumentName = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -142,10 +179,12 @@ class EncryptedXmlBasicDocumentMetadata extends \Protobuf\AbstractMessage
 
         $message = new self();
         $values  = array_merge([
+            'DocumentName' => null
         ], $values);
 
         $message->setFormationDate($values['FormationDate']);
         $message->setFormationTime($values['FormationTime']);
+        $message->setDocumentName($values['DocumentName']);
 
         return $message;
     }
@@ -169,6 +208,12 @@ class EncryptedXmlBasicDocumentMetadata extends \Protobuf\AbstractMessage
                     'name' => 'FormationTime',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 3,
+                    'name' => 'DocumentName',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
                 ]),
             ],
         ]);
@@ -214,6 +259,11 @@ class EncryptedXmlBasicDocumentMetadata extends \Protobuf\AbstractMessage
         if ($this->FormationTime !== null) {
             $writer->writeVarint($stream, 18);
             $writer->writeString($stream, $this->FormationTime);
+        }
+
+        if ($this->DocumentName !== null) {
+            $writer->writeVarint($stream, 26);
+            $writer->writeString($stream, $this->DocumentName);
         }
 
         if ($this->extensions !== null) {
@@ -266,6 +316,14 @@ class EncryptedXmlBasicDocumentMetadata extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 3) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->DocumentName = $reader->readString($stream);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -305,6 +363,11 @@ class EncryptedXmlBasicDocumentMetadata extends \Protobuf\AbstractMessage
             $size += $calculator->computeStringSize($this->FormationTime);
         }
 
+        if ($this->DocumentName !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->DocumentName);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -319,6 +382,7 @@ class EncryptedXmlBasicDocumentMetadata extends \Protobuf\AbstractMessage
     {
         $this->FormationDate = null;
         $this->FormationTime = null;
+        $this->DocumentName = null;
     }
 
     /**
@@ -332,6 +396,7 @@ class EncryptedXmlBasicDocumentMetadata extends \Protobuf\AbstractMessage
 
         $this->FormationDate = ($message->FormationDate !== null) ? $message->FormationDate : $this->FormationDate;
         $this->FormationTime = ($message->FormationTime !== null) ? $message->FormationTime : $this->FormationTime;
+        $this->DocumentName = ($message->DocumentName !== null) ? $message->DocumentName : $this->DocumentName;
     }
 
 

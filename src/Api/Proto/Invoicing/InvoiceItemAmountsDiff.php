@@ -46,7 +46,7 @@ class InvoiceItemAmountsDiff extends \Protobuf\AbstractMessage
     protected $Vat = null;
 
     /**
-     * Subtotal required string = 4
+     * Subtotal optional string = 4
      *
      * @var string
      */
@@ -167,7 +167,7 @@ class InvoiceItemAmountsDiff extends \Protobuf\AbstractMessage
      *
      * @param string $value
      */
-    public function setSubtotal($value)
+    public function setSubtotal($value = null)
     {
         $this->Subtotal = $value;
     }
@@ -205,15 +205,12 @@ class InvoiceItemAmountsDiff extends \Protobuf\AbstractMessage
      */
     public static function fromArray(array $values)
     {
-        if ( ! isset($values['Subtotal'])) {
-            throw new \InvalidArgumentException('Field "Subtotal" (tag 4) is required but has no value.');
-        }
-
         $message = new self();
         $values  = array_merge([
             'Excise' => null,
             'SubtotalWithVatExcluded' => null,
             'Vat' => null,
+            'Subtotal' => null
         ], $values);
 
         $message->setExcise($values['Excise']);
@@ -254,7 +251,7 @@ class InvoiceItemAmountsDiff extends \Protobuf\AbstractMessage
                     'number' => 4,
                     'name' => 'Subtotal',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
-                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
                 ]),
             ],
         ]);
@@ -283,10 +280,6 @@ class InvoiceItemAmountsDiff extends \Protobuf\AbstractMessage
         $stream      = $context->getStream();
         $writer      = $context->getWriter();
         $sizeContext = $context->getComputeSizeContext();
-
-        if ($this->Subtotal === null) {
-            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Invoicing\\InvoiceItemAmountsDiff#Subtotal" (tag 4) is required but has no value.');
-        }
 
         if ($this->Excise !== null) {
             $writer->writeVarint($stream, 10);

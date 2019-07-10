@@ -249,11 +249,18 @@ class MessageToPost extends \Protobuf\AbstractMessage
     protected $UniversalTransferDocumentSellerTitles = null;
 
     /**
-     * CustomDocumentAttachments repeated message = 34
+     * DocumentAttachments repeated message = 34
      *
-     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\CustomDocumentAttachment>
+     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\DocumentAttachment>
      */
-    protected $CustomDocumentAttachments = null;
+    protected $DocumentAttachments = null;
+
+    /**
+     * LockMode optional enum = 35
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\LockMode
+     */
+    protected $LockMode = null;
 
     /**
      * {@inheritdoc}
@@ -266,6 +273,7 @@ class MessageToPost extends \Protobuf\AbstractMessage
         $this->IsInternal = false;
         $this->DelaySend = false;
         $this->LockPacket = false;
+        $this->LockMode = \AgentSIB\Diadoc\Api\Proto\LockMode::None();
 
         parent::__construct($stream, $configuration);
     }
@@ -1511,47 +1519,77 @@ class MessageToPost extends \Protobuf\AbstractMessage
     }
 
     /**
-     * Check if 'CustomDocumentAttachments' has a value
+     * Check if 'DocumentAttachments' has a value
      *
      * @return bool
      */
-    public function hasCustomDocumentAttachmentsList()
+    public function hasDocumentAttachmentsList()
     {
-        return $this->CustomDocumentAttachments !== null;
+        return $this->DocumentAttachments !== null;
     }
 
     /**
-     * Get 'CustomDocumentAttachments' value
+     * Get 'DocumentAttachments' value
      *
-     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\CustomDocumentAttachment>
+     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\DocumentAttachment>
      */
-    public function getCustomDocumentAttachmentsList()
+    public function getDocumentAttachmentsList()
     {
-        return $this->CustomDocumentAttachments;
+        return $this->DocumentAttachments;
     }
 
     /**
-     * Set 'CustomDocumentAttachments' value
+     * Set 'DocumentAttachments' value
      *
-     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\CustomDocumentAttachment> $value
+     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Events\DocumentAttachment> $value
      */
-    public function setCustomDocumentAttachmentsList(\Protobuf\Collection $value = null)
+    public function setDocumentAttachmentsList(\Protobuf\Collection $value = null)
     {
-        $this->CustomDocumentAttachments = $value;
+        $this->DocumentAttachments = $value;
     }
 
     /**
-     * Add a new element to 'CustomDocumentAttachments'
+     * Add a new element to 'DocumentAttachments'
      *
-     * @param \AgentSIB\Diadoc\Api\Proto\Events\CustomDocumentAttachment $value
+     * @param \AgentSIB\Diadoc\Api\Proto\Events\DocumentAttachment $value
      */
-    public function addCustomDocumentAttachments(\AgentSIB\Diadoc\Api\Proto\Events\CustomDocumentAttachment $value)
+    public function addDocumentAttachments(\AgentSIB\Diadoc\Api\Proto\Events\DocumentAttachment $value)
     {
-        if ($this->CustomDocumentAttachments === null) {
-            $this->CustomDocumentAttachments = new \Protobuf\MessageCollection();
+        if ($this->DocumentAttachments === null) {
+            $this->DocumentAttachments = new \Protobuf\MessageCollection();
         }
 
-        $this->CustomDocumentAttachments->add($value);
+        $this->DocumentAttachments->add($value);
+    }
+
+    /**
+     * Check if 'LockMode' has a value
+     *
+     * @return bool
+     */
+    public function hasLockMode()
+    {
+        return $this->LockMode !== null;
+    }
+
+    /**
+     * Get 'LockMode' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\LockMode
+     */
+    public function getLockMode()
+    {
+        return $this->LockMode;
+    }
+
+    /**
+     * Set 'LockMode' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\LockMode $value
+     */
+    public function setLockMode(\AgentSIB\Diadoc\Api\Proto\LockMode $value = null)
+    {
+        $this->LockMode = $value;
     }
 
     /**
@@ -1624,7 +1662,8 @@ class MessageToPost extends \Protobuf\AbstractMessage
             'SupplementaryAgreements' => [],
             'LockPacket' => false,
             'UniversalTransferDocumentSellerTitles' => [],
-            'CustomDocumentAttachments' => []
+            'DocumentAttachments' => [],
+            'LockMode' => \AgentSIB\Diadoc\Api\Proto\LockMode::None()
         ], $values);
 
         $message->setFromBoxId($values['FromBoxId']);
@@ -1639,6 +1678,7 @@ class MessageToPost extends \Protobuf\AbstractMessage
         $message->setProxyBoxId($values['ProxyBoxId']);
         $message->setProxyDepartmentId($values['ProxyDepartmentId']);
         $message->setLockPacket($values['LockPacket']);
+        $message->setLockMode($values['LockMode']);
 
         foreach ($values['Invoices'] as $item) {
             $message->addInvoices($item);
@@ -1720,8 +1760,8 @@ class MessageToPost extends \Protobuf\AbstractMessage
             $message->addUniversalTransferDocumentSellerTitles($item);
         }
 
-        foreach ($values['CustomDocumentAttachments'] as $item) {
-            $message->addCustomDocumentAttachments($item);
+        foreach ($values['DocumentAttachments'] as $item) {
+            $message->addDocumentAttachments($item);
         }
 
         return $message;
@@ -1955,10 +1995,18 @@ class MessageToPost extends \Protobuf\AbstractMessage
                 ]),
                 \google\protobuf\FieldDescriptorProto::fromArray([
                     'number' => 34,
-                    'name' => 'CustomDocumentAttachments',
+                    'name' => 'DocumentAttachments',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
-                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.CustomDocumentAttachment'
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.DocumentAttachment'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 35,
+                    'name' => 'LockMode',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.LockMode',
+                    'default_value' => \AgentSIB\Diadoc\Api\Proto\LockMode::None()
                 ]),
             ],
         ]);
@@ -2212,12 +2260,17 @@ class MessageToPost extends \Protobuf\AbstractMessage
             }
         }
 
-        if ($this->CustomDocumentAttachments !== null) {
-            foreach ($this->CustomDocumentAttachments as $val) {
+        if ($this->DocumentAttachments !== null) {
+            foreach ($this->DocumentAttachments as $val) {
                 $writer->writeVarint($stream, 274);
                 $writer->writeVarint($stream, $val->serializedSize($sizeContext));
                 $val->writeTo($context);
             }
+        }
+
+        if ($this->LockMode !== null) {
+            $writer->writeVarint($stream, 280);
+            $writer->writeVarint($stream, $this->LockMode->value());
         }
 
         if ($this->extensions !== null) {
@@ -2734,17 +2787,25 @@ class MessageToPost extends \Protobuf\AbstractMessage
                 \Protobuf\WireFormat::assertWireType($wire, 11);
 
                 $innerSize    = $reader->readVarint($stream);
-                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\CustomDocumentAttachment();
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\DocumentAttachment();
 
-                if ($this->CustomDocumentAttachments === null) {
-                    $this->CustomDocumentAttachments = new \Protobuf\MessageCollection();
+                if ($this->DocumentAttachments === null) {
+                    $this->DocumentAttachments = new \Protobuf\MessageCollection();
                 }
 
-                $this->CustomDocumentAttachments->add($innerMessage);
+                $this->DocumentAttachments->add($innerMessage);
 
                 $context->setLength($innerSize);
                 $innerMessage->readFrom($context);
                 $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 35) {
+                \Protobuf\WireFormat::assertWireType($wire, 14);
+
+                $this->LockMode = \AgentSIB\Diadoc\Api\Proto\LockMode::valueOf($reader->readVarint($stream));
 
                 continue;
             }
@@ -3038,14 +3099,19 @@ class MessageToPost extends \Protobuf\AbstractMessage
             }
         }
 
-        if ($this->CustomDocumentAttachments !== null) {
-            foreach ($this->CustomDocumentAttachments as $val) {
+        if ($this->DocumentAttachments !== null) {
+            foreach ($this->DocumentAttachments as $val) {
                 $innerSize = $val->serializedSize($context);
 
                 $size += 2;
                 $size += $innerSize;
                 $size += $calculator->computeVarintSize($innerSize);
             }
+        }
+
+        if ($this->LockMode !== null) {
+            $size += 2;
+            $size += $calculator->computeVarintSize($this->LockMode->value());
         }
 
         if ($this->extensions !== null) {
@@ -3092,7 +3158,8 @@ class MessageToPost extends \Protobuf\AbstractMessage
         $this->SupplementaryAgreements = null;
         $this->LockPacket = false;
         $this->UniversalTransferDocumentSellerTitles = null;
-        $this->CustomDocumentAttachments = null;
+        $this->DocumentAttachments = null;
+        $this->LockMode = \AgentSIB\Diadoc\Api\Proto\LockMode::None();
     }
 
     /**
@@ -3136,7 +3203,8 @@ class MessageToPost extends \Protobuf\AbstractMessage
         $this->SupplementaryAgreements = ($message->SupplementaryAgreements !== null) ? $message->SupplementaryAgreements : $this->SupplementaryAgreements;
         $this->LockPacket = ($message->LockPacket !== null) ? $message->LockPacket : $this->LockPacket;
         $this->UniversalTransferDocumentSellerTitles = ($message->UniversalTransferDocumentSellerTitles !== null) ? $message->UniversalTransferDocumentSellerTitles : $this->UniversalTransferDocumentSellerTitles;
-        $this->CustomDocumentAttachments = ($message->CustomDocumentAttachments !== null) ? $message->CustomDocumentAttachments : $this->CustomDocumentAttachments;
+        $this->DocumentAttachments = ($message->DocumentAttachments !== null) ? $message->DocumentAttachments : $this->DocumentAttachments;
+        $this->LockMode = ($message->LockMode !== null) ? $message->LockMode : $this->LockMode;
     }
 
 

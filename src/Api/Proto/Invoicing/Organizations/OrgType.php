@@ -30,6 +30,11 @@ class OrgType extends \Protobuf\Enum
     const ForeignEntity_VALUE = 3;
 
     /**
+     * PhysicalEntity = 4
+     */
+    const PhysicalEntity_VALUE = 4;
+
+    /**
      * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Organizations\OrgType
      */
     protected static $LegalEntity = null;
@@ -43,6 +48,11 @@ class OrgType extends \Protobuf\Enum
      * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Organizations\OrgType
      */
     protected static $ForeignEntity = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Organizations\OrgType
+     */
+    protected static $PhysicalEntity = null;
 
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Organizations\OrgType
@@ -81,6 +91,18 @@ class OrgType extends \Protobuf\Enum
     }
 
     /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Organizations\OrgType
+     */
+    public static function PhysicalEntity()
+    {
+        if (self::$PhysicalEntity !== null) {
+            return self::$PhysicalEntity;
+        }
+
+        return self::$PhysicalEntity = new self('PhysicalEntity', self::PhysicalEntity_VALUE);
+    }
+
+    /**
      * @param int $value
      * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Organizations\OrgType
      */
@@ -90,6 +112,7 @@ class OrgType extends \Protobuf\Enum
             case 1: return self::LegalEntity();
             case 2: return self::IndividualEntity();
             case 3: return self::ForeignEntity();
+            case 4: return self::PhysicalEntity();
             default: return null;
         }
     }

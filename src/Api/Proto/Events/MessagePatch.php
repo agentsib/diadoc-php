@@ -116,6 +116,13 @@ class MessagePatch extends \Protobuf\AbstractMessage
     protected $PatchId = null;
 
     /**
+     * MessageType required enum = 15
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\MessageType
+     */
+    protected $MessageType = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
@@ -563,6 +570,36 @@ class MessagePatch extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'MessageType' has a value
+     *
+     * @return bool
+     */
+    public function hasMessageType()
+    {
+        return $this->MessageType !== null;
+    }
+
+    /**
+     * Get 'MessageType' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\MessageType
+     */
+    public function getMessageType()
+    {
+        return $this->MessageType;
+    }
+
+    /**
+     * Set 'MessageType' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Documents\MessageType $value
+     */
+    public function setMessageType(\AgentSIB\Diadoc\Api\Proto\Documents\MessageType $value)
+    {
+        $this->MessageType = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -607,6 +644,10 @@ class MessagePatch extends \Protobuf\AbstractMessage
             throw new \InvalidArgumentException('Field "PatchId" (tag 13) is required but has no value.');
         }
 
+        if ( ! isset($values['MessageType'])) {
+            throw new \InvalidArgumentException('Field "MessageType" (tag 15) is required but has no value.');
+        }
+
         $message = new self();
         $values  = array_merge([
             'Entities' => [],
@@ -631,6 +672,7 @@ class MessagePatch extends \Protobuf\AbstractMessage
         $message->setMessageIsDelivered($values['MessageIsDelivered']);
         $message->setDeliveredPatchId($values['DeliveredPatchId']);
         $message->setPatchId($values['PatchId']);
+        $message->setMessageType($values['MessageType']);
 
         foreach ($values['Entities'] as $item) {
             $message->addEntities($item);
@@ -741,6 +783,13 @@ class MessagePatch extends \Protobuf\AbstractMessage
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
                 ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 15,
+                    'name' => 'MessageType',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.MessageType'
+                ]),
             ],
         ]);
     }
@@ -779,6 +828,10 @@ class MessagePatch extends \Protobuf\AbstractMessage
 
         if ($this->PatchId === null) {
             throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Events\\MessagePatch#PatchId" (tag 13) is required but has no value.');
+        }
+
+        if ($this->MessageType === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Events\\MessagePatch#MessageType" (tag 15) is required but has no value.');
         }
 
         if ($this->MessageId !== null) {
@@ -852,6 +905,11 @@ class MessagePatch extends \Protobuf\AbstractMessage
         if ($this->PatchId !== null) {
             $writer->writeVarint($stream, 106);
             $writer->writeString($stream, $this->PatchId);
+        }
+
+        if ($this->MessageType !== null) {
+            $writer->writeVarint($stream, 120);
+            $writer->writeVarint($stream, $this->MessageType->value());
         }
 
         if ($this->extensions !== null) {
@@ -1018,6 +1076,14 @@ class MessagePatch extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 15) {
+                \Protobuf\WireFormat::assertWireType($wire, 14);
+
+                $this->MessageType = \AgentSIB\Diadoc\Api\Proto\Documents\MessageType::valueOf($reader->readVarint($stream));
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -1124,6 +1190,11 @@ class MessagePatch extends \Protobuf\AbstractMessage
             $size += $calculator->computeStringSize($this->PatchId);
         }
 
+        if ($this->MessageType !== null) {
+            $size += 1;
+            $size += $calculator->computeVarintSize($this->MessageType->value());
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -1149,6 +1220,7 @@ class MessagePatch extends \Protobuf\AbstractMessage
         $this->MessageIsDelivered = false;
         $this->DeliveredPatchId = null;
         $this->PatchId = null;
+        $this->MessageType = null;
     }
 
     /**
@@ -1173,6 +1245,7 @@ class MessagePatch extends \Protobuf\AbstractMessage
         $this->MessageIsDelivered = ($message->MessageIsDelivered !== null) ? $message->MessageIsDelivered : $this->MessageIsDelivered;
         $this->DeliveredPatchId = ($message->DeliveredPatchId !== null) ? $message->DeliveredPatchId : $this->DeliveredPatchId;
         $this->PatchId = ($message->PatchId !== null) ? $message->PatchId : $this->PatchId;
+        $this->MessageType = ($message->MessageType !== null) ? $message->MessageType : $this->MessageType;
     }
 
 

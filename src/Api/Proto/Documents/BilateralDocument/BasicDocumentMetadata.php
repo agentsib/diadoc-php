@@ -61,6 +61,20 @@ class BasicDocumentMetadata extends \Protobuf\AbstractMessage
     protected $ReceiptStatus = null;
 
     /**
+     * RevisionDate optional string = 6
+     *
+     * @var string
+     */
+    protected $RevisionDate = null;
+
+    /**
+     * RevisionNumber optional string = 7
+     *
+     * @var string
+     */
+    protected $RevisionNumber = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
@@ -222,6 +236,66 @@ class BasicDocumentMetadata extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'RevisionDate' has a value
+     *
+     * @return bool
+     */
+    public function hasRevisionDate()
+    {
+        return $this->RevisionDate !== null;
+    }
+
+    /**
+     * Get 'RevisionDate' value
+     *
+     * @return string
+     */
+    public function getRevisionDate()
+    {
+        return $this->RevisionDate;
+    }
+
+    /**
+     * Set 'RevisionDate' value
+     *
+     * @param string $value
+     */
+    public function setRevisionDate($value = null)
+    {
+        $this->RevisionDate = $value;
+    }
+
+    /**
+     * Check if 'RevisionNumber' has a value
+     *
+     * @return bool
+     */
+    public function hasRevisionNumber()
+    {
+        return $this->RevisionNumber !== null;
+    }
+
+    /**
+     * Get 'RevisionNumber' value
+     *
+     * @return string
+     */
+    public function getRevisionNumber()
+    {
+        return $this->RevisionNumber;
+    }
+
+    /**
+     * Set 'RevisionNumber' value
+     *
+     * @param string $value
+     */
+    public function setRevisionNumber($value = null)
+    {
+        $this->RevisionNumber = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -263,7 +337,9 @@ class BasicDocumentMetadata extends \Protobuf\AbstractMessage
             'DocumentStatus' => \AgentSIB\Diadoc\Api\Proto\Documents\BilateralDocument\BilateralDocumentStatus::UnknownBilateralDocumentStatus(),
             'Vat' => null,
             'Grounds' => null,
-            'ReceiptStatus' => \AgentSIB\Diadoc\Api\Proto\Documents\ReceiptStatus::UnknownReceiptStatus()
+            'ReceiptStatus' => \AgentSIB\Diadoc\Api\Proto\Documents\ReceiptStatus::UnknownReceiptStatus(),
+            'RevisionDate' => null,
+            'RevisionNumber' => null
         ], $values);
 
         $message->setDocumentStatus($values['DocumentStatus']);
@@ -271,6 +347,8 @@ class BasicDocumentMetadata extends \Protobuf\AbstractMessage
         $message->setVat($values['Vat']);
         $message->setGrounds($values['Grounds']);
         $message->setReceiptStatus($values['ReceiptStatus']);
+        $message->setRevisionDate($values['RevisionDate']);
+        $message->setRevisionNumber($values['RevisionNumber']);
 
         return $message;
     }
@@ -316,6 +394,18 @@ class BasicDocumentMetadata extends \Protobuf\AbstractMessage
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.ReceiptStatus',
                     'default_value' => \AgentSIB\Diadoc\Api\Proto\Documents\ReceiptStatus::UnknownReceiptStatus()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 6,
+                    'name' => 'RevisionDate',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 7,
+                    'name' => 'RevisionNumber',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
                 ]),
             ],
         ]);
@@ -372,6 +462,16 @@ class BasicDocumentMetadata extends \Protobuf\AbstractMessage
         if ($this->ReceiptStatus !== null) {
             $writer->writeVarint($stream, 40);
             $writer->writeVarint($stream, $this->ReceiptStatus->value());
+        }
+
+        if ($this->RevisionDate !== null) {
+            $writer->writeVarint($stream, 50);
+            $writer->writeString($stream, $this->RevisionDate);
+        }
+
+        if ($this->RevisionNumber !== null) {
+            $writer->writeVarint($stream, 58);
+            $writer->writeString($stream, $this->RevisionNumber);
         }
 
         if ($this->extensions !== null) {
@@ -448,6 +548,22 @@ class BasicDocumentMetadata extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 6) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->RevisionDate = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 7) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->RevisionNumber = $reader->readString($stream);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -502,6 +618,16 @@ class BasicDocumentMetadata extends \Protobuf\AbstractMessage
             $size += $calculator->computeVarintSize($this->ReceiptStatus->value());
         }
 
+        if ($this->RevisionDate !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->RevisionDate);
+        }
+
+        if ($this->RevisionNumber !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->RevisionNumber);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -519,6 +645,8 @@ class BasicDocumentMetadata extends \Protobuf\AbstractMessage
         $this->Vat = null;
         $this->Grounds = null;
         $this->ReceiptStatus = \AgentSIB\Diadoc\Api\Proto\Documents\ReceiptStatus::UnknownReceiptStatus();
+        $this->RevisionDate = null;
+        $this->RevisionNumber = null;
     }
 
     /**
@@ -535,6 +663,8 @@ class BasicDocumentMetadata extends \Protobuf\AbstractMessage
         $this->Vat = ($message->Vat !== null) ? $message->Vat : $this->Vat;
         $this->Grounds = ($message->Grounds !== null) ? $message->Grounds : $this->Grounds;
         $this->ReceiptStatus = ($message->ReceiptStatus !== null) ? $message->ReceiptStatus : $this->ReceiptStatus;
+        $this->RevisionDate = ($message->RevisionDate !== null) ? $message->RevisionDate : $this->RevisionDate;
+        $this->RevisionNumber = ($message->RevisionNumber !== null) ? $message->RevisionNumber : $this->RevisionNumber;
     }
 
 

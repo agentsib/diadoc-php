@@ -27,7 +27,7 @@ class ResolutionInfo extends \Protobuf\AbstractMessage
     /**
      * ResolutionType optional enum = 1
      *
-     * @var \AgentSIB\Diadoc\Api\Proto\Events\ResolutionType
+     * @var \AgentSIB\Diadoc\Api\Proto\ResolutionType
      */
     protected $ResolutionType = null;
 
@@ -50,7 +50,7 @@ class ResolutionInfo extends \Protobuf\AbstractMessage
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
     {
-        $this->ResolutionType = \AgentSIB\Diadoc\Api\Proto\Events\ResolutionType::UnknownResolutionType();
+        $this->ResolutionType = \AgentSIB\Diadoc\Api\Proto\ResolutionType::UnknownResolutionType();
 
         parent::__construct($stream, $configuration);
     }
@@ -68,7 +68,7 @@ class ResolutionInfo extends \Protobuf\AbstractMessage
     /**
      * Get 'ResolutionType' value
      *
-     * @return \AgentSIB\Diadoc\Api\Proto\Events\ResolutionType
+     * @return \AgentSIB\Diadoc\Api\Proto\ResolutionType
      */
     public function getResolutionType()
     {
@@ -78,9 +78,9 @@ class ResolutionInfo extends \Protobuf\AbstractMessage
     /**
      * Set 'ResolutionType' value
      *
-     * @param \AgentSIB\Diadoc\Api\Proto\Events\ResolutionType $value
+     * @param \AgentSIB\Diadoc\Api\Proto\ResolutionType $value
      */
-    public function setResolutionType(\AgentSIB\Diadoc\Api\Proto\Events\ResolutionType $value = null)
+    public function setResolutionType(\AgentSIB\Diadoc\Api\Proto\ResolutionType $value = null)
     {
         $this->ResolutionType = $value;
     }
@@ -184,7 +184,7 @@ class ResolutionInfo extends \Protobuf\AbstractMessage
 
         $message = new self();
         $values  = array_merge([
-            'ResolutionType' => \AgentSIB\Diadoc\Api\Proto\Events\ResolutionType::UnknownResolutionType(),
+            'ResolutionType' => \AgentSIB\Diadoc\Api\Proto\ResolutionType::UnknownResolutionType(),
             'InitialRequestId' => null
         ], $values);
 
@@ -208,8 +208,8 @@ class ResolutionInfo extends \Protobuf\AbstractMessage
                     'name' => 'ResolutionType',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
-                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.ResolutionType',
-                    'default_value' => \AgentSIB\Diadoc\Api\Proto\Events\ResolutionType::UnknownResolutionType()
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.ResolutionType',
+                    'default_value' => \AgentSIB\Diadoc\Api\Proto\ResolutionType::UnknownResolutionType()
                 ]),
                 \google\protobuf\FieldDescriptorProto::fromArray([
                     'number' => 2,
@@ -307,7 +307,7 @@ class ResolutionInfo extends \Protobuf\AbstractMessage
             if ($tag === 1) {
                 \Protobuf\WireFormat::assertWireType($wire, 14);
 
-                $this->ResolutionType = \AgentSIB\Diadoc\Api\Proto\Events\ResolutionType::valueOf($reader->readVarint($stream));
+                $this->ResolutionType = \AgentSIB\Diadoc\Api\Proto\ResolutionType::valueOf($reader->readVarint($stream));
 
                 continue;
             }
@@ -384,7 +384,7 @@ class ResolutionInfo extends \Protobuf\AbstractMessage
      */
     public function clear()
     {
-        $this->ResolutionType = \AgentSIB\Diadoc\Api\Proto\Events\ResolutionType::UnknownResolutionType();
+        $this->ResolutionType = \AgentSIB\Diadoc\Api\Proto\ResolutionType::UnknownResolutionType();
         $this->Author = null;
         $this->InitialRequestId = null;
     }

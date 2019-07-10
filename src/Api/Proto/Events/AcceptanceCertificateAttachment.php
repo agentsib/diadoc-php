@@ -68,7 +68,7 @@ class AcceptanceCertificateAttachment extends \Protobuf\AbstractMessage
     protected $DocumentDate = null;
 
     /**
-     * DocumentNumber required string = 7
+     * DocumentNumber optional string = 7
      *
      * @var string
      */
@@ -128,6 +128,7 @@ class AcceptanceCertificateAttachment extends \Protobuf\AbstractMessage
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
     {
+        $this->DocumentNumber = '';
         $this->NeedReceipt = false;
         $this->NeedRecipientSignature = true;
 
@@ -367,7 +368,7 @@ class AcceptanceCertificateAttachment extends \Protobuf\AbstractMessage
      *
      * @param string $value
      */
-    public function setDocumentNumber($value)
+    public function setDocumentNumber($value = null)
     {
         $this->DocumentNumber = $value;
     }
@@ -641,10 +642,6 @@ class AcceptanceCertificateAttachment extends \Protobuf\AbstractMessage
             throw new \InvalidArgumentException('Field "DocumentDate" (tag 6) is required but has no value.');
         }
 
-        if ( ! isset($values['DocumentNumber'])) {
-            throw new \InvalidArgumentException('Field "DocumentNumber" (tag 7) is required but has no value.');
-        }
-
         if ( ! isset($values['Total'])) {
             throw new \InvalidArgumentException('Field "Total" (tag 8) is required but has no value.');
         }
@@ -654,6 +651,7 @@ class AcceptanceCertificateAttachment extends \Protobuf\AbstractMessage
             'Comment' => null,
             'InitialDocumentIds' => [],
             'SubordinateDocumentIds' => [],
+            'DocumentNumber' => '',
             'CustomDocumentId' => null,
             'Vat' => null,
             'Grounds' => null,
@@ -740,7 +738,8 @@ class AcceptanceCertificateAttachment extends \Protobuf\AbstractMessage
                     'number' => 7,
                     'name' => 'DocumentNumber',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
-                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'default_value' => ''
                 ]),
                 \google\protobuf\FieldDescriptorProto::fromArray([
                     'number' => 8,
@@ -825,10 +824,6 @@ class AcceptanceCertificateAttachment extends \Protobuf\AbstractMessage
 
         if ($this->DocumentDate === null) {
             throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Events\\AcceptanceCertificateAttachment#DocumentDate" (tag 6) is required but has no value.');
-        }
-
-        if ($this->DocumentNumber === null) {
-            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Events\\AcceptanceCertificateAttachment#DocumentNumber" (tag 7) is required but has no value.');
         }
 
         if ($this->Total === null) {
@@ -1236,7 +1231,7 @@ class AcceptanceCertificateAttachment extends \Protobuf\AbstractMessage
         $this->InitialDocumentIds = null;
         $this->SubordinateDocumentIds = null;
         $this->DocumentDate = null;
-        $this->DocumentNumber = null;
+        $this->DocumentNumber = '';
         $this->Total = null;
         $this->CustomDocumentId = null;
         $this->Vat = null;

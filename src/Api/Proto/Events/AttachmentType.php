@@ -225,6 +225,21 @@ class AttachmentType extends \Protobuf\Enum
     const UniversalTransferDocumentRevision_VALUE = 45;
 
     /**
+     * UniversalCorrectionDocument = 49
+     */
+    const UniversalCorrectionDocument_VALUE = 49;
+
+    /**
+     * UniversalCorrectionDocumentRevision = 50
+     */
+    const UniversalCorrectionDocumentRevision_VALUE = 50;
+
+    /**
+     * UniversalCorrectionDocumentBuyerTitle = 51
+     */
+    const UniversalCorrectionDocumentBuyerTitle_VALUE = 51;
+
+    /**
      * CustomData = 64
      */
     const CustomData_VALUE = 64;
@@ -235,9 +250,39 @@ class AttachmentType extends \Protobuf\Enum
     const MoveDocument_VALUE = 65;
 
     /**
-     * ResolutionChainAssignmentAttachment = 66
+     * ResolutionRouteAssignmentAttachment = 66
      */
-    const ResolutionChainAssignmentAttachment_VALUE = 66;
+    const ResolutionRouteAssignmentAttachment_VALUE = 66;
+
+    /**
+     * ResolutionRouteRemovalAttachment = 67
+     */
+    const ResolutionRouteRemovalAttachment_VALUE = 67;
+
+    /**
+     * Title = 68
+     */
+    const Title_VALUE = 68;
+
+    /**
+     * Cancellation = 69
+     */
+    const Cancellation_VALUE = 69;
+
+    /**
+     * Edition = 71
+     */
+    const Edition_VALUE = 71;
+
+    /**
+     * DeletionRestoration = 72
+     */
+    const DeletionRestoration_VALUE = 72;
+
+    /**
+     * TemplateTransformation = 73
+     */
+    const TemplateTransformation_VALUE = 73;
 
     /**
      * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
@@ -452,6 +497,21 @@ class AttachmentType extends \Protobuf\Enum
     /**
      * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
      */
+    protected static $UniversalCorrectionDocument = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    protected static $UniversalCorrectionDocumentRevision = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    protected static $UniversalCorrectionDocumentBuyerTitle = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
     protected static $CustomData = null;
 
     /**
@@ -462,7 +522,37 @@ class AttachmentType extends \Protobuf\Enum
     /**
      * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
      */
-    protected static $ResolutionChainAssignmentAttachment = null;
+    protected static $ResolutionRouteAssignmentAttachment = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    protected static $ResolutionRouteRemovalAttachment = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    protected static $Title = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    protected static $Cancellation = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    protected static $Edition = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    protected static $DeletionRestoration = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    protected static $TemplateTransformation = null;
 
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
@@ -971,6 +1061,42 @@ class AttachmentType extends \Protobuf\Enum
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
      */
+    public static function UniversalCorrectionDocument()
+    {
+        if (self::$UniversalCorrectionDocument !== null) {
+            return self::$UniversalCorrectionDocument;
+        }
+
+        return self::$UniversalCorrectionDocument = new self('UniversalCorrectionDocument', self::UniversalCorrectionDocument_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    public static function UniversalCorrectionDocumentRevision()
+    {
+        if (self::$UniversalCorrectionDocumentRevision !== null) {
+            return self::$UniversalCorrectionDocumentRevision;
+        }
+
+        return self::$UniversalCorrectionDocumentRevision = new self('UniversalCorrectionDocumentRevision', self::UniversalCorrectionDocumentRevision_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    public static function UniversalCorrectionDocumentBuyerTitle()
+    {
+        if (self::$UniversalCorrectionDocumentBuyerTitle !== null) {
+            return self::$UniversalCorrectionDocumentBuyerTitle;
+        }
+
+        return self::$UniversalCorrectionDocumentBuyerTitle = new self('UniversalCorrectionDocumentBuyerTitle', self::UniversalCorrectionDocumentBuyerTitle_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
     public static function CustomData()
     {
         if (self::$CustomData !== null) {
@@ -995,13 +1121,85 @@ class AttachmentType extends \Protobuf\Enum
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
      */
-    public static function ResolutionChainAssignmentAttachment()
+    public static function ResolutionRouteAssignmentAttachment()
     {
-        if (self::$ResolutionChainAssignmentAttachment !== null) {
-            return self::$ResolutionChainAssignmentAttachment;
+        if (self::$ResolutionRouteAssignmentAttachment !== null) {
+            return self::$ResolutionRouteAssignmentAttachment;
         }
 
-        return self::$ResolutionChainAssignmentAttachment = new self('ResolutionChainAssignmentAttachment', self::ResolutionChainAssignmentAttachment_VALUE);
+        return self::$ResolutionRouteAssignmentAttachment = new self('ResolutionRouteAssignmentAttachment', self::ResolutionRouteAssignmentAttachment_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    public static function ResolutionRouteRemovalAttachment()
+    {
+        if (self::$ResolutionRouteRemovalAttachment !== null) {
+            return self::$ResolutionRouteRemovalAttachment;
+        }
+
+        return self::$ResolutionRouteRemovalAttachment = new self('ResolutionRouteRemovalAttachment', self::ResolutionRouteRemovalAttachment_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    public static function Title()
+    {
+        if (self::$Title !== null) {
+            return self::$Title;
+        }
+
+        return self::$Title = new self('Title', self::Title_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    public static function Cancellation()
+    {
+        if (self::$Cancellation !== null) {
+            return self::$Cancellation;
+        }
+
+        return self::$Cancellation = new self('Cancellation', self::Cancellation_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    public static function Edition()
+    {
+        if (self::$Edition !== null) {
+            return self::$Edition;
+        }
+
+        return self::$Edition = new self('Edition', self::Edition_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    public static function DeletionRestoration()
+    {
+        if (self::$DeletionRestoration !== null) {
+            return self::$DeletionRestoration;
+        }
+
+        return self::$DeletionRestoration = new self('DeletionRestoration', self::DeletionRestoration_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    public static function TemplateTransformation()
+    {
+        if (self::$TemplateTransformation !== null) {
+            return self::$TemplateTransformation;
+        }
+
+        return self::$TemplateTransformation = new self('TemplateTransformation', self::TemplateTransformation_VALUE);
     }
 
     /**
@@ -1053,9 +1251,18 @@ class AttachmentType extends \Protobuf\Enum
             case 41: return self::UniversalTransferDocument();
             case 42: return self::UniversalTransferDocumentBuyerTitle();
             case 45: return self::UniversalTransferDocumentRevision();
+            case 49: return self::UniversalCorrectionDocument();
+            case 50: return self::UniversalCorrectionDocumentRevision();
+            case 51: return self::UniversalCorrectionDocumentBuyerTitle();
             case 64: return self::CustomData();
             case 65: return self::MoveDocument();
-            case 66: return self::ResolutionChainAssignmentAttachment();
+            case 66: return self::ResolutionRouteAssignmentAttachment();
+            case 67: return self::ResolutionRouteRemovalAttachment();
+            case 68: return self::Title();
+            case 69: return self::Cancellation();
+            case 71: return self::Edition();
+            case 72: return self::DeletionRestoration();
+            case 73: return self::TemplateTransformation();
             default: return null;
         }
     }

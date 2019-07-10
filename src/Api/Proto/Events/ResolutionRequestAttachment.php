@@ -34,7 +34,7 @@ class ResolutionRequestAttachment extends \Protobuf\AbstractMessage
     /**
      * Type required enum = 2
      *
-     * @var \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRequestType
+     * @var \AgentSIB\Diadoc\Api\Proto\ResolutionRequestType
      */
     protected $Type = null;
 
@@ -58,6 +58,13 @@ class ResolutionRequestAttachment extends \Protobuf\AbstractMessage
      * @var string
      */
     protected $Comment = null;
+
+    /**
+     * Labels repeated string = 6
+     *
+     * @var \Protobuf\Collection
+     */
+    protected $Labels = null;
 
     /**
      * Check if 'InitialDocumentId' has a value
@@ -102,7 +109,7 @@ class ResolutionRequestAttachment extends \Protobuf\AbstractMessage
     /**
      * Get 'Type' value
      *
-     * @return \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRequestType
+     * @return \AgentSIB\Diadoc\Api\Proto\ResolutionRequestType
      */
     public function getType()
     {
@@ -112,9 +119,9 @@ class ResolutionRequestAttachment extends \Protobuf\AbstractMessage
     /**
      * Set 'Type' value
      *
-     * @param \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRequestType $value
+     * @param \AgentSIB\Diadoc\Api\Proto\ResolutionRequestType $value
      */
-    public function setType(\AgentSIB\Diadoc\Api\Proto\Events\ResolutionRequestType $value)
+    public function setType(\AgentSIB\Diadoc\Api\Proto\ResolutionRequestType $value)
     {
         $this->Type = $value;
     }
@@ -210,6 +217,50 @@ class ResolutionRequestAttachment extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'Labels' has a value
+     *
+     * @return bool
+     */
+    public function hasLabelsList()
+    {
+        return $this->Labels !== null;
+    }
+
+    /**
+     * Get 'Labels' value
+     *
+     * @return \Protobuf\Collection
+     */
+    public function getLabelsList()
+    {
+        return $this->Labels;
+    }
+
+    /**
+     * Set 'Labels' value
+     *
+     * @param \Protobuf\Collection $value
+     */
+    public function setLabelsList(\Protobuf\Collection $value = null)
+    {
+        $this->Labels = $value;
+    }
+
+    /**
+     * Add a new element to 'Labels'
+     *
+     * @param string $value
+     */
+    public function addLabels($value)
+    {
+        if ($this->Labels === null) {
+            $this->Labels = new \Protobuf\ScalarCollection();
+        }
+
+        $this->Labels->add($value);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -254,7 +305,8 @@ class ResolutionRequestAttachment extends \Protobuf\AbstractMessage
         $values  = array_merge([
             'TargetUserId' => null,
             'TargetDepartmentId' => null,
-            'Comment' => null
+            'Comment' => null,
+            'Labels' => []
         ], $values);
 
         $message->setInitialDocumentId($values['InitialDocumentId']);
@@ -262,6 +314,10 @@ class ResolutionRequestAttachment extends \Protobuf\AbstractMessage
         $message->setTargetUserId($values['TargetUserId']);
         $message->setTargetDepartmentId($values['TargetDepartmentId']);
         $message->setComment($values['Comment']);
+
+        foreach ($values['Labels'] as $item) {
+            $message->addLabels($item);
+        }
 
         return $message;
     }
@@ -285,7 +341,7 @@ class ResolutionRequestAttachment extends \Protobuf\AbstractMessage
                     'name' => 'Type',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED(),
-                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.ResolutionRequestType'
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.ResolutionRequestType'
                 ]),
                 \google\protobuf\FieldDescriptorProto::fromArray([
                     'number' => 3,
@@ -304,6 +360,12 @@ class ResolutionRequestAttachment extends \Protobuf\AbstractMessage
                     'name' => 'Comment',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 6,
+                    'name' => 'Labels',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED()
                 ]),
             ],
         ]);
@@ -366,6 +428,13 @@ class ResolutionRequestAttachment extends \Protobuf\AbstractMessage
             $writer->writeString($stream, $this->Comment);
         }
 
+        if ($this->Labels !== null) {
+            foreach ($this->Labels as $val) {
+                $writer->writeVarint($stream, 50);
+                $writer->writeString($stream, $val);
+            }
+        }
+
         if ($this->extensions !== null) {
             $this->extensions->writeTo($context);
         }
@@ -411,7 +480,7 @@ class ResolutionRequestAttachment extends \Protobuf\AbstractMessage
             if ($tag === 2) {
                 \Protobuf\WireFormat::assertWireType($wire, 14);
 
-                $this->Type = \AgentSIB\Diadoc\Api\Proto\Events\ResolutionRequestType::valueOf($reader->readVarint($stream));
+                $this->Type = \AgentSIB\Diadoc\Api\Proto\ResolutionRequestType::valueOf($reader->readVarint($stream));
 
                 continue;
             }
@@ -436,6 +505,18 @@ class ResolutionRequestAttachment extends \Protobuf\AbstractMessage
                 \Protobuf\WireFormat::assertWireType($wire, 9);
 
                 $this->Comment = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 6) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                if ($this->Labels === null) {
+                    $this->Labels = new \Protobuf\ScalarCollection();
+                }
+
+                $this->Labels->add($reader->readString($stream));
 
                 continue;
             }
@@ -494,6 +575,13 @@ class ResolutionRequestAttachment extends \Protobuf\AbstractMessage
             $size += $calculator->computeStringSize($this->Comment);
         }
 
+        if ($this->Labels !== null) {
+            foreach ($this->Labels as $val) {
+                $size += 1;
+                $size += $calculator->computeStringSize($val);
+            }
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -511,6 +599,7 @@ class ResolutionRequestAttachment extends \Protobuf\AbstractMessage
         $this->TargetUserId = null;
         $this->TargetDepartmentId = null;
         $this->Comment = null;
+        $this->Labels = null;
     }
 
     /**
@@ -527,6 +616,7 @@ class ResolutionRequestAttachment extends \Protobuf\AbstractMessage
         $this->TargetUserId = ($message->TargetUserId !== null) ? $message->TargetUserId : $this->TargetUserId;
         $this->TargetDepartmentId = ($message->TargetDepartmentId !== null) ? $message->TargetDepartmentId : $this->TargetDepartmentId;
         $this->Comment = ($message->Comment !== null) ? $message->Comment : $this->Comment;
+        $this->Labels = ($message->Labels !== null) ? $message->Labels : $this->Labels;
     }
 
 

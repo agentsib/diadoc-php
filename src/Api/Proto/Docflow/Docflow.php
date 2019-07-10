@@ -144,6 +144,27 @@ class Docflow extends \Protobuf\AbstractMessage
     protected $CustomData = null;
 
     /**
+     * InboundUniversalTransferDocumentDocflow optional message = 18
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Docflow\InboundUniversalTransferDocumentDocflow
+     */
+    protected $InboundUniversalTransferDocumentDocflow = null;
+
+    /**
+     * OutboundUniversalTransferDocumentDocflow optional message = 19
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Docflow\OutboundUniversalTransferDocumentDocflow
+     */
+    protected $OutboundUniversalTransferDocumentDocflow = null;
+
+    /**
+     * RoamingNotification optional message = 20
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Docflow\RoamingNotification
+     */
+    protected $RoamingNotification = null;
+
+    /**
      * Check if 'IsFinished' has a value
      *
      * @return bool
@@ -668,6 +689,96 @@ class Docflow extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'InboundUniversalTransferDocumentDocflow' has a value
+     *
+     * @return bool
+     */
+    public function hasInboundUniversalTransferDocumentDocflow()
+    {
+        return $this->InboundUniversalTransferDocumentDocflow !== null;
+    }
+
+    /**
+     * Get 'InboundUniversalTransferDocumentDocflow' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Docflow\InboundUniversalTransferDocumentDocflow
+     */
+    public function getInboundUniversalTransferDocumentDocflow()
+    {
+        return $this->InboundUniversalTransferDocumentDocflow;
+    }
+
+    /**
+     * Set 'InboundUniversalTransferDocumentDocflow' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Docflow\InboundUniversalTransferDocumentDocflow $value
+     */
+    public function setInboundUniversalTransferDocumentDocflow(\AgentSIB\Diadoc\Api\Proto\Docflow\InboundUniversalTransferDocumentDocflow $value = null)
+    {
+        $this->InboundUniversalTransferDocumentDocflow = $value;
+    }
+
+    /**
+     * Check if 'OutboundUniversalTransferDocumentDocflow' has a value
+     *
+     * @return bool
+     */
+    public function hasOutboundUniversalTransferDocumentDocflow()
+    {
+        return $this->OutboundUniversalTransferDocumentDocflow !== null;
+    }
+
+    /**
+     * Get 'OutboundUniversalTransferDocumentDocflow' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Docflow\OutboundUniversalTransferDocumentDocflow
+     */
+    public function getOutboundUniversalTransferDocumentDocflow()
+    {
+        return $this->OutboundUniversalTransferDocumentDocflow;
+    }
+
+    /**
+     * Set 'OutboundUniversalTransferDocumentDocflow' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Docflow\OutboundUniversalTransferDocumentDocflow $value
+     */
+    public function setOutboundUniversalTransferDocumentDocflow(\AgentSIB\Diadoc\Api\Proto\Docflow\OutboundUniversalTransferDocumentDocflow $value = null)
+    {
+        $this->OutboundUniversalTransferDocumentDocflow = $value;
+    }
+
+    /**
+     * Check if 'RoamingNotification' has a value
+     *
+     * @return bool
+     */
+    public function hasRoamingNotification()
+    {
+        return $this->RoamingNotification !== null;
+    }
+
+    /**
+     * Get 'RoamingNotification' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Docflow\RoamingNotification
+     */
+    public function getRoamingNotification()
+    {
+        return $this->RoamingNotification;
+    }
+
+    /**
+     * Set 'RoamingNotification' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Docflow\RoamingNotification $value
+     */
+    public function setRoamingNotification(\AgentSIB\Diadoc\Api\Proto\Docflow\RoamingNotification $value = null)
+    {
+        $this->RoamingNotification = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -718,7 +829,10 @@ class Docflow extends \Protobuf\AbstractMessage
             'ResolutionDocflow' => null,
             'CanDocumentBeRevokedUnilaterallyBySender' => null,
             'PacketId' => null,
-            'CustomData' => []
+            'CustomData' => [],
+            'InboundUniversalTransferDocumentDocflow' => null,
+            'OutboundUniversalTransferDocumentDocflow' => null,
+            'RoamingNotification' => null
         ], $values);
 
         $message->setIsFinished($values['IsFinished']);
@@ -737,6 +851,9 @@ class Docflow extends \Protobuf\AbstractMessage
         $message->setResolutionDocflow($values['ResolutionDocflow']);
         $message->setCanDocumentBeRevokedUnilaterallyBySender($values['CanDocumentBeRevokedUnilaterallyBySender']);
         $message->setPacketId($values['PacketId']);
+        $message->setInboundUniversalTransferDocumentDocflow($values['InboundUniversalTransferDocumentDocflow']);
+        $message->setOutboundUniversalTransferDocumentDocflow($values['OutboundUniversalTransferDocumentDocflow']);
+        $message->setRoamingNotification($values['RoamingNotification']);
 
         foreach ($values['CustomData'] as $item) {
             $message->addCustomData($item);
@@ -867,6 +984,27 @@ class Docflow extends \Protobuf\AbstractMessage
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.CustomDataItem'
                 ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 18,
+                    'name' => 'InboundUniversalTransferDocumentDocflow',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Docflow.InboundUniversalTransferDocumentDocflow'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 19,
+                    'name' => 'OutboundUniversalTransferDocumentDocflow',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Docflow.OutboundUniversalTransferDocumentDocflow'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 20,
+                    'name' => 'RoamingNotification',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Docflow.RoamingNotification'
+                ]),
             ],
         ]);
     }
@@ -992,6 +1130,24 @@ class Docflow extends \Protobuf\AbstractMessage
                 $writer->writeVarint($stream, $val->serializedSize($sizeContext));
                 $val->writeTo($context);
             }
+        }
+
+        if ($this->InboundUniversalTransferDocumentDocflow !== null) {
+            $writer->writeVarint($stream, 146);
+            $writer->writeVarint($stream, $this->InboundUniversalTransferDocumentDocflow->serializedSize($sizeContext));
+            $this->InboundUniversalTransferDocumentDocflow->writeTo($context);
+        }
+
+        if ($this->OutboundUniversalTransferDocumentDocflow !== null) {
+            $writer->writeVarint($stream, 154);
+            $writer->writeVarint($stream, $this->OutboundUniversalTransferDocumentDocflow->serializedSize($sizeContext));
+            $this->OutboundUniversalTransferDocumentDocflow->writeTo($context);
+        }
+
+        if ($this->RoamingNotification !== null) {
+            $writer->writeVarint($stream, 162);
+            $writer->writeVarint($stream, $this->RoamingNotification->serializedSize($sizeContext));
+            $this->RoamingNotification->writeTo($context);
         }
 
         if ($this->extensions !== null) {
@@ -1252,6 +1408,51 @@ class Docflow extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 18) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Docflow\InboundUniversalTransferDocumentDocflow();
+
+                $this->InboundUniversalTransferDocumentDocflow = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 19) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Docflow\OutboundUniversalTransferDocumentDocflow();
+
+                $this->OutboundUniversalTransferDocumentDocflow = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 20) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Docflow\RoamingNotification();
+
+                $this->RoamingNotification = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -1404,6 +1605,30 @@ class Docflow extends \Protobuf\AbstractMessage
             }
         }
 
+        if ($this->InboundUniversalTransferDocumentDocflow !== null) {
+            $innerSize = $this->InboundUniversalTransferDocumentDocflow->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->OutboundUniversalTransferDocumentDocflow !== null) {
+            $innerSize = $this->OutboundUniversalTransferDocumentDocflow->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->RoamingNotification !== null) {
+            $innerSize = $this->RoamingNotification->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -1433,6 +1658,9 @@ class Docflow extends \Protobuf\AbstractMessage
         $this->CanDocumentBeRevokedUnilaterallyBySender = null;
         $this->PacketId = null;
         $this->CustomData = null;
+        $this->InboundUniversalTransferDocumentDocflow = null;
+        $this->OutboundUniversalTransferDocumentDocflow = null;
+        $this->RoamingNotification = null;
     }
 
     /**
@@ -1461,6 +1689,9 @@ class Docflow extends \Protobuf\AbstractMessage
         $this->CanDocumentBeRevokedUnilaterallyBySender = ($message->CanDocumentBeRevokedUnilaterallyBySender !== null) ? $message->CanDocumentBeRevokedUnilaterallyBySender : $this->CanDocumentBeRevokedUnilaterallyBySender;
         $this->PacketId = ($message->PacketId !== null) ? $message->PacketId : $this->PacketId;
         $this->CustomData = ($message->CustomData !== null) ? $message->CustomData : $this->CustomData;
+        $this->InboundUniversalTransferDocumentDocflow = ($message->InboundUniversalTransferDocumentDocflow !== null) ? $message->InboundUniversalTransferDocumentDocflow : $this->InboundUniversalTransferDocumentDocflow;
+        $this->OutboundUniversalTransferDocumentDocflow = ($message->OutboundUniversalTransferDocumentDocflow !== null) ? $message->OutboundUniversalTransferDocumentDocflow : $this->OutboundUniversalTransferDocumentDocflow;
+        $this->RoamingNotification = ($message->RoamingNotification !== null) ? $message->RoamingNotification : $this->RoamingNotification;
     }
 
 

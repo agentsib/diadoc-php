@@ -3,6 +3,7 @@ import "DocumentId.proto";
 import "CustomDataItem.proto";
 import "DocumentType.proto";
 import "DocumentDirection.proto";
+import "LockMode.proto";
 import "Documents/AcceptanceCertificateDocument.proto";
 import "Documents/BilateralDocument.proto";
 import "Documents/InvoiceDocument.proto";
@@ -11,6 +12,7 @@ import "Documents/UnilateralDocument.proto";
 import "Documents/UniversalTransferDocument.proto";
 import "ResolutionTarget.proto";
 import "ForwardDocumentEvent.proto";
+import "Events/DiadocMessage-PostApi.proto";
 
 package AgentSIB.Diadoc.Api.Proto.Documents;
 
@@ -69,6 +71,27 @@ message Document {
 	optional NonformalizedDocument.NonformalizedDocumentMetadata PriceListAgreementMetadata = 54;
 	optional NonformalizedDocument.NonformalizedDocumentMetadata CertificateRegistryMetadata = 55;
 	optional UniversalTransferDocument.UniversalTransferDocumentMetadata UniversalTransferDocumentMetadata = 56;
+	optional UniversalTransferDocument.UniversalTransferDocumentRevisionMetadata UniversalTransferDocumentRevisionMetadata = 57;
+	optional UniversalTransferDocument.UniversalCorrectionDocumentMetadata UniversalCorrectionDocumentMetadata = 58;
+	optional UniversalTransferDocument.UniversalCorrectionDocumentRevisionMetadata UniversalCorrectionDocumentRevisionMetadata = 59;
+	optional string ResolutionRouteId = 60 [default = ""];
+	optional string AttachmentVersion = 61;
+	optional ProxySignatureStatus ProxySignatureStatus = 62 [default = UnknownProxySignatureStatus];
+
+	required string TypeNamedId = 63;
+	required string Function = 64;
+	required int32 WorkflowId = 65;
+	required string Title = 66;
+	repeated Events.MetadataItem Metadata = 67;
+	required RecipientReceiptMetadata RecipientReceiptMetadata = 68;
+	required ConfirmationMetadata ConfirmationMetadata = 69;
+	required RecipientResponseStatus RecipientResponseStatus = 70 [default = RecipientResponseStatusUnknown];
+	required AmendmentRequestMetadata AmendmentRequestMetadata = 71;
+	optional Origin Origin = 72;
+	optional string EditingSettingId = 73 [default = ""];
+	required LockMode LockMode = 74 [default = None];
+	required SenderReceiptMetadata SenderReceiptMetadata = 75; 
+	required string Version = 76;
 }
 
 message ResolutionStatus {
@@ -85,7 +108,8 @@ enum ResolutionStatusType {
 	Disapproved = 2;
 	ApprovementRequested = 3;
 	SignatureRequested = 4;
-	SignatureDenied = 5;
+	SignatureDenied = 5; 
+	ActionsRequested = 6;
 }
 
 enum RevocationStatus {
@@ -110,4 +134,63 @@ enum SenderSignatureStatus {
 	SenderSignatureUnchecked = 2;
 	SenderSignatureCheckedAndValid = 3;
 	SenderSignatureCheckedAndInvalid = 4;
+}
+
+enum ProxySignatureStatus {
+	UnknownProxySignatureStatus = 0;
+	ProxySignatureStatusNone = 1;
+	WaitingForProxySignature = 2;
+	WithProxySignature = 3;
+	ProxySignatureRejected = 4;
+	InvalidProxySignature = 5;
+}
+
+
+enum GeneralReceiptStatus {
+	GeneralReceiptStatusUnknown = 0;
+	GeneralReceiptStatusNotAcceptable = 1;
+	HaveToCreateReceipt = 2;
+	WaitingForReceipt = 3;
+	Finished = 4;
+}
+
+message RecipientReceiptMetadata {
+	required GeneralReceiptStatus ReceiptStatus = 1 [default = GeneralReceiptStatusUnknown];
+	optional ConfirmationMetadata ConfirmationMetadata = 2;
+}
+
+message SenderReceiptMetadata {
+	required GeneralReceiptStatus ReceiptStatus = 1 [default = GeneralReceiptStatusUnknown];
+}
+
+message ConfirmationMetadata {
+	required GeneralReceiptStatus ReceiptStatus = 1 [default = GeneralReceiptStatusUnknown];
+	required sfixed64 DateTimeTicks = 2;
+}
+
+
+message AmendmentRequestMetadata {
+	required int32 AmendmentFlags = 1;
+	required GeneralReceiptStatus ReceiptStatus = 2 [default = GeneralReceiptStatusUnknown];
+}
+
+enum RecipientResponseStatus {
+	RecipientResponseStatusUnknown = 0;
+	RecipientResponseStatusNotAcceptable = 1;
+	WaitingForRecipientSignature = 2;
+	WithRecipientSignature = 3;
+	RecipientSignatureRequestRejected = 4;
+	InvalidRecipientSignature = 5;
+}
+
+message Origin {
+	required MessageType MessageType = 1;
+	required string MessageId = 2;
+}
+
+enum MessageType {
+	Unknown = 0;
+	Letter = 1;
+	Draft = 2;
+	Template = 3;
 }

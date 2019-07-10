@@ -25,48 +25,18 @@ class AutosignReceiptsResult extends \Protobuf\AbstractMessage
     protected $extensions = null;
 
     /**
-     * NextBatchKey required string = 1
-     *
-     * @var string
-     */
-    protected $NextBatchKey = null;
-
-    /**
-     * SignedReceiptsCount required int32 = 2
+     * SignedReceiptsCount required int64 = 1
      *
      * @var int
      */
     protected $SignedReceiptsCount = null;
 
     /**
-     * Check if 'NextBatchKey' has a value
+     * NextBatchKey required string = 2
      *
-     * @return bool
+     * @var string
      */
-    public function hasNextBatchKey()
-    {
-        return $this->NextBatchKey !== null;
-    }
-
-    /**
-     * Get 'NextBatchKey' value
-     *
-     * @return string
-     */
-    public function getNextBatchKey()
-    {
-        return $this->NextBatchKey;
-    }
-
-    /**
-     * Set 'NextBatchKey' value
-     *
-     * @param string $value
-     */
-    public function setNextBatchKey($value)
-    {
-        $this->NextBatchKey = $value;
-    }
+    protected $NextBatchKey = null;
 
     /**
      * Check if 'SignedReceiptsCount' has a value
@@ -96,6 +66,36 @@ class AutosignReceiptsResult extends \Protobuf\AbstractMessage
     public function setSignedReceiptsCount($value)
     {
         $this->SignedReceiptsCount = $value;
+    }
+
+    /**
+     * Check if 'NextBatchKey' has a value
+     *
+     * @return bool
+     */
+    public function hasNextBatchKey()
+    {
+        return $this->NextBatchKey !== null;
+    }
+
+    /**
+     * Get 'NextBatchKey' value
+     *
+     * @return string
+     */
+    public function getNextBatchKey()
+    {
+        return $this->NextBatchKey;
+    }
+
+    /**
+     * Set 'NextBatchKey' value
+     *
+     * @param string $value
+     */
+    public function setNextBatchKey($value)
+    {
+        $this->NextBatchKey = $value;
     }
 
     /**
@@ -131,20 +131,20 @@ class AutosignReceiptsResult extends \Protobuf\AbstractMessage
      */
     public static function fromArray(array $values)
     {
-        if ( ! isset($values['NextBatchKey'])) {
-            throw new \InvalidArgumentException('Field "NextBatchKey" (tag 1) is required but has no value.');
+        if ( ! isset($values['SignedReceiptsCount'])) {
+            throw new \InvalidArgumentException('Field "SignedReceiptsCount" (tag 1) is required but has no value.');
         }
 
-        if ( ! isset($values['SignedReceiptsCount'])) {
-            throw new \InvalidArgumentException('Field "SignedReceiptsCount" (tag 2) is required but has no value.');
+        if ( ! isset($values['NextBatchKey'])) {
+            throw new \InvalidArgumentException('Field "NextBatchKey" (tag 2) is required but has no value.');
         }
 
         $message = new self();
         $values  = array_merge([
         ], $values);
 
-        $message->setNextBatchKey($values['NextBatchKey']);
         $message->setSignedReceiptsCount($values['SignedReceiptsCount']);
+        $message->setNextBatchKey($values['NextBatchKey']);
 
         return $message;
     }
@@ -159,14 +159,14 @@ class AutosignReceiptsResult extends \Protobuf\AbstractMessage
             'field'     => [
                 \google\protobuf\FieldDescriptorProto::fromArray([
                     'number' => 1,
-                    'name' => 'NextBatchKey',
-                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'name' => 'SignedReceiptsCount',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_INT64(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
                 ]),
                 \google\protobuf\FieldDescriptorProto::fromArray([
                     'number' => 2,
-                    'name' => 'SignedReceiptsCount',
-                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_INT32(),
+                    'name' => 'NextBatchKey',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
                 ]),
             ],
@@ -197,22 +197,22 @@ class AutosignReceiptsResult extends \Protobuf\AbstractMessage
         $writer      = $context->getWriter();
         $sizeContext = $context->getComputeSizeContext();
 
-        if ($this->NextBatchKey === null) {
-            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\AutosignReceiptsResult#NextBatchKey" (tag 1) is required but has no value.');
-        }
-
         if ($this->SignedReceiptsCount === null) {
-            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\AutosignReceiptsResult#SignedReceiptsCount" (tag 2) is required but has no value.');
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\AutosignReceiptsResult#SignedReceiptsCount" (tag 1) is required but has no value.');
         }
 
-        if ($this->NextBatchKey !== null) {
-            $writer->writeVarint($stream, 10);
-            $writer->writeString($stream, $this->NextBatchKey);
+        if ($this->NextBatchKey === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\AutosignReceiptsResult#NextBatchKey" (tag 2) is required but has no value.');
         }
 
         if ($this->SignedReceiptsCount !== null) {
-            $writer->writeVarint($stream, 16);
+            $writer->writeVarint($stream, 8);
             $writer->writeVarint($stream, $this->SignedReceiptsCount);
+        }
+
+        if ($this->NextBatchKey !== null) {
+            $writer->writeVarint($stream, 18);
+            $writer->writeString($stream, $this->NextBatchKey);
         }
 
         if ($this->extensions !== null) {
@@ -250,17 +250,17 @@ class AutosignReceiptsResult extends \Protobuf\AbstractMessage
             }
 
             if ($tag === 1) {
-                \Protobuf\WireFormat::assertWireType($wire, 9);
+                \Protobuf\WireFormat::assertWireType($wire, 3);
 
-                $this->NextBatchKey = $reader->readString($stream);
+                $this->SignedReceiptsCount = $reader->readVarint($stream);
 
                 continue;
             }
 
             if ($tag === 2) {
-                \Protobuf\WireFormat::assertWireType($wire, 5);
+                \Protobuf\WireFormat::assertWireType($wire, 9);
 
-                $this->SignedReceiptsCount = $reader->readVarint($stream);
+                $this->NextBatchKey = $reader->readString($stream);
 
                 continue;
             }
@@ -294,14 +294,14 @@ class AutosignReceiptsResult extends \Protobuf\AbstractMessage
         $calculator = $context->getSizeCalculator();
         $size       = 0;
 
-        if ($this->NextBatchKey !== null) {
-            $size += 1;
-            $size += $calculator->computeStringSize($this->NextBatchKey);
-        }
-
         if ($this->SignedReceiptsCount !== null) {
             $size += 1;
             $size += $calculator->computeVarintSize($this->SignedReceiptsCount);
+        }
+
+        if ($this->NextBatchKey !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->NextBatchKey);
         }
 
         if ($this->extensions !== null) {
@@ -316,8 +316,8 @@ class AutosignReceiptsResult extends \Protobuf\AbstractMessage
      */
     public function clear()
     {
-        $this->NextBatchKey = null;
         $this->SignedReceiptsCount = null;
+        $this->NextBatchKey = null;
     }
 
     /**
@@ -329,8 +329,8 @@ class AutosignReceiptsResult extends \Protobuf\AbstractMessage
             throw new \InvalidArgumentException(sprintf('Argument 1 passed to %s must be a %s, %s given', __METHOD__, __CLASS__, get_class($message)));
         }
 
-        $this->NextBatchKey = ($message->NextBatchKey !== null) ? $message->NextBatchKey : $this->NextBatchKey;
         $this->SignedReceiptsCount = ($message->SignedReceiptsCount !== null) ? $message->SignedReceiptsCount : $this->SignedReceiptsCount;
+        $this->NextBatchKey = ($message->NextBatchKey !== null) ? $message->NextBatchKey : $this->NextBatchKey;
     }
 
 

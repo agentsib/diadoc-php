@@ -120,6 +120,21 @@ class DocumentType extends \Protobuf\Enum
     const UniversalTransferDocument_VALUE = 41;
 
     /**
+     * UniversalTransferDocumentRevision = 45
+     */
+    const UniversalTransferDocumentRevision_VALUE = 45;
+
+    /**
+     * UniversalCorrectionDocument = 49
+     */
+    const UniversalCorrectionDocument_VALUE = 49;
+
+    /**
+     * UniversalCorrectionDocumentRevision = 50
+     */
+    const UniversalCorrectionDocumentRevision_VALUE = 50;
+
+    /**
      * @var \AgentSIB\Diadoc\Api\Proto\DocumentType
      */
     protected static $UnknownDocumentType = null;
@@ -223,6 +238,21 @@ class DocumentType extends \Protobuf\Enum
      * @var \AgentSIB\Diadoc\Api\Proto\DocumentType
      */
     protected static $UniversalTransferDocument = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\DocumentType
+     */
+    protected static $UniversalTransferDocumentRevision = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\DocumentType
+     */
+    protected static $UniversalCorrectionDocument = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\DocumentType
+     */
+    protected static $UniversalCorrectionDocumentRevision = null;
 
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\DocumentType
@@ -477,6 +507,42 @@ class DocumentType extends \Protobuf\Enum
     }
 
     /**
+     * @return \AgentSIB\Diadoc\Api\Proto\DocumentType
+     */
+    public static function UniversalTransferDocumentRevision()
+    {
+        if (self::$UniversalTransferDocumentRevision !== null) {
+            return self::$UniversalTransferDocumentRevision;
+        }
+
+        return self::$UniversalTransferDocumentRevision = new self('UniversalTransferDocumentRevision', self::UniversalTransferDocumentRevision_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\DocumentType
+     */
+    public static function UniversalCorrectionDocument()
+    {
+        if (self::$UniversalCorrectionDocument !== null) {
+            return self::$UniversalCorrectionDocument;
+        }
+
+        return self::$UniversalCorrectionDocument = new self('UniversalCorrectionDocument', self::UniversalCorrectionDocument_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\DocumentType
+     */
+    public static function UniversalCorrectionDocumentRevision()
+    {
+        if (self::$UniversalCorrectionDocumentRevision !== null) {
+            return self::$UniversalCorrectionDocumentRevision;
+        }
+
+        return self::$UniversalCorrectionDocumentRevision = new self('UniversalCorrectionDocumentRevision', self::UniversalCorrectionDocumentRevision_VALUE);
+    }
+
+    /**
      * @param int $value
      * @return \AgentSIB\Diadoc\Api\Proto\DocumentType
      */
@@ -504,6 +570,9 @@ class DocumentType extends \Protobuf\Enum
             case 38: return self::ServiceDetails();
             case 40: return self::SupplementaryAgreement();
             case 41: return self::UniversalTransferDocument();
+            case 45: return self::UniversalTransferDocumentRevision();
+            case 49: return self::UniversalCorrectionDocument();
+            case 50: return self::UniversalCorrectionDocumentRevision();
             default: return null;
         }
     }

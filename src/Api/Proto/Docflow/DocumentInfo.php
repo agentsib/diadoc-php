@@ -123,6 +123,34 @@ class DocumentInfo extends \Protobuf\AbstractMessage
     protected $SupplementaryAgreementInfo = null;
 
     /**
+     * UniversalTransferDocumentInfo optional message = 15
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Docflow\UniversalTransferDocumentInfo
+     */
+    protected $UniversalTransferDocumentInfo = null;
+
+    /**
+     * UniversalCorrectionDocumentInfo optional message = 16
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Docflow\UniversalCorrectionDocumentInfo
+     */
+    protected $UniversalCorrectionDocumentInfo = null;
+
+    /**
+     * AttachmentVersion optional string = 17
+     *
+     * @var string
+     */
+    protected $AttachmentVersion = null;
+
+    /**
+     * Version required string = 18
+     *
+     * @var string
+     */
+    protected $Version = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
@@ -554,6 +582,126 @@ class DocumentInfo extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'UniversalTransferDocumentInfo' has a value
+     *
+     * @return bool
+     */
+    public function hasUniversalTransferDocumentInfo()
+    {
+        return $this->UniversalTransferDocumentInfo !== null;
+    }
+
+    /**
+     * Get 'UniversalTransferDocumentInfo' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Docflow\UniversalTransferDocumentInfo
+     */
+    public function getUniversalTransferDocumentInfo()
+    {
+        return $this->UniversalTransferDocumentInfo;
+    }
+
+    /**
+     * Set 'UniversalTransferDocumentInfo' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Docflow\UniversalTransferDocumentInfo $value
+     */
+    public function setUniversalTransferDocumentInfo(\AgentSIB\Diadoc\Api\Proto\Docflow\UniversalTransferDocumentInfo $value = null)
+    {
+        $this->UniversalTransferDocumentInfo = $value;
+    }
+
+    /**
+     * Check if 'UniversalCorrectionDocumentInfo' has a value
+     *
+     * @return bool
+     */
+    public function hasUniversalCorrectionDocumentInfo()
+    {
+        return $this->UniversalCorrectionDocumentInfo !== null;
+    }
+
+    /**
+     * Get 'UniversalCorrectionDocumentInfo' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Docflow\UniversalCorrectionDocumentInfo
+     */
+    public function getUniversalCorrectionDocumentInfo()
+    {
+        return $this->UniversalCorrectionDocumentInfo;
+    }
+
+    /**
+     * Set 'UniversalCorrectionDocumentInfo' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Docflow\UniversalCorrectionDocumentInfo $value
+     */
+    public function setUniversalCorrectionDocumentInfo(\AgentSIB\Diadoc\Api\Proto\Docflow\UniversalCorrectionDocumentInfo $value = null)
+    {
+        $this->UniversalCorrectionDocumentInfo = $value;
+    }
+
+    /**
+     * Check if 'AttachmentVersion' has a value
+     *
+     * @return bool
+     */
+    public function hasAttachmentVersion()
+    {
+        return $this->AttachmentVersion !== null;
+    }
+
+    /**
+     * Get 'AttachmentVersion' value
+     *
+     * @return string
+     */
+    public function getAttachmentVersion()
+    {
+        return $this->AttachmentVersion;
+    }
+
+    /**
+     * Set 'AttachmentVersion' value
+     *
+     * @param string $value
+     */
+    public function setAttachmentVersion($value = null)
+    {
+        $this->AttachmentVersion = $value;
+    }
+
+    /**
+     * Check if 'Version' has a value
+     *
+     * @return bool
+     */
+    public function hasVersion()
+    {
+        return $this->Version !== null;
+    }
+
+    /**
+     * Get 'Version' value
+     *
+     * @return string
+     */
+    public function getVersion()
+    {
+        return $this->Version;
+    }
+
+    /**
+     * Set 'Version' value
+     *
+     * @param string $value
+     */
+    public function setVersion($value)
+    {
+        $this->Version = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -586,6 +734,10 @@ class DocumentInfo extends \Protobuf\AbstractMessage
      */
     public static function fromArray(array $values)
     {
+        if ( ! isset($values['Version'])) {
+            throw new \InvalidArgumentException('Field "Version" (tag 18) is required but has no value.');
+        }
+
         $message = new self();
         $values  = array_merge([
             'DocumentType' => \AgentSIB\Diadoc\Api\Proto\DocumentType::UnknownDocumentType(),
@@ -601,7 +753,10 @@ class DocumentInfo extends \Protobuf\AbstractMessage
             'InvoiceCorrectionInfo' => null,
             'PriceListInfo' => null,
             'ContractInfo' => null,
-            'SupplementaryAgreementInfo' => null
+            'SupplementaryAgreementInfo' => null,
+            'UniversalTransferDocumentInfo' => null,
+            'UniversalCorrectionDocumentInfo' => null,
+            'AttachmentVersion' => null,
         ], $values);
 
         $message->setDocumentType($values['DocumentType']);
@@ -618,6 +773,10 @@ class DocumentInfo extends \Protobuf\AbstractMessage
         $message->setPriceListInfo($values['PriceListInfo']);
         $message->setContractInfo($values['ContractInfo']);
         $message->setSupplementaryAgreementInfo($values['SupplementaryAgreementInfo']);
+        $message->setUniversalTransferDocumentInfo($values['UniversalTransferDocumentInfo']);
+        $message->setUniversalCorrectionDocumentInfo($values['UniversalCorrectionDocumentInfo']);
+        $message->setAttachmentVersion($values['AttachmentVersion']);
+        $message->setVersion($values['Version']);
 
         return $message;
     }
@@ -725,6 +884,32 @@ class DocumentInfo extends \Protobuf\AbstractMessage
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.Docflow.SupplementaryAgreementDocumentInfo'
                 ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 15,
+                    'name' => 'UniversalTransferDocumentInfo',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Docflow.UniversalTransferDocumentInfo'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 16,
+                    'name' => 'UniversalCorrectionDocumentInfo',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Docflow.UniversalCorrectionDocumentInfo'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 17,
+                    'name' => 'AttachmentVersion',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 18,
+                    'name' => 'Version',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
+                ]),
             ],
         ]);
     }
@@ -752,6 +937,10 @@ class DocumentInfo extends \Protobuf\AbstractMessage
         $stream      = $context->getStream();
         $writer      = $context->getWriter();
         $sizeContext = $context->getComputeSizeContext();
+
+        if ($this->Version === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Docflow\\DocumentInfo#Version" (tag 18) is required but has no value.');
+        }
 
         if ($this->DocumentType !== null) {
             $writer->writeVarint($stream, 8);
@@ -828,6 +1017,28 @@ class DocumentInfo extends \Protobuf\AbstractMessage
             $writer->writeVarint($stream, 114);
             $writer->writeVarint($stream, $this->SupplementaryAgreementInfo->serializedSize($sizeContext));
             $this->SupplementaryAgreementInfo->writeTo($context);
+        }
+
+        if ($this->UniversalTransferDocumentInfo !== null) {
+            $writer->writeVarint($stream, 122);
+            $writer->writeVarint($stream, $this->UniversalTransferDocumentInfo->serializedSize($sizeContext));
+            $this->UniversalTransferDocumentInfo->writeTo($context);
+        }
+
+        if ($this->UniversalCorrectionDocumentInfo !== null) {
+            $writer->writeVarint($stream, 130);
+            $writer->writeVarint($stream, $this->UniversalCorrectionDocumentInfo->serializedSize($sizeContext));
+            $this->UniversalCorrectionDocumentInfo->writeTo($context);
+        }
+
+        if ($this->AttachmentVersion !== null) {
+            $writer->writeVarint($stream, 138);
+            $writer->writeString($stream, $this->AttachmentVersion);
+        }
+
+        if ($this->Version !== null) {
+            $writer->writeVarint($stream, 146);
+            $writer->writeString($stream, $this->Version);
         }
 
         if ($this->extensions !== null) {
@@ -1025,6 +1236,52 @@ class DocumentInfo extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 15) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Docflow\UniversalTransferDocumentInfo();
+
+                $this->UniversalTransferDocumentInfo = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 16) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Docflow\UniversalCorrectionDocumentInfo();
+
+                $this->UniversalCorrectionDocumentInfo = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 17) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->AttachmentVersion = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 18) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->Version = $reader->readString($stream);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -1145,6 +1402,32 @@ class DocumentInfo extends \Protobuf\AbstractMessage
             $size += $calculator->computeVarintSize($innerSize);
         }
 
+        if ($this->UniversalTransferDocumentInfo !== null) {
+            $innerSize = $this->UniversalTransferDocumentInfo->serializedSize($context);
+
+            $size += 1;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->UniversalCorrectionDocumentInfo !== null) {
+            $innerSize = $this->UniversalCorrectionDocumentInfo->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->AttachmentVersion !== null) {
+            $size += 2;
+            $size += $calculator->computeStringSize($this->AttachmentVersion);
+        }
+
+        if ($this->Version !== null) {
+            $size += 2;
+            $size += $calculator->computeStringSize($this->Version);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -1171,6 +1454,10 @@ class DocumentInfo extends \Protobuf\AbstractMessage
         $this->PriceListInfo = null;
         $this->ContractInfo = null;
         $this->SupplementaryAgreementInfo = null;
+        $this->UniversalTransferDocumentInfo = null;
+        $this->UniversalCorrectionDocumentInfo = null;
+        $this->AttachmentVersion = null;
+        $this->Version = null;
     }
 
     /**
@@ -1196,6 +1483,10 @@ class DocumentInfo extends \Protobuf\AbstractMessage
         $this->PriceListInfo = ($message->PriceListInfo !== null) ? $message->PriceListInfo : $this->PriceListInfo;
         $this->ContractInfo = ($message->ContractInfo !== null) ? $message->ContractInfo : $this->ContractInfo;
         $this->SupplementaryAgreementInfo = ($message->SupplementaryAgreementInfo !== null) ? $message->SupplementaryAgreementInfo : $this->SupplementaryAgreementInfo;
+        $this->UniversalTransferDocumentInfo = ($message->UniversalTransferDocumentInfo !== null) ? $message->UniversalTransferDocumentInfo : $this->UniversalTransferDocumentInfo;
+        $this->UniversalCorrectionDocumentInfo = ($message->UniversalCorrectionDocumentInfo !== null) ? $message->UniversalCorrectionDocumentInfo : $this->UniversalCorrectionDocumentInfo;
+        $this->AttachmentVersion = ($message->AttachmentVersion !== null) ? $message->AttachmentVersion : $this->AttachmentVersion;
+        $this->Version = ($message->Version !== null) ? $message->Version : $this->Version;
     }
 
 

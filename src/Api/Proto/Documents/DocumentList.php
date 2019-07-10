@@ -39,6 +39,13 @@ class DocumentList extends \Protobuf\AbstractMessage
     protected $Documents = null;
 
     /**
+     * HasMoreResults optional bool = 3
+     *
+     * @var bool
+     */
+    protected $HasMoreResults = null;
+
+    /**
      * Check if 'TotalCount' has a value
      *
      * @return bool
@@ -113,6 +120,36 @@ class DocumentList extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'HasMoreResults' has a value
+     *
+     * @return bool
+     */
+    public function hasHasMoreResults()
+    {
+        return $this->HasMoreResults !== null;
+    }
+
+    /**
+     * Get 'HasMoreResults' value
+     *
+     * @return bool
+     */
+    public function getHasMoreResults()
+    {
+        return $this->HasMoreResults;
+    }
+
+    /**
+     * Set 'HasMoreResults' value
+     *
+     * @param bool $value
+     */
+    public function setHasMoreResults($value = null)
+    {
+        $this->HasMoreResults = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -151,10 +188,12 @@ class DocumentList extends \Protobuf\AbstractMessage
 
         $message = new self();
         $values  = array_merge([
-            'Documents' => []
+            'Documents' => [],
+            'HasMoreResults' => null
         ], $values);
 
         $message->setTotalCount($values['TotalCount']);
+        $message->setHasMoreResults($values['HasMoreResults']);
 
         foreach ($values['Documents'] as $item) {
             $message->addDocuments($item);
@@ -183,6 +222,12 @@ class DocumentList extends \Protobuf\AbstractMessage
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.Document'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 3,
+                    'name' => 'HasMoreResults',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_BOOL(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
                 ]),
             ],
         ]);
@@ -227,6 +272,11 @@ class DocumentList extends \Protobuf\AbstractMessage
                 $writer->writeVarint($stream, $val->serializedSize($sizeContext));
                 $val->writeTo($context);
             }
+        }
+
+        if ($this->HasMoreResults !== null) {
+            $writer->writeVarint($stream, 24);
+            $writer->writeBool($stream, $this->HasMoreResults);
         }
 
         if ($this->extensions !== null) {
@@ -290,6 +340,14 @@ class DocumentList extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 3) {
+                \Protobuf\WireFormat::assertWireType($wire, 8);
+
+                $this->HasMoreResults = $reader->readBool($stream);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -334,6 +392,11 @@ class DocumentList extends \Protobuf\AbstractMessage
             }
         }
 
+        if ($this->HasMoreResults !== null) {
+            $size += 1;
+            $size += 1;
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -348,6 +411,7 @@ class DocumentList extends \Protobuf\AbstractMessage
     {
         $this->TotalCount = null;
         $this->Documents = null;
+        $this->HasMoreResults = null;
     }
 
     /**
@@ -361,6 +425,7 @@ class DocumentList extends \Protobuf\AbstractMessage
 
         $this->TotalCount = ($message->TotalCount !== null) ? $message->TotalCount : $this->TotalCount;
         $this->Documents = ($message->Documents !== null) ? $message->Documents : $this->Documents;
+        $this->HasMoreResults = ($message->HasMoreResults !== null) ? $message->HasMoreResults : $this->HasMoreResults;
     }
 
 

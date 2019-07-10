@@ -159,11 +159,11 @@ class UniversalTransferDocumentSellerTitleInfo extends \Protobuf\AbstractMessage
     protected $DocumentCreatorBase = null;
 
     /**
-     * GovermentContractInfo optional string = 20
+     * GovernmentContractInfo optional string = 20
      *
      * @var string
      */
-    protected $GovermentContractInfo = null;
+    protected $GovernmentContractInfo = null;
 
     /**
      * Check if 'Function' has a value
@@ -764,33 +764,33 @@ class UniversalTransferDocumentSellerTitleInfo extends \Protobuf\AbstractMessage
     }
 
     /**
-     * Check if 'GovermentContractInfo' has a value
+     * Check if 'GovernmentContractInfo' has a value
      *
      * @return bool
      */
-    public function hasGovermentContractInfo()
+    public function hasGovernmentContractInfo()
     {
-        return $this->GovermentContractInfo !== null;
+        return $this->GovernmentContractInfo !== null;
     }
 
     /**
-     * Get 'GovermentContractInfo' value
+     * Get 'GovernmentContractInfo' value
      *
      * @return string
      */
-    public function getGovermentContractInfo()
+    public function getGovernmentContractInfo()
     {
-        return $this->GovermentContractInfo;
+        return $this->GovernmentContractInfo;
     }
 
     /**
-     * Set 'GovermentContractInfo' value
+     * Set 'GovernmentContractInfo' value
      *
      * @param string $value
      */
-    public function setGovermentContractInfo($value = null)
+    public function setGovernmentContractInfo($value = null)
     {
-        $this->GovermentContractInfo = $value;
+        $this->GovernmentContractInfo = $value;
     }
 
     /**
@@ -868,7 +868,7 @@ class UniversalTransferDocumentSellerTitleInfo extends \Protobuf\AbstractMessage
             'AdditionalInfoId' => null,
             'TransferInfo' => null,
             'DocumentCreatorBase' => null,
-            'GovermentContractInfo' => null
+            'GovernmentContractInfo' => null
         ], $values);
 
         $message->setFunction($values['Function']);
@@ -888,7 +888,7 @@ class UniversalTransferDocumentSellerTitleInfo extends \Protobuf\AbstractMessage
         $message->setTransferInfo($values['TransferInfo']);
         $message->setDocumentCreator($values['DocumentCreator']);
         $message->setDocumentCreatorBase($values['DocumentCreatorBase']);
-        $message->setGovermentContractInfo($values['GovermentContractInfo']);
+        $message->setGovernmentContractInfo($values['GovernmentContractInfo']);
 
         foreach ($values['Signers'] as $item) {
             $message->addSigners($item);
@@ -1035,7 +1035,7 @@ class UniversalTransferDocumentSellerTitleInfo extends \Protobuf\AbstractMessage
                 ]),
                 \google\protobuf\FieldDescriptorProto::fromArray([
                     'number' => 20,
-                    'name' => 'GovermentContractInfo',
+                    'name' => 'GovernmentContractInfo',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
                 ]),
@@ -1203,9 +1203,9 @@ class UniversalTransferDocumentSellerTitleInfo extends \Protobuf\AbstractMessage
             $writer->writeString($stream, $this->DocumentCreatorBase);
         }
 
-        if ($this->GovermentContractInfo !== null) {
+        if ($this->GovernmentContractInfo !== null) {
             $writer->writeVarint($stream, 162);
-            $writer->writeString($stream, $this->GovermentContractInfo);
+            $writer->writeString($stream, $this->GovernmentContractInfo);
         }
 
         if ($this->extensions !== null) {
@@ -1468,7 +1468,7 @@ class UniversalTransferDocumentSellerTitleInfo extends \Protobuf\AbstractMessage
             if ($tag === 20) {
                 \Protobuf\WireFormat::assertWireType($wire, 9);
 
-                $this->GovermentContractInfo = $reader->readString($stream);
+                $this->GovernmentContractInfo = $reader->readString($stream);
 
                 continue;
             }
@@ -1628,9 +1628,9 @@ class UniversalTransferDocumentSellerTitleInfo extends \Protobuf\AbstractMessage
             $size += $calculator->computeStringSize($this->DocumentCreatorBase);
         }
 
-        if ($this->GovermentContractInfo !== null) {
+        if ($this->GovernmentContractInfo !== null) {
             $size += 2;
-            $size += $calculator->computeStringSize($this->GovermentContractInfo);
+            $size += $calculator->computeStringSize($this->GovernmentContractInfo);
         }
 
         if ($this->extensions !== null) {
@@ -1664,7 +1664,7 @@ class UniversalTransferDocumentSellerTitleInfo extends \Protobuf\AbstractMessage
         $this->TransferInfo = null;
         $this->DocumentCreator = null;
         $this->DocumentCreatorBase = null;
-        $this->GovermentContractInfo = null;
+        $this->GovernmentContractInfo = null;
     }
 
     /**
@@ -1695,7 +1695,7 @@ class UniversalTransferDocumentSellerTitleInfo extends \Protobuf\AbstractMessage
         $this->TransferInfo = ($message->TransferInfo !== null) ? $message->TransferInfo : $this->TransferInfo;
         $this->DocumentCreator = ($message->DocumentCreator !== null) ? $message->DocumentCreator : $this->DocumentCreator;
         $this->DocumentCreatorBase = ($message->DocumentCreatorBase !== null) ? $message->DocumentCreatorBase : $this->DocumentCreatorBase;
-        $this->GovermentContractInfo = ($message->GovermentContractInfo !== null) ? $message->GovermentContractInfo : $this->GovermentContractInfo;
+        $this->GovernmentContractInfo = ($message->GovernmentContractInfo !== null) ? $message->GovernmentContractInfo : $this->GovernmentContractInfo;
     }
 
 

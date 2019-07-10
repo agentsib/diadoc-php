@@ -50,6 +50,11 @@ class ResolutionStatusType extends \Protobuf\Enum
     const SignatureDenied_VALUE = 5;
 
     /**
+     * ActionsRequested = 6
+     */
+    const ActionsRequested_VALUE = 6;
+
+    /**
      * @var \AgentSIB\Diadoc\Api\Proto\Documents\ResolutionStatusType
      */
     protected static $UnknownResolutionStatus = null;
@@ -83,6 +88,11 @@ class ResolutionStatusType extends \Protobuf\Enum
      * @var \AgentSIB\Diadoc\Api\Proto\Documents\ResolutionStatusType
      */
     protected static $SignatureDenied = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\ResolutionStatusType
+     */
+    protected static $ActionsRequested = null;
 
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Documents\ResolutionStatusType
@@ -169,6 +179,18 @@ class ResolutionStatusType extends \Protobuf\Enum
     }
 
     /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\ResolutionStatusType
+     */
+    public static function ActionsRequested()
+    {
+        if (self::$ActionsRequested !== null) {
+            return self::$ActionsRequested;
+        }
+
+        return self::$ActionsRequested = new self('ActionsRequested', self::ActionsRequested_VALUE);
+    }
+
+    /**
      * @param int $value
      * @return \AgentSIB\Diadoc\Api\Proto\Documents\ResolutionStatusType
      */
@@ -182,6 +204,7 @@ class ResolutionStatusType extends \Protobuf\Enum
             case 3: return self::ApprovementRequested();
             case 4: return self::SignatureRequested();
             case 5: return self::SignatureDenied();
+            case 6: return self::ActionsRequested();
             default: return null;
         }
     }

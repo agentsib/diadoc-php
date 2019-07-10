@@ -33,6 +33,20 @@ class ResolutionRequestCancellationAttachment extends \Protobuf\AbstractMessage
     protected $InitialResolutionRequestId = null;
 
     /**
+     * Comment optional string = 2
+     *
+     * @var string
+     */
+    protected $Comment = null;
+
+    /**
+     * Labels repeated string = 3
+     *
+     * @var \Protobuf\Collection
+     */
+    protected $Labels = null;
+
+    /**
      * Check if 'InitialResolutionRequestId' has a value
      *
      * @return bool
@@ -60,6 +74,80 @@ class ResolutionRequestCancellationAttachment extends \Protobuf\AbstractMessage
     public function setInitialResolutionRequestId($value)
     {
         $this->InitialResolutionRequestId = $value;
+    }
+
+    /**
+     * Check if 'Comment' has a value
+     *
+     * @return bool
+     */
+    public function hasComment()
+    {
+        return $this->Comment !== null;
+    }
+
+    /**
+     * Get 'Comment' value
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->Comment;
+    }
+
+    /**
+     * Set 'Comment' value
+     *
+     * @param string $value
+     */
+    public function setComment($value = null)
+    {
+        $this->Comment = $value;
+    }
+
+    /**
+     * Check if 'Labels' has a value
+     *
+     * @return bool
+     */
+    public function hasLabelsList()
+    {
+        return $this->Labels !== null;
+    }
+
+    /**
+     * Get 'Labels' value
+     *
+     * @return \Protobuf\Collection
+     */
+    public function getLabelsList()
+    {
+        return $this->Labels;
+    }
+
+    /**
+     * Set 'Labels' value
+     *
+     * @param \Protobuf\Collection $value
+     */
+    public function setLabelsList(\Protobuf\Collection $value = null)
+    {
+        $this->Labels = $value;
+    }
+
+    /**
+     * Add a new element to 'Labels'
+     *
+     * @param string $value
+     */
+    public function addLabels($value)
+    {
+        if ($this->Labels === null) {
+            $this->Labels = new \Protobuf\ScalarCollection();
+        }
+
+        $this->Labels->add($value);
     }
 
     /**
@@ -101,9 +189,16 @@ class ResolutionRequestCancellationAttachment extends \Protobuf\AbstractMessage
 
         $message = new self();
         $values  = array_merge([
+            'Comment' => null,
+            'Labels' => []
         ], $values);
 
         $message->setInitialResolutionRequestId($values['InitialResolutionRequestId']);
+        $message->setComment($values['Comment']);
+
+        foreach ($values['Labels'] as $item) {
+            $message->addLabels($item);
+        }
 
         return $message;
     }
@@ -121,6 +216,18 @@ class ResolutionRequestCancellationAttachment extends \Protobuf\AbstractMessage
                     'name' => 'InitialResolutionRequestId',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 2,
+                    'name' => 'Comment',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 3,
+                    'name' => 'Labels',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED()
                 ]),
             ],
         ]);
@@ -157,6 +264,18 @@ class ResolutionRequestCancellationAttachment extends \Protobuf\AbstractMessage
         if ($this->InitialResolutionRequestId !== null) {
             $writer->writeVarint($stream, 10);
             $writer->writeString($stream, $this->InitialResolutionRequestId);
+        }
+
+        if ($this->Comment !== null) {
+            $writer->writeVarint($stream, 18);
+            $writer->writeString($stream, $this->Comment);
+        }
+
+        if ($this->Labels !== null) {
+            foreach ($this->Labels as $val) {
+                $writer->writeVarint($stream, 26);
+                $writer->writeString($stream, $val);
+            }
         }
 
         if ($this->extensions !== null) {
@@ -201,6 +320,26 @@ class ResolutionRequestCancellationAttachment extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 2) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->Comment = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 3) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                if ($this->Labels === null) {
+                    $this->Labels = new \Protobuf\ScalarCollection();
+                }
+
+                $this->Labels->add($reader->readString($stream));
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -235,6 +374,18 @@ class ResolutionRequestCancellationAttachment extends \Protobuf\AbstractMessage
             $size += $calculator->computeStringSize($this->InitialResolutionRequestId);
         }
 
+        if ($this->Comment !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->Comment);
+        }
+
+        if ($this->Labels !== null) {
+            foreach ($this->Labels as $val) {
+                $size += 1;
+                $size += $calculator->computeStringSize($val);
+            }
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -248,6 +399,8 @@ class ResolutionRequestCancellationAttachment extends \Protobuf\AbstractMessage
     public function clear()
     {
         $this->InitialResolutionRequestId = null;
+        $this->Comment = null;
+        $this->Labels = null;
     }
 
     /**
@@ -260,6 +413,8 @@ class ResolutionRequestCancellationAttachment extends \Protobuf\AbstractMessage
         }
 
         $this->InitialResolutionRequestId = ($message->InitialResolutionRequestId !== null) ? $message->InitialResolutionRequestId : $this->InitialResolutionRequestId;
+        $this->Comment = ($message->Comment !== null) ? $message->Comment : $this->Comment;
+        $this->Labels = ($message->Labels !== null) ? $message->Labels : $this->Labels;
     }
 
 

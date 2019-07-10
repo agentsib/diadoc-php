@@ -166,6 +166,13 @@ class ExtendedOrganizationInfo extends \Protobuf\AbstractMessage
     protected $IndividualEntityRegistrationCertificate = null;
 
     /**
+     * Country optional string = 21
+     *
+     * @var string
+     */
+    protected $Country = null;
+
+    /**
      * Check if 'BoxId' has a value
      *
      * @return bool
@@ -766,6 +773,36 @@ class ExtendedOrganizationInfo extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'Country' has a value
+     *
+     * @return bool
+     */
+    public function hasCountry()
+    {
+        return $this->Country !== null;
+    }
+
+    /**
+     * Get 'Country' value
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->Country;
+    }
+
+    /**
+     * Set 'Country' value
+     *
+     * @param string $value
+     */
+    public function setCountry($value = null)
+    {
+        $this->Country = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -822,7 +859,8 @@ class ExtendedOrganizationInfo extends \Protobuf\AbstractMessage
             'Department' => null,
             'OrganizationAdditionalInfo' => null,
             'OrganizationOrPersonInfo' => null,
-            'IndividualEntityRegistrationCertificate' => null
+            'IndividualEntityRegistrationCertificate' => null,
+            'Country' => null
         ], $values);
 
         $message->setBoxId($values['BoxId']);
@@ -845,6 +883,7 @@ class ExtendedOrganizationInfo extends \Protobuf\AbstractMessage
         $message->setOrganizationAdditionalInfo($values['OrganizationAdditionalInfo']);
         $message->setOrganizationOrPersonInfo($values['OrganizationOrPersonInfo']);
         $message->setIndividualEntityRegistrationCertificate($values['IndividualEntityRegistrationCertificate']);
+        $message->setCountry($values['Country']);
 
         return $message;
     }
@@ -979,6 +1018,12 @@ class ExtendedOrganizationInfo extends \Protobuf\AbstractMessage
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
                 ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 21,
+                    'name' => 'Country',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
             ],
         ]);
     }
@@ -1110,6 +1155,11 @@ class ExtendedOrganizationInfo extends \Protobuf\AbstractMessage
         if ($this->IndividualEntityRegistrationCertificate !== null) {
             $writer->writeVarint($stream, 162);
             $writer->writeString($stream, $this->IndividualEntityRegistrationCertificate);
+        }
+
+        if ($this->Country !== null) {
+            $writer->writeVarint($stream, 170);
+            $writer->writeString($stream, $this->Country);
         }
 
         if ($this->extensions !== null) {
@@ -1313,6 +1363,14 @@ class ExtendedOrganizationInfo extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 21) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->Country = $reader->readString($stream);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -1445,6 +1503,11 @@ class ExtendedOrganizationInfo extends \Protobuf\AbstractMessage
             $size += $calculator->computeStringSize($this->IndividualEntityRegistrationCertificate);
         }
 
+        if ($this->Country !== null) {
+            $size += 2;
+            $size += $calculator->computeStringSize($this->Country);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -1477,6 +1540,7 @@ class ExtendedOrganizationInfo extends \Protobuf\AbstractMessage
         $this->OrganizationAdditionalInfo = null;
         $this->OrganizationOrPersonInfo = null;
         $this->IndividualEntityRegistrationCertificate = null;
+        $this->Country = null;
     }
 
     /**
@@ -1508,6 +1572,7 @@ class ExtendedOrganizationInfo extends \Protobuf\AbstractMessage
         $this->OrganizationAdditionalInfo = ($message->OrganizationAdditionalInfo !== null) ? $message->OrganizationAdditionalInfo : $this->OrganizationAdditionalInfo;
         $this->OrganizationOrPersonInfo = ($message->OrganizationOrPersonInfo !== null) ? $message->OrganizationOrPersonInfo : $this->OrganizationOrPersonInfo;
         $this->IndividualEntityRegistrationCertificate = ($message->IndividualEntityRegistrationCertificate !== null) ? $message->IndividualEntityRegistrationCertificate : $this->IndividualEntityRegistrationCertificate;
+        $this->Country = ($message->Country !== null) ? $message->Country : $this->Country;
     }
 
 

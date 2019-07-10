@@ -5,11 +5,14 @@
 //	GetMessage(string boxId, Guid messageId) : Message
 
 import "Content.proto";
-import "DocumentId.proto";
+import "LockMode.proto";
 import "Documents/Document.proto";
+import "Events/CancellationInfo.proto";
 import "Events/ResolutionInfo.proto";
 import "Events/ResolutionRequestInfo.proto";
 import "Events/ResolutionRequestDenialInfo.proto";
+import "Events/ResolutionRouteInfo.proto";
+import "DocumentId.proto";
 
 package AgentSIB.Diadoc.Api.Proto.Events;
 
@@ -45,6 +48,22 @@ message Message {
 	optional string ProxyBoxId = 18;
 	optional string ProxyTitle = 19;
 	optional bool PacketIsLocked = 20 [default = false];
+	required LockMode LockMode = 21 [default = None];
+	required Documents.MessageType MessageType = 22;
+	optional TemplateToLetterTransformationInfo TemplateToLetterTransformationInfo = 23;
+}
+
+message Template {
+    required string MessageId = 1;
+    required sfixed64 TimestampTicks = 2;
+    required string FromBoxId = 3;
+    required string ToBoxId = 4;
+    required string MessageFromBoxId = 5;
+    required string MessageToBoxId = 6;
+    repeated Entity Entities = 7;
+    optional bool IsDeleted = 8 [default = false];
+    optional string MessageToDepartmentId = 9;
+    required LockMode LockMode = 10;
 }
 
 message MessagePatch {
@@ -61,6 +80,8 @@ message MessagePatch {
 	optional bool MessageIsDelivered = 11 [default = false];
 	optional string DeliveredPatchId = 12;
 	required string PatchId = 13;
+
+	required Documents.MessageType MessageType = 15;
 }
 
 message Entity {
@@ -83,6 +104,27 @@ message Entity {
 	optional string PacketId = 18;
 	optional bool IsApprovementSignature = 19 [default = false];			// only for EntityType.Signature
 	optional bool IsEncryptedContent = 20 [default = false];
+	optional string AttachmentVersion = 21;
+	optional ResolutionRouteAssignmentInfo ResolutionRouteAssignmentInfo = 22; // only for AttachmentType.ResolutionRouteAssignmentAttachment
+	optional ResolutionRouteRemovalInfo ResolutionRouteRemovalInfo = 23;	// only for AttachmentType.ResolutionRouteRemovalAttachment
+	optional CancellationInfo CancellationInfo = 24;						// only for AttachmentType.Cancellation
+	repeated string Labels = 25;
+	optional string Version = 26;
+	optional TemplateTransformationInfo TemplateTransformationInfo = 27;
+}
+
+message TemplateToLetterTransformationInfo
+{
+	required string LetterFromBoxId = 1;
+	required string LetterToBoxId = 2;
+	optional string LetterFromDepartmentId = 3;
+	optional string LetterToDepartmentId = 4;
+}
+
+message TemplateTransformationInfo
+{
+	optional DocumentId TransformedToDocumentId = 1;
+	optional string Author = 2;
 }
 
 message EntityPatch {
@@ -144,8 +186,17 @@ enum AttachmentType {
 	UniversalTransferDocument = 41;
 	UniversalTransferDocumentBuyerTitle = 42;
 	UniversalTransferDocumentRevision = 45;
+	UniversalCorrectionDocument = 49;
+	UniversalCorrectionDocumentRevision = 50;
+	UniversalCorrectionDocumentBuyerTitle = 51;
 	CustomData = 64;
 	MoveDocument = 65;
-	ResolutionChainAssignmentAttachment = 66;
-	//Неизвестные типы должны обрабатываться как Nonformalized
+	ResolutionRouteAssignmentAttachment = 66;
+	ResolutionRouteRemovalAttachment = 67;
+	Title = 68;
+	Cancellation = 69;
+	Edition = 71;
+	DeletionRestoration = 72;
+	TemplateTransformation = 73;
+	//Неизвестные типы должны обрабатываться как Title
 }
