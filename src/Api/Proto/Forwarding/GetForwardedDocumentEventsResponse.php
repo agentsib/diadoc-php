@@ -40,6 +40,13 @@ class GetForwardedDocumentEventsResponse extends \Protobuf\AbstractMessage
     protected $Events = null;
 
     /**
+     * TotalCountType required enum = 3
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\TotalCountType
+     */
+    protected $TotalCountType = null;
+
+    /**
      * Check if 'TotalCount' has a value
      *
      * @return bool
@@ -114,6 +121,36 @@ class GetForwardedDocumentEventsResponse extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'TotalCountType' has a value
+     *
+     * @return bool
+     */
+    public function hasTotalCountType()
+    {
+        return $this->TotalCountType !== null;
+    }
+
+    /**
+     * Get 'TotalCountType' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\TotalCountType
+     */
+    public function getTotalCountType()
+    {
+        return $this->TotalCountType;
+    }
+
+    /**
+     * Set 'TotalCountType' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\TotalCountType $value
+     */
+    public function setTotalCountType(\AgentSIB\Diadoc\Api\Proto\TotalCountType $value)
+    {
+        $this->TotalCountType = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -146,13 +183,18 @@ class GetForwardedDocumentEventsResponse extends \Protobuf\AbstractMessage
      */
     public static function fromArray(array $values)
     {
+        if ( ! isset($values['TotalCountType'])) {
+            throw new \InvalidArgumentException('Field "TotalCountType" (tag 3) is required but has no value.');
+        }
+
         $message = new self();
         $values  = array_merge([
             'TotalCount' => null,
-            'Events' => []
+            'Events' => [],
         ], $values);
 
         $message->setTotalCount($values['TotalCount']);
+        $message->setTotalCountType($values['TotalCountType']);
 
         foreach ($values['Events'] as $item) {
             $message->addEvents($item);
@@ -182,6 +224,13 @@ class GetForwardedDocumentEventsResponse extends \Protobuf\AbstractMessage
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.Forwarding.ForwardedDocumentEvent'
                 ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 3,
+                    'name' => 'TotalCountType',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.TotalCountType'
+                ]),
             ],
         ]);
     }
@@ -210,6 +259,10 @@ class GetForwardedDocumentEventsResponse extends \Protobuf\AbstractMessage
         $writer      = $context->getWriter();
         $sizeContext = $context->getComputeSizeContext();
 
+        if ($this->TotalCountType === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Forwarding\\GetForwardedDocumentEventsResponse#TotalCountType" (tag 3) is required but has no value.');
+        }
+
         if ($this->TotalCount !== null) {
             $writer->writeVarint($stream, 8);
             $writer->writeVarint($stream, $this->TotalCount);
@@ -221,6 +274,11 @@ class GetForwardedDocumentEventsResponse extends \Protobuf\AbstractMessage
                 $writer->writeVarint($stream, $val->serializedSize($sizeContext));
                 $val->writeTo($context);
             }
+        }
+
+        if ($this->TotalCountType !== null) {
+            $writer->writeVarint($stream, 24);
+            $writer->writeVarint($stream, $this->TotalCountType->value());
         }
 
         if ($this->extensions !== null) {
@@ -284,6 +342,14 @@ class GetForwardedDocumentEventsResponse extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 3) {
+                \Protobuf\WireFormat::assertWireType($wire, 14);
+
+                $this->TotalCountType = \AgentSIB\Diadoc\Api\Proto\TotalCountType::valueOf($reader->readVarint($stream));
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -328,6 +394,11 @@ class GetForwardedDocumentEventsResponse extends \Protobuf\AbstractMessage
             }
         }
 
+        if ($this->TotalCountType !== null) {
+            $size += 1;
+            $size += $calculator->computeVarintSize($this->TotalCountType->value());
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -342,6 +413,7 @@ class GetForwardedDocumentEventsResponse extends \Protobuf\AbstractMessage
     {
         $this->TotalCount = null;
         $this->Events = null;
+        $this->TotalCountType = null;
     }
 
     /**
@@ -355,6 +427,7 @@ class GetForwardedDocumentEventsResponse extends \Protobuf\AbstractMessage
 
         $this->TotalCount = ($message->TotalCount !== null) ? $message->TotalCount : $this->TotalCount;
         $this->Events = ($message->Events !== null) ? $message->Events : $this->Events;
+        $this->TotalCountType = ($message->TotalCountType !== null) ? $message->TotalCountType : $this->TotalCountType;
     }
 
 

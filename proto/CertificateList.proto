@@ -1,0 +1,6 @@
+import "CertificateInfoV2.proto";
+package AgentSIB.Diadoc.Api.Proto;
+
+message CertificateList {
+	repeated CertificateInfoV2 Certificates = 1;
+}

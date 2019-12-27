@@ -102,11 +102,19 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
     protected $PredefinedRecipientTitle = null;
 
     /**
+     * RefusalDisabled optional bool = 12
+     *
+     * @var bool
+     */
+    protected $RefusalDisabled = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
     {
         $this->NeedRecipientSignature = false;
+        $this->RefusalDisabled = false;
 
         parent::__construct($stream, $configuration);
     }
@@ -456,6 +464,36 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'RefusalDisabled' has a value
+     *
+     * @return bool
+     */
+    public function hasRefusalDisabled()
+    {
+        return $this->RefusalDisabled !== null;
+    }
+
+    /**
+     * Get 'RefusalDisabled' value
+     *
+     * @return bool
+     */
+    public function getRefusalDisabled()
+    {
+        return $this->RefusalDisabled;
+    }
+
+    /**
+     * Set 'RefusalDisabled' value
+     *
+     * @param bool $value
+     */
+    public function setRefusalDisabled($value = null)
+    {
+        $this->RefusalDisabled = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -506,7 +544,8 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
             'CustomDocumentId' => null,
             'EditingSettingId' => null,
             'NeedRecipientSignature' => false,
-            'PredefinedRecipientTitle' => null
+            'PredefinedRecipientTitle' => null,
+            'RefusalDisabled' => false
         ], $values);
 
         $message->setUnsignedContent($values['UnsignedContent']);
@@ -519,6 +558,7 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
         $message->setEditingSettingId($values['EditingSettingId']);
         $message->setNeedRecipientSignature($values['NeedRecipientSignature']);
         $message->setPredefinedRecipientTitle($values['PredefinedRecipientTitle']);
+        $message->setRefusalDisabled($values['RefusalDisabled']);
 
         foreach ($values['Metadata'] as $item) {
             $message->addMetadata($item);
@@ -604,6 +644,13 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.PredefinedRecipientTitle'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 12,
+                    'name' => 'RefusalDisabled',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_BOOL(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'default_value' => false
                 ]),
             ],
         ]);
@@ -699,6 +746,11 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
             $writer->writeVarint($stream, 90);
             $writer->writeVarint($stream, $this->PredefinedRecipientTitle->serializedSize($sizeContext));
             $this->PredefinedRecipientTitle->writeTo($context);
+        }
+
+        if ($this->RefusalDisabled !== null) {
+            $writer->writeVarint($stream, 96);
+            $writer->writeBool($stream, $this->RefusalDisabled);
         }
 
         if ($this->extensions !== null) {
@@ -848,6 +900,14 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 12) {
+                \Protobuf\WireFormat::assertWireType($wire, 8);
+
+                $this->RefusalDisabled = $reader->readBool($stream);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -943,6 +1003,11 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
             $size += $calculator->computeVarintSize($innerSize);
         }
 
+        if ($this->RefusalDisabled !== null) {
+            $size += 1;
+            $size += 1;
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -966,6 +1031,7 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
         $this->EditingSettingId = null;
         $this->NeedRecipientSignature = false;
         $this->PredefinedRecipientTitle = null;
+        $this->RefusalDisabled = false;
     }
 
     /**
@@ -988,6 +1054,7 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
         $this->EditingSettingId = ($message->EditingSettingId !== null) ? $message->EditingSettingId : $this->EditingSettingId;
         $this->NeedRecipientSignature = ($message->NeedRecipientSignature !== null) ? $message->NeedRecipientSignature : $this->NeedRecipientSignature;
         $this->PredefinedRecipientTitle = ($message->PredefinedRecipientTitle !== null) ? $message->PredefinedRecipientTitle : $this->PredefinedRecipientTitle;
+        $this->RefusalDisabled = ($message->RefusalDisabled !== null) ? $message->RefusalDisabled : $this->RefusalDisabled;
     }
 
 

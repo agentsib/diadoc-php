@@ -207,6 +207,13 @@ class Entity extends \Protobuf\AbstractMessage
     protected $TemplateTransformationInfo = null;
 
     /**
+     * TemplateRefusalInfo optional message = 28
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\TemplateRefusalInfo
+     */
+    protected $TemplateRefusalInfo = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
@@ -1017,6 +1024,36 @@ class Entity extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'TemplateRefusalInfo' has a value
+     *
+     * @return bool
+     */
+    public function hasTemplateRefusalInfo()
+    {
+        return $this->TemplateRefusalInfo !== null;
+    }
+
+    /**
+     * Get 'TemplateRefusalInfo' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\TemplateRefusalInfo
+     */
+    public function getTemplateRefusalInfo()
+    {
+        return $this->TemplateRefusalInfo;
+    }
+
+    /**
+     * Set 'TemplateRefusalInfo' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Events\TemplateRefusalInfo $value
+     */
+    public function setTemplateRefusalInfo(\AgentSIB\Diadoc\Api\Proto\Events\TemplateRefusalInfo $value = null)
+    {
+        $this->TemplateRefusalInfo = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -1079,7 +1116,8 @@ class Entity extends \Protobuf\AbstractMessage
             'CancellationInfo' => null,
             'Labels' => [],
             'Version' => null,
-            'TemplateTransformationInfo' => null
+            'TemplateTransformationInfo' => null,
+            'TemplateRefusalInfo' => null
         ], $values);
 
         $message->setEntityType($values['EntityType']);
@@ -1107,6 +1145,7 @@ class Entity extends \Protobuf\AbstractMessage
         $message->setCancellationInfo($values['CancellationInfo']);
         $message->setVersion($values['Version']);
         $message->setTemplateTransformationInfo($values['TemplateTransformationInfo']);
+        $message->setTemplateRefusalInfo($values['TemplateRefusalInfo']);
 
         foreach ($values['Labels'] as $item) {
             $message->addLabels($item);
@@ -1297,6 +1336,13 @@ class Entity extends \Protobuf\AbstractMessage
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.TemplateTransformationInfo'
                 ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 28,
+                    'name' => 'TemplateRefusalInfo',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.TemplateRefusalInfo'
+                ]),
             ],
         ]);
     }
@@ -1468,6 +1514,12 @@ class Entity extends \Protobuf\AbstractMessage
             $writer->writeVarint($stream, 218);
             $writer->writeVarint($stream, $this->TemplateTransformationInfo->serializedSize($sizeContext));
             $this->TemplateTransformationInfo->writeTo($context);
+        }
+
+        if ($this->TemplateRefusalInfo !== null) {
+            $writer->writeVarint($stream, 226);
+            $writer->writeVarint($stream, $this->TemplateRefusalInfo->serializedSize($sizeContext));
+            $this->TemplateRefusalInfo->writeTo($context);
         }
 
         if ($this->extensions !== null) {
@@ -1779,6 +1831,21 @@ class Entity extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 28) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\TemplateRefusalInfo();
+
+                $this->TemplateRefusalInfo = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -1967,6 +2034,14 @@ class Entity extends \Protobuf\AbstractMessage
             $size += $calculator->computeVarintSize($innerSize);
         }
 
+        if ($this->TemplateRefusalInfo !== null) {
+            $innerSize = $this->TemplateRefusalInfo->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -2005,6 +2080,7 @@ class Entity extends \Protobuf\AbstractMessage
         $this->Labels = null;
         $this->Version = null;
         $this->TemplateTransformationInfo = null;
+        $this->TemplateRefusalInfo = null;
     }
 
     /**
@@ -2042,6 +2118,7 @@ class Entity extends \Protobuf\AbstractMessage
         $this->Labels = ($message->Labels !== null) ? $message->Labels : $this->Labels;
         $this->Version = ($message->Version !== null) ? $message->Version : $this->Version;
         $this->TemplateTransformationInfo = ($message->TemplateTransformationInfo !== null) ? $message->TemplateTransformationInfo : $this->TemplateTransformationInfo;
+        $this->TemplateRefusalInfo = ($message->TemplateRefusalInfo !== null) ? $message->TemplateRefusalInfo : $this->TemplateRefusalInfo;
     }
 
 

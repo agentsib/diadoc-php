@@ -39,6 +39,13 @@ class BoxEventList extends \Protobuf\AbstractMessage
     protected $TotalCount = null;
 
     /**
+     * TotalCountType required enum = 3
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\TotalCountType
+     */
+    protected $TotalCountType = null;
+
+    /**
      * Check if 'Events' has a value
      *
      * @return bool
@@ -113,6 +120,36 @@ class BoxEventList extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'TotalCountType' has a value
+     *
+     * @return bool
+     */
+    public function hasTotalCountType()
+    {
+        return $this->TotalCountType !== null;
+    }
+
+    /**
+     * Get 'TotalCountType' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\TotalCountType
+     */
+    public function getTotalCountType()
+    {
+        return $this->TotalCountType;
+    }
+
+    /**
+     * Set 'TotalCountType' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\TotalCountType $value
+     */
+    public function setTotalCountType(\AgentSIB\Diadoc\Api\Proto\TotalCountType $value)
+    {
+        $this->TotalCountType = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -145,13 +182,18 @@ class BoxEventList extends \Protobuf\AbstractMessage
      */
     public static function fromArray(array $values)
     {
+        if ( ! isset($values['TotalCountType'])) {
+            throw new \InvalidArgumentException('Field "TotalCountType" (tag 3) is required but has no value.');
+        }
+
         $message = new self();
         $values  = array_merge([
             'Events' => [],
-            'TotalCount' => null
+            'TotalCount' => null,
         ], $values);
 
         $message->setTotalCount($values['TotalCount']);
+        $message->setTotalCountType($values['TotalCountType']);
 
         foreach ($values['Events'] as $item) {
             $message->addEvents($item);
@@ -181,6 +223,13 @@ class BoxEventList extends \Protobuf\AbstractMessage
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_INT32(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
                 ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 3,
+                    'name' => 'TotalCountType',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.TotalCountType'
+                ]),
             ],
         ]);
     }
@@ -209,6 +258,10 @@ class BoxEventList extends \Protobuf\AbstractMessage
         $writer      = $context->getWriter();
         $sizeContext = $context->getComputeSizeContext();
 
+        if ($this->TotalCountType === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Events\\BoxEventList#TotalCountType" (tag 3) is required but has no value.');
+        }
+
         if ($this->Events !== null) {
             foreach ($this->Events as $val) {
                 $writer->writeVarint($stream, 10);
@@ -220,6 +273,11 @@ class BoxEventList extends \Protobuf\AbstractMessage
         if ($this->TotalCount !== null) {
             $writer->writeVarint($stream, 16);
             $writer->writeVarint($stream, $this->TotalCount);
+        }
+
+        if ($this->TotalCountType !== null) {
+            $writer->writeVarint($stream, 24);
+            $writer->writeVarint($stream, $this->TotalCountType->value());
         }
 
         if ($this->extensions !== null) {
@@ -283,6 +341,14 @@ class BoxEventList extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 3) {
+                \Protobuf\WireFormat::assertWireType($wire, 14);
+
+                $this->TotalCountType = \AgentSIB\Diadoc\Api\Proto\TotalCountType::valueOf($reader->readVarint($stream));
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -327,6 +393,11 @@ class BoxEventList extends \Protobuf\AbstractMessage
             $size += $calculator->computeVarintSize($this->TotalCount);
         }
 
+        if ($this->TotalCountType !== null) {
+            $size += 1;
+            $size += $calculator->computeVarintSize($this->TotalCountType->value());
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -341,6 +412,7 @@ class BoxEventList extends \Protobuf\AbstractMessage
     {
         $this->Events = null;
         $this->TotalCount = null;
+        $this->TotalCountType = null;
     }
 
     /**
@@ -354,6 +426,7 @@ class BoxEventList extends \Protobuf\AbstractMessage
 
         $this->Events = ($message->Events !== null) ? $message->Events : $this->Events;
         $this->TotalCount = ($message->TotalCount !== null) ? $message->TotalCount : $this->TotalCount;
+        $this->TotalCountType = ($message->TotalCountType !== null) ? $message->TotalCountType : $this->TotalCountType;
     }
 
 

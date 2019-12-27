@@ -46,6 +46,13 @@ class DocumentTemplateInfo extends \Protobuf\AbstractMessage
     protected $TemplateTransformationInfos = null;
 
     /**
+     * TemplateRefusalInfo optional message = 4
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Docflow\TemplateRefusalInfo
+     */
+    protected $TemplateRefusalInfo = null;
+
+    /**
      * Check if 'LetterParticipants' has a value
      *
      * @return bool
@@ -164,6 +171,36 @@ class DocumentTemplateInfo extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'TemplateRefusalInfo' has a value
+     *
+     * @return bool
+     */
+    public function hasTemplateRefusalInfo()
+    {
+        return $this->TemplateRefusalInfo !== null;
+    }
+
+    /**
+     * Get 'TemplateRefusalInfo' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Docflow\TemplateRefusalInfo
+     */
+    public function getTemplateRefusalInfo()
+    {
+        return $this->TemplateRefusalInfo;
+    }
+
+    /**
+     * Set 'TemplateRefusalInfo' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Docflow\TemplateRefusalInfo $value
+     */
+    public function setTemplateRefusalInfo(\AgentSIB\Diadoc\Api\Proto\Docflow\TemplateRefusalInfo $value = null)
+    {
+        $this->TemplateRefusalInfo = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -203,10 +240,12 @@ class DocumentTemplateInfo extends \Protobuf\AbstractMessage
         $message = new self();
         $values  = array_merge([
             'TransformedToLetterIds' => [],
-            'TemplateTransformationInfos' => []
+            'TemplateTransformationInfos' => [],
+            'TemplateRefusalInfo' => null
         ], $values);
 
         $message->setLetterParticipants($values['LetterParticipants']);
+        $message->setTemplateRefusalInfo($values['TemplateRefusalInfo']);
 
         foreach ($values['TransformedToLetterIds'] as $item) {
             $message->addTransformedToLetterIds($item);
@@ -246,6 +285,13 @@ class DocumentTemplateInfo extends \Protobuf\AbstractMessage
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.Docflow.TemplateTransformationInfo'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 4,
+                    'name' => 'TemplateRefusalInfo',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Docflow.TemplateRefusalInfo'
                 ]),
             ],
         ]);
@@ -298,6 +344,12 @@ class DocumentTemplateInfo extends \Protobuf\AbstractMessage
                 $writer->writeVarint($stream, $val->serializedSize($sizeContext));
                 $val->writeTo($context);
             }
+        }
+
+        if ($this->TemplateRefusalInfo !== null) {
+            $writer->writeVarint($stream, 34);
+            $writer->writeVarint($stream, $this->TemplateRefusalInfo->serializedSize($sizeContext));
+            $this->TemplateRefusalInfo->writeTo($context);
         }
 
         if ($this->extensions !== null) {
@@ -380,6 +432,21 @@ class DocumentTemplateInfo extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 4) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Docflow\TemplateRefusalInfo();
+
+                $this->TemplateRefusalInfo = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -434,6 +501,14 @@ class DocumentTemplateInfo extends \Protobuf\AbstractMessage
             }
         }
 
+        if ($this->TemplateRefusalInfo !== null) {
+            $innerSize = $this->TemplateRefusalInfo->serializedSize($context);
+
+            $size += 1;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -449,6 +524,7 @@ class DocumentTemplateInfo extends \Protobuf\AbstractMessage
         $this->LetterParticipants = null;
         $this->TransformedToLetterIds = null;
         $this->TemplateTransformationInfos = null;
+        $this->TemplateRefusalInfo = null;
     }
 
     /**
@@ -463,6 +539,7 @@ class DocumentTemplateInfo extends \Protobuf\AbstractMessage
         $this->LetterParticipants = ($message->LetterParticipants !== null) ? $message->LetterParticipants : $this->LetterParticipants;
         $this->TransformedToLetterIds = ($message->TransformedToLetterIds !== null) ? $message->TransformedToLetterIds : $this->TransformedToLetterIds;
         $this->TemplateTransformationInfos = ($message->TemplateTransformationInfos !== null) ? $message->TemplateTransformationInfos : $this->TemplateTransformationInfos;
+        $this->TemplateRefusalInfo = ($message->TemplateRefusalInfo !== null) ? $message->TemplateRefusalInfo : $this->TemplateRefusalInfo;
     }
 
 

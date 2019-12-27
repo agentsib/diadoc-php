@@ -285,6 +285,11 @@ class AttachmentType extends \Protobuf\Enum
     const TemplateTransformation_VALUE = 73;
 
     /**
+     * TemplateRefusal = 74
+     */
+    const TemplateRefusal_VALUE = 74;
+
+    /**
      * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
      */
     protected static $UnknownAttachmentType = null;
@@ -553,6 +558,11 @@ class AttachmentType extends \Protobuf\Enum
      * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
      */
     protected static $TemplateTransformation = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    protected static $TemplateRefusal = null;
 
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
@@ -1203,6 +1213,18 @@ class AttachmentType extends \Protobuf\Enum
     }
 
     /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    public static function TemplateRefusal()
+    {
+        if (self::$TemplateRefusal !== null) {
+            return self::$TemplateRefusal;
+        }
+
+        return self::$TemplateRefusal = new self('TemplateRefusal', self::TemplateRefusal_VALUE);
+    }
+
+    /**
      * @param int $value
      * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
      */
@@ -1263,6 +1285,7 @@ class AttachmentType extends \Protobuf\Enum
             case 71: return self::Edition();
             case 72: return self::DeletionRestoration();
             case 73: return self::TemplateTransformation();
+            case 74: return self::TemplateRefusal();
             default: return null;
         }
     }
