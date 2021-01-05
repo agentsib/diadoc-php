@@ -54,6 +54,20 @@ class TemplateToLetterTransformationInfo extends \Protobuf\AbstractMessage
     protected $LetterToDepartmentId = null;
 
     /**
+     * LetterProxyBoxId optional string = 5
+     *
+     * @var string
+     */
+    protected $LetterProxyBoxId = null;
+
+    /**
+     * LetterProxyDepartmentId optional string = 6
+     *
+     * @var string
+     */
+    protected $LetterProxyDepartmentId = null;
+
+    /**
      * Check if 'LetterFromBoxId' has a value
      *
      * @return bool
@@ -174,6 +188,66 @@ class TemplateToLetterTransformationInfo extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'LetterProxyBoxId' has a value
+     *
+     * @return bool
+     */
+    public function hasLetterProxyBoxId()
+    {
+        return $this->LetterProxyBoxId !== null;
+    }
+
+    /**
+     * Get 'LetterProxyBoxId' value
+     *
+     * @return string
+     */
+    public function getLetterProxyBoxId()
+    {
+        return $this->LetterProxyBoxId;
+    }
+
+    /**
+     * Set 'LetterProxyBoxId' value
+     *
+     * @param string $value
+     */
+    public function setLetterProxyBoxId($value = null)
+    {
+        $this->LetterProxyBoxId = $value;
+    }
+
+    /**
+     * Check if 'LetterProxyDepartmentId' has a value
+     *
+     * @return bool
+     */
+    public function hasLetterProxyDepartmentId()
+    {
+        return $this->LetterProxyDepartmentId !== null;
+    }
+
+    /**
+     * Get 'LetterProxyDepartmentId' value
+     *
+     * @return string
+     */
+    public function getLetterProxyDepartmentId()
+    {
+        return $this->LetterProxyDepartmentId;
+    }
+
+    /**
+     * Set 'LetterProxyDepartmentId' value
+     *
+     * @param string $value
+     */
+    public function setLetterProxyDepartmentId($value = null)
+    {
+        $this->LetterProxyDepartmentId = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -217,13 +291,17 @@ class TemplateToLetterTransformationInfo extends \Protobuf\AbstractMessage
         $message = new self();
         $values  = array_merge([
             'LetterFromDepartmentId' => null,
-            'LetterToDepartmentId' => null
+            'LetterToDepartmentId' => null,
+            'LetterProxyBoxId' => null,
+            'LetterProxyDepartmentId' => null
         ], $values);
 
         $message->setLetterFromBoxId($values['LetterFromBoxId']);
         $message->setLetterToBoxId($values['LetterToBoxId']);
         $message->setLetterFromDepartmentId($values['LetterFromDepartmentId']);
         $message->setLetterToDepartmentId($values['LetterToDepartmentId']);
+        $message->setLetterProxyBoxId($values['LetterProxyBoxId']);
+        $message->setLetterProxyDepartmentId($values['LetterProxyDepartmentId']);
 
         return $message;
     }
@@ -257,6 +335,18 @@ class TemplateToLetterTransformationInfo extends \Protobuf\AbstractMessage
                 \google\protobuf\FieldDescriptorProto::fromArray([
                     'number' => 4,
                     'name' => 'LetterToDepartmentId',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 5,
+                    'name' => 'LetterProxyBoxId',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 6,
+                    'name' => 'LetterProxyDepartmentId',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
                 ]),
@@ -314,6 +404,16 @@ class TemplateToLetterTransformationInfo extends \Protobuf\AbstractMessage
         if ($this->LetterToDepartmentId !== null) {
             $writer->writeVarint($stream, 34);
             $writer->writeString($stream, $this->LetterToDepartmentId);
+        }
+
+        if ($this->LetterProxyBoxId !== null) {
+            $writer->writeVarint($stream, 42);
+            $writer->writeString($stream, $this->LetterProxyBoxId);
+        }
+
+        if ($this->LetterProxyDepartmentId !== null) {
+            $writer->writeVarint($stream, 50);
+            $writer->writeString($stream, $this->LetterProxyDepartmentId);
         }
 
         if ($this->extensions !== null) {
@@ -382,6 +482,22 @@ class TemplateToLetterTransformationInfo extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 5) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->LetterProxyBoxId = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 6) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->LetterProxyDepartmentId = $reader->readString($stream);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -431,6 +547,16 @@ class TemplateToLetterTransformationInfo extends \Protobuf\AbstractMessage
             $size += $calculator->computeStringSize($this->LetterToDepartmentId);
         }
 
+        if ($this->LetterProxyBoxId !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->LetterProxyBoxId);
+        }
+
+        if ($this->LetterProxyDepartmentId !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->LetterProxyDepartmentId);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -447,6 +573,8 @@ class TemplateToLetterTransformationInfo extends \Protobuf\AbstractMessage
         $this->LetterToBoxId = null;
         $this->LetterFromDepartmentId = null;
         $this->LetterToDepartmentId = null;
+        $this->LetterProxyBoxId = null;
+        $this->LetterProxyDepartmentId = null;
     }
 
     /**
@@ -462,6 +590,8 @@ class TemplateToLetterTransformationInfo extends \Protobuf\AbstractMessage
         $this->LetterToBoxId = ($message->LetterToBoxId !== null) ? $message->LetterToBoxId : $this->LetterToBoxId;
         $this->LetterFromDepartmentId = ($message->LetterFromDepartmentId !== null) ? $message->LetterFromDepartmentId : $this->LetterFromDepartmentId;
         $this->LetterToDepartmentId = ($message->LetterToDepartmentId !== null) ? $message->LetterToDepartmentId : $this->LetterToDepartmentId;
+        $this->LetterProxyBoxId = ($message->LetterProxyBoxId !== null) ? $message->LetterProxyBoxId : $this->LetterProxyBoxId;
+        $this->LetterProxyDepartmentId = ($message->LetterProxyDepartmentId !== null) ? $message->LetterProxyDepartmentId : $this->LetterProxyDepartmentId;
     }
 
 

@@ -46,6 +46,27 @@ class OrganizationWithCounteragentStatus extends \Protobuf\AbstractMessage
     protected $LastEventTimestampTicks = null;
 
     /**
+     * MessageFromCounteragent optional string = 4
+     *
+     * @var string
+     */
+    protected $MessageFromCounteragent = null;
+
+    /**
+     * MessageToCounteragent optional string = 5
+     *
+     * @var string
+     */
+    protected $MessageToCounteragent = null;
+
+    /**
+     * InvitationDocumentId optional message = 6
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\DocumentId
+     */
+    protected $InvitationDocumentId = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
@@ -146,6 +167,96 @@ class OrganizationWithCounteragentStatus extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'MessageFromCounteragent' has a value
+     *
+     * @return bool
+     */
+    public function hasMessageFromCounteragent()
+    {
+        return $this->MessageFromCounteragent !== null;
+    }
+
+    /**
+     * Get 'MessageFromCounteragent' value
+     *
+     * @return string
+     */
+    public function getMessageFromCounteragent()
+    {
+        return $this->MessageFromCounteragent;
+    }
+
+    /**
+     * Set 'MessageFromCounteragent' value
+     *
+     * @param string $value
+     */
+    public function setMessageFromCounteragent($value = null)
+    {
+        $this->MessageFromCounteragent = $value;
+    }
+
+    /**
+     * Check if 'MessageToCounteragent' has a value
+     *
+     * @return bool
+     */
+    public function hasMessageToCounteragent()
+    {
+        return $this->MessageToCounteragent !== null;
+    }
+
+    /**
+     * Get 'MessageToCounteragent' value
+     *
+     * @return string
+     */
+    public function getMessageToCounteragent()
+    {
+        return $this->MessageToCounteragent;
+    }
+
+    /**
+     * Set 'MessageToCounteragent' value
+     *
+     * @param string $value
+     */
+    public function setMessageToCounteragent($value = null)
+    {
+        $this->MessageToCounteragent = $value;
+    }
+
+    /**
+     * Check if 'InvitationDocumentId' has a value
+     *
+     * @return bool
+     */
+    public function hasInvitationDocumentId()
+    {
+        return $this->InvitationDocumentId !== null;
+    }
+
+    /**
+     * Get 'InvitationDocumentId' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\DocumentId
+     */
+    public function getInvitationDocumentId()
+    {
+        return $this->InvitationDocumentId;
+    }
+
+    /**
+     * Set 'InvitationDocumentId' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\DocumentId $value
+     */
+    public function setInvitationDocumentId(\AgentSIB\Diadoc\Api\Proto\DocumentId $value = null)
+    {
+        $this->InvitationDocumentId = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -185,12 +296,18 @@ class OrganizationWithCounteragentStatus extends \Protobuf\AbstractMessage
         $message = new self();
         $values  = array_merge([
             'CounteragentStatus' => \AgentSIB\Diadoc\Api\Proto\CounteragentStatus::UnknownCounteragentStatus(),
-            'LastEventTimestampTicks' => null
+            'LastEventTimestampTicks' => null,
+            'MessageFromCounteragent' => null,
+            'MessageToCounteragent' => null,
+            'InvitationDocumentId' => null
         ], $values);
 
         $message->setOrganization($values['Organization']);
         $message->setCounteragentStatus($values['CounteragentStatus']);
         $message->setLastEventTimestampTicks($values['LastEventTimestampTicks']);
+        $message->setMessageFromCounteragent($values['MessageFromCounteragent']);
+        $message->setMessageToCounteragent($values['MessageToCounteragent']);
+        $message->setInvitationDocumentId($values['InvitationDocumentId']);
 
         return $message;
     }
@@ -223,6 +340,25 @@ class OrganizationWithCounteragentStatus extends \Protobuf\AbstractMessage
                     'name' => 'LastEventTimestampTicks',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_SFIXED64(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 4,
+                    'name' => 'MessageFromCounteragent',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 5,
+                    'name' => 'MessageToCounteragent',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 6,
+                    'name' => 'InvitationDocumentId',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.DocumentId'
                 ]),
             ],
         ]);
@@ -270,6 +406,22 @@ class OrganizationWithCounteragentStatus extends \Protobuf\AbstractMessage
         if ($this->LastEventTimestampTicks !== null) {
             $writer->writeVarint($stream, 25);
             $writer->writeSFixed64($stream, $this->LastEventTimestampTicks);
+        }
+
+        if ($this->MessageFromCounteragent !== null) {
+            $writer->writeVarint($stream, 34);
+            $writer->writeString($stream, $this->MessageFromCounteragent);
+        }
+
+        if ($this->MessageToCounteragent !== null) {
+            $writer->writeVarint($stream, 42);
+            $writer->writeString($stream, $this->MessageToCounteragent);
+        }
+
+        if ($this->InvitationDocumentId !== null) {
+            $writer->writeVarint($stream, 50);
+            $writer->writeVarint($stream, $this->InvitationDocumentId->serializedSize($sizeContext));
+            $this->InvitationDocumentId->writeTo($context);
         }
 
         if ($this->extensions !== null) {
@@ -337,6 +489,37 @@ class OrganizationWithCounteragentStatus extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 4) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->MessageFromCounteragent = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 5) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->MessageToCounteragent = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 6) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\DocumentId();
+
+                $this->InvitationDocumentId = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -384,6 +567,24 @@ class OrganizationWithCounteragentStatus extends \Protobuf\AbstractMessage
             $size += 8;
         }
 
+        if ($this->MessageFromCounteragent !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->MessageFromCounteragent);
+        }
+
+        if ($this->MessageToCounteragent !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->MessageToCounteragent);
+        }
+
+        if ($this->InvitationDocumentId !== null) {
+            $innerSize = $this->InvitationDocumentId->serializedSize($context);
+
+            $size += 1;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -399,6 +600,9 @@ class OrganizationWithCounteragentStatus extends \Protobuf\AbstractMessage
         $this->Organization = null;
         $this->CounteragentStatus = \AgentSIB\Diadoc\Api\Proto\CounteragentStatus::UnknownCounteragentStatus();
         $this->LastEventTimestampTicks = null;
+        $this->MessageFromCounteragent = null;
+        $this->MessageToCounteragent = null;
+        $this->InvitationDocumentId = null;
     }
 
     /**
@@ -413,6 +617,9 @@ class OrganizationWithCounteragentStatus extends \Protobuf\AbstractMessage
         $this->Organization = ($message->Organization !== null) ? $message->Organization : $this->Organization;
         $this->CounteragentStatus = ($message->CounteragentStatus !== null) ? $message->CounteragentStatus : $this->CounteragentStatus;
         $this->LastEventTimestampTicks = ($message->LastEventTimestampTicks !== null) ? $message->LastEventTimestampTicks : $this->LastEventTimestampTicks;
+        $this->MessageFromCounteragent = ($message->MessageFromCounteragent !== null) ? $message->MessageFromCounteragent : $this->MessageFromCounteragent;
+        $this->MessageToCounteragent = ($message->MessageToCounteragent !== null) ? $message->MessageToCounteragent : $this->MessageToCounteragent;
+        $this->InvitationDocumentId = ($message->InvitationDocumentId !== null) ? $message->InvitationDocumentId : $this->InvitationDocumentId;
     }
 
 

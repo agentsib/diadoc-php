@@ -95,6 +95,20 @@ class DocflowV3 extends \Protobuf\AbstractMessage
     protected $ResolutionEntities = null;
 
     /**
+     * OuterDocflows repeated message = 12
+     *
+     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflow>
+     */
+    protected $OuterDocflows = null;
+
+    /**
+     * OuterDocflowEntities repeated message = 13
+     *
+     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflowEntities>
+     */
+    protected $OuterDocflowEntities = null;
+
+    /**
      * Check if 'SenderTitle' has a value
      *
      * @return bool
@@ -395,6 +409,94 @@ class DocflowV3 extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'OuterDocflows' has a value
+     *
+     * @return bool
+     */
+    public function hasOuterDocflowsList()
+    {
+        return $this->OuterDocflows !== null;
+    }
+
+    /**
+     * Get 'OuterDocflows' value
+     *
+     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflow>
+     */
+    public function getOuterDocflowsList()
+    {
+        return $this->OuterDocflows;
+    }
+
+    /**
+     * Set 'OuterDocflows' value
+     *
+     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflow> $value
+     */
+    public function setOuterDocflowsList(\Protobuf\Collection $value = null)
+    {
+        $this->OuterDocflows = $value;
+    }
+
+    /**
+     * Add a new element to 'OuterDocflows'
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflow $value
+     */
+    public function addOuterDocflows(\AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflow $value)
+    {
+        if ($this->OuterDocflows === null) {
+            $this->OuterDocflows = new \Protobuf\MessageCollection();
+        }
+
+        $this->OuterDocflows->add($value);
+    }
+
+    /**
+     * Check if 'OuterDocflowEntities' has a value
+     *
+     * @return bool
+     */
+    public function hasOuterDocflowEntitiesList()
+    {
+        return $this->OuterDocflowEntities !== null;
+    }
+
+    /**
+     * Get 'OuterDocflowEntities' value
+     *
+     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflowEntities>
+     */
+    public function getOuterDocflowEntitiesList()
+    {
+        return $this->OuterDocflowEntities;
+    }
+
+    /**
+     * Set 'OuterDocflowEntities' value
+     *
+     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflowEntities> $value
+     */
+    public function setOuterDocflowEntitiesList(\Protobuf\Collection $value = null)
+    {
+        $this->OuterDocflowEntities = $value;
+    }
+
+    /**
+     * Add a new element to 'OuterDocflowEntities'
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflowEntities $value
+     */
+    public function addOuterDocflowEntities(\AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflowEntities $value)
+    {
+        if ($this->OuterDocflowEntities === null) {
+            $this->OuterDocflowEntities = new \Protobuf\MessageCollection();
+        }
+
+        $this->OuterDocflowEntities->add($value);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -441,7 +543,9 @@ class DocflowV3 extends \Protobuf\AbstractMessage
             'Revocation' => null,
             'SenderReceipt' => null,
             'Resolution' => null,
-            'ResolutionEntities' => null
+            'ResolutionEntities' => null,
+            'OuterDocflows' => [],
+            'OuterDocflowEntities' => []
         ], $values);
 
         $message->setSenderTitle($values['SenderTitle']);
@@ -454,6 +558,14 @@ class DocflowV3 extends \Protobuf\AbstractMessage
         $message->setSenderReceipt($values['SenderReceipt']);
         $message->setResolution($values['Resolution']);
         $message->setResolutionEntities($values['ResolutionEntities']);
+
+        foreach ($values['OuterDocflows'] as $item) {
+            $message->addOuterDocflows($item);
+        }
+
+        foreach ($values['OuterDocflowEntities'] as $item) {
+            $message->addOuterDocflowEntities($item);
+        }
 
         return $message;
     }
@@ -535,6 +647,20 @@ class DocflowV3 extends \Protobuf\AbstractMessage
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.Docflow.ResolutionEntitiesV3'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 12,
+                    'name' => 'OuterDocflows',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Docflow.OuterDocflow'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 13,
+                    'name' => 'OuterDocflowEntities',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Docflow.OuterDocflowEntities'
                 ]),
             ],
         ]);
@@ -626,6 +752,22 @@ class DocflowV3 extends \Protobuf\AbstractMessage
             $writer->writeVarint($stream, 82);
             $writer->writeVarint($stream, $this->ResolutionEntities->serializedSize($sizeContext));
             $this->ResolutionEntities->writeTo($context);
+        }
+
+        if ($this->OuterDocflows !== null) {
+            foreach ($this->OuterDocflows as $val) {
+                $writer->writeVarint($stream, 98);
+                $writer->writeVarint($stream, $val->serializedSize($sizeContext));
+                $val->writeTo($context);
+            }
+        }
+
+        if ($this->OuterDocflowEntities !== null) {
+            foreach ($this->OuterDocflowEntities as $val) {
+                $writer->writeVarint($stream, 106);
+                $writer->writeVarint($stream, $val->serializedSize($sizeContext));
+                $val->writeTo($context);
+            }
         }
 
         if ($this->extensions !== null) {
@@ -812,6 +954,44 @@ class DocflowV3 extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 12) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflow();
+
+                if ($this->OuterDocflows === null) {
+                    $this->OuterDocflows = new \Protobuf\MessageCollection();
+                }
+
+                $this->OuterDocflows->add($innerMessage);
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 13) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflowEntities();
+
+                if ($this->OuterDocflowEntities === null) {
+                    $this->OuterDocflowEntities = new \Protobuf\MessageCollection();
+                }
+
+                $this->OuterDocflowEntities->add($innerMessage);
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -921,6 +1101,26 @@ class DocflowV3 extends \Protobuf\AbstractMessage
             $size += $calculator->computeVarintSize($innerSize);
         }
 
+        if ($this->OuterDocflows !== null) {
+            foreach ($this->OuterDocflows as $val) {
+                $innerSize = $val->serializedSize($context);
+
+                $size += 1;
+                $size += $innerSize;
+                $size += $calculator->computeVarintSize($innerSize);
+            }
+        }
+
+        if ($this->OuterDocflowEntities !== null) {
+            foreach ($this->OuterDocflowEntities as $val) {
+                $innerSize = $val->serializedSize($context);
+
+                $size += 1;
+                $size += $innerSize;
+                $size += $calculator->computeVarintSize($innerSize);
+            }
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -943,6 +1143,8 @@ class DocflowV3 extends \Protobuf\AbstractMessage
         $this->SenderReceipt = null;
         $this->Resolution = null;
         $this->ResolutionEntities = null;
+        $this->OuterDocflows = null;
+        $this->OuterDocflowEntities = null;
     }
 
     /**
@@ -964,6 +1166,8 @@ class DocflowV3 extends \Protobuf\AbstractMessage
         $this->SenderReceipt = ($message->SenderReceipt !== null) ? $message->SenderReceipt : $this->SenderReceipt;
         $this->Resolution = ($message->Resolution !== null) ? $message->Resolution : $this->Resolution;
         $this->ResolutionEntities = ($message->ResolutionEntities !== null) ? $message->ResolutionEntities : $this->ResolutionEntities;
+        $this->OuterDocflows = ($message->OuterDocflows !== null) ? $message->OuterDocflows : $this->OuterDocflows;
+        $this->OuterDocflowEntities = ($message->OuterDocflowEntities !== null) ? $message->OuterDocflowEntities : $this->OuterDocflowEntities;
     }
 
 

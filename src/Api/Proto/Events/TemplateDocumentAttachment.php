@@ -109,6 +109,13 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
     protected $RefusalDisabled = null;
 
     /**
+     * CustomData repeated message = 13
+     *
+     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\CustomDataItem>
+     */
+    protected $CustomData = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
@@ -494,6 +501,50 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'CustomData' has a value
+     *
+     * @return bool
+     */
+    public function hasCustomDataList()
+    {
+        return $this->CustomData !== null;
+    }
+
+    /**
+     * Get 'CustomData' value
+     *
+     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\CustomDataItem>
+     */
+    public function getCustomDataList()
+    {
+        return $this->CustomData;
+    }
+
+    /**
+     * Set 'CustomData' value
+     *
+     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\CustomDataItem> $value
+     */
+    public function setCustomDataList(\Protobuf\Collection $value = null)
+    {
+        $this->CustomData = $value;
+    }
+
+    /**
+     * Add a new element to 'CustomData'
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\CustomDataItem $value
+     */
+    public function addCustomData(\AgentSIB\Diadoc\Api\Proto\CustomDataItem $value)
+    {
+        if ($this->CustomData === null) {
+            $this->CustomData = new \Protobuf\MessageCollection();
+        }
+
+        $this->CustomData->add($value);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -545,7 +596,8 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
             'EditingSettingId' => null,
             'NeedRecipientSignature' => false,
             'PredefinedRecipientTitle' => null,
-            'RefusalDisabled' => false
+            'RefusalDisabled' => false,
+            'CustomData' => []
         ], $values);
 
         $message->setUnsignedContent($values['UnsignedContent']);
@@ -562,6 +614,10 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
 
         foreach ($values['Metadata'] as $item) {
             $message->addMetadata($item);
+        }
+
+        foreach ($values['CustomData'] as $item) {
+            $message->addCustomData($item);
         }
 
         return $message;
@@ -651,6 +707,13 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_BOOL(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
                     'default_value' => false
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 13,
+                    'name' => 'CustomData',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.CustomDataItem'
                 ]),
             ],
         ]);
@@ -751,6 +814,14 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
         if ($this->RefusalDisabled !== null) {
             $writer->writeVarint($stream, 96);
             $writer->writeBool($stream, $this->RefusalDisabled);
+        }
+
+        if ($this->CustomData !== null) {
+            foreach ($this->CustomData as $val) {
+                $writer->writeVarint($stream, 106);
+                $writer->writeVarint($stream, $val->serializedSize($sizeContext));
+                $val->writeTo($context);
+            }
         }
 
         if ($this->extensions !== null) {
@@ -908,6 +979,25 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 13) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\CustomDataItem();
+
+                if ($this->CustomData === null) {
+                    $this->CustomData = new \Protobuf\MessageCollection();
+                }
+
+                $this->CustomData->add($innerMessage);
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -1008,6 +1098,16 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
             $size += 1;
         }
 
+        if ($this->CustomData !== null) {
+            foreach ($this->CustomData as $val) {
+                $innerSize = $val->serializedSize($context);
+
+                $size += 1;
+                $size += $innerSize;
+                $size += $calculator->computeVarintSize($innerSize);
+            }
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -1032,6 +1132,7 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
         $this->NeedRecipientSignature = false;
         $this->PredefinedRecipientTitle = null;
         $this->RefusalDisabled = false;
+        $this->CustomData = null;
     }
 
     /**
@@ -1055,6 +1156,7 @@ class TemplateDocumentAttachment extends \Protobuf\AbstractMessage
         $this->NeedRecipientSignature = ($message->NeedRecipientSignature !== null) ? $message->NeedRecipientSignature : $this->NeedRecipientSignature;
         $this->PredefinedRecipientTitle = ($message->PredefinedRecipientTitle !== null) ? $message->PredefinedRecipientTitle : $this->PredefinedRecipientTitle;
         $this->RefusalDisabled = ($message->RefusalDisabled !== null) ? $message->RefusalDisabled : $this->RefusalDisabled;
+        $this->CustomData = ($message->CustomData !== null) ? $message->CustomData : $this->CustomData;
     }
 
 

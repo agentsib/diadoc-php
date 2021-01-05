@@ -50,6 +50,36 @@ class SignerPowers extends \Protobuf\Enum
     const ResponsibleForOperationAndSignerForInvoice_VALUE = 6;
 
     /**
+     * ChairmanCommission = 7
+     */
+    const ChairmanCommission_VALUE = 7;
+
+    /**
+     * MemberCommission = 8
+     */
+    const MemberCommission_VALUE = 8;
+
+    /**
+     * PersonApprovedDocument = 21
+     */
+    const PersonApprovedDocument_VALUE = 21;
+
+    /**
+     * PersonConfirmedDocument = 22
+     */
+    const PersonConfirmedDocument_VALUE = 22;
+
+    /**
+     * PersonAgreedOnDocument = 23
+     */
+    const PersonAgreedOnDocument_VALUE = 23;
+
+    /**
+     * PersonOtherPower = 29
+     */
+    const PersonOtherPower_VALUE = 29;
+
+    /**
      * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerPowers
      */
     protected static $InvoiceSigner = null;
@@ -83,6 +113,36 @@ class SignerPowers extends \Protobuf\Enum
      * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerPowers
      */
     protected static $ResponsibleForOperationAndSignerForInvoice = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerPowers
+     */
+    protected static $ChairmanCommission = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerPowers
+     */
+    protected static $MemberCommission = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerPowers
+     */
+    protected static $PersonApprovedDocument = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerPowers
+     */
+    protected static $PersonConfirmedDocument = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerPowers
+     */
+    protected static $PersonAgreedOnDocument = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerPowers
+     */
+    protected static $PersonOtherPower = null;
 
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerPowers
@@ -169,6 +229,78 @@ class SignerPowers extends \Protobuf\Enum
     }
 
     /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerPowers
+     */
+    public static function ChairmanCommission()
+    {
+        if (self::$ChairmanCommission !== null) {
+            return self::$ChairmanCommission;
+        }
+
+        return self::$ChairmanCommission = new self('ChairmanCommission', self::ChairmanCommission_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerPowers
+     */
+    public static function MemberCommission()
+    {
+        if (self::$MemberCommission !== null) {
+            return self::$MemberCommission;
+        }
+
+        return self::$MemberCommission = new self('MemberCommission', self::MemberCommission_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerPowers
+     */
+    public static function PersonApprovedDocument()
+    {
+        if (self::$PersonApprovedDocument !== null) {
+            return self::$PersonApprovedDocument;
+        }
+
+        return self::$PersonApprovedDocument = new self('PersonApprovedDocument', self::PersonApprovedDocument_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerPowers
+     */
+    public static function PersonConfirmedDocument()
+    {
+        if (self::$PersonConfirmedDocument !== null) {
+            return self::$PersonConfirmedDocument;
+        }
+
+        return self::$PersonConfirmedDocument = new self('PersonConfirmedDocument', self::PersonConfirmedDocument_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerPowers
+     */
+    public static function PersonAgreedOnDocument()
+    {
+        if (self::$PersonAgreedOnDocument !== null) {
+            return self::$PersonAgreedOnDocument;
+        }
+
+        return self::$PersonAgreedOnDocument = new self('PersonAgreedOnDocument', self::PersonAgreedOnDocument_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerPowers
+     */
+    public static function PersonOtherPower()
+    {
+        if (self::$PersonOtherPower !== null) {
+            return self::$PersonOtherPower;
+        }
+
+        return self::$PersonOtherPower = new self('PersonOtherPower', self::PersonOtherPower_VALUE);
+    }
+
+    /**
      * @param int $value
      * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\SignerPowers
      */
@@ -182,6 +314,12 @@ class SignerPowers extends \Protobuf\Enum
             case 4: return self::MadeOperationAndSignedInvoice();
             case 5: return self::MadeAndResponsibleForOperationAndSignedInvoice();
             case 6: return self::ResponsibleForOperationAndSignerForInvoice();
+            case 7: return self::ChairmanCommission();
+            case 8: return self::MemberCommission();
+            case 21: return self::PersonApprovedDocument();
+            case 22: return self::PersonConfirmedDocument();
+            case 23: return self::PersonAgreedOnDocument();
+            case 29: return self::PersonOtherPower();
             default: return null;
         }
     }

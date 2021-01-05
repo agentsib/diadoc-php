@@ -95,6 +95,20 @@ class Template extends \Protobuf\AbstractMessage
     protected $LockMode = null;
 
     /**
+     * MessageProxyBoxId optional string = 11
+     *
+     * @var string
+     */
+    protected $MessageProxyBoxId = null;
+
+    /**
+     * MessageProxyDepartmentId optional string = 12
+     *
+     * @var string
+     */
+    protected $MessageProxyDepartmentId = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
@@ -419,6 +433,66 @@ class Template extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'MessageProxyBoxId' has a value
+     *
+     * @return bool
+     */
+    public function hasMessageProxyBoxId()
+    {
+        return $this->MessageProxyBoxId !== null;
+    }
+
+    /**
+     * Get 'MessageProxyBoxId' value
+     *
+     * @return string
+     */
+    public function getMessageProxyBoxId()
+    {
+        return $this->MessageProxyBoxId;
+    }
+
+    /**
+     * Set 'MessageProxyBoxId' value
+     *
+     * @param string $value
+     */
+    public function setMessageProxyBoxId($value = null)
+    {
+        $this->MessageProxyBoxId = $value;
+    }
+
+    /**
+     * Check if 'MessageProxyDepartmentId' has a value
+     *
+     * @return bool
+     */
+    public function hasMessageProxyDepartmentId()
+    {
+        return $this->MessageProxyDepartmentId !== null;
+    }
+
+    /**
+     * Get 'MessageProxyDepartmentId' value
+     *
+     * @return string
+     */
+    public function getMessageProxyDepartmentId()
+    {
+        return $this->MessageProxyDepartmentId;
+    }
+
+    /**
+     * Set 'MessageProxyDepartmentId' value
+     *
+     * @param string $value
+     */
+    public function setMessageProxyDepartmentId($value = null)
+    {
+        $this->MessageProxyDepartmentId = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -484,6 +558,8 @@ class Template extends \Protobuf\AbstractMessage
             'Entities' => [],
             'IsDeleted' => false,
             'MessageToDepartmentId' => null,
+            'MessageProxyBoxId' => null,
+            'MessageProxyDepartmentId' => null
         ], $values);
 
         $message->setMessageId($values['MessageId']);
@@ -495,6 +571,8 @@ class Template extends \Protobuf\AbstractMessage
         $message->setIsDeleted($values['IsDeleted']);
         $message->setMessageToDepartmentId($values['MessageToDepartmentId']);
         $message->setLockMode($values['LockMode']);
+        $message->setMessageProxyBoxId($values['MessageProxyBoxId']);
+        $message->setMessageProxyDepartmentId($values['MessageProxyDepartmentId']);
 
         foreach ($values['Entities'] as $item) {
             $message->addEntities($item);
@@ -573,6 +651,18 @@ class Template extends \Protobuf\AbstractMessage
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.LockMode'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 11,
+                    'name' => 'MessageProxyBoxId',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 12,
+                    'name' => 'MessageProxyDepartmentId',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
                 ]),
             ],
         ]);
@@ -681,6 +771,16 @@ class Template extends \Protobuf\AbstractMessage
         if ($this->LockMode !== null) {
             $writer->writeVarint($stream, 80);
             $writer->writeVarint($stream, $this->LockMode->value());
+        }
+
+        if ($this->MessageProxyBoxId !== null) {
+            $writer->writeVarint($stream, 90);
+            $writer->writeString($stream, $this->MessageProxyBoxId);
+        }
+
+        if ($this->MessageProxyDepartmentId !== null) {
+            $writer->writeVarint($stream, 98);
+            $writer->writeString($stream, $this->MessageProxyDepartmentId);
         }
 
         if ($this->extensions !== null) {
@@ -808,6 +908,22 @@ class Template extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 11) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->MessageProxyBoxId = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 12) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->MessageProxyDepartmentId = $reader->readString($stream);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -892,6 +1008,16 @@ class Template extends \Protobuf\AbstractMessage
             $size += $calculator->computeVarintSize($this->LockMode->value());
         }
 
+        if ($this->MessageProxyBoxId !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->MessageProxyBoxId);
+        }
+
+        if ($this->MessageProxyDepartmentId !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->MessageProxyDepartmentId);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -914,6 +1040,8 @@ class Template extends \Protobuf\AbstractMessage
         $this->IsDeleted = false;
         $this->MessageToDepartmentId = null;
         $this->LockMode = null;
+        $this->MessageProxyBoxId = null;
+        $this->MessageProxyDepartmentId = null;
     }
 
     /**
@@ -935,6 +1063,8 @@ class Template extends \Protobuf\AbstractMessage
         $this->IsDeleted = ($message->IsDeleted !== null) ? $message->IsDeleted : $this->IsDeleted;
         $this->MessageToDepartmentId = ($message->MessageToDepartmentId !== null) ? $message->MessageToDepartmentId : $this->MessageToDepartmentId;
         $this->LockMode = ($message->LockMode !== null) ? $message->LockMode : $this->LockMode;
+        $this->MessageProxyBoxId = ($message->MessageProxyBoxId !== null) ? $message->MessageProxyBoxId : $this->MessageProxyBoxId;
+        $this->MessageProxyDepartmentId = ($message->MessageProxyDepartmentId !== null) ? $message->MessageProxyDepartmentId : $this->MessageProxyDepartmentId;
     }
 
 

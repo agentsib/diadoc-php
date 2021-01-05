@@ -214,6 +214,27 @@ class Entity extends \Protobuf\AbstractMessage
     protected $TemplateRefusalInfo = null;
 
     /**
+     * OuterDocflow optional message = 29
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\OuterDocflowInfo
+     */
+    protected $OuterDocflow = null;
+
+    /**
+     * RevocationRequestInfo optional message = 30
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\RevocationRequestInfo
+     */
+    protected $RevocationRequestInfo = null;
+
+    /**
+     * ContentTypeId optional string = 31
+     *
+     * @var string
+     */
+    protected $ContentTypeId = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
@@ -1054,6 +1075,96 @@ class Entity extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'OuterDocflow' has a value
+     *
+     * @return bool
+     */
+    public function hasOuterDocflow()
+    {
+        return $this->OuterDocflow !== null;
+    }
+
+    /**
+     * Get 'OuterDocflow' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\OuterDocflowInfo
+     */
+    public function getOuterDocflow()
+    {
+        return $this->OuterDocflow;
+    }
+
+    /**
+     * Set 'OuterDocflow' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\OuterDocflowInfo $value
+     */
+    public function setOuterDocflow(\AgentSIB\Diadoc\Api\Proto\OuterDocflowInfo $value = null)
+    {
+        $this->OuterDocflow = $value;
+    }
+
+    /**
+     * Check if 'RevocationRequestInfo' has a value
+     *
+     * @return bool
+     */
+    public function hasRevocationRequestInfo()
+    {
+        return $this->RevocationRequestInfo !== null;
+    }
+
+    /**
+     * Get 'RevocationRequestInfo' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\RevocationRequestInfo
+     */
+    public function getRevocationRequestInfo()
+    {
+        return $this->RevocationRequestInfo;
+    }
+
+    /**
+     * Set 'RevocationRequestInfo' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Events\RevocationRequestInfo $value
+     */
+    public function setRevocationRequestInfo(\AgentSIB\Diadoc\Api\Proto\Events\RevocationRequestInfo $value = null)
+    {
+        $this->RevocationRequestInfo = $value;
+    }
+
+    /**
+     * Check if 'ContentTypeId' has a value
+     *
+     * @return bool
+     */
+    public function hasContentTypeId()
+    {
+        return $this->ContentTypeId !== null;
+    }
+
+    /**
+     * Get 'ContentTypeId' value
+     *
+     * @return string
+     */
+    public function getContentTypeId()
+    {
+        return $this->ContentTypeId;
+    }
+
+    /**
+     * Set 'ContentTypeId' value
+     *
+     * @param string $value
+     */
+    public function setContentTypeId($value = null)
+    {
+        $this->ContentTypeId = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -1117,7 +1228,10 @@ class Entity extends \Protobuf\AbstractMessage
             'Labels' => [],
             'Version' => null,
             'TemplateTransformationInfo' => null,
-            'TemplateRefusalInfo' => null
+            'TemplateRefusalInfo' => null,
+            'OuterDocflow' => null,
+            'RevocationRequestInfo' => null,
+            'ContentTypeId' => null
         ], $values);
 
         $message->setEntityType($values['EntityType']);
@@ -1146,6 +1260,9 @@ class Entity extends \Protobuf\AbstractMessage
         $message->setVersion($values['Version']);
         $message->setTemplateTransformationInfo($values['TemplateTransformationInfo']);
         $message->setTemplateRefusalInfo($values['TemplateRefusalInfo']);
+        $message->setOuterDocflow($values['OuterDocflow']);
+        $message->setRevocationRequestInfo($values['RevocationRequestInfo']);
+        $message->setContentTypeId($values['ContentTypeId']);
 
         foreach ($values['Labels'] as $item) {
             $message->addLabels($item);
@@ -1343,6 +1460,26 @@ class Entity extends \Protobuf\AbstractMessage
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.TemplateRefusalInfo'
                 ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 29,
+                    'name' => 'OuterDocflow',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.OuterDocflowInfo'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 30,
+                    'name' => 'RevocationRequestInfo',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Events.RevocationRequestInfo'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 31,
+                    'name' => 'ContentTypeId',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
             ],
         ]);
     }
@@ -1520,6 +1657,23 @@ class Entity extends \Protobuf\AbstractMessage
             $writer->writeVarint($stream, 226);
             $writer->writeVarint($stream, $this->TemplateRefusalInfo->serializedSize($sizeContext));
             $this->TemplateRefusalInfo->writeTo($context);
+        }
+
+        if ($this->OuterDocflow !== null) {
+            $writer->writeVarint($stream, 234);
+            $writer->writeVarint($stream, $this->OuterDocflow->serializedSize($sizeContext));
+            $this->OuterDocflow->writeTo($context);
+        }
+
+        if ($this->RevocationRequestInfo !== null) {
+            $writer->writeVarint($stream, 242);
+            $writer->writeVarint($stream, $this->RevocationRequestInfo->serializedSize($sizeContext));
+            $this->RevocationRequestInfo->writeTo($context);
+        }
+
+        if ($this->ContentTypeId !== null) {
+            $writer->writeVarint($stream, 250);
+            $writer->writeString($stream, $this->ContentTypeId);
         }
 
         if ($this->extensions !== null) {
@@ -1846,6 +2000,44 @@ class Entity extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 29) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\OuterDocflowInfo();
+
+                $this->OuterDocflow = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 30) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Events\RevocationRequestInfo();
+
+                $this->RevocationRequestInfo = $innerMessage;
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
+            if ($tag === 31) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->ContentTypeId = $reader->readString($stream);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -2042,6 +2234,27 @@ class Entity extends \Protobuf\AbstractMessage
             $size += $calculator->computeVarintSize($innerSize);
         }
 
+        if ($this->OuterDocflow !== null) {
+            $innerSize = $this->OuterDocflow->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->RevocationRequestInfo !== null) {
+            $innerSize = $this->RevocationRequestInfo->serializedSize($context);
+
+            $size += 2;
+            $size += $innerSize;
+            $size += $calculator->computeVarintSize($innerSize);
+        }
+
+        if ($this->ContentTypeId !== null) {
+            $size += 2;
+            $size += $calculator->computeStringSize($this->ContentTypeId);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -2081,6 +2294,9 @@ class Entity extends \Protobuf\AbstractMessage
         $this->Version = null;
         $this->TemplateTransformationInfo = null;
         $this->TemplateRefusalInfo = null;
+        $this->OuterDocflow = null;
+        $this->RevocationRequestInfo = null;
+        $this->ContentTypeId = null;
     }
 
     /**
@@ -2119,6 +2335,9 @@ class Entity extends \Protobuf\AbstractMessage
         $this->Version = ($message->Version !== null) ? $message->Version : $this->Version;
         $this->TemplateTransformationInfo = ($message->TemplateTransformationInfo !== null) ? $message->TemplateTransformationInfo : $this->TemplateTransformationInfo;
         $this->TemplateRefusalInfo = ($message->TemplateRefusalInfo !== null) ? $message->TemplateRefusalInfo : $this->TemplateRefusalInfo;
+        $this->OuterDocflow = ($message->OuterDocflow !== null) ? $message->OuterDocflow : $this->OuterDocflow;
+        $this->RevocationRequestInfo = ($message->RevocationRequestInfo !== null) ? $message->RevocationRequestInfo : $this->RevocationRequestInfo;
+        $this->ContentTypeId = ($message->ContentTypeId !== null) ? $message->ContentTypeId : $this->ContentTypeId;
     }
 
 

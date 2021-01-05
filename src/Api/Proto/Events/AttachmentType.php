@@ -290,6 +290,11 @@ class AttachmentType extends \Protobuf\Enum
     const TemplateRefusal_VALUE = 74;
 
     /**
+     * OuterDocflow = 75
+     */
+    const OuterDocflow_VALUE = 75;
+
+    /**
      * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
      */
     protected static $UnknownAttachmentType = null;
@@ -563,6 +568,11 @@ class AttachmentType extends \Protobuf\Enum
      * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
      */
     protected static $TemplateRefusal = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    protected static $OuterDocflow = null;
 
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
@@ -1225,6 +1235,18 @@ class AttachmentType extends \Protobuf\Enum
     }
 
     /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
+     */
+    public static function OuterDocflow()
+    {
+        if (self::$OuterDocflow !== null) {
+            return self::$OuterDocflow;
+        }
+
+        return self::$OuterDocflow = new self('OuterDocflow', self::OuterDocflow_VALUE);
+    }
+
+    /**
      * @param int $value
      * @return \AgentSIB\Diadoc\Api\Proto\Events\AttachmentType
      */
@@ -1286,6 +1308,7 @@ class AttachmentType extends \Protobuf\Enum
             case 72: return self::DeletionRestoration();
             case 73: return self::TemplateTransformation();
             case 74: return self::TemplateRefusal();
+            case 75: return self::OuterDocflow();
             default: return null;
         }
     }

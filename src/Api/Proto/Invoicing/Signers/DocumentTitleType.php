@@ -65,6 +65,16 @@ class DocumentTitleType extends \Protobuf\Enum
     const Utd820Buyer_VALUE = 8;
 
     /**
+     * Torg2Buyer = 9
+     */
+    const Torg2Buyer_VALUE = 9;
+
+    /**
+     * Torg2AdditionalInfo = 10
+     */
+    const Torg2AdditionalInfo_VALUE = 10;
+
+    /**
      * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\DocumentTitleType
      */
     protected static $Absent = null;
@@ -113,6 +123,16 @@ class DocumentTitleType extends \Protobuf\Enum
      * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\DocumentTitleType
      */
     protected static $Utd820Buyer = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\DocumentTitleType
+     */
+    protected static $Torg2Buyer = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\DocumentTitleType
+     */
+    protected static $Torg2AdditionalInfo = null;
 
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\DocumentTitleType
@@ -235,6 +255,30 @@ class DocumentTitleType extends \Protobuf\Enum
     }
 
     /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\DocumentTitleType
+     */
+    public static function Torg2Buyer()
+    {
+        if (self::$Torg2Buyer !== null) {
+            return self::$Torg2Buyer;
+        }
+
+        return self::$Torg2Buyer = new self('Torg2Buyer', self::Torg2Buyer_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\DocumentTitleType
+     */
+    public static function Torg2AdditionalInfo()
+    {
+        if (self::$Torg2AdditionalInfo !== null) {
+            return self::$Torg2AdditionalInfo;
+        }
+
+        return self::$Torg2AdditionalInfo = new self('Torg2AdditionalInfo', self::Torg2AdditionalInfo_VALUE);
+    }
+
+    /**
      * @param int $value
      * @return \AgentSIB\Diadoc\Api\Proto\Invoicing\Signers\DocumentTitleType
      */
@@ -251,6 +295,8 @@ class DocumentTitleType extends \Protobuf\Enum
             case 6: return self::AccCert552Seller();
             case 7: return self::AccCert552Buyer();
             case 8: return self::Utd820Buyer();
+            case 9: return self::Torg2Buyer();
+            case 10: return self::Torg2AdditionalInfo();
             default: return null;
         }
     }

@@ -67,6 +67,13 @@ class RevocationDocflowV3 extends \Protobuf\AbstractMessage
     protected $ResolutionEntities = null;
 
     /**
+     * OuterDocflowEntities repeated message = 7
+     *
+     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflowEntities>
+     */
+    protected $OuterDocflowEntities = null;
+
+    /**
      * Check if 'IsFinished' has a value
      *
      * @return bool
@@ -247,6 +254,50 @@ class RevocationDocflowV3 extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'OuterDocflowEntities' has a value
+     *
+     * @return bool
+     */
+    public function hasOuterDocflowEntitiesList()
+    {
+        return $this->OuterDocflowEntities !== null;
+    }
+
+    /**
+     * Get 'OuterDocflowEntities' value
+     *
+     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflowEntities>
+     */
+    public function getOuterDocflowEntitiesList()
+    {
+        return $this->OuterDocflowEntities;
+    }
+
+    /**
+     * Set 'OuterDocflowEntities' value
+     *
+     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflowEntities> $value
+     */
+    public function setOuterDocflowEntitiesList(\Protobuf\Collection $value = null)
+    {
+        $this->OuterDocflowEntities = $value;
+    }
+
+    /**
+     * Add a new element to 'OuterDocflowEntities'
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflowEntities $value
+     */
+    public function addOuterDocflowEntities(\AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflowEntities $value)
+    {
+        if ($this->OuterDocflowEntities === null) {
+            $this->OuterDocflowEntities = new \Protobuf\MessageCollection();
+        }
+
+        $this->OuterDocflowEntities->add($value);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -298,7 +349,8 @@ class RevocationDocflowV3 extends \Protobuf\AbstractMessage
         $message = new self();
         $values  = array_merge([
             'RevocationResponse' => null,
-            'ResolutionEntities' => null
+            'ResolutionEntities' => null,
+            'OuterDocflowEntities' => []
         ], $values);
 
         $message->setIsFinished($values['IsFinished']);
@@ -307,6 +359,10 @@ class RevocationDocflowV3 extends \Protobuf\AbstractMessage
         $message->setInitiatorBoxId($values['InitiatorBoxId']);
         $message->setRevocationStatus($values['RevocationStatus']);
         $message->setResolutionEntities($values['ResolutionEntities']);
+
+        foreach ($values['OuterDocflowEntities'] as $item) {
+            $message->addOuterDocflowEntities($item);
+        }
 
         return $message;
     }
@@ -358,6 +414,13 @@ class RevocationDocflowV3 extends \Protobuf\AbstractMessage
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.Docflow.ResolutionEntitiesV3'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 7,
+                    'name' => 'OuterDocflowEntities',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Docflow.OuterDocflowEntities'
                 ]),
             ],
         ]);
@@ -434,6 +497,14 @@ class RevocationDocflowV3 extends \Protobuf\AbstractMessage
             $writer->writeVarint($stream, 50);
             $writer->writeVarint($stream, $this->ResolutionEntities->serializedSize($sizeContext));
             $this->ResolutionEntities->writeTo($context);
+        }
+
+        if ($this->OuterDocflowEntities !== null) {
+            foreach ($this->OuterDocflowEntities as $val) {
+                $writer->writeVarint($stream, 58);
+                $writer->writeVarint($stream, $val->serializedSize($sizeContext));
+                $val->writeTo($context);
+            }
         }
 
         if ($this->extensions !== null) {
@@ -539,6 +610,25 @@ class RevocationDocflowV3 extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 7) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Docflow\OuterDocflowEntities();
+
+                if ($this->OuterDocflowEntities === null) {
+                    $this->OuterDocflowEntities = new \Protobuf\MessageCollection();
+                }
+
+                $this->OuterDocflowEntities->add($innerMessage);
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -607,6 +697,16 @@ class RevocationDocflowV3 extends \Protobuf\AbstractMessage
             $size += $calculator->computeVarintSize($innerSize);
         }
 
+        if ($this->OuterDocflowEntities !== null) {
+            foreach ($this->OuterDocflowEntities as $val) {
+                $innerSize = $val->serializedSize($context);
+
+                $size += 1;
+                $size += $innerSize;
+                $size += $calculator->computeVarintSize($innerSize);
+            }
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -625,6 +725,7 @@ class RevocationDocflowV3 extends \Protobuf\AbstractMessage
         $this->InitiatorBoxId = null;
         $this->RevocationStatus = null;
         $this->ResolutionEntities = null;
+        $this->OuterDocflowEntities = null;
     }
 
     /**
@@ -642,6 +743,7 @@ class RevocationDocflowV3 extends \Protobuf\AbstractMessage
         $this->InitiatorBoxId = ($message->InitiatorBoxId !== null) ? $message->InitiatorBoxId : $this->InitiatorBoxId;
         $this->RevocationStatus = ($message->RevocationStatus !== null) ? $message->RevocationStatus : $this->RevocationStatus;
         $this->ResolutionEntities = ($message->ResolutionEntities !== null) ? $message->ResolutionEntities : $this->ResolutionEntities;
+        $this->OuterDocflowEntities = ($message->OuterDocflowEntities !== null) ? $message->OuterDocflowEntities : $this->OuterDocflowEntities;
     }
 
 

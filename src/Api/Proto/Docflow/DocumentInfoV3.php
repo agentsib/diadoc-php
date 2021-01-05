@@ -151,6 +151,23 @@ class DocumentInfoV3 extends \Protobuf\AbstractMessage
     protected $Origin = null;
 
     /**
+     * EditingSettingId optional string = 19
+     *
+     * @var string
+     */
+    protected $EditingSettingId = null;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
+    {
+        $this->EditingSettingId = '';
+
+        parent::__construct($stream, $configuration);
+    }
+
+    /**
      * Check if 'FullVersion' has a value
      *
      * @return bool
@@ -719,6 +736,36 @@ class DocumentInfoV3 extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'EditingSettingId' has a value
+     *
+     * @return bool
+     */
+    public function hasEditingSettingId()
+    {
+        return $this->EditingSettingId !== null;
+    }
+
+    /**
+     * Get 'EditingSettingId' value
+     *
+     * @return string
+     */
+    public function getEditingSettingId()
+    {
+        return $this->EditingSettingId;
+    }
+
+    /**
+     * Set 'EditingSettingId' value
+     *
+     * @param string $value
+     */
+    public function setEditingSettingId($value = null)
+    {
+        $this->EditingSettingId = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -803,7 +850,8 @@ class DocumentInfoV3 extends \Protobuf\AbstractMessage
             'LetterInfo' => null,
             'DraftInfo' => null,
             'TemplateInfo' => null,
-            'Origin' => null
+            'Origin' => null,
+            'EditingSettingId' => ''
         ], $values);
 
         $message->setFullVersion($values['FullVersion']);
@@ -822,6 +870,7 @@ class DocumentInfoV3 extends \Protobuf\AbstractMessage
         $message->setDraftInfo($values['DraftInfo']);
         $message->setTemplateInfo($values['TemplateInfo']);
         $message->setOrigin($values['Origin']);
+        $message->setEditingSettingId($values['EditingSettingId']);
 
         foreach ($values['Metadata'] as $item) {
             $message->addMetadata($item);
@@ -961,6 +1010,13 @@ class DocumentInfoV3 extends \Protobuf\AbstractMessage
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.Origin'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 19,
+                    'name' => 'EditingSettingId',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'default_value' => ''
                 ]),
             ],
         ]);
@@ -1136,6 +1192,11 @@ class DocumentInfoV3 extends \Protobuf\AbstractMessage
             $writer->writeVarint($stream, 146);
             $writer->writeVarint($stream, $this->Origin->serializedSize($sizeContext));
             $this->Origin->writeTo($context);
+        }
+
+        if ($this->EditingSettingId !== null) {
+            $writer->writeVarint($stream, 154);
+            $writer->writeString($stream, $this->EditingSettingId);
         }
 
         if ($this->extensions !== null) {
@@ -1394,6 +1455,14 @@ class DocumentInfoV3 extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 19) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->EditingSettingId = $reader->readString($stream);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -1547,6 +1616,11 @@ class DocumentInfoV3 extends \Protobuf\AbstractMessage
             $size += $calculator->computeVarintSize($innerSize);
         }
 
+        if ($this->EditingSettingId !== null) {
+            $size += 2;
+            $size += $calculator->computeStringSize($this->EditingSettingId);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -1577,6 +1651,7 @@ class DocumentInfoV3 extends \Protobuf\AbstractMessage
         $this->DraftInfo = null;
         $this->TemplateInfo = null;
         $this->Origin = null;
+        $this->EditingSettingId = '';
     }
 
     /**
@@ -1606,6 +1681,7 @@ class DocumentInfoV3 extends \Protobuf\AbstractMessage
         $this->DraftInfo = ($message->DraftInfo !== null) ? $message->DraftInfo : $this->DraftInfo;
         $this->TemplateInfo = ($message->TemplateInfo !== null) ? $message->TemplateInfo : $this->TemplateInfo;
         $this->Origin = ($message->Origin !== null) ? $message->Origin : $this->Origin;
+        $this->EditingSettingId = ($message->EditingSettingId !== null) ? $message->EditingSettingId : $this->EditingSettingId;
     }
 
 

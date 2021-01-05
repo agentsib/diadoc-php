@@ -50,6 +50,11 @@ class DssOperationStatus extends \Protobuf\Enum
     const UserHasUnconfirmedOperation_VALUE = 6;
 
     /**
+     * OperationRetryRequired = 7
+     */
+    const OperationRetryRequired_VALUE = 7;
+
+    /**
      * @var \AgentSIB\Diadoc\Api\Proto\Dss\DssOperationStatus
      */
     protected static $Unknown = null;
@@ -83,6 +88,11 @@ class DssOperationStatus extends \Protobuf\Enum
      * @var \AgentSIB\Diadoc\Api\Proto\Dss\DssOperationStatus
      */
     protected static $UserHasUnconfirmedOperation = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Dss\DssOperationStatus
+     */
+    protected static $OperationRetryRequired = null;
 
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Dss\DssOperationStatus
@@ -169,6 +179,18 @@ class DssOperationStatus extends \Protobuf\Enum
     }
 
     /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Dss\DssOperationStatus
+     */
+    public static function OperationRetryRequired()
+    {
+        if (self::$OperationRetryRequired !== null) {
+            return self::$OperationRetryRequired;
+        }
+
+        return self::$OperationRetryRequired = new self('OperationRetryRequired', self::OperationRetryRequired_VALUE);
+    }
+
+    /**
      * @param int $value
      * @return \AgentSIB\Diadoc\Api\Proto\Dss\DssOperationStatus
      */
@@ -182,6 +204,7 @@ class DssOperationStatus extends \Protobuf\Enum
             case 4: return self::Timeout();
             case 5: return self::Crashed();
             case 6: return self::UserHasUnconfirmedOperation();
+            case 7: return self::OperationRetryRequired();
             default: return null;
         }
     }

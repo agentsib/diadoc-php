@@ -543,6 +543,13 @@ class Document extends \Protobuf\AbstractMessage
     protected $Version = null;
 
     /**
+     * LastOuterDocflows repeated message = 77
+     *
+     * @var \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Documents\LastOuterDocflow>
+     */
+    protected $LastOuterDocflows = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
@@ -2857,6 +2864,50 @@ class Document extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'LastOuterDocflows' has a value
+     *
+     * @return bool
+     */
+    public function hasLastOuterDocflowsList()
+    {
+        return $this->LastOuterDocflows !== null;
+    }
+
+    /**
+     * Get 'LastOuterDocflows' value
+     *
+     * @return \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Documents\LastOuterDocflow>
+     */
+    public function getLastOuterDocflowsList()
+    {
+        return $this->LastOuterDocflows;
+    }
+
+    /**
+     * Set 'LastOuterDocflows' value
+     *
+     * @param \Protobuf\Collection<\AgentSIB\Diadoc\Api\Proto\Documents\LastOuterDocflow> $value
+     */
+    public function setLastOuterDocflowsList(\Protobuf\Collection $value = null)
+    {
+        $this->LastOuterDocflows = $value;
+    }
+
+    /**
+     * Add a new element to 'LastOuterDocflows'
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Documents\LastOuterDocflow $value
+     */
+    public function addLastOuterDocflows(\AgentSIB\Diadoc\Api\Proto\Documents\LastOuterDocflow $value)
+    {
+        if ($this->LastOuterDocflows === null) {
+            $this->LastOuterDocflows = new \Protobuf\MessageCollection();
+        }
+
+        $this->LastOuterDocflows->add($value);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -2999,6 +3050,7 @@ class Document extends \Protobuf\AbstractMessage
             'Metadata' => [],
             'Origin' => null,
             'EditingSettingId' => '',
+            'LastOuterDocflows' => []
         ], $values);
 
         $message->setIndexKey($values['IndexKey']);
@@ -3089,6 +3141,10 @@ class Document extends \Protobuf\AbstractMessage
 
         foreach ($values['Metadata'] as $item) {
             $message->addMetadata($item);
+        }
+
+        foreach ($values['LastOuterDocflows'] as $item) {
+            $message->addLastOuterDocflows($item);
         }
 
         return $message;
@@ -3604,6 +3660,13 @@ class Document extends \Protobuf\AbstractMessage
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
                 ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 77,
+                    'name' => 'LastOuterDocflows',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Documents.LastOuterDocflow'
+                ]),
             ],
         ]);
     }
@@ -4101,6 +4164,14 @@ class Document extends \Protobuf\AbstractMessage
         if ($this->Version !== null) {
             $writer->writeVarint($stream, 610);
             $writer->writeString($stream, $this->Version);
+        }
+
+        if ($this->LastOuterDocflows !== null) {
+            foreach ($this->LastOuterDocflows as $val) {
+                $writer->writeVarint($stream, 618);
+                $writer->writeVarint($stream, $val->serializedSize($sizeContext));
+                $val->writeTo($context);
+            }
         }
 
         if ($this->extensions !== null) {
@@ -4994,6 +5065,25 @@ class Document extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 77) {
+                \Protobuf\WireFormat::assertWireType($wire, 11);
+
+                $innerSize    = $reader->readVarint($stream);
+                $innerMessage = new \AgentSIB\Diadoc\Api\Proto\Documents\LastOuterDocflow();
+
+                if ($this->LastOuterDocflows === null) {
+                    $this->LastOuterDocflows = new \Protobuf\MessageCollection();
+                }
+
+                $this->LastOuterDocflows->add($innerMessage);
+
+                $context->setLength($innerSize);
+                $innerMessage->readFrom($context);
+                $context->setLength($length);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -5508,6 +5598,16 @@ class Document extends \Protobuf\AbstractMessage
             $size += $calculator->computeStringSize($this->Version);
         }
 
+        if ($this->LastOuterDocflows !== null) {
+            foreach ($this->LastOuterDocflows as $val) {
+                $innerSize = $val->serializedSize($context);
+
+                $size += 2;
+                $size += $innerSize;
+                $size += $calculator->computeVarintSize($innerSize);
+            }
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -5594,6 +5694,7 @@ class Document extends \Protobuf\AbstractMessage
         $this->LockMode = \AgentSIB\Diadoc\Api\Proto\LockMode::None();
         $this->SenderReceiptMetadata = null;
         $this->Version = null;
+        $this->LastOuterDocflows = null;
     }
 
     /**
@@ -5679,6 +5780,7 @@ class Document extends \Protobuf\AbstractMessage
         $this->LockMode = ($message->LockMode !== null) ? $message->LockMode : $this->LockMode;
         $this->SenderReceiptMetadata = ($message->SenderReceiptMetadata !== null) ? $message->SenderReceiptMetadata : $this->SenderReceiptMetadata;
         $this->Version = ($message->Version !== null) ? $message->Version : $this->Version;
+        $this->LastOuterDocflows = ($message->LastOuterDocflows !== null) ? $message->LastOuterDocflows : $this->LastOuterDocflows;
     }
 
 

@@ -88,6 +88,20 @@ class TemplateToPost extends \Protobuf\AbstractMessage
     protected $ToDepartmentId = null;
 
     /**
+     * MessageProxyBoxId optional string = 10
+     *
+     * @var string
+     */
+    protected $MessageProxyBoxId = null;
+
+    /**
+     * MessageProxyDepartmentId optional string = 11
+     *
+     * @var string
+     */
+    protected $MessageProxyDepartmentId = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
@@ -382,6 +396,66 @@ class TemplateToPost extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'MessageProxyBoxId' has a value
+     *
+     * @return bool
+     */
+    public function hasMessageProxyBoxId()
+    {
+        return $this->MessageProxyBoxId !== null;
+    }
+
+    /**
+     * Get 'MessageProxyBoxId' value
+     *
+     * @return string
+     */
+    public function getMessageProxyBoxId()
+    {
+        return $this->MessageProxyBoxId;
+    }
+
+    /**
+     * Set 'MessageProxyBoxId' value
+     *
+     * @param string $value
+     */
+    public function setMessageProxyBoxId($value = null)
+    {
+        $this->MessageProxyBoxId = $value;
+    }
+
+    /**
+     * Check if 'MessageProxyDepartmentId' has a value
+     *
+     * @return bool
+     */
+    public function hasMessageProxyDepartmentId()
+    {
+        return $this->MessageProxyDepartmentId !== null;
+    }
+
+    /**
+     * Get 'MessageProxyDepartmentId' value
+     *
+     * @return string
+     */
+    public function getMessageProxyDepartmentId()
+    {
+        return $this->MessageProxyDepartmentId;
+    }
+
+    /**
+     * Set 'MessageProxyDepartmentId' value
+     *
+     * @param string $value
+     */
+    public function setMessageProxyDepartmentId($value = null)
+    {
+        $this->MessageProxyDepartmentId = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -436,7 +510,9 @@ class TemplateToPost extends \Protobuf\AbstractMessage
             'DocumentAttachments' => [],
             'LockMode' => \AgentSIB\Diadoc\Api\Proto\LockMode::None(),
             'FromDepartmentId' => null,
-            'ToDepartmentId' => null
+            'ToDepartmentId' => null,
+            'MessageProxyBoxId' => null,
+            'MessageProxyDepartmentId' => null
         ], $values);
 
         $message->setFromBoxId($values['FromBoxId']);
@@ -447,6 +523,8 @@ class TemplateToPost extends \Protobuf\AbstractMessage
         $message->setLockMode($values['LockMode']);
         $message->setFromDepartmentId($values['FromDepartmentId']);
         $message->setToDepartmentId($values['ToDepartmentId']);
+        $message->setMessageProxyBoxId($values['MessageProxyBoxId']);
+        $message->setMessageProxyDepartmentId($values['MessageProxyDepartmentId']);
 
         foreach ($values['DocumentAttachments'] as $item) {
             $message->addDocumentAttachments($item);
@@ -517,6 +595,18 @@ class TemplateToPost extends \Protobuf\AbstractMessage
                 \google\protobuf\FieldDescriptorProto::fromArray([
                     'number' => 9,
                     'name' => 'ToDepartmentId',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 10,
+                    'name' => 'MessageProxyBoxId',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 11,
+                    'name' => 'MessageProxyDepartmentId',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
                 ]),
@@ -610,6 +700,16 @@ class TemplateToPost extends \Protobuf\AbstractMessage
         if ($this->ToDepartmentId !== null) {
             $writer->writeVarint($stream, 74);
             $writer->writeString($stream, $this->ToDepartmentId);
+        }
+
+        if ($this->MessageProxyBoxId !== null) {
+            $writer->writeVarint($stream, 82);
+            $writer->writeString($stream, $this->MessageProxyBoxId);
+        }
+
+        if ($this->MessageProxyDepartmentId !== null) {
+            $writer->writeVarint($stream, 90);
+            $writer->writeString($stream, $this->MessageProxyDepartmentId);
         }
 
         if ($this->extensions !== null) {
@@ -729,6 +829,22 @@ class TemplateToPost extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 10) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->MessageProxyBoxId = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 11) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->MessageProxyDepartmentId = $reader->readString($stream);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -808,6 +924,16 @@ class TemplateToPost extends \Protobuf\AbstractMessage
             $size += $calculator->computeStringSize($this->ToDepartmentId);
         }
 
+        if ($this->MessageProxyBoxId !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->MessageProxyBoxId);
+        }
+
+        if ($this->MessageProxyDepartmentId !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->MessageProxyDepartmentId);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -829,6 +955,8 @@ class TemplateToPost extends \Protobuf\AbstractMessage
         $this->LockMode = \AgentSIB\Diadoc\Api\Proto\LockMode::None();
         $this->FromDepartmentId = null;
         $this->ToDepartmentId = null;
+        $this->MessageProxyBoxId = null;
+        $this->MessageProxyDepartmentId = null;
     }
 
     /**
@@ -849,6 +977,8 @@ class TemplateToPost extends \Protobuf\AbstractMessage
         $this->LockMode = ($message->LockMode !== null) ? $message->LockMode : $this->LockMode;
         $this->FromDepartmentId = ($message->FromDepartmentId !== null) ? $message->FromDepartmentId : $this->FromDepartmentId;
         $this->ToDepartmentId = ($message->ToDepartmentId !== null) ? $message->ToDepartmentId : $this->ToDepartmentId;
+        $this->MessageProxyBoxId = ($message->MessageProxyBoxId !== null) ? $message->MessageProxyBoxId : $this->MessageProxyBoxId;
+        $this->MessageProxyDepartmentId = ($message->MessageProxyDepartmentId !== null) ? $message->MessageProxyDepartmentId : $this->MessageProxyDepartmentId;
     }
 
 

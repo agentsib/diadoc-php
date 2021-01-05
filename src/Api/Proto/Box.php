@@ -32,6 +32,13 @@ class Box extends \Protobuf\AbstractMessage
     protected $BoxId = null;
 
     /**
+     * BoxIdGuid required string = 6
+     *
+     * @var string
+     */
+    protected $BoxIdGuid = null;
+
+    /**
      * Title required string = 2
      *
      * @var string
@@ -97,6 +104,36 @@ class Box extends \Protobuf\AbstractMessage
     public function setBoxId($value)
     {
         $this->BoxId = $value;
+    }
+
+    /**
+     * Check if 'BoxIdGuid' has a value
+     *
+     * @return bool
+     */
+    public function hasBoxIdGuid()
+    {
+        return $this->BoxIdGuid !== null;
+    }
+
+    /**
+     * Get 'BoxIdGuid' value
+     *
+     * @return string
+     */
+    public function getBoxIdGuid()
+    {
+        return $this->BoxIdGuid;
+    }
+
+    /**
+     * Set 'BoxIdGuid' value
+     *
+     * @param string $value
+     */
+    public function setBoxIdGuid($value)
+    {
+        $this->BoxIdGuid = $value;
     }
 
     /**
@@ -256,6 +293,10 @@ class Box extends \Protobuf\AbstractMessage
             throw new \InvalidArgumentException('Field "BoxId" (tag 1) is required but has no value.');
         }
 
+        if ( ! isset($values['BoxIdGuid'])) {
+            throw new \InvalidArgumentException('Field "BoxIdGuid" (tag 6) is required but has no value.');
+        }
+
         if ( ! isset($values['Title'])) {
             throw new \InvalidArgumentException('Field "Title" (tag 2) is required but has no value.');
         }
@@ -268,6 +309,7 @@ class Box extends \Protobuf\AbstractMessage
         ], $values);
 
         $message->setBoxId($values['BoxId']);
+        $message->setBoxIdGuid($values['BoxIdGuid']);
         $message->setTitle($values['Title']);
         $message->setOrganization($values['Organization']);
         $message->setInvoiceFormatVersion($values['InvoiceFormatVersion']);
@@ -287,6 +329,12 @@ class Box extends \Protobuf\AbstractMessage
                 \google\protobuf\FieldDescriptorProto::fromArray([
                     'number' => 1,
                     'name' => 'BoxId',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 6,
+                    'name' => 'BoxIdGuid',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED()
                 ]),
@@ -349,6 +397,10 @@ class Box extends \Protobuf\AbstractMessage
             throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Box#BoxId" (tag 1) is required but has no value.');
         }
 
+        if ($this->BoxIdGuid === null) {
+            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Box#BoxIdGuid" (tag 6) is required but has no value.');
+        }
+
         if ($this->Title === null) {
             throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Box#Title" (tag 2) is required but has no value.');
         }
@@ -356,6 +408,11 @@ class Box extends \Protobuf\AbstractMessage
         if ($this->BoxId !== null) {
             $writer->writeVarint($stream, 10);
             $writer->writeString($stream, $this->BoxId);
+        }
+
+        if ($this->BoxIdGuid !== null) {
+            $writer->writeVarint($stream, 50);
+            $writer->writeString($stream, $this->BoxIdGuid);
         }
 
         if ($this->Title !== null) {
@@ -417,6 +474,14 @@ class Box extends \Protobuf\AbstractMessage
                 \Protobuf\WireFormat::assertWireType($wire, 9);
 
                 $this->BoxId = $reader->readString($stream);
+
+                continue;
+            }
+
+            if ($tag === 6) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->BoxIdGuid = $reader->readString($stream);
 
                 continue;
             }
@@ -494,6 +559,11 @@ class Box extends \Protobuf\AbstractMessage
             $size += $calculator->computeStringSize($this->BoxId);
         }
 
+        if ($this->BoxIdGuid !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->BoxIdGuid);
+        }
+
         if ($this->Title !== null) {
             $size += 1;
             $size += $calculator->computeStringSize($this->Title);
@@ -530,6 +600,7 @@ class Box extends \Protobuf\AbstractMessage
     public function clear()
     {
         $this->BoxId = null;
+        $this->BoxIdGuid = null;
         $this->Title = null;
         $this->Organization = null;
         $this->InvoiceFormatVersion = \AgentSIB\Diadoc\Api\Proto\OrganizationInvoiceFormatVersion::v5_02();
@@ -546,6 +617,7 @@ class Box extends \Protobuf\AbstractMessage
         }
 
         $this->BoxId = ($message->BoxId !== null) ? $message->BoxId : $this->BoxId;
+        $this->BoxIdGuid = ($message->BoxIdGuid !== null) ? $message->BoxIdGuid : $this->BoxIdGuid;
         $this->Title = ($message->Title !== null) ? $message->Title : $this->Title;
         $this->Organization = ($message->Organization !== null) ? $message->Organization : $this->Organization;
         $this->InvoiceFormatVersion = ($message->InvoiceFormatVersion !== null) ? $message->InvoiceFormatVersion : $this->InvoiceFormatVersion;

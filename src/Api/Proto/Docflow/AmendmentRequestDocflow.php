@@ -32,7 +32,7 @@ class AmendmentRequestDocflow extends \Protobuf\AbstractMessage
     protected $IsFinished = null;
 
     /**
-     * AmendmentRequest required message = 2
+     * AmendmentRequest optional message = 2
      *
      * @var \AgentSIB\Diadoc\Api\Proto\Docflow\SignedAttachmentV3
      */
@@ -128,7 +128,7 @@ class AmendmentRequestDocflow extends \Protobuf\AbstractMessage
      *
      * @param \AgentSIB\Diadoc\Api\Proto\Docflow\SignedAttachmentV3 $value
      */
-    public function setAmendmentRequest(\AgentSIB\Diadoc\Api\Proto\Docflow\SignedAttachmentV3 $value)
+    public function setAmendmentRequest(\AgentSIB\Diadoc\Api\Proto\Docflow\SignedAttachmentV3 $value = null)
     {
         $this->AmendmentRequest = $value;
     }
@@ -320,16 +320,13 @@ class AmendmentRequestDocflow extends \Protobuf\AbstractMessage
             throw new \InvalidArgumentException('Field "IsFinished" (tag 1) is required but has no value.');
         }
 
-        if ( ! isset($values['AmendmentRequest'])) {
-            throw new \InvalidArgumentException('Field "AmendmentRequest" (tag 2) is required but has no value.');
-        }
-
         if ( ! isset($values['AmendmentFlags'])) {
             throw new \InvalidArgumentException('Field "AmendmentFlags" (tag 6) is required but has no value.');
         }
 
         $message = new self();
         $values  = array_merge([
+            'AmendmentRequest' => null,
             'SentAt' => null,
             'DeliveredAt' => null,
             'Receipt' => null,
@@ -365,7 +362,7 @@ class AmendmentRequestDocflow extends \Protobuf\AbstractMessage
                     'number' => 2,
                     'name' => 'AmendmentRequest',
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
-                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REQUIRED(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.Docflow.SignedAttachmentV3'
                 ]),
                 \google\protobuf\FieldDescriptorProto::fromArray([
@@ -431,10 +428,6 @@ class AmendmentRequestDocflow extends \Protobuf\AbstractMessage
 
         if ($this->IsFinished === null) {
             throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Docflow\\AmendmentRequestDocflow#IsFinished" (tag 1) is required but has no value.');
-        }
-
-        if ($this->AmendmentRequest === null) {
-            throw new \UnexpectedValueException('Field "\\AgentSIB\\Diadoc\\Api\\Proto\\Docflow\\AmendmentRequestDocflow#AmendmentRequest" (tag 2) is required but has no value.');
         }
 
         if ($this->AmendmentFlags === null) {

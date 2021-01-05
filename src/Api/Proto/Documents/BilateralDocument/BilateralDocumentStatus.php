@@ -31,6 +31,11 @@ class BilateralDocumentStatus extends \Protobuf\Enum
     const OutboundWithRecipientSignature_VALUE = 2;
 
     /**
+     * OutboundWithRecipientPartiallySignature = 19
+     */
+    const OutboundWithRecipientPartiallySignature_VALUE = 19;
+
+    /**
      * OutboundRecipientSignatureRequestRejected = 3
      */
     const OutboundRecipientSignatureRequestRejected_VALUE = 3;
@@ -56,6 +61,11 @@ class BilateralDocumentStatus extends \Protobuf\Enum
     const InboundWithRecipientSignature_VALUE = 5;
 
     /**
+     * InboundWithRecipientPartiallySignature = 20
+     */
+    const InboundWithRecipientPartiallySignature_VALUE = 20;
+
+    /**
      * InboundRecipientSignatureRequestRejected = 6
      */
     const InboundRecipientSignatureRequestRejected_VALUE = 6;
@@ -74,6 +84,11 @@ class BilateralDocumentStatus extends \Protobuf\Enum
      * InternalWithRecipientSignature = 8
      */
     const InternalWithRecipientSignature_VALUE = 8;
+
+    /**
+     * InternalWithRecipientPartiallySignature = 21
+     */
+    const InternalWithRecipientPartiallySignature_VALUE = 21;
 
     /**
      * InternalRecipientSignatureRequestRejected = 9
@@ -113,6 +128,11 @@ class BilateralDocumentStatus extends \Protobuf\Enum
     /**
      * @var \AgentSIB\Diadoc\Api\Proto\Documents\BilateralDocument\BilateralDocumentStatus
      */
+    protected static $OutboundWithRecipientPartiallySignature = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\BilateralDocument\BilateralDocumentStatus
+     */
     protected static $OutboundRecipientSignatureRequestRejected = null;
 
     /**
@@ -138,6 +158,11 @@ class BilateralDocumentStatus extends \Protobuf\Enum
     /**
      * @var \AgentSIB\Diadoc\Api\Proto\Documents\BilateralDocument\BilateralDocumentStatus
      */
+    protected static $InboundWithRecipientPartiallySignature = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\BilateralDocument\BilateralDocumentStatus
+     */
     protected static $InboundRecipientSignatureRequestRejected = null;
 
     /**
@@ -154,6 +179,11 @@ class BilateralDocumentStatus extends \Protobuf\Enum
      * @var \AgentSIB\Diadoc\Api\Proto\Documents\BilateralDocument\BilateralDocumentStatus
      */
     protected static $InternalWithRecipientSignature = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\BilateralDocument\BilateralDocumentStatus
+     */
+    protected static $InternalWithRecipientPartiallySignature = null;
 
     /**
      * @var \AgentSIB\Diadoc\Api\Proto\Documents\BilateralDocument\BilateralDocumentStatus
@@ -209,6 +239,18 @@ class BilateralDocumentStatus extends \Protobuf\Enum
         }
 
         return self::$OutboundWithRecipientSignature = new self('OutboundWithRecipientSignature', self::OutboundWithRecipientSignature_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\BilateralDocument\BilateralDocumentStatus
+     */
+    public static function OutboundWithRecipientPartiallySignature()
+    {
+        if (self::$OutboundWithRecipientPartiallySignature !== null) {
+            return self::$OutboundWithRecipientPartiallySignature;
+        }
+
+        return self::$OutboundWithRecipientPartiallySignature = new self('OutboundWithRecipientPartiallySignature', self::OutboundWithRecipientPartiallySignature_VALUE);
     }
 
     /**
@@ -274,6 +316,18 @@ class BilateralDocumentStatus extends \Protobuf\Enum
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Documents\BilateralDocument\BilateralDocumentStatus
      */
+    public static function InboundWithRecipientPartiallySignature()
+    {
+        if (self::$InboundWithRecipientPartiallySignature !== null) {
+            return self::$InboundWithRecipientPartiallySignature;
+        }
+
+        return self::$InboundWithRecipientPartiallySignature = new self('InboundWithRecipientPartiallySignature', self::InboundWithRecipientPartiallySignature_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\BilateralDocument\BilateralDocumentStatus
+     */
     public static function InboundRecipientSignatureRequestRejected()
     {
         if (self::$InboundRecipientSignatureRequestRejected !== null) {
@@ -317,6 +371,18 @@ class BilateralDocumentStatus extends \Protobuf\Enum
         }
 
         return self::$InternalWithRecipientSignature = new self('InternalWithRecipientSignature', self::InternalWithRecipientSignature_VALUE);
+    }
+
+    /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\BilateralDocument\BilateralDocumentStatus
+     */
+    public static function InternalWithRecipientPartiallySignature()
+    {
+        if (self::$InternalWithRecipientPartiallySignature !== null) {
+            return self::$InternalWithRecipientPartiallySignature;
+        }
+
+        return self::$InternalWithRecipientPartiallySignature = new self('InternalWithRecipientPartiallySignature', self::InternalWithRecipientPartiallySignature_VALUE);
     }
 
     /**
@@ -377,15 +443,18 @@ class BilateralDocumentStatus extends \Protobuf\Enum
             case 0: return self::UnknownBilateralDocumentStatus();
             case 1: return self::OutboundWaitingForRecipientSignature();
             case 2: return self::OutboundWithRecipientSignature();
+            case 19: return self::OutboundWithRecipientPartiallySignature();
             case 3: return self::OutboundRecipientSignatureRequestRejected();
             case 10: return self::OutboundWaitingForSenderSignature();
             case 11: return self::OutboundInvalidSenderSignature();
             case 4: return self::InboundWaitingForRecipientSignature();
             case 5: return self::InboundWithRecipientSignature();
+            case 20: return self::InboundWithRecipientPartiallySignature();
             case 6: return self::InboundRecipientSignatureRequestRejected();
             case 12: return self::InboundInvalidRecipientSignature();
             case 7: return self::InternalWaitingForRecipientSignature();
             case 8: return self::InternalWithRecipientSignature();
+            case 21: return self::InternalWithRecipientPartiallySignature();
             case 9: return self::InternalRecipientSignatureRequestRejected();
             case 13: return self::InternalWaitingForSenderSignature();
             case 14: return self::InternalInvalidSenderSignature();

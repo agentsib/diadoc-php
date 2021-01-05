@@ -45,6 +45,11 @@ class RecipientResponseStatus extends \Protobuf\Enum
     const InvalidRecipientSignature_VALUE = 5;
 
     /**
+     * WithRecipientPartiallySignature = 6
+     */
+    const WithRecipientPartiallySignature_VALUE = 6;
+
+    /**
      * @var \AgentSIB\Diadoc\Api\Proto\Documents\RecipientResponseStatus
      */
     protected static $RecipientResponseStatusUnknown = null;
@@ -73,6 +78,11 @@ class RecipientResponseStatus extends \Protobuf\Enum
      * @var \AgentSIB\Diadoc\Api\Proto\Documents\RecipientResponseStatus
      */
     protected static $InvalidRecipientSignature = null;
+
+    /**
+     * @var \AgentSIB\Diadoc\Api\Proto\Documents\RecipientResponseStatus
+     */
+    protected static $WithRecipientPartiallySignature = null;
 
     /**
      * @return \AgentSIB\Diadoc\Api\Proto\Documents\RecipientResponseStatus
@@ -147,6 +157,18 @@ class RecipientResponseStatus extends \Protobuf\Enum
     }
 
     /**
+     * @return \AgentSIB\Diadoc\Api\Proto\Documents\RecipientResponseStatus
+     */
+    public static function WithRecipientPartiallySignature()
+    {
+        if (self::$WithRecipientPartiallySignature !== null) {
+            return self::$WithRecipientPartiallySignature;
+        }
+
+        return self::$WithRecipientPartiallySignature = new self('WithRecipientPartiallySignature', self::WithRecipientPartiallySignature_VALUE);
+    }
+
+    /**
      * @param int $value
      * @return \AgentSIB\Diadoc\Api\Proto\Documents\RecipientResponseStatus
      */
@@ -159,6 +181,7 @@ class RecipientResponseStatus extends \Protobuf\Enum
             case 3: return self::WithRecipientSignature();
             case 4: return self::RecipientSignatureRequestRejected();
             case 5: return self::InvalidRecipientSignature();
+            case 6: return self::WithRecipientPartiallySignature();
             default: return null;
         }
     }

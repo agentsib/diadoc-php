@@ -123,6 +123,13 @@ class DocumentAttachment extends \Protobuf\AbstractMessage
     protected $IsEncrypted = null;
 
     /**
+     * EditingSettingId optional string = 18
+     *
+     * @var string
+     */
+    protected $EditingSettingId = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
@@ -611,6 +618,36 @@ class DocumentAttachment extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'EditingSettingId' has a value
+     *
+     * @return bool
+     */
+    public function hasEditingSettingId()
+    {
+        return $this->EditingSettingId !== null;
+    }
+
+    /**
+     * Get 'EditingSettingId' value
+     *
+     * @return string
+     */
+    public function getEditingSettingId()
+    {
+        return $this->EditingSettingId;
+    }
+
+    /**
+     * Set 'EditingSettingId' value
+     *
+     * @param string $value
+     */
+    public function setEditingSettingId($value = null)
+    {
+        $this->EditingSettingId = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -664,7 +701,8 @@ class DocumentAttachment extends \Protobuf\AbstractMessage
             'Version' => null,
             'Metadata' => [],
             'WorkflowId' => null,
-            'IsEncrypted' => false
+            'IsEncrypted' => false,
+            'EditingSettingId' => null
         ], $values);
 
         $message->setSignedContent($values['SignedContent']);
@@ -677,6 +715,7 @@ class DocumentAttachment extends \Protobuf\AbstractMessage
         $message->setVersion($values['Version']);
         $message->setWorkflowId($values['WorkflowId']);
         $message->setIsEncrypted($values['IsEncrypted']);
+        $message->setEditingSettingId($values['EditingSettingId']);
 
         foreach ($values['InitialDocumentIds'] as $item) {
             $message->addInitialDocumentIds($item);
@@ -797,6 +836,12 @@ class DocumentAttachment extends \Protobuf\AbstractMessage
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
                     'default_value' => false
                 ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 18,
+                    'name' => 'EditingSettingId',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
+                ]),
             ],
         ]);
     }
@@ -914,6 +959,11 @@ class DocumentAttachment extends \Protobuf\AbstractMessage
         if ($this->IsEncrypted !== null) {
             $writer->writeVarint($stream, 136);
             $writer->writeBool($stream, $this->IsEncrypted);
+        }
+
+        if ($this->EditingSettingId !== null) {
+            $writer->writeVarint($stream, 146);
+            $writer->writeString($stream, $this->EditingSettingId);
         }
 
         if ($this->extensions !== null) {
@@ -1113,6 +1163,14 @@ class DocumentAttachment extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 18) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->EditingSettingId = $reader->readString($stream);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -1235,6 +1293,11 @@ class DocumentAttachment extends \Protobuf\AbstractMessage
             $size += 1;
         }
 
+        if ($this->EditingSettingId !== null) {
+            $size += 2;
+            $size += $calculator->computeStringSize($this->EditingSettingId);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -1261,6 +1324,7 @@ class DocumentAttachment extends \Protobuf\AbstractMessage
         $this->Metadata = null;
         $this->WorkflowId = null;
         $this->IsEncrypted = false;
+        $this->EditingSettingId = null;
     }
 
     /**
@@ -1286,6 +1350,7 @@ class DocumentAttachment extends \Protobuf\AbstractMessage
         $this->Metadata = ($message->Metadata !== null) ? $message->Metadata : $this->Metadata;
         $this->WorkflowId = ($message->WorkflowId !== null) ? $message->WorkflowId : $this->WorkflowId;
         $this->IsEncrypted = ($message->IsEncrypted !== null) ? $message->IsEncrypted : $this->IsEncrypted;
+        $this->EditingSettingId = ($message->EditingSettingId !== null) ? $message->EditingSettingId : $this->EditingSettingId;
     }
 
 

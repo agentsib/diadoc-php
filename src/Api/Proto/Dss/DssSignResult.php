@@ -39,11 +39,34 @@ class DssSignResult extends \Protobuf\AbstractMessage
     protected $FileSigningResults = null;
 
     /**
+     * ConfirmType optional enum = 3
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Dss\DssConfirmType
+     */
+    protected $ConfirmType = null;
+
+    /**
+     * Operator optional enum = 4
+     *
+     * @var \AgentSIB\Diadoc\Api\Proto\Dss\DssOperator
+     */
+    protected $Operator = null;
+
+    /**
+     * PhoneLastNumbers optional string = 5
+     *
+     * @var string
+     */
+    protected $PhoneLastNumbers = null;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct($stream = null, \Protobuf\Configuration $configuration = null)
     {
         $this->OperationStatus = \AgentSIB\Diadoc\Api\Proto\Dss\DssOperationStatus::Unknown();
+        $this->ConfirmType = \AgentSIB\Diadoc\Api\Proto\Dss\DssConfirmType::ConfirmTypeUnknown();
+        $this->Operator = \AgentSIB\Diadoc\Api\Proto\Dss\DssOperator::OperatorUnknown();
 
         parent::__construct($stream, $configuration);
     }
@@ -123,6 +146,96 @@ class DssSignResult extends \Protobuf\AbstractMessage
     }
 
     /**
+     * Check if 'ConfirmType' has a value
+     *
+     * @return bool
+     */
+    public function hasConfirmType()
+    {
+        return $this->ConfirmType !== null;
+    }
+
+    /**
+     * Get 'ConfirmType' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Dss\DssConfirmType
+     */
+    public function getConfirmType()
+    {
+        return $this->ConfirmType;
+    }
+
+    /**
+     * Set 'ConfirmType' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Dss\DssConfirmType $value
+     */
+    public function setConfirmType(\AgentSIB\Diadoc\Api\Proto\Dss\DssConfirmType $value = null)
+    {
+        $this->ConfirmType = $value;
+    }
+
+    /**
+     * Check if 'Operator' has a value
+     *
+     * @return bool
+     */
+    public function hasOperator()
+    {
+        return $this->Operator !== null;
+    }
+
+    /**
+     * Get 'Operator' value
+     *
+     * @return \AgentSIB\Diadoc\Api\Proto\Dss\DssOperator
+     */
+    public function getOperator()
+    {
+        return $this->Operator;
+    }
+
+    /**
+     * Set 'Operator' value
+     *
+     * @param \AgentSIB\Diadoc\Api\Proto\Dss\DssOperator $value
+     */
+    public function setOperator(\AgentSIB\Diadoc\Api\Proto\Dss\DssOperator $value = null)
+    {
+        $this->Operator = $value;
+    }
+
+    /**
+     * Check if 'PhoneLastNumbers' has a value
+     *
+     * @return bool
+     */
+    public function hasPhoneLastNumbers()
+    {
+        return $this->PhoneLastNumbers !== null;
+    }
+
+    /**
+     * Get 'PhoneLastNumbers' value
+     *
+     * @return string
+     */
+    public function getPhoneLastNumbers()
+    {
+        return $this->PhoneLastNumbers;
+    }
+
+    /**
+     * Set 'PhoneLastNumbers' value
+     *
+     * @param string $value
+     */
+    public function setPhoneLastNumbers($value = null)
+    {
+        $this->PhoneLastNumbers = $value;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function extensions()
@@ -158,10 +271,16 @@ class DssSignResult extends \Protobuf\AbstractMessage
         $message = new self();
         $values  = array_merge([
             'OperationStatus' => \AgentSIB\Diadoc\Api\Proto\Dss\DssOperationStatus::Unknown(),
-            'FileSigningResults' => []
+            'FileSigningResults' => [],
+            'ConfirmType' => \AgentSIB\Diadoc\Api\Proto\Dss\DssConfirmType::ConfirmTypeUnknown(),
+            'Operator' => \AgentSIB\Diadoc\Api\Proto\Dss\DssOperator::OperatorUnknown(),
+            'PhoneLastNumbers' => null
         ], $values);
 
         $message->setOperationStatus($values['OperationStatus']);
+        $message->setConfirmType($values['ConfirmType']);
+        $message->setOperator($values['Operator']);
+        $message->setPhoneLastNumbers($values['PhoneLastNumbers']);
 
         foreach ($values['FileSigningResults'] as $item) {
             $message->addFileSigningResults($item);
@@ -192,6 +311,28 @@ class DssSignResult extends \Protobuf\AbstractMessage
                     'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_MESSAGE(),
                     'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_REPEATED(),
                     'type_name' => '.AgentSIB.Diadoc.Api.Proto.Dss.DssFileSigningResult'
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 3,
+                    'name' => 'ConfirmType',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Dss.DssConfirmType',
+                    'default_value' => \AgentSIB\Diadoc\Api\Proto\Dss\DssConfirmType::ConfirmTypeUnknown()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 4,
+                    'name' => 'Operator',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_ENUM(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL(),
+                    'type_name' => '.AgentSIB.Diadoc.Api.Proto.Dss.DssOperator',
+                    'default_value' => \AgentSIB\Diadoc\Api\Proto\Dss\DssOperator::OperatorUnknown()
+                ]),
+                \google\protobuf\FieldDescriptorProto::fromArray([
+                    'number' => 5,
+                    'name' => 'PhoneLastNumbers',
+                    'type' => \google\protobuf\FieldDescriptorProto\Type::TYPE_STRING(),
+                    'label' => \google\protobuf\FieldDescriptorProto\Label::LABEL_OPTIONAL()
                 ]),
             ],
         ]);
@@ -232,6 +373,21 @@ class DssSignResult extends \Protobuf\AbstractMessage
                 $writer->writeVarint($stream, $val->serializedSize($sizeContext));
                 $val->writeTo($context);
             }
+        }
+
+        if ($this->ConfirmType !== null) {
+            $writer->writeVarint($stream, 24);
+            $writer->writeVarint($stream, $this->ConfirmType->value());
+        }
+
+        if ($this->Operator !== null) {
+            $writer->writeVarint($stream, 32);
+            $writer->writeVarint($stream, $this->Operator->value());
+        }
+
+        if ($this->PhoneLastNumbers !== null) {
+            $writer->writeVarint($stream, 42);
+            $writer->writeString($stream, $this->PhoneLastNumbers);
         }
 
         if ($this->extensions !== null) {
@@ -295,6 +451,30 @@ class DssSignResult extends \Protobuf\AbstractMessage
                 continue;
             }
 
+            if ($tag === 3) {
+                \Protobuf\WireFormat::assertWireType($wire, 14);
+
+                $this->ConfirmType = \AgentSIB\Diadoc\Api\Proto\Dss\DssConfirmType::valueOf($reader->readVarint($stream));
+
+                continue;
+            }
+
+            if ($tag === 4) {
+                \Protobuf\WireFormat::assertWireType($wire, 14);
+
+                $this->Operator = \AgentSIB\Diadoc\Api\Proto\Dss\DssOperator::valueOf($reader->readVarint($stream));
+
+                continue;
+            }
+
+            if ($tag === 5) {
+                \Protobuf\WireFormat::assertWireType($wire, 9);
+
+                $this->PhoneLastNumbers = $reader->readString($stream);
+
+                continue;
+            }
+
             $extensions = $context->getExtensionRegistry();
             $extension  = $extensions ? $extensions->findByNumber(__CLASS__, $tag) : null;
 
@@ -339,6 +519,21 @@ class DssSignResult extends \Protobuf\AbstractMessage
             }
         }
 
+        if ($this->ConfirmType !== null) {
+            $size += 1;
+            $size += $calculator->computeVarintSize($this->ConfirmType->value());
+        }
+
+        if ($this->Operator !== null) {
+            $size += 1;
+            $size += $calculator->computeVarintSize($this->Operator->value());
+        }
+
+        if ($this->PhoneLastNumbers !== null) {
+            $size += 1;
+            $size += $calculator->computeStringSize($this->PhoneLastNumbers);
+        }
+
         if ($this->extensions !== null) {
             $size += $this->extensions->serializedSize($context);
         }
@@ -353,6 +548,9 @@ class DssSignResult extends \Protobuf\AbstractMessage
     {
         $this->OperationStatus = \AgentSIB\Diadoc\Api\Proto\Dss\DssOperationStatus::Unknown();
         $this->FileSigningResults = null;
+        $this->ConfirmType = \AgentSIB\Diadoc\Api\Proto\Dss\DssConfirmType::ConfirmTypeUnknown();
+        $this->Operator = \AgentSIB\Diadoc\Api\Proto\Dss\DssOperator::OperatorUnknown();
+        $this->PhoneLastNumbers = null;
     }
 
     /**
@@ -366,6 +564,9 @@ class DssSignResult extends \Protobuf\AbstractMessage
 
         $this->OperationStatus = ($message->OperationStatus !== null) ? $message->OperationStatus : $this->OperationStatus;
         $this->FileSigningResults = ($message->FileSigningResults !== null) ? $message->FileSigningResults : $this->FileSigningResults;
+        $this->ConfirmType = ($message->ConfirmType !== null) ? $message->ConfirmType : $this->ConfirmType;
+        $this->Operator = ($message->Operator !== null) ? $message->Operator : $this->Operator;
+        $this->PhoneLastNumbers = ($message->PhoneLastNumbers !== null) ? $message->PhoneLastNumbers : $this->PhoneLastNumbers;
     }
 
 

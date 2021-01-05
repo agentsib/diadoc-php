@@ -14,6 +14,8 @@ import "Events/ResolutionInfo.proto";
 import "Events/ResolutionRequestInfo.proto";
 import "Events/ResolutionRequestDenialInfo.proto";
 import "Events/ResolutionRouteInfo.proto";
+import "Events/RevocationRequestInfo.proto";
+import "OuterDocflow.proto";
 
 package AgentSIB.Diadoc.Api.Proto.Events;
 
@@ -66,6 +68,8 @@ message Template {
     optional bool IsDeleted = 8 [default = false];
     optional string MessageToDepartmentId = 9;
     required LockMode LockMode = 10;
+    optional string MessageProxyBoxId = 11;
+    optional string MessageProxyDepartmentId = 12;
 }
 
 message MessagePatch {
@@ -114,6 +118,9 @@ message Entity {
 	optional string Version = 26;
 	optional TemplateTransformationInfo TemplateTransformationInfo = 27;
 	optional TemplateRefusalInfo TemplateRefusalInfo = 28;
+	optional OuterDocflowInfo OuterDocflow = 29;	
+	optional RevocationRequestInfo RevocationRequestInfo = 30;
+	optional string ContentTypeId = 31;
 }
 
 message EntityPatch {
@@ -131,6 +138,8 @@ message TemplateToLetterTransformationInfo
 	required string LetterToBoxId = 2;
 	optional string LetterFromDepartmentId = 3;
 	optional string LetterToDepartmentId = 4;
+	optional string LetterProxyBoxId = 5;
+	optional string LetterProxyDepartmentId = 6;
 }
 
 message TemplateTransformationInfo
@@ -217,5 +226,6 @@ enum AttachmentType {
 	DeletionRestoration = 72;
 	TemplateTransformation = 73;
 	TemplateRefusal = 74;
+	OuterDocflow = 75;
 	//Неизвестные типы должны обрабатываться как Title
 }
